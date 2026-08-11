@@ -1,222 +1,1047 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Contact - KY5 GLOBAL TRADE</title>
 
     <style>
+
+        /* =========================================
+           CONFIGURATION GÉNÉRALE
+        ========================================= */
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #87afe4eb;
-            color: #222;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f9ff;
+            color: #17233c;
+            overflow-x: hidden;
         }
+
+
+        /* =========================================
+           NAVIGATION
+        ========================================= */
 
         header {
-            background: #111;
+            width: 100%;
+            background: linear-gradient(135deg, #041a38, #0756a3);
             color: white;
-            padding: 20px 40px;
+            padding: 16px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 25px rgba(0, 50, 110, 0.25);
         }
 
-        header h1 {
-            margin-bottom: 15px;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            width: 68px;
+            height: 68px;
+            object-fit: contain;
+        }
+
+        .logo h2 {
+            color: white;
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
         }
 
         nav a {
+            position: relative;
             color: white;
             text-decoration: none;
-            margin-right: 25px;
+            font-size: 15px;
             font-weight: bold;
+            transition: 0.3s ease;
+            white-space: nowrap;
         }
 
-        nav a:hover {
-            color: #f5b400;
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0;
+            height: 3px;
+            border-radius: 10px;
+            background: #51c7ff;
+            transition: 0.3s ease;
         }
 
-        .contact {
-            max-width: 1000px;
-            margin: 50px auto;
-            padding: 20px;
+        nav a:hover,
+        nav a.active {
+            color: #5bc8ff;
         }
 
-        .contact h2 {
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+
+        /* =========================================
+           HERO CONTACT
+        ========================================= */
+
+        .contact-hero {
+            position: relative;
+            min-height: 58vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            font-size: 40px;
+            padding: 90px 7%;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(92, 202, 255, 0.35),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(0, 72, 170, 0.40),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #041a38,
+                    #0756a3,
+                    #0787d8
+                );
+        }
+
+        .contact-hero::before {
+            content: "";
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.15);
+            top: -160px;
+            right: -100px;
+            animation: flotter 8s ease-in-out infinite;
+        }
+
+        .contact-hero::after {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            bottom: -150px;
+            left: -80px;
+            animation: flotter 10s ease-in-out infinite reverse;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            animation: apparition 1.2s ease forwards;
+        }
+
+        .hero-small {
+            color: #72d2ff;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .contact-hero h1 {
+            color: white;
+            font-size: clamp(45px, 7vw, 78px);
+            line-height: 1.05;
+            margin-bottom: 25px;
+            font-weight: 900;
+        }
+
+        .contact-hero h1 span {
+            color: #63ccff;
+        }
+
+        .contact-hero p {
+            max-width: 750px;
+            margin: auto;
+            color: #e9f7ff;
+            font-size: 19px;
+            line-height: 1.8;
+        }
+
+
+        /* =========================================
+           SECTION CONTACT
+        ========================================= */
+
+        .contact-section {
+            padding: 90px 7%;
+            background: #ffffff;
+        }
+
+        .section-title {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .section-title span {
+            color: #0785d1;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .section-title h2 {
+            color: #092d5c;
+            font-size: clamp(32px, 5vw, 52px);
+            margin-top: 12px;
             margin-bottom: 15px;
         }
 
-        .intro {
-            text-align: center;
-            font-size: 20px;
-            color: #666;
-            margin-bottom: 40px;
+        .section-title p {
+            color: #68758a;
+            font-size: 17px;
+            line-height: 1.8;
         }
 
-        .cards {
+
+        /* =========================================
+           CARTES CONTACT
+        ========================================= */
+
+        .contact-grid {
+            max-width: 1200px;
+            margin: auto;
+
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 25px;
         }
 
-        .card {
-            background: ;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        .contact-card {
+            position: relative;
+            overflow: hidden;
+
+            background: linear-gradient(
+                145deg,
+                #ffffff,
+                #eef7ff
+            );
+
+            border: 1px solid #d8eaff;
+            border-radius: 22px;
+            padding: 35px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 76, 150, 0.10);
+
+            transition: 0.45s ease;
+
+            animation: apparition 1s ease both;
         }
 
-       .card h3 {
-    font-size: 25px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-.card h3 img {
-    width: 30px !important;
-    height: 30px !important;
-    margin: 0 3px 0 0 !important;
-    padding: 0 !important;
-    object-fit: contain;
-}
+        .contact-card:nth-child(2) {
+            animation-delay: 0.15s;
         }
-   
 
-        .card p {
-            margin: 10px 0;
-            line-height: 1.6;
+        .contact-card:nth-child(3) {
+            animation-delay: 0.30s;
         }
-      .card h3 img {
-    width: 35px;
-    height: 35px;
-    object-fit: contain;
-    vertical-align: middle;
-    margin-right: 10px;
-}
-}
 
-        .phone {
-            color: #1557a6;
+        .contact-card:nth-child(4) {
+            animation-delay: 0.45s;
+        }
+
+        .contact-card:nth-child(5) {
+            animation-delay: 0.60s;
+        }
+
+        .contact-card:nth-child(6) {
+            animation-delay: 0.75s;
+        }
+
+        .contact-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(
+                #087dcc,
+                #55c8ff
+            );
+        }
+
+        .contact-card::after {
+            content: "";
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: rgba(25, 154, 230, 0.06);
+            right: -50px;
+            top: -50px;
+            transition: 0.5s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow:
+                0 25px 55px rgba(0, 76, 150, 0.18);
+        }
+
+        .contact-card:hover::after {
+            transform: scale(1.5);
+        }
+
+        .card-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #087dcc,
+                #50c7ff
+            );
+
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 10px 25px rgba(0, 125, 204, 0.25);
+
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .card-icon img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+        }
+
+        .contact-card h3 {
+            color: #092d5c;
+            font-size: 25px;
+            margin-bottom: 17px;
+        }
+
+        .contact-card p {
+            color: #637083;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 5px;
+        }
+
+        .contact-card a {
+            color: #075fa9;
             font-weight: bold;
-        }
-
-        .whatsapp {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 20px;
-            background: #25D366;
-            color: white;
             text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
+            transition: 0.3s ease;
         }
+
+        .contact-card a:hover {
+            color: #0a9be8;
+        }
+
+
+        /* =========================================
+           WHATSAPP
+        ========================================= */
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+            margin-top: 15px;
+            padding: 14px 22px;
+
+            background: #25D366;
+            color: white !important;
+
+            border-radius: 10px;
+            font-weight: bold;
+
+            box-shadow:
+                0 8px 20px rgba(37, 211, 102, 0.25);
+
+            transition: 0.35s ease;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            background: #1ebe5d;
+            color: white !important;
+        }
+
+
+        /* =========================================
+           BLOC APPEL À L'ACTION
+        ========================================= */
+
+        .contact-cta {
+            margin-top: 70px;
+            padding: 70px 8%;
+            border-radius: 25px;
+
+            text-align: center;
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(100,210,255,0.25),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #041a38,
+                    #086db8
+                );
+
+            box-shadow:
+                0 20px 50px rgba(0, 60, 130, 0.20);
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-cta::before {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 50%;
+            right: -80px;
+            top: -80px;
+            animation: rotation 15s linear infinite;
+        }
+
+        .contact-cta h2 {
+            position: relative;
+            z-index: 2;
+            font-size: clamp(30px, 5vw, 46px);
+            margin-bottom: 18px;
+        }
+
+        .contact-cta p {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: auto auto 30px;
+            color: #e4f6ff;
+            line-height: 1.8;
+        }
+
+        .cta-btn {
+            position: relative;
+            z-index: 2;
+
+            display: inline-block;
+            padding: 15px 28px;
+
+            border-radius: 10px;
+
+            background: white;
+            color: #075ba5;
+
+            text-decoration: none;
+            font-weight: bold;
+
+            transition: 0.35s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            background: #5fc8ff;
+            color: white;
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
 
         footer {
-            background: #111;
+            background: #03132b;
             color: white;
+            padding: 45px 7% 25px;
             text-align: center;
-            padding: 20px;
-            margin-top: 50px;
         }
+
+        .footer-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+        }
+
+        .footer-logo h3 {
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        footer p {
+            color: #a9bfd8;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+
+        /* =========================================
+           ANIMATIONS
+        ========================================= */
+
+        @keyframes apparition {
+
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        @keyframes flotter {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-25px) rotate(8deg);
+            }
+
+        }
+
+        @keyframes rotation {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.06);
+            }
+
+        }
+
+
+        /* =========================================
+           VERSION TÉLÉPHONE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            header {
+                flex-direction: column;
+                padding: 18px 20px;
+                gap: 18px;
+            }
+
+            .logo {
+                justify-content: center;
+            }
+
+            .logo img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .logo h2 {
+                font-size: 18px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 14px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .contact-hero {
+                min-height: 60vh;
+                padding: 70px 22px;
+            }
+
+            .contact-hero h1 {
+                font-size: 43px;
+            }
+
+            .contact-hero p {
+                font-size: 16px;
+            }
+
+            .contact-section {
+                padding: 65px 20px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-card {
+                padding: 30px 25px;
+            }
+
+            .contact-cta {
+                margin-top: 45px;
+                padding: 55px 25px;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .logo h2 {
+                font-size: 16px;
+                letter-spacing: 0.5px;
+            }
+
+            .logo img {
+                width: 52px;
+                height: 52px;
+            }
+
+            nav ul {
+                gap: 11px;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .contact-hero h1 {
+                font-size: 38px;
+            }
+
+            .hero-small {
+                font-size: 11px;
+                letter-spacing: 3px;
+            }
+
+            .contact-card h3 {
+                font-size: 22px;
+            }
+
+        }
+
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 
 <body>
 
-<header>
-<h1 style="color: #1557a6;">KY5 GLOBAL TRADE</h1>
 
-    <nav>
-        <a href="index.html">Accueil</a>
-        <a href="services.html">Services</a>
-        <a href="apropos.html">À propos</a>
-        <a href="activites.html">Nos activités</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-</header>
+    <!-- =========================================
+         NAVIGATION
+    ========================================= -->
 
-<section class="contact">
+    <header>
 
-    <h2>Contactez-nous</h2>
+        <div class="logo">
 
-    <p class="intro">
-        Pour toute demande d'information, de partenariat ou de prestation,
-        notre équipe est à votre disposition.
-    </p>
+            <img src="logo sté.png" alt="Logo KY5 GLOBAL TRADE">
 
-    <div class="cards">
+            <h2>KY5 GLOBAL TRADE</h2>
 
-        <div class="card">
-          <h3>
-    <img src="ADRESSE.png" alt="Adresse"
-         style="width:30px; height:30px; object-fit:contain; margin-right:5px;">
-    Kinshasa
-</h3>
-
-            <p>1060, Paulo Maurice</p>
-            <p>Commune de la Gombe</p>
-            <p>Kinshasa, République Démocratique du Congo</p>
         </div>
 
-        <div class="card">
-            <h3><img src="ADRESSE.png" alt="Adresse" style="width:30px; height:30px; object-fit:contain; margin-right:5px;"> Brazzaville</h3>
 
-198, rue Charles Faucolt            <p>Centre-ville</p>
-            <p>Brazzaville, République du Congo</p>
-        </div>
+        <nav>
 
-       <div class="card">
-    <h3>
-        <img src="téléphone.png" alt="Téléphone" style="width:35px; height:35px; object-fit:contain; vertical-align:middle; margin-right:10px;">
-        Téléphone
-    </h3>
+            <ul>
 
-    <p class="phone"><a href="tel:+242066585358">+242 066 585 358</a></p>
-    <p class="phone"><a href="tel:+86187013015">+86 187 013 015</a></p>
-</div>
+                <li>
+                    <a href="index.html">Accueil</a>
+                </li>
 
-        <div class="card">
-           <h3><img src="WHAT.png" alt="WhatsApp" style="width:30px; height:30px; object-fit:contain; margin-right:5px;"> WhatsApp</h3>
+                <li>
+                    <a href="apropos.html">À propos</a>
+                </li>
 
-            <p>Contactez-nous directement sur WhatsApp.</p>
+                <li>
+                    <a href="services.html">Services</a>
+                </li>
 
-            <a class="whatsapp"
-href="https://wa.me/8618701301815"               target="_blank">
-                Nous écrire sur WhatsApp
-            </a>
-        </div>
+                <li>
+                    <a href="produits.html">Produits</a>
+                </li>
 
-        <div class="card">
-          <h3><img src="EMAIL.png" alt="E-mail" style="width:30px; height:30px; object-fit:contain; margin-right:5px;"> E-mail</h3>
+                <li>
+                    <a href="projets.html">Projets</a>
+                </li>
 
-     <a href="mailto:ky5.global.trade@gmail.com">
-    ky5.global.trade@gmail.com
-</a>
-        </div>
+                <li>
+                    <a href="activites.html">Nos activités</a>
+                </li>
 
-        <div class="card">
-            <h3>🌐 Réseaux sociaux</h3>
+                <li>
+                    <a href="contact.html" class="active">Contact</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================================
+         HERO
+    ========================================= -->
+
+    <section class="contact-hero">
+
+        <div class="hero-content">
+
+            <div class="hero-small">
+                KY5 GLOBAL TRADE
+            </div>
+
+            <h1>
+                Contactez-<span>nous</span>
+            </h1>
 
             <p>
-                Nos réseaux sociaux officiels sont actuellement
-                en cours d'établissement.
+                Une question, un projet, un partenariat ou une opportunité
+                d'affaires ? Notre équipe est à votre disposition pour
+                vous accompagner.
             </p>
+
         </div>
 
-    </div>
+    </section>
 
-</section>
 
-<footer>
-    © 2026 KY5 GLOBAL TRADE
-</footer>
+
+    <!-- =========================================
+         CONTACT
+    ========================================= -->
+
+    <section class="contact-section">
+
+        <div class="section-title">
+
+            <span>Nos coordonnées</span>
+
+            <h2>Restons en contact</h2>
+
+            <p>
+                Retrouvez nos différents points de contact et choisissez
+                le moyen qui vous convient le mieux pour échanger avec
+                KY5 GLOBAL TRADE.
+            </p>
+
+        </div>
+
+
+
+        <div class="contact-grid">
+
+
+            <!-- KINSHASA -->
+
+            <div class="contact-card">
+
+                <div class="card-icon">
+
+                    <img src="ADRESSE.png" alt="Adresse">
+
+                </div>
+
+                <h3>Kinshasa</h3>
+
+                <p>
+                    1060, Paulo Maurice
+                </p>
+
+                <p>
+                    Commune de la Gombe
+                </p>
+
+                <p>
+                    Kinshasa, République Démocratique du Congo
+                </p>
+
+            </div>
+
+
+
+            <!-- BRAZZAVILLE -->
+
+            <div class="contact-card">
+
+                <div class="card-icon">
+
+                    <img src="ADRESSE.png" alt="Adresse">
+
+                </div>
+
+                <h3>Brazzaville</h3>
+
+                <p>
+                    198, rue Charles Foucault
+                </p>
+
+                <p>
+                    Centre-ville
+                </p>
+
+                <p>
+                    Brazzaville, République du Congo
+                </p>
+
+            </div>
+
+
+
+            <!-- TÉLÉPHONE -->
+
+            <div class="contact-card">
+
+                <div class="card-icon">
+
+                    <img src="téléphone.png" alt="Téléphone">
+
+                </div>
+
+                <h3>Téléphone</h3>
+
+                <p>
+                    <a href="tel:+242066585358">
+                        +242 066 585 358
+                    </a>
+                </p>
+
+                <p>
+                    <a href="tel:+86187013015">
+                        +86 187 013 015
+                    </a>
+                </p>
+
+            </div>
+
+
+
+            <!-- WHATSAPP -->
+
+            <div class="contact-card">
+
+                <div class="card-icon">
+
+                    <img src="WHAT.png" alt="WhatsApp">
+
+                </div>
+
+                <h3>WhatsApp</h3>
+
+                <p>
+                    Contactez directement notre équipe
+                    pour toute demande d'information.
+                </p>
+
+                <a
+                    class="whatsapp-btn"
+                    href="https://wa.me/8618701301815"
+                    target="_blank"
+                >
+                    Nous écrire sur WhatsApp
+                </a>
+
+            </div>
+
+
+
+            <!-- EMAIL -->
+
+            <div class="contact-card">
+
+                <div class="card-icon">
+
+                    <img src="EMAIL.png" alt="E-mail">
+
+                </div>
+
+                <h3>E-mail</h3>
+
+                <p>
+                    <a href="mailto:ky5.global.trade@gmail.com">
+                        ky5.global.trade@gmail.com
+                    </a>
+                </p>
+
+                <p>
+                    Nous sommes disponibles pour répondre
+                    à vos demandes professionnelles.
+                </p>
+
+            </div>
+
+
+
+            <!-- RÉSEAUX SOCIAUX -->
+
+            <div class="contact-card">
+
+                <div class="card-icon">
+
+                    <span style="font-size:30px;">
+                        🌐
+                    </span>
+
+                </div>
+
+                <h3>Réseaux sociaux</h3>
+
+                <p>
+                    Nos réseaux sociaux officiels sont actuellement
+                    en cours d'établissement.
+                </p>
+
+                <p>
+                    Ils seront bientôt disponibles.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =========================================
+             CTA
+        ========================================= -->
+
+        <div class="contact-cta">
+
+            <h2>
+                Un projet à concrétiser ?
+            </h2>
+
+            <p>
+                Parlons de votre projet, de vos besoins ou de votre
+                prochaine opportunité d'affaires.
+            </p>
+
+            <a
+                href="mailto:ky5.global.trade@gmail.com"
+                class="cta-btn"
+            >
+                NOUS ÉCRIRE
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+
+    <footer>
+
+        <div class="footer-logo">
+
+            <img
+                src="logo sté.png"
+                alt="Logo KY5 GLOBAL TRADE"
+            >
+
+            <h3>
+                KY5 GLOBAL TRADE
+            </h3>
+
+        </div>
+
+        <p>
+            Importation • Transport • Logistique • BTP •
+            Gestion immobilière • Business Consulting
+        </p>
+
+        <p style="margin-top:15px;">
+            © 2026 KY5 GLOBAL TRADE — Tous droits réservés.
+        </p>
+
+    </footer>
+
 
 </body>
 </html>

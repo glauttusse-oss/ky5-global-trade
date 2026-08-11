@@ -1,208 +1,869 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>À propos - KY5 GLOBAL TRADE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+    <title>À propos - KY5 GLOBAL TRADE</title>
 
-body{
-    font-family:Arial,sans-serif;
-    margin:0;
-}
+    <style>
 
-header{
-    background:#003366;
-    color:white;
-    text-align:center;
-    padding:20px;
-}
+        /* ==============================
+           CONFIGURATION GÉNÉRALE
+        ============================== */
 
-nav a{
-    color:white;
-    text-decoration:none;
-    margin:15px;
-    font-weight:bold;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-section{
-    padding:50px;
-    max-width:1000px;
-    margin:auto;
-}
+        html {
+            scroll-behavior: smooth;
+        }
 
-h2{
-    color:#003366;
-    text-align:center;
-}
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f9ff;
+            color: #17233c;
+            overflow-x: hidden;
+        }
 
-footer{
-    background:#003366;
-    color:#87afe4eb;
-    text-align:center;
-    padding:15px;
-}
 
-</style>
+        /* ==============================
+           NAVIGATION
+        ============================== */
 
+        header {
+            width: 100%;
+            background: linear-gradient(135deg, #061b3a, #0a3d78);
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.18);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            width: 58px;
+            height: 58px;
+            object-fit: contain;
+        }
+
+        .logo h2 {
+            font-size: 20px;
+            letter-spacing: 1px;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 15px;
+            transition: 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -7px;
+            width: 0;
+            height: 3px;
+            background: #29a9ff;
+            transition: 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #55baff;
+        }
+
+
+        /* ==============================
+           HERO À PROPOS
+        ============================== */
+
+        .about-hero {
+            min-height: 55vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 8%;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 15% 20%, rgba(55,181,255,0.30), transparent 30%),
+                radial-gradient(circle at 85% 80%, rgba(0,91,190,0.35), transparent 35%),
+                linear-gradient(135deg, #061b3a, #0754a3, #087cc9);
+        }
+
+        .about-hero::before {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            top: -120px;
+            right: -100px;
+            animation: flotter 7s ease-in-out infinite;
+        }
+
+        .about-hero::after {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            bottom: -100px;
+            left: -80px;
+            animation: flotter 9s ease-in-out infinite reverse;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            animation: apparition 1.2s ease forwards;
+        }
+
+        .hero-small {
+            color: #7dd0ff;
+            font-weight: bold;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .about-hero h1 {
+            color: white;
+            font-size: clamp(40px, 6vw, 75px);
+            line-height: 1.05;
+            margin-bottom: 25px;
+        }
+
+        .about-hero h1 span {
+            color: #5fc4ff;
+        }
+
+        .about-hero p {
+            color: #e9f6ff;
+            font-size: 19px;
+            line-height: 1.7;
+            max-width: 750px;
+            margin: auto;
+        }
+
+
+        /* ==============================
+           SECTION PRINCIPALE
+        ============================== */
+
+        .about-section {
+            padding: 90px 8%;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title span {
+            color: #087dcc;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .section-title h2 {
+            font-size: clamp(32px, 5vw, 50px);
+            color: #092d5c;
+            margin-top: 12px;
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 15px auto 0;
+            color: #667085;
+            line-height: 1.7;
+        }
+
+
+        /* ==============================
+           PRÉSENTATION
+        ============================== */
+
+        .about-grid {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text {
+            animation: glissementGauche 1s ease;
+        }
+
+        .about-text h3 {
+            color: #0a4f98;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: #5d6878;
+            line-height: 1.9;
+            font-size: 17px;
+            margin-bottom: 18px;
+        }
+
+        .about-image {
+            position: relative;
+            animation: glissementDroite 1s ease;
+        }
+
+        .about-image img {
+            width: 100%;
+            max-height: 430px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,70,140,0.20);
+        }
+
+        .image-decoration {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #087dcc, #58c8ff);
+            right: -25px;
+            bottom: -25px;
+            z-index: -1;
+            animation: rotation 8s linear infinite;
+        }
+
+
+        /* ==============================
+           NOS VALEURS
+        ============================== */
+
+        .values {
+            background: linear-gradient(135deg, #eef7ff, #ffffff);
+            padding: 90px 8%;
+        }
+
+        .values-grid {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .value-card {
+            background: white;
+            padding: 35px 28px;
+            border-radius: 18px;
+            border-top: 5px solid #087dcc;
+            box-shadow: 0 10px 35px rgba(0,70,140,0.10);
+            transition: 0.4s ease;
+            animation: apparition 1s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 45px rgba(0,70,140,0.18);
+        }
+
+        .value-number {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1595e5;
+            margin-bottom: 15px;
+        }
+
+        .value-card h3 {
+            color: #092d5c;
+            font-size: 23px;
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            color: #687386;
+            line-height: 1.7;
+        }
+
+
+        /* ==============================
+           DOMAINES D'ACTIVITÉ
+        ============================== */
+
+        .domains {
+            padding: 90px 8%;
+            background: #ffffff;
+        }
+
+        .domains-grid {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .domain-card {
+            padding: 35px;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #f5faff, #e8f4ff);
+            border: 1px solid #d5eaff;
+            transition: 0.4s ease;
+        }
+
+        .domain-card:hover {
+            transform: translateY(-8px);
+            background: linear-gradient(145deg, #087dcc, #07529b);
+            color: white;
+        }
+
+        .domain-card h3 {
+            color: #0758a5;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .domain-card:hover h3 {
+            color: white;
+        }
+
+        .domain-card p {
+            color: #637083;
+            line-height: 1.7;
+        }
+
+        .domain-card:hover p {
+            color: #edf8ff;
+        }
+
+
+        /* ==============================
+           CTA
+        ============================== */
+
+        .cta {
+            margin: 0;
+            padding: 80px 8%;
+            text-align: center;
+            color: white;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(80,200,255,0.25), transparent 30%),
+                linear-gradient(135deg, #061b3a, #086db8);
+        }
+
+        .cta h2 {
+            font-size: clamp(30px, 5vw, 48px);
+            margin-bottom: 18px;
+        }
+
+        .cta p {
+            max-width: 700px;
+            margin: auto auto 30px;
+            line-height: 1.7;
+            color: #e4f5ff;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 28px;
+            border-radius: 8px;
+            background: white;
+            color: #075ba5;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            background: #5fc4ff;
+            color: white;
+        }
+
+
+        /* ==============================
+           FOOTER
+        ============================== */
+
+        footer {
+            background: #04142d;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer p {
+            color: #a9bfd8;
+            font-size: 14px;
+        }
+
+
+        /* ==============================
+           ANIMATIONS
+        ============================== */
+
+        @keyframes apparition {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glissementGauche {
+            from {
+                opacity: 0;
+                transform: translateX(-60px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes glissementDroite {
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes flotter {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-25px) rotate(8deg);
+            }
+        }
+
+        @keyframes rotation {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* ==============================
+           VERSION TÉLÉPHONE
+        ============================== */
+
+        @media (max-width: 850px) {
+
+            header {
+                flex-direction: column;
+                gap: 18px;
+                padding: 18px 20px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .logo h2 {
+                font-size: 17px;
+            }
+
+            .about-hero {
+                min-height: 65vh;
+                padding: 70px 25px;
+            }
+
+            .about-hero h1 {
+                font-size: 42px;
+            }
+
+            .about-hero p {
+                font-size: 16px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .values-grid,
+            .domains-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-section,
+            .values,
+            .domains {
+                padding: 65px 20px;
+            }
+
+            .image-decoration {
+                display: none;
+            }
+        }
+
+    </style>
 </head>
+
 
 <body>
 
-<header>
+    <!-- ==============================
+         NAVIGATION
+    ============================== -->
 
-<h1>KY5 GLOBAL TRADE</h1>
+    <header>
 
-<nav>
-<a href="index.html">Accueil</a>
-<a href="services.html">Services</a>
-<a href="apropos.html">À propos</a>
-<a href="produits.html">Produits</a>
-<a href="contact.html">Contact</a>
-</nav>
+        <div class="logo">
+            <img src="logo1.png" alt="Logo KY5 GLOBAL TRADE">
+            <h2>KY5 GLOBAL TRADE</h2>
+        </div>
 
-</header>
+        <nav>
+            <ul>
 
-<section>
+                <li>
+                    <a href="index.html">Accueil</a>
+                </li>
 
-<h2>À propos de nous</h2>
+                <li>
+                    <a href="apropos.html" class="active">À propos</a>
+                </li>
 
-<p>
-KY5 GLOBAL TRADE est une entreprise spécialisée dans l'import-export,
-le bâtiment et travaux publics (BTP), le commerce général et
-l'accompagnement des investissements.
-</p>
+                <li>
+                    <a href="services.html">Services</a>
+                </li>
 
-<br>
+                <li>
+                    <a href="produits.html">Produits</a>
+                </li>
 
-<h3>Notre Vision</h3>
+                <li>
+                    <a href="projets.html">Projets</a>
+                </li>
 
-<p>
-Devenir un acteur de référence dans le domaine du commerce,
-de l'import-export, du BTP et de la gestion immobilière en
-République Démocratique du Congo et en République du Congo.
-</p>
-<h3>Nos domaines d'activité</h3>
+                <li>
+                    <a href="activites.html">Nos activités</a>
+                </li>
 
-<p>
-    KY5 GLOBAL TRADE intervient dans plusieurs domaines stratégiques :
-</p>
+                <li>
+                    <a href="contact.html">Contact</a>
+                </li>
 
-<ul>
-    <li>
-        <strong>Import - Export et Logistique</strong> :
-        accompagnement des opérations commerciales et logistiques.
-    </li>
+            </ul>
+        </nav>
 
-    <li>
-        <strong>BTP et Gestion immobilière</strong> :
-        solutions et accompagnement dans les projets de construction et immobiliers.
-    </li>
+    </header>
 
-    <li>
-        <strong>Business Consulting</strong> :
-        accompagnement et conseil pour les entreprises, investisseurs et partenaires.
-    </li>
-</ul>
 
-<p>
-    <strong>Notre ambition : « Connecter les marchés, bâtir l'avenir ».</strong>
-</p>
-<br>
+    <!-- ==============================
+         HERO
+    ============================== -->
 
-<h3>Notre Mission</h3>
+    <section class="about-hero">
 
-<p>
-    Notre mission est de proposer à nos clients des solutions fiables,
-    adaptées et professionnelles, tout en développant des partenariats
-    durables et en contribuant au développement économique de nos marchés.
-</p>
+        <div class="hero-content">
 
-<h3>Nos Valeurs</h3>
+            <div class="hero-small">
+                KY5 GLOBAL TRADE
+            </div>
 
-<div class="values">
+            <h1>
+                Votre partenaire
+                <span>stratégique en Afrique</span>
+            </h1>
 
-    <div class="value">
-        <h4>🤝 Confiance</h4>
+            <p>
+                Nous accompagnons les entreprises, investisseurs,
+                commerçants et particuliers dans leurs projets
+                commerciaux et immobiliers.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         PRÉSENTATION
+    ============================== -->
+
+    <section class="about-section">
+
+        <div class="section-title">
+
+            <span>Qui sommes-nous ?</span>
+
+            <h2>Une vision tournée vers l'avenir</h2>
+
+            <p>
+                KY5 GLOBAL TRADE développe des solutions professionnelles
+                adaptées aux réalités du marché africain.
+            </p>
+
+        </div>
+
+
+        <div class="about-grid">
+
+            <div class="about-text">
+
+                <h3>Une entreprise au service de vos ambitions</h3>
+
+                <p>
+                    KY5 GLOBAL TRADE est une entreprise orientée vers
+                    le développement des affaires, la gestion immobilière,
+                    le BTP, la construction et le business consulting.
+                </p>
+
+                <p>
+                    Notre objectif est de créer des connexions fiables
+                    entre les opportunités, les entreprises et les
+                    différents acteurs économiques.
+                </p>
+
+                <p>
+                    Nous privilégions une approche professionnelle,
+                    transparente et orientée vers des résultats concrets.
+                </p>
+
+            </div>
+
+
+            <div class="about-image">
+
+                <img src="logo.png" alt="KY5 GLOBAL TRADE">
+
+                <div class="image-decoration"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         NOS VALEURS
+    ============================== -->
+
+    <section class="values">
+
+        <div class="section-title">
+
+            <span>Notre identité</span>
+
+            <h2>Nos valeurs</h2>
+
+            <p>
+                Les principes qui orientent notre manière de travailler.
+            </p>
+
+        </div>
+
+
+        <div class="values-grid">
+
+            <div class="value-card">
+
+                <div class="value-number">01 — FIABILITÉ</div>
+
+                <h3>La confiance</h3>
+
+                <p>
+                    Nous construisons des relations professionnelles
+                    basées sur la confiance, la transparence et le respect
+                    de nos engagements.
+                </p>
+
+            </div>
+
+
+            <div class="value-card">
+
+                <div class="value-number">02 — EXPERTISE</div>
+
+                <h3>Le professionnalisme</h3>
+
+                <p>
+                    Nous mettons notre savoir-faire et notre expérience
+                    au service des projets de nos partenaires.
+                </p>
+
+            </div>
+
+
+            <div class="value-card">
+
+                <div class="value-number">03 — VISION</div>
+
+                <h3>L'innovation</h3>
+
+                <p>
+                    Nous recherchons constamment des solutions modernes
+                    permettant de répondre efficacement aux besoins
+                    de nos clients.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         DOMAINES
+    ============================== -->
+
+    <section class="domains">
+
+        <div class="section-title">
+
+            <span>Notre expertise</span>
+
+            <h2>Nos domaines d'intervention</h2>
+
+            <p>
+                Des solutions professionnelles dans plusieurs secteurs
+                stratégiques.
+            </p>
+
+        </div>
+
+
+        <div class="domains-grid">
+
+            <div class="domain-card">
+
+                <h3>Gestion immobilière</h3>
+
+                <p>
+                    Gestion, accompagnement et développement de projets
+                    immobiliers adaptés aux besoins de nos partenaires.
+                </p>
+
+            </div>
+
+
+            <div class="domain-card">
+
+                <h3>BTP & Construction</h3>
+
+                <p>
+                    Accompagnement des projets de construction,
+                    développement immobilier et solutions adaptées
+                    aux besoins des entreprises.
+                </p>
+
+            </div>
+
+
+            <div class="domain-card">
+
+                <h3>Business Consulting</h3>
+
+                <p>
+                    Conseil et accompagnement des entreprises dans
+                    leurs projets, stratégies et opportunités d'affaires.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==============================
+         CONTACT / CTA
+    ============================== -->
+
+    <section class="cta">
+
+        <h2>Construisons ensemble vos projets</h2>
+
         <p>
-            Nous construisons des relations durables fondées sur la confiance
-            et le respect de nos engagements.
+            Vous avez un projet ou une opportunité d'affaires ?
+            KY5 GLOBAL TRADE est à vos côtés pour vous accompagner.
         </p>
-    </div>
 
-    <div class="value">
-        <h4>💼 Professionnalisme</h4>
+        <a href="contact.html" class="btn">
+            NOUS CONTACTER
+        </a>
+
+    </section>
+
+
+    <!-- ==============================
+         FOOTER
+    ============================== -->
+
+    <footer>
+
         <p>
-            Nous mettons notre expertise et notre sérieux au service de
-            chaque client et partenaire.
+            © 2026 KY5 GLOBAL TRADE — Tous droits réservés.
         </p>
-    </div>
 
-    <div class="value">
-        <h4>⭐ Qualité</h4>
-        <p>
-            Nous recherchons constamment la qualité dans nos produits,
-            nos services et nos prestations.
-        </p>
-    </div>
+    </footer>
 
-    <div class="value">
-        <h4>🔎 Transparence</h4>
-        <p>
-            Nous privilégions une communication claire, honnête et
-            transparente dans toutes nos activités.
-        </p>
-    </div>
-
-    <div class="value">
-        <h4>🌍 Partenariat</h4>
-        <p>
-            Nous développons des collaborations solides et durables avec
-            nos clients, fournisseurs et partenaires.
-        </p>
-    </div>
-
-    <div class="value">
-        <h4>🚀 Engagement</h4>
-        <p>
-            Nous nous engageons à fournir des solutions adaptées et à
-            accompagner nos clients vers la réussite.
-        </p>
-    </div>
-
-</div>
-</p>
-<h3>Nos Implantations</h3>
-
-<div class="locations">
-
-    <div class="location">
-        <h4>📍 Kinshasa</h4>
-        <p>
-            1060, Paulo Maurice<br>
-            Commune de la Gombe<br>
-            Kinshasa, République Démocratique du Congo
-        </p>
-    </div>
-
-    <div class="location">
-        <h4>📍 Brazzaville</h4>
-        <p>
-            198, rue Charles Faucolt<br>
-            Centre-ville<br>
-            Brazzaville, République du Congo
-        </p>
-    </div>
-
-</div>
-</section>
-
-<footer>
-© 2026 KY5 GLOBAL TRADE
-</footer>
 
 </body>
-
 </html>
