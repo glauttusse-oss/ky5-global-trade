@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nos activités - KY5 GLOBAL TRADE </title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f8fc;
+            color: #1c2733;
+            line-height: 1.6;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: #071a2f;
+            color: white;
+            padding: 20px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #1683e8;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #1683e8;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 440px;
+            background:
+                linear-gradient(rgba(4, 30, 55, 0.82), rgba(4, 30, 55, 0.82)),
+                linear-gradient(135deg, #0b5fa5, #1683e8);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 70px 20px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero small {
+            display: inline-block;
+            color: #8dccff;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            max-width: 760px;
+            margin: auto;
+            color: #e7f3ff;
+        }
+
+        /* ================= GENERAL ================= */
+
+        .section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title span {
+            color: #1683e8;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title h2 {
+            color: #071a2f;
+            font-size: 36px;
+            margin-top: 8px;
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 12px auto 0;
+            color: #647180;
+        }
+
+        /* ================= ACTIVITES ================= */
+
+        .activities {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .activity {
+            background: white;
+            border-radius: 15px;
+            padding: 35px;
+            border: 1px solid #e2eaf2;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(7, 26, 47, 0.10);
+        }
+
+        .activity::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 5px;
+            height: 100%;
+            background: #1683e8;
+        }
+
+        .activity-number {
+            color: #1683e8;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .activity h3 {
+            color: #071a2f;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .activity p {
+            color: #647180;
+            margin-bottom: 18px;
+        }
+
+        .activity ul {
+            list-style: none;
+        }
+
+        .activity li {
+            margin: 8px 0;
+            color: #344454;
+        }
+
+        .activity li::before {
+            content: "✓";
+            color: #1683e8;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* ================= SOLUTIONS ================= */
+
+        .solutions {
+            background: #071a2f;
+            color: white;
+            padding: 80px 7%;
+        }
+
+        .solutions-container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .solutions .section-title h2 {
+            color: white;
+        }
+
+        .solutions .section-title p {
+            color: #b8c8d8;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .solution {
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 30px;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .solution h3 {
+            color: #63b5ff;
+            margin-bottom: 10px;
+        }
+
+        .solution p {
+            color: #c9d5df;
+        }
+
+        /* ================= CONDITIONS ================= */
+
+        .conditions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .condition {
+            background: white;
+            border: 1px solid #dce6ef;
+            padding: 18px 35px;
+            border-radius: 50px;
+            color: #071a2f;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .condition span {
+            color: #1683e8;
+        }
+
+        /* ================= MARCHES ================= */
+
+        .markets {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .market-box {
+            background: white;
+            border-radius: 15px;
+            padding: 35px;
+            border: 1px solid #e0e8f0;
+        }
+
+        .market-box h3 {
+            color: #071a2f;
+            font-size: 23px;
+            margin-bottom: 20px;
+        }
+
+        .country-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .country {
+            background: #eaf4ff;
+            color: #075a9d;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* ================= CREDIBILITE ================= */
+
+        .credibility {
+            background: linear-gradient(135deg, #0b5fa5, #1683e8);
+            color: white;
+            border-radius: 20px;
+            padding: 55px;
+            text-align: center;
+        }
+
+        .credibility h2 {
+            font-size: 34px;
+            margin-bottom: 15px;
+        }
+
+        .credibility p {
+            max-width: 800px;
+            margin: auto;
+            color: #eaf5ff;
+            font-size: 17px;
+        }
+
+        /* ================= CLIENTS ================= */
+
+        .clients {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .client {
+            background: white;
+            text-align: center;
+            padding: 35px 20px;
+            border-radius: 15px;
+            border: 1px solid #e1e9f0;
+        }
+
+        .client h3 {
+            color: #071a2f;
+            margin-bottom: 10px;
+        }
+
+        .client p {
+            color: #687685;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta {
+            background: #eaf4ff;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .cta h2 {
+            color: #071a2f;
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            color: #647180;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #1683e8;
+            color: white;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 7px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #075a9d;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #071a2f;
+            color: #b8c8d8;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            header {
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .activities,
+            .markets,
+            .solution-grid,
+            .clients {
+                grid-template-columns: 1fr;
+            }
+
+            .credibility {
+                padding: 35px 20px;
+            }
+
+            nav {
+                justify-content: center;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        <h1>KY5 GLOBAL TRADE</h1>
+    </div>
+
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="services.html">Services</a>
+        <a href="apropos.html">À propos</a>
+        <a href="produits.html">Produits</a>
+        <a href="activites.html" class="active">Nos activités</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <small>KY5 GLOBAL TRADE</small>
+
+        <h1>
+            Connecter les marchés,<br>
+            bâtir l'avenir
+        </h1>
+
+        <p>
+            Importation, transport, logistique et solutions commerciales
+            pour accompagner vos marchandises de l'origine jusqu'à leur destination.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ACTIVITES -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <span>Notre expertise</span>
+
+        <h2>Nos principales activités</h2>
+
+        <p>
+            Nous développons des solutions adaptées aux besoins des
+            entreprises, commerçants et particuliers.
+        </p>
+
+    </div>
+
+
+    <div class="activities">
+
+        <div class="activity">
+
+            <div class="activity-number">01 — IMPORTATION</div>
+
+            <h3>Importation de marchandises</h3>
+
+            <p>
+                Nous organisons l'approvisionnement et l'importation
+                de différents produits et équipements selon les besoins
+                de nos clients.
+            </p>
+
+            <ul>
+                <li>Matériel agricole</li>
+                <li>Équipements et matériels de bâtiment</li>
+                <li>Matériels de construction</li>
+                <li>Marchandises sur commande</li>
+            </ul>
+
+        </div>
+
+
+        <div class="activity">
+
+            <div class="activity-number">02 — LOGISTIQUE</div>
+
+            <h3>Transport & logistique</h3>
+
+            <p>
+                Nous proposons plusieurs solutions pour assurer
+                l'acheminement des marchandises.
+            </p>
+
+            <ul>
+                <li>Transport maritime</li>
+                <li>Transport aérien</li>
+                <li>Transport terrestre</li>
+                <li>Transport par conteneur</li>
+                <li>Groupage et CBM</li>
+                <li>Livraison</li>
+            </ul>
+
+        </div>
+
+
+        <div class="activity">
+
+            <div class="activity-number">03 — TRANSIT</div>
+
+            <h3>Transit & dédouanement</h3>
+
+            <p>
+                Nous accompagnons les opérations liées au transit
+                et aux formalités nécessaires à l'acheminement
+                des marchandises.
+            </p>
+
+            <ul>
+                <li>Transit</li>
+                <li>Dédouanement</li>
+                <li>Suivi des opérations</li>
+                <li>Accompagnement logistique</li>
+            </ul>
+
+        </div>
+
+
+        <div class="activity">
+
+            <div class="activity-number">04 — COMMERCE</div>
+
+            <h3>Solutions commerciales</h3>
+
+            <p>
+                Nous adaptons nos solutions commerciales aux besoins
+                spécifiques de chaque opération.
+            </p>
+
+            <ul>
+                <li>FOB</li>
+                <li>CIF</li>
+                <li>DDP</li>
+                <li>Commandes personnalisées</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SOLUTIONS LOGISTIQUES -->
+
+<section class="solutions">
+
+    <div class="solutions-container">
+
+        <div class="section-title">
+
+            <span>Solutions logistiques</span>
+
+            <h2>Une chaîne logistique complète</h2>
+
+            <p>
+                De l'organisation du transport jusqu'à la livraison,
+                nous proposons plusieurs solutions pour répondre
+                aux exigences de nos clients.
+            </p>
+
+        </div>
+
+
+        <div class="solution-grid">
+
+            <div class="solution">
+                <h3>Transport maritime</h3>
+                <p>
+                    Solutions adaptées au transport de marchandises
+                    par voie maritime et au transport par conteneur.
+                </p>
+            </div>
+
+            <div class="solution">
+                <h3>Transport aérien</h3>
+                <p>
+                    Une solution adaptée aux marchandises nécessitant
+                    un acheminement rapide.
+                </p>
+            </div>
+
+            <div class="solution">
+                <h3>Transport terrestre</h3>
+                <p>
+                    Acheminement des marchandises vers leur destination
+                    par voie terrestre.
+                </p>
+            </div>
+
+            <div class="solution">
+                <h3>Groupage / CBM</h3>
+                <p>
+                    Une solution permettant de regrouper les marchandises
+                    selon leur volume et leurs besoins logistiques.
+                </p>
+            </div>
+
+            <div class="solution">
+                <h3>Transit & dédouanement</h3>
+                <p>
+                    Accompagnement dans les différentes étapes
+                    administratives et douanières.
+                </p>
+            </div>
+
+            <div class="solution">
+                <h3>Livraison</h3>
+                <p>
+                    Organisation de l'acheminement des marchandises
+                    jusqu'à leur destination.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONDITIONS COMMERCIALES -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <span>Commerce international</span>
+
+        <h2>Nos conditions commerciales</h2>
+
+        <p>
+            Nous travaillons notamment selon différentes conditions
+            commerciales adaptées aux opérations internationales.
+        </p>
+
+    </div>
+
+
+    <div class="conditions">
+
+        <div class="condition">
+            <span>FOB</span>
+        </div>
+
+        <div class="condition">
+            <span>CIF</span>
+        </div>
+
+        <div class="condition">
+            <span>DDP</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MARCHES -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <span>Notre réseau</span>
+
+        <h2>Nos marchés</h2>
+
+        <p>
+            Notre activité actuelle s'appuie sur une présence
+            entre la République du Congo et la République démocratique du Congo,
+            avec une ambition internationale.
+        </p>
+
+    </div>
+
+
+    <div class="markets">
+
+        <div class="market-box">
+
+            <h3>Marchés actuels</h3>
+
+            <div class="country-list">
+
+                <div class="country">🇨🇬 République du Congo</div>
+
+                <div class="country">🇨🇩 RDC</div>
+
+            </div>
+
+        </div>
+
+
+        <div class="market-box">
+
+            <h3>Marchés ciblés</h3>
+
+            <div class="country-list">
+
+                <div class="country">Gabon</div>
+                <div class="country">Angola</div>
+                <div class="country">Côte d'Ivoire</div>
+                <div class="country">Sénégal</div>
+                <div class="country">Maroc</div>
+                <div class="country">Chine</div>
+                <div class="country">Émirats arabes unis</div>
+                <div class="country">Turquie</div>
+                <div class="country">France</div>
+                <div class="country">Angleterre</div>
+                <div class="country">Espagne</div>
+                <div class="country">Canada</div>
+                <div class="country">USA</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CREDIBILITE -->
+
+<section class="section">
+
+    <div class="credibility">
+
+        <h2>Notre crédibilité, notre engagement</h2>
+
+        <p>
+            Chez KY5 GLOBAL TRADE, la crédibilité constitue
+            un élément essentiel de notre engagement. Nous travaillons
+            à offrir à nos clients des solutions commerciales et
+            logistiques fiables, adaptées à leurs besoins et à leurs
+            opérations.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- CLIENTS -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <span>Nos clients</span>
+
+        <h2>À qui s'adressent nos solutions ?</h2>
+
+    </div>
+
+
+    <div class="clients">
+
+        <div class="client">
+
+            <h3>Entreprises</h3>
+
+            <p>
+                Solutions d'approvisionnement, d'importation
+                et de logistique adaptées aux entreprises.
+            </p>
+
+        </div>
+
+
+        <div class="client">
+
+            <h3>Commerçants</h3>
+
+            <p>
+                Accompagnement pour l'achat, l'importation
+                et l'acheminement des marchandises.
+            </p>
+
+        </div>
+
+
+        <div class="client">
+
+            <h3>Particuliers</h3>
+
+            <p>
+                Solutions pour les commandes et l'acheminement
+                de marchandises selon les besoins.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta">
+
+    <h2>Un projet d'importation ou de logistique ?</h2>
+
+    <p>
+        Parlons de votre besoin et trouvons ensemble
+        la solution adaptée.
+    </p>
+
+    <a href="contact.html" class="btn">
+        Nous contacter
+    </a>
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 <strong>KY5 GLOBAL TRADE</strong> —
+        Tous droits réservés.
+    </p>
+
+</footer>
+
+</body>
+</html>
