@@ -170,7 +170,36 @@ footer{
     padding:30px;
     font-size:18px;
 }
+.hero {
+    animation: apparitionAccueil 1s ease-out;
+}
 
+.hero-content h1 {
+    animation: apparition 0.8s ease-out;
+}
+
+.hero-content h2 {
+    animation: apparition 0.8s ease-out 0.3s both;
+}
+
+.hero-content p {
+    animation: apparition 0.8s ease-out 0.6s both;
+}
+
+.hero-content .btn {
+    animation: apparition 0.8s ease-out 0.9s both;
+}
+
+@keyframes apparition {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+}
 </style>
 
 </head>
