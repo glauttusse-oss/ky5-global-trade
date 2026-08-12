@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>À propos - KY5 GLOBAL TRADE</title>
 
+    <meta name="description"
+        content="Découvrez KY5 GLOBAL TRADE, son identité, ses valeurs, son expertise et ses domaines d'intervention.">
+
     <style>
 
-        /* ==============================
-           CONFIGURATION GÉNÉRALE
-        ============================== */
+        /* =====================================================
+           RÉINITIALISATION
+        ===================================================== */
 
         * {
             margin: 0;
@@ -24,600 +29,1970 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background: #f5f9ff;
-            color: #17233c;
+            background: #f4f8fc;
+            color: #17243a;
             overflow-x: hidden;
         }
 
+        img {
+            display: block;
+            max-width: 100%;
+        }
 
-        /* ==============================
-           NAVIGATION
-        ============================== */
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           COULEURS
+        ===================================================== */
+
+        :root {
+
+            --header-dark: #001329;
+            --header-blue: #002c5f;
+            --header-blue-2: #004b89;
+
+            --blue: #075ca8;
+            --blue-light: #18a2e0;
+            --cyan: #67d9ff;
+
+            --white: #ffffff;
+
+            --text: #14213d;
+            --muted: #69778a;
+
+            --background: #f4f8fc;
+
+            --border: #dce8f3;
+        }
+
+
+        /* =====================================================
+           EN-TÊTE PROFESSIONNEL
+        ===================================================== */
 
         header {
-            width: 100%;
-            background: linear-gradient(135deg, #061b3a, #0a3d78);
-            color: white;
-            padding: 18px 6%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+
             position: sticky;
+
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.18);
+
+            z-index: 99999;
+
+            width: 100%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #001329 0%,
+                    #002653 48%,
+                    #004b89 100%
+                );
+
+            border-bottom:
+                2px solid
+                rgba(103, 217, 255, 0.35);
+
+            box-shadow:
+                0 12px 35px
+                rgba(0, 18, 45, 0.42);
+
+            backdrop-filter: blur(14px);
+
+            animation:
+                headerAppear 0.8s ease;
         }
+
+
+        /* ligne lumineuse supérieure */
+
+        header::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #63d7ff,
+                    #ffffff,
+                    #63d7ff,
+                    transparent
+                );
+
+            background-size: 200% 100%;
+
+            animation:
+                lightMove 5s linear infinite;
+        }
+
+
+        /* =====================================================
+           CONTENEUR HEADER
+        ===================================================== */
+
+        .header-container {
+
+            width: 100%;
+
+            max-width: 1500px;
+
+            min-height: 120px;
+
+            margin: auto;
+
+            padding:
+                15px 4%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 45px;
+        }
+
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
 
         .logo {
+
+            position: relative;
+
             display: flex;
+
             align-items: center;
-            gap: 12px;
+
+            gap: 20px;
+
+            flex-shrink: 0;
+
+            animation:
+                logoEntrance 1s ease;
         }
+
+
+        .logo::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 95px;
+            height: 95px;
+
+            left: -7px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(103, 217, 255, 0.30);
+
+            animation:
+                logoRotation 8s linear infinite;
+        }
+
 
         .logo img {
-            width: 58px;
-            height: 58px;
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 90px;
+            height: 90px;
+
             object-fit: contain;
+
+            filter:
+                drop-shadow(
+                    0 7px 15px
+                    rgba(0,0,0,0.35)
+                );
+
+            animation:
+                logoFloat 4s ease-in-out infinite;
+
+            transition:
+                transform 0.4s ease,
+                filter 0.4s ease;
         }
 
-        .logo h2 {
-            font-size: 20px;
-            letter-spacing: 1px;
-            color: white;
+
+        .logo img:hover {
+
+            transform:
+                scale(1.10)
+                rotate(-3deg);
+
+            filter:
+                drop-shadow(
+                    0 0 18px
+                    rgba(103,217,255,0.65)
+                );
         }
+
+
+        /* =====================================================
+           NOM KY5
+        ===================================================== */
+
+        .logo-text {
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        .logo-text h1 {
+
+            color: #ffffff;
+
+            font-size: 36px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            line-height: 1;
+
+            white-space: nowrap;
+
+            text-transform: uppercase;
+
+            text-shadow:
+                0 3px 10px
+                rgba(0,0,0,0.35);
+
+            animation:
+                companyAppear 1s ease;
+        }
+
+
+        .logo-text span {
+
+            margin-top: 8px;
+
+            color: #8edfff;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
 
         nav ul {
-            list-style: none;
+
             display: flex;
-            gap: 25px;
+
             align-items: center;
+
+            justify-content: flex-end;
+
+            gap: 8px;
+
+            list-style: none;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 15px;
-            transition: 0.3s ease;
+
+        nav li {
+
             position: relative;
         }
 
-        nav a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -7px;
-            width: 0;
-            height: 3px;
-            background: #29a9ff;
-            transition: 0.3s ease;
+
+        nav a {
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding:
+                14px 16px;
+
+            color: #ffffff;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.3px;
+
+            border-radius: 9px;
+
+            transition:
+                0.35s ease;
         }
+
+
+        nav a:hover {
+
+            color: #ffffff;
+
+            background:
+                rgba(255,255,255,0.11);
+
+            transform:
+                translateY(-3px);
+        }
+
+
+        nav a::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 50%;
+
+            bottom: 4px;
+
+            width: 0;
+
+            height: 3px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #63d7ff,
+                    #ffffff
+                );
+
+            transform:
+                translateX(-50%);
+
+            transition:
+                width 0.35s ease;
+        }
+
 
         nav a:hover::after,
         nav a.active::after {
-            width: 100%;
+
+            width: 70%;
         }
 
-        nav a:hover,
+
         nav a.active {
-            color: #55baff;
-        }
-
-
-        /* ==============================
-           HERO À PROPOS
-        ============================== */
-
-        .about-hero {
-            min-height: 55vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 80px 8%;
-            position: relative;
-            overflow: hidden;
 
             background:
-                radial-gradient(circle at 15% 20%, rgba(55,181,255,0.30), transparent 30%),
-                radial-gradient(circle at 85% 80%, rgba(0,91,190,0.35), transparent 35%),
-                linear-gradient(135deg, #061b3a, #0754a3, #087cc9);
+                rgba(255,255,255,0.14);
+
+            box-shadow:
+                inset 0 0 0 1px
+                rgba(255,255,255,0.08);
         }
+
+
+        /* =====================================================
+           HERO À PROPOS
+        ===================================================== */
+
+        .about-hero {
+
+            position: relative;
+
+            min-height: 68vh;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding:
+                100px 7%;
+
+            background:
+
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(103,217,255,0.22),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(0,85,170,0.35),
+                    transparent 35%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #04152c,
+                    #07518f,
+                    #078bd0
+                );
+        }
+
 
         .about-hero::before {
+
             content: "";
+
             position: absolute;
-            width: 350px;
-            height: 350px;
+
+            width: 520px;
+            height: 520px;
+
+            right: -200px;
+            top: -230px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.14);
+
             border-radius: 50%;
-            background: rgba(255,255,255,0.06);
-            top: -120px;
-            right: -100px;
-            animation: flotter 7s ease-in-out infinite;
+
+            animation:
+                rotateCircle 18s linear infinite;
         }
+
 
         .about-hero::after {
+
             content: "";
+
             position: absolute;
-            width: 250px;
-            height: 250px;
+
+            width: 370px;
+            height: 370px;
+
+            left: -170px;
+            bottom: -200px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
             border-radius: 50%;
-            background: rgba(255,255,255,0.05);
-            bottom: -100px;
-            left: -80px;
-            animation: flotter 9s ease-in-out infinite reverse;
+
+            animation:
+                rotateReverse 15s linear infinite;
         }
+
+
+        .hero-light {
+
+            position: absolute;
+
+            width: 10px;
+            height: 10px;
+
+            border-radius: 50%;
+
+            background: #67d9ff;
+
+            box-shadow:
+                0 0 20px
+                rgba(103,217,255,0.9);
+
+            animation:
+                floating 5s ease-in-out infinite;
+        }
+
+
+        .light-one {
+
+            left: 15%;
+            top: 25%;
+        }
+
+
+        .light-two {
+
+            right: 17%;
+            top: 65%;
+
+            animation-delay: 1s;
+        }
+
+
+        .light-three {
+
+            right: 27%;
+            top: 30%;
+
+            animation-delay: 2s;
+        }
+
 
         .hero-content {
+
             position: relative;
-            z-index: 2;
-            max-width: 900px;
-            animation: apparition 1.2s ease forwards;
+
+            z-index: 5;
+
+            max-width: 1000px;
+
+            animation:
+                contentAppear 1.2s ease;
         }
+
 
         .hero-small {
-            color: #7dd0ff;
-            font-weight: bold;
-            letter-spacing: 4px;
-            margin-bottom: 15px;
+
+            color: #86e0ff;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            letter-spacing: 7px;
+
+            margin-bottom: 22px;
+
             text-transform: uppercase;
         }
+
 
         .about-hero h1 {
-            color: white;
-            font-size: clamp(40px, 6vw, 75px);
-            line-height: 1.05;
-            margin-bottom: 25px;
+
+            color: #ffffff;
+
+            font-size:
+                clamp(48px, 7vw, 82px);
+
+            line-height: 1;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 28px;
         }
+
 
         .about-hero h1 span {
-            color: #5fc4ff;
+
+            color: #69d8ff;
+
+            display: block;
+
+            margin-top: 8px;
+
+            text-shadow:
+                0 0 25px
+                rgba(103,217,255,0.25);
         }
+
 
         .about-hero p {
-            color: #e9f6ff;
-            font-size: 19px;
-            line-height: 1.7;
-            max-width: 750px;
+
+            max-width: 850px;
+
             margin: auto;
+
+            color: #e9f8ff;
+
+            font-size: 19px;
+
+            line-height: 1.8;
         }
 
 
-        /* ==============================
-           SECTION PRINCIPALE
-        ============================== */
+        /* =====================================================
+           BOUTON HERO
+        ===================================================== */
+
+        .hero-button {
+
+            display: inline-flex;
+
+            margin-top: 35px;
+
+            padding:
+                16px 30px;
+
+            border-radius: 50px;
+
+            background: #ffffff;
+
+            color: #075ca8;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 12px 30px
+                rgba(0,0,0,0.20);
+
+            transition:
+                0.35s ease;
+        }
+
+
+        .hero-button:hover {
+
+            transform:
+                translateY(-5px)
+                scale(1.03);
+
+            background:
+                #63d7ff;
+
+            color: #ffffff;
+        }
+
+
+        /* =====================================================
+           SECTION PRÉSENTATION
+        ===================================================== */
 
         .about-section {
-            padding: 90px 8%;
-            background: white;
-        }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
+            padding:
+                100px 7%;
 
-        .section-title span {
-            color: #087dcc;
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
-
-        .section-title h2 {
-            font-size: clamp(32px, 5vw, 50px);
-            color: #092d5c;
-            margin-top: 12px;
-        }
-
-        .section-title p {
-            max-width: 700px;
-            margin: 15px auto 0;
-            color: #667085;
-            line-height: 1.7;
-        }
-
-
-        /* ==============================
-           PRÉSENTATION
-        ============================== */
-
-        .about-grid {
-            max-width: 1200px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .about-text {
-            animation: glissementGauche 1s ease;
-        }
-
-        .about-text h3 {
-            color: #0a4f98;
-            font-size: 30px;
-            margin-bottom: 20px;
-        }
-
-        .about-text p {
-            color: #5d6878;
-            line-height: 1.9;
-            font-size: 17px;
-            margin-bottom: 18px;
-        }
-
-        .about-image {
-            position: relative;
-            animation: glissementDroite 1s ease;
-        }
-
-        .about-image img {
-            width: 100%;
-            max-height: 430px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,70,140,0.20);
-        }
-
-        .image-decoration {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, #087dcc, #58c8ff);
-            right: -25px;
-            bottom: -25px;
-            z-index: -1;
-            animation: rotation 8s linear infinite;
-        }
-
-
-        /* ==============================
-           NOS VALEURS
-        ============================== */
-
-        .values {
-            background: linear-gradient(135deg, #eef7ff, #ffffff);
-            padding: 90px 8%;
-        }
-
-        .values-grid {
-            max-width: 1200px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .value-card {
-            background: white;
-            padding: 35px 28px;
-            border-radius: 18px;
-            border-top: 5px solid #087dcc;
-            box-shadow: 0 10px 35px rgba(0,70,140,0.10);
-            transition: 0.4s ease;
-            animation: apparition 1s ease;
-        }
-
-        .value-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 45px rgba(0,70,140,0.18);
-        }
-
-        .value-number {
-            font-size: 15px;
-            font-weight: bold;
-            color: #1595e5;
-            margin-bottom: 15px;
-        }
-
-        .value-card h3 {
-            color: #092d5c;
-            font-size: 23px;
-            margin-bottom: 15px;
-        }
-
-        .value-card p {
-            color: #687386;
-            line-height: 1.7;
-        }
-
-
-        /* ==============================
-           DOMAINES D'ACTIVITÉ
-        ============================== */
-
-        .domains {
-            padding: 90px 8%;
             background: #ffffff;
         }
 
-        .domains-grid {
+
+        .section-title {
+
+            max-width: 850px;
+
+            margin:
+                0 auto 65px;
+
+            text-align: center;
+        }
+
+
+        .section-title span {
+
+            color: #0785d1;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+        }
+
+
+        .section-title h2 {
+
+            color: #092d5c;
+
+            font-size:
+                clamp(34px, 5vw, 52px);
+
+            margin:
+                14px 0;
+        }
+
+
+        .section-title p {
+
+            color: #69778a;
+
+            line-height: 1.8;
+
+            font-size: 17px;
+        }
+
+
+        /* =====================================================
+           GRILLE PRÉSENTATION
+        ===================================================== */
+
+        .about-grid {
+
             max-width: 1200px;
+
             margin: auto;
+
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 70px;
+
+            align-items: center;
+        }
+
+
+        .about-text {
+
+            animation:
+                slideLeft 1s ease;
+        }
+
+
+        .about-text h3 {
+
+            color: #075ca8;
+
+            font-size:
+                clamp(28px, 4vw, 38px);
+
+            margin-bottom: 25px;
+        }
+
+
+        .about-text p {
+
+            color: #5d6878;
+
+            line-height: 1.9;
+
+            font-size: 17px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =====================================================
+           IMAGE
+        ===================================================== */
+
+        .about-image {
+
+            position: relative;
+
+            animation:
+                slideRight 1s ease;
+        }
+
+
+        .about-image img {
+
+            width: 100%;
+
+            min-height: 420px;
+
+            max-height: 500px;
+
+            object-fit: contain;
+
+            padding: 40px;
+
+            border-radius: 25px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    #f2f8fd,
+                    #ffffff
+                );
+
+            border:
+                1px solid
+                #dce9f5;
+
+            box-shadow:
+                0 25px 60px
+                rgba(0,70,140,0.16);
+
+            transition:
+                transform 0.5s ease;
+        }
+
+
+        .about-image:hover img {
+
+            transform:
+                scale(1.025);
+        }
+
+
+        .image-decoration {
+
+            position: absolute;
+
+            width: 110px;
+            height: 110px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #087dcc,
+                    #58c8ff
+                );
+
+            right: -28px;
+            bottom: -28px;
+
+            z-index: -1;
+
+            animation:
+                rotation 8s linear infinite;
+        }
+
+
+        /* =====================================================
+           BANDEAU CHIFFRES
+        ===================================================== */
+
+        .stats {
+
+            padding:
+                65px 7%;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #edf7ff,
+                    #ffffff
+                );
+        }
+
+
+        .stats-grid {
+
+            max-width: 1050px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
             gap: 25px;
         }
 
-        .domain-card {
-            padding: 35px;
+
+        .stat-card {
+
+            padding:
+                35px 25px;
+
+            text-align: center;
+
+            background: #ffffff;
+
+            border:
+                1px solid
+                #dce8f3;
+
             border-radius: 18px;
-            background: linear-gradient(145deg, #f5faff, #e8f4ff);
-            border: 1px solid #d5eaff;
-            transition: 0.4s ease;
+
+            box-shadow:
+                0 12px 35px
+                rgba(0,70,140,0.08);
+
+            transition:
+                0.4s ease;
         }
+
+
+        .stat-card:hover {
+
+            transform:
+                translateY(-8px);
+
+            box-shadow:
+                0 20px 45px
+                rgba(0,70,140,0.15);
+        }
+
+
+        .stat-card strong {
+
+            display: block;
+
+            color: #075ca8;
+
+            font-size: 38px;
+
+            font-weight: 900;
+
+            margin-bottom: 8px;
+        }
+
+
+        .stat-card span {
+
+            color: #687386;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+           NOS VALEURS
+        ===================================================== */
+
+        .values {
+
+            padding:
+                100px 7%;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #eef7ff,
+                    #ffffff
+                );
+        }
+
+
+        .values-grid {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+
+        .value-card {
+
+            position: relative;
+
+            padding:
+                38px 30px;
+
+            background: #ffffff;
+
+            border-radius: 20px;
+
+            border-top:
+                5px solid
+                #087dcc;
+
+            box-shadow:
+                0 12px 35px
+                rgba(0,70,140,0.10);
+
+            transition:
+                0.4s ease;
+
+            overflow: hidden;
+        }
+
+
+        .value-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 100px;
+            height: 100px;
+
+            right: -45px;
+            top: -45px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(8,125,204,0.07);
+        }
+
+
+        .value-card:hover {
+
+            transform:
+                translateY(-12px);
+
+            box-shadow:
+                0 22px 50px
+                rgba(0,70,140,0.18);
+        }
+
+
+        .value-number {
+
+            color: #1595e5;
+
+            font-size: 13px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .value-card h3 {
+
+            color: #092d5c;
+
+            font-size: 24px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .value-card p {
+
+            color: #687386;
+
+            line-height: 1.75;
+        }
+
+
+        /* =====================================================
+           DOMAINES
+        ===================================================== */
+
+        .domains {
+
+            padding:
+                100px 7%;
+
+            background: #ffffff;
+        }
+
+
+        .domains-grid {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+
+        .domain-card {
+
+            position: relative;
+
+            padding:
+                38px 32px;
+
+            min-height: 230px;
+
+            border-radius: 20px;
+
+            background:
+
+                linear-gradient(
+                    145deg,
+                    #f5faff,
+                    #e8f4ff
+                );
+
+            border:
+                1px solid
+                #d5eaff;
+
+            transition:
+                0.45s ease;
+
+            overflow: hidden;
+        }
+
+
+        .domain-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 130px;
+            height: 130px;
+
+            border-radius: 50%;
+
+            right: -55px;
+            bottom: -55px;
+
+            background:
+                rgba(8,125,204,0.08);
+
+            transition:
+                0.4s ease;
+        }
+
 
         .domain-card:hover {
-            transform: translateY(-8px);
-            background: linear-gradient(145deg, #087dcc, #07529b);
+
+            transform:
+                translateY(-9px);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #087dcc,
+                    #07529b
+                );
+
             color: white;
+
+            box-shadow:
+                0 20px 45px
+                rgba(0,75,150,0.22);
         }
+
+
+        .domain-card:hover::before {
+
+            transform:
+                scale(1.8);
+        }
+
 
         .domain-card h3 {
+
+            position: relative;
+
+            z-index: 2;
+
             color: #0758a5;
+
             margin-bottom: 15px;
-            font-size: 22px;
+
+            font-size: 23px;
         }
+
 
         .domain-card:hover h3 {
-            color: white;
+
+            color: #ffffff;
         }
+
 
         .domain-card p {
+
+            position: relative;
+
+            z-index: 2;
+
             color: #637083;
-            line-height: 1.7;
+
+            line-height: 1.75;
         }
 
+
         .domain-card:hover p {
+
             color: #edf8ff;
         }
 
 
-        /* ==============================
+        /* =====================================================
            CTA
-        ============================== */
+        ===================================================== */
 
         .cta {
-            margin: 0;
-            padding: 80px 8%;
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding:
+                90px 7%;
+
             text-align: center;
-            color: white;
+
+            color: #ffffff;
+
             background:
-                radial-gradient(circle at 20% 20%, rgba(80,200,255,0.25), transparent 30%),
-                linear-gradient(135deg, #061b3a, #086db8);
+
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(80,200,255,0.25),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #061b3a,
+                    #086db8
+                );
         }
 
+
+        .cta::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+            height: 350px;
+
+            right: -150px;
+            top: -180px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.13);
+
+            border-radius: 50%;
+
+            animation:
+                rotateCircle 18s linear infinite;
+        }
+
+
         .cta h2 {
-            font-size: clamp(30px, 5vw, 48px);
+
+            position: relative;
+
+            z-index: 2;
+
+            font-size:
+                clamp(32px, 5vw, 50px);
+
             margin-bottom: 18px;
         }
 
+
         .cta p {
-            max-width: 700px;
-            margin: auto auto 30px;
-            line-height: 1.7;
+
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 750px;
+
+            margin:
+                auto auto 30px;
+
+            line-height: 1.8;
+
             color: #e4f5ff;
+
+            font-size: 17px;
         }
+
 
         .btn {
-            display: inline-block;
-            padding: 15px 28px;
-            border-radius: 8px;
-            background: white;
+
+            position: relative;
+
+            z-index: 2;
+
+            display: inline-flex;
+
+            padding:
+                16px 32px;
+
+            border-radius: 50px;
+
+            background: #ffffff;
+
             color: #075ba5;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s ease;
+
+            font-weight: 900;
+
+            transition:
+                0.35s ease;
         }
+
 
         .btn:hover {
-            transform: translateY(-4px);
-            background: #5fc4ff;
-            color: white;
+
+            transform:
+                translateY(-5px)
+                scale(1.04);
+
+            background:
+                #63d7ff;
+
+            color: #ffffff;
         }
 
 
-        /* ==============================
+        /* =====================================================
            FOOTER
-        ============================== */
+        ===================================================== */
 
         footer {
-            background: #04142d;
-            color: white;
+
+            padding:
+                50px 7% 25px;
+
             text-align: center;
-            padding: 30px 20px;
+
+            color: #ffffff;
+
+            background:
+
+                linear-gradient(
+                    135deg,
+                    #020b1b,
+                    #031d3d
+                );
         }
+
+
+        .footer-logo {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .footer-logo img {
+
+            width: 60px;
+            height: 60px;
+
+            object-fit: contain;
+        }
+
+
+        .footer-logo h3 {
+
+            font-size: 22px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
 
         footer p {
+
             color: #a9bfd8;
+
             font-size: 14px;
+
+            line-height: 1.7;
         }
 
 
-        /* ==============================
+        /* =====================================================
            ANIMATIONS
-        ============================== */
+        ===================================================== */
 
-        @keyframes apparition {
+        @keyframes headerAppear {
+
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform:
+                    translateY(-25px);
             }
 
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform:
+                    translateY(0);
             }
         }
 
-        @keyframes glissementGauche {
+
+        @keyframes lightMove {
+
+            from {
+                background-position:
+                    0% 50%;
+            }
+
+            to {
+                background-position:
+                    200% 50%;
+            }
+        }
+
+
+        @keyframes logoEntrance {
+
             from {
                 opacity: 0;
-                transform: translateX(-60px);
+                transform:
+                    translateX(-35px)
+                    scale(0.8);
             }
 
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform:
+                    translateX(0)
+                    scale(1);
             }
         }
 
-        @keyframes glissementDroite {
+
+        @keyframes companyAppear {
+
             from {
                 opacity: 0;
-                transform: translateX(60px);
+                transform:
+                    translateX(-25px);
             }
 
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform:
+                    translateX(0);
             }
         }
 
-        @keyframes flotter {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0);
             }
 
             50% {
-                transform: translateY(-25px) rotate(8deg);
+                transform:
+                    translateY(-6px);
             }
         }
 
-        @keyframes rotation {
+
+        @keyframes logoRotation {
+
             from {
-                transform: rotate(0deg);
+                transform:
+                    rotate(0deg);
             }
 
             to {
-                transform: rotate(360deg);
+                transform:
+                    rotate(360deg);
             }
         }
 
 
-        /* ==============================
-           VERSION TÉLÉPHONE
-        ============================== */
+        @keyframes rotateCircle {
 
-        @media (max-width: 850px) {
-
-            header {
-                flex-direction: column;
-                gap: 18px;
-                padding: 18px 20px;
+            from {
+                transform:
+                    rotate(0deg);
             }
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+        }
+
+
+        @keyframes rotateReverse {
+
+            from {
+                transform:
+                    rotate(360deg);
+            }
+
+            to {
+                transform:
+                    rotate(0deg);
+            }
+        }
+
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-25px);
+            }
+        }
+
+
+        @keyframes contentAppear {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(35px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        @keyframes slideLeft {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateX(-60px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateX(0);
+            }
+        }
+
+
+        @keyframes slideRight {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateX(60px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateX(0);
+            }
+        }
+
+
+        @keyframes rotation {
+
+            from {
+                transform:
+                    rotate(0deg);
+            }
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+        }
+
+
+        /* =====================================================
+           TABLETTE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .header-container {
+
+                padding:
+                    15px 25px;
+
+                gap: 25px;
+            }
+
+
+            .logo img {
+
+                width: 78px;
+                height: 78px;
+            }
+
+
+            .logo::before {
+
+                width: 83px;
+                height: 83px;
+            }
+
+
+            .logo-text h1 {
+
+                font-size: 28px;
+            }
+
 
             nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
+
+                gap: 3px;
             }
 
+
             nav a {
+
+                padding:
+                    11px 10px;
+
+                font-size: 14px;
+            }
+
+
+            .about-grid {
+
+                gap: 40px;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 750px) {
+
+            header {
+
+                position: relative;
+            }
+
+
+            .header-container {
+
+                min-height: auto;
+
+                flex-direction: column;
+
+                padding:
+                    18px 15px;
+
+                gap: 18px;
+            }
+
+
+            .logo {
+
+                gap: 15px;
+
+                justify-content: center;
+            }
+
+
+            .logo img {
+
+                width: 68px;
+                height: 68px;
+            }
+
+
+            .logo::before {
+
+                width: 74px;
+                height: 74px;
+            }
+
+
+            .logo-text h1 {
+
+                font-size: 22px;
+
+                letter-spacing: 1px;
+            }
+
+
+            .logo-text span {
+
+                font-size: 8px;
+
+                letter-spacing: 2px;
+            }
+
+
+            nav {
+
+                width: 100%;
+            }
+
+
+            nav ul {
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 4px;
+            }
+
+
+            nav a {
+
+                padding:
+                    9px 8px;
+
                 font-size: 13px;
             }
 
-            .logo h2 {
-                font-size: 17px;
-            }
 
             .about-hero {
+
                 min-height: 65vh;
-                padding: 70px 25px;
+
+                padding:
+                    75px 20px;
             }
+
+
+            .hero-small {
+
+                font-size: 10px;
+
+                letter-spacing: 4px;
+            }
+
 
             .about-hero h1 {
-                font-size: 42px;
+
+                font-size: 43px;
             }
 
+
             .about-hero p {
+
                 font-size: 16px;
             }
 
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .values-grid,
-            .domains-grid {
-                grid-template-columns: 1fr;
-            }
 
             .about-section,
+            .stats,
             .values,
             .domains {
-                padding: 65px 20px;
+
+                padding:
+                    70px 20px;
             }
 
+
+            .about-grid {
+
+                grid-template-columns:
+                    1fr;
+
+                gap: 45px;
+            }
+
+
+            .about-image img {
+
+                min-height: 300px;
+
+                padding: 25px;
+            }
+
+
             .image-decoration {
+
                 display: none;
+            }
+
+
+            .stats-grid,
+            .values-grid,
+            .domains-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .cta {
+
+                padding:
+                    70px 20px;
+            }
+        }
+
+
+        /* =====================================================
+           PETIT TÉLÉPHONE
+        ===================================================== */
+
+        @media (max-width: 480px) {
+
+            .logo-text h1 {
+
+                font-size: 18px;
+            }
+
+
+            .logo-text span {
+
+                font-size: 7px;
+
+                letter-spacing: 1.5px;
+            }
+
+
+            nav ul {
+
+                gap: 2px;
+            }
+
+
+            nav a {
+
+                font-size: 11px;
+
+                padding:
+                    8px 6px;
+            }
+
+
+            .about-hero h1 {
+
+                font-size: 37px;
             }
         }
 
     </style>
+
 </head>
 
 
 <body>
 
-    <!-- ==============================
-         NAVIGATION
-    ============================== -->
+
+    <!-- =====================================================
+         EN-TÊTE
+    ===================================================== -->
 
     <header>
 
-        <div class="logo">
-            <img src="logo1.png" alt="Logo KY5 GLOBAL TRADE">
-            <h2>KY5 GLOBAL TRADE</h2>
+        <div class="header-container">
+
+
+            <div class="logo">
+
+                <img
+                    src="logo sté.png"
+                    alt="Logo KY5 GLOBAL TRADE"
+                >
+
+
+                <div class="logo-text">
+
+                    <h1>
+                        KY5 GLOBAL TRADE
+                    </h1>
+
+                    <span>
+                        Global Trade • BTP • Immobilier
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <nav>
+
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Accueil
+                        </a>
+                    </li>
+
+                    <li>
+                        <a
+                            href="apropos.html"
+                            class="active"
+                        >
+                            À propos
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="services.html">
+                            Services
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="produits.html">
+                            Produits
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="projets.html">
+                            Projets
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="activites.html">
+                            Nos activités
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="contact.html">
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
         </div>
-
-        <nav>
-            <ul>
-
-                <li>
-                    <a href="index.html">Accueil</a>
-                </li>
-
-                <li>
-                    <a href="apropos.html" class="active">À propos</a>
-                </li>
-
-                <li>
-                    <a href="services.html">Services</a>
-                </li>
-
-                <li>
-                    <a href="produits.html">Produits</a>
-                </li>
-
-                <li>
-                    <a href="projets.html">Projets</a>
-                </li>
-
-                <li>
-                    <a href="activites.html">Nos activités</a>
-                </li>
-
-                <li>
-                    <a href="contact.html">Contact</a>
-                </li>
-
-            </ul>
-        </nav>
 
     </header>
 
 
-    <!-- ==============================
+    <!-- =====================================================
          HERO
-    ============================== -->
+    ===================================================== -->
 
     <section class="about-hero">
+
+        <div class="hero-light light-one"></div>
+
+        <div class="hero-light light-two"></div>
+
+        <div class="hero-light light-three"></div>
+
 
         <div class="hero-content">
 
@@ -625,37 +2000,57 @@
                 KY5 GLOBAL TRADE
             </div>
 
+
             <h1>
-                Votre partenaire
-                <span>stratégique en Afrique</span>
+                À PROPOS DE
+                <span>KY5 GLOBAL TRADE</span>
             </h1>
 
+
             <p>
-                Nous accompagnons les entreprises, investisseurs,
-                commerçants et particuliers dans leurs projets
-                commerciaux et immobiliers.
+                Votre partenaire stratégique pour le développement
+                des affaires, le BTP, la construction et la gestion
+                immobilière en Afrique.
             </p>
+
+
+            <a
+                href="#presentation"
+                class="hero-button"
+            >
+                DÉCOUVRIR NOTRE ENTREPRISE
+            </a>
 
         </div>
 
     </section>
 
 
-    <!-- ==============================
+    <!-- =====================================================
          PRÉSENTATION
-    ============================== -->
+    ===================================================== -->
 
-    <section class="about-section">
+    <section
+        class="about-section"
+        id="presentation"
+    >
 
         <div class="section-title">
 
-            <span>Qui sommes-nous ?</span>
+            <span>
+                Qui sommes-nous ?
+            </span>
 
-            <h2>Une vision tournée vers l'avenir</h2>
+
+            <h2>
+                Une vision tournée vers l'avenir
+            </h2>
+
 
             <p>
-                KY5 GLOBAL TRADE développe des solutions professionnelles
-                adaptées aux réalités du marché africain.
+                KY5 GLOBAL TRADE développe des solutions
+                professionnelles adaptées aux réalités
+                du marché africain.
             </p>
 
         </div>
@@ -663,25 +2058,33 @@
 
         <div class="about-grid">
 
+
             <div class="about-text">
 
-                <h3>Une entreprise au service de vos ambitions</h3>
+                <h3>
+                    Une entreprise au service de vos ambitions
+                </h3>
+
 
                 <p>
-                    KY5 GLOBAL TRADE est une entreprise orientée vers
-                    le développement des affaires, la gestion immobilière,
-                    le BTP, la construction et le business consulting.
+                    KY5 GLOBAL TRADE est une entreprise orientée
+                    vers le développement des affaires, la gestion
+                    immobilière, le BTP, la construction et le
+                    business consulting.
                 </p>
 
+
                 <p>
-                    Notre objectif est de créer des connexions fiables
-                    entre les opportunités, les entreprises et les
-                    différents acteurs économiques.
+                    Notre objectif est de créer des connexions
+                    fiables entre les opportunités, les entreprises
+                    et les différents acteurs économiques.
                 </p>
+
 
                 <p>
                     Nous privilégions une approche professionnelle,
-                    transparente et orientée vers des résultats concrets.
+                    transparente et orientée vers des résultats
+                    concrets.
                 </p>
 
             </div>
@@ -689,7 +2092,10 @@
 
             <div class="about-image">
 
-                <img src="logo.png" alt="KY5 GLOBAL TRADE">
+                <img
+                    src="logo.png"
+                    alt="KY5 GLOBAL TRADE"
+                >
 
                 <div class="image-decoration"></div>
 
@@ -700,20 +2106,80 @@
     </section>
 
 
-    <!-- ==============================
+    <!-- =====================================================
+         CHIFFRES / IDENTITÉ
+    ===================================================== -->
+
+    <section class="stats">
+
+        <div class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <strong>
+                    BTP
+                </strong>
+
+                <span>
+                    Construction
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <strong>
+                    IMMOBILIER
+                </strong>
+
+                <span>
+                    Gestion immobilière
+                </span>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <strong>
+                    GLOBAL
+                </strong>
+
+                <span>
+                    Business & Commerce
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
          NOS VALEURS
-    ============================== -->
+    ===================================================== -->
 
     <section class="values">
 
         <div class="section-title">
 
-            <span>Notre identité</span>
+            <span>
+                Notre identité
+            </span>
 
-            <h2>Nos valeurs</h2>
+
+            <h2>
+                Nos valeurs
+            </h2>
+
 
             <p>
-                Les principes qui orientent notre manière de travailler.
+                Les principes qui orientent notre manière
+                de travailler.
             </p>
 
         </div>
@@ -721,16 +2187,23 @@
 
         <div class="values-grid">
 
+
             <div class="value-card">
 
-                <div class="value-number">01 — FIABILITÉ</div>
+                <div class="value-number">
+                    01 — FIABILITÉ
+                </div>
 
-                <h3>La confiance</h3>
+
+                <h3>
+                    La confiance
+                </h3>
+
 
                 <p>
                     Nous construisons des relations professionnelles
-                    basées sur la confiance, la transparence et le respect
-                    de nos engagements.
+                    basées sur la confiance, la transparence et
+                    le respect de nos engagements.
                 </p>
 
             </div>
@@ -738,9 +2211,15 @@
 
             <div class="value-card">
 
-                <div class="value-number">02 — EXPERTISE</div>
+                <div class="value-number">
+                    02 — EXPERTISE
+                </div>
 
-                <h3>Le professionnalisme</h3>
+
+                <h3>
+                    Le professionnalisme
+                </h3>
+
 
                 <p>
                     Nous mettons notre savoir-faire et notre expérience
@@ -752,9 +2231,15 @@
 
             <div class="value-card">
 
-                <div class="value-number">03 — VISION</div>
+                <div class="value-number">
+                    03 — VISION
+                </div>
 
-                <h3>L'innovation</h3>
+
+                <h3>
+                    L'innovation
+                </h3>
+
 
                 <p>
                     Nous recherchons constamment des solutions modernes
@@ -764,26 +2249,33 @@
 
             </div>
 
+
         </div>
 
     </section>
 
 
-    <!-- ==============================
+    <!-- =====================================================
          DOMAINES
-    ============================== -->
+    ===================================================== -->
 
     <section class="domains">
 
         <div class="section-title">
 
-            <span>Notre expertise</span>
+            <span>
+                Notre expertise
+            </span>
 
-            <h2>Nos domaines d'intervention</h2>
+
+            <h2>
+                Nos domaines d'intervention
+            </h2>
+
 
             <p>
-                Des solutions professionnelles dans plusieurs secteurs
-                stratégiques.
+                Des solutions professionnelles dans plusieurs
+                secteurs stratégiques.
             </p>
 
         </div>
@@ -791,13 +2283,18 @@
 
         <div class="domains-grid">
 
+
             <div class="domain-card">
 
-                <h3>Gestion immobilière</h3>
+                <h3>
+                    Gestion immobilière
+                </h3>
+
 
                 <p>
-                    Gestion, accompagnement et développement de projets
-                    immobiliers adaptés aux besoins de nos partenaires.
+                    Gestion, accompagnement et développement
+                    de projets immobiliers adaptés aux besoins
+                    de nos partenaires.
                 </p>
 
             </div>
@@ -805,7 +2302,10 @@
 
             <div class="domain-card">
 
-                <h3>BTP & Construction</h3>
+                <h3>
+                    BTP & Construction
+                </h3>
+
 
                 <p>
                     Accompagnement des projets de construction,
@@ -818,47 +2318,80 @@
 
             <div class="domain-card">
 
-                <h3>Business Consulting</h3>
+                <h3>
+                    Business Consulting
+                </h3>
+
 
                 <p>
-                    Conseil et accompagnement des entreprises dans
-                    leurs projets, stratégies et opportunités d'affaires.
+                    Conseil et accompagnement des entreprises
+                    dans leurs projets, stratégies et opportunités
+                    d'affaires.
                 </p>
 
             </div>
+
 
         </div>
 
     </section>
 
 
-    <!-- ==============================
-         CONTACT / CTA
-    ============================== -->
+    <!-- =====================================================
+         CTA
+    ===================================================== -->
 
     <section class="cta">
 
-        <h2>Construisons ensemble vos projets</h2>
+        <h2>
+            Construisons ensemble vos projets
+        </h2>
+
 
         <p>
             Vous avez un projet ou une opportunité d'affaires ?
             KY5 GLOBAL TRADE est à vos côtés pour vous accompagner.
         </p>
 
-        <a href="contact.html" class="btn">
+
+        <a
+            href="contact.html"
+            class="btn"
+        >
             NOUS CONTACTER
         </a>
 
     </section>
 
 
-    <!-- ==============================
+    <!-- =====================================================
          FOOTER
-    ============================== -->
+    ===================================================== -->
 
     <footer>
 
+        <div class="footer-logo">
+
+            <img
+                src="logo sté.png"
+                alt="Logo KY5 GLOBAL TRADE"
+            >
+
+
+            <h3>
+                KY5 GLOBAL TRADE
+            </h3>
+
+        </div>
+
+
         <p>
+            Importation • Transport • Logistique • BTP •
+            Gestion immobilière • Business Consulting
+        </p>
+
+
+        <p style="margin-top:15px;">
             © 2026 KY5 GLOBAL TRADE — Tous droits réservés.
         </p>
 
@@ -866,4 +2399,5 @@
 
 
 </body>
+
 </html>
