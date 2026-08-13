@@ -1,3 +1,8 @@
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -1845,6 +1850,30 @@
             }
         }
 
+
+        .service-action { display:inline-flex; align-items:center; justify-content:center; width:100%; margin-top:22px; padding:13px 18px; border:0; border-radius:12px; cursor:pointer; background:linear-gradient(135deg,#075ca8,#1599dc); color:#fff; font-size:14px; font-weight:800; letter-spacing:.3px; box-shadow:0 10px 24px rgba(0,90,170,.18); transition:.3s ease; }
+        .service-action:hover { transform:translateY(-3px); box-shadow:0 15px 30px rgba(0,90,170,.28); }
+        .appointment-modal { position:fixed; inset:0; z-index:100000; display:none; align-items:center; justify-content:center; padding:20px; background:rgba(0,13,35,.72); backdrop-filter:blur(7px); }
+        .appointment-modal.show { display:flex; }
+        .appointment-box { width:min(720px,100%); max-height:92vh; overflow-y:auto; padding:34px; border-radius:24px; background:#fff; box-shadow:0 30px 80px rgba(0,0,0,.35); animation:modalAppear .35s ease; }
+        .appointment-head { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; margin-bottom:25px; }
+        .appointment-head h2 { color:#092d5c; font-size:30px; margin-bottom:7px; }
+        .appointment-head p { color:#69778a; line-height:1.6; font-size:14px; }
+        .appointment-close { width:42px; height:42px; flex:0 0 42px; border:0; border-radius:50%; cursor:pointer; background:#edf5fb; color:#075ca8; font-size:25px; line-height:1; }
+        .appointment-form { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+        .appointment-field { display:flex; flex-direction:column; gap:7px; }
+        .appointment-field.full,.appointment-submit,.appointment-note { grid-column:1/-1; }
+        .appointment-field label { color:#173457; font-size:13px; font-weight:800; }
+        .appointment-field input,.appointment-field select,.appointment-field textarea { width:100%; padding:13px 14px; border:1px solid #d6e4f0; border-radius:11px; outline:none; background:#f9fcff; color:#17243a; font:inherit; transition:.25s ease; }
+        .appointment-field textarea { min-height:115px; resize:vertical; }
+        .appointment-field input:focus,.appointment-field select:focus,.appointment-field textarea:focus { border-color:#1599dc; box-shadow:0 0 0 3px rgba(21,153,220,.12); background:#fff; }
+        .appointment-submit { margin-top:5px; padding:15px 20px; border:0; border-radius:12px; cursor:pointer; background:linear-gradient(135deg,#075ca8,#1599dc); color:#fff; font-weight:900; font-size:15px; box-shadow:0 12px 28px rgba(0,90,170,.22); transition:.3s ease; }
+        .appointment-submit:hover { transform:translateY(-2px); box-shadow:0 16px 35px rgba(0,90,170,.30); }
+        .appointment-note { color:#718096; font-size:12px; line-height:1.6; margin-top:-4px; }
+        body.modal-open { overflow:hidden; }
+        @keyframes modalAppear { from { opacity:0; transform:translateY(25px) scale(.98); } to { opacity:1; transform:translateY(0) scale(1); } }
+        @media (max-width:650px) { .appointment-box { padding:24px 18px; } .appointment-form { grid-template-columns:1fr; } .appointment-field.full,.appointment-submit,.appointment-note { grid-column:auto; } .appointment-head h2 { font-size:24px; } }
+
     </style>
 
 </head>
@@ -2084,6 +2113,10 @@
                         des espaces.
                     </p>
 
+                    <button type="button" class="service-action" data-service="Carrelage">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
+
                 </div>
 
             </article>
@@ -2117,6 +2150,10 @@
                         aux bâtiments résidentiels
                         et professionnels.
                     </p>
+
+                    <button type="button" class="service-action" data-service="Sanitaires">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
 
                 </div>
 
@@ -2152,6 +2189,10 @@
                         et sanitaires.
                     </p>
 
+                    <button type="button" class="service-action" data-service="Plomberie">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
+
                 </div>
 
             </article>
@@ -2185,6 +2226,10 @@
                         aux besoins des bâtiments
                         et des projets.
                     </p>
+
+                    <button type="button" class="service-action" data-service="Électricité">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
 
                 </div>
 
@@ -2220,6 +2265,10 @@
                         des espaces.
                     </p>
 
+                    <button type="button" class="service-action" data-service="Décoration">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
+
                 </div>
 
             </article>
@@ -2253,6 +2302,10 @@
                         préparation du béton sur
                         les chantiers.
                     </p>
+
+                    <button type="button" class="service-action" data-service="Bétonnière">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
 
                 </div>
 
@@ -2288,6 +2341,10 @@
                         et les chantiers.
                     </p>
 
+                    <button type="button" class="service-action" data-service="Groupe électrogène">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
+
                 </div>
 
             </article>
@@ -2321,6 +2378,10 @@
                         aux besoins énergétiques
                         des projets.
                     </p>
+
+                    <button type="button" class="service-action" data-service="Panneau solaire">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
 
                 </div>
 
@@ -2356,6 +2417,10 @@
                         opérations de chantier.
                     </p>
 
+                    <button type="button" class="service-action" data-service="Échafaudage">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
+
                 </div>
 
             </article>
@@ -2388,6 +2453,10 @@
                         Machines et équipements destinés
                         aux travaux de construction.
                     </p>
+
+                    <button type="button" class="service-action" data-service="Machine à ciment">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
 
                 </div>
 
@@ -2458,6 +2527,10 @@
                         propriétaires.
                     </p>
 
+                    <button type="button" class="service-action" data-service="Gestion des maisons et appartements">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
+
                 </div>
 
             </article>
@@ -2490,6 +2563,10 @@
                         Gestion et suivi des espaces
                         professionnels et bureaux.
                     </p>
+
+                    <button type="button" class="service-action" data-service="Gestion des bureaux">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
 
                 </div>
 
@@ -2525,6 +2602,10 @@
                         disponibles.
                     </p>
 
+                    <button type="button" class="service-action" data-service="Recherche de locataires">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
+
                 </div>
 
             </article>
@@ -2559,6 +2640,10 @@
                         dans leur gestion.
                     </p>
 
+                    <button type="button" class="service-action" data-service="Suivi des contrats de loyer">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
+
                 </div>
 
             </article>
@@ -2591,6 +2676,10 @@
                         Suivi des loyers et accompagnement
                         dans la gestion locative des biens.
                     </p>
+
+                    <button type="button" class="service-action" data-service="Suivi des loyers">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
 
                 </div>
 
@@ -2625,6 +2714,10 @@
                         de préserver leur état et leur valeur.
                     </p>
 
+                    <button type="button" class="service-action" data-service="Entretien">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
+
                 </div>
 
             </article>
@@ -2658,6 +2751,10 @@
                         pour les espaces résidentiels
                         et professionnels.
                     </p>
+
+                    <button type="button" class="service-action" data-service="Aménagement intérieur">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
 
                 </div>
 
@@ -2814,6 +2911,10 @@
                         des constructions.
                     </p>
 
+                    <button type="button" class="service-action" data-service="Fondation">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
+
                 </div>
 
             </article>
@@ -2848,6 +2949,10 @@
                         et professionnels.
                     </p>
 
+                    <button type="button" class="service-action" data-service="Peinture">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
+
                 </div>
 
             </article>
@@ -2880,6 +2985,10 @@
                         Aménagement des espaces selon
                         les besoins du projet.
                     </p>
+
+                    <button type="button" class="service-action" data-service="Aménagement intérieur">
+                        DEMANDER UN PROSPECT / RENDEZ-VOUS
+                    </button>
 
                 </div>
 
@@ -2925,6 +3034,33 @@
     </section>
 
 
+
+    <div class="appointment-modal" id="appointmentModal" aria-hidden="true">
+        <div class="appointment-box" role="dialog" aria-modal="true" aria-labelledby="appointmentTitle">
+            <div class="appointment-head">
+                <div><h2 id="appointmentTitle">Votre demande</h2><p>Remplissez ce formulaire. Votre demande sera transmise à KY5 GLOBAL TRADE pour traitement par le Call Center.</p></div>
+                <button type="button" class="appointment-close" id="closeAppointment" aria-label="Fermer">&times;</button>
+            </div>
+            <form class="appointment-form" action="https://formsubmit.co/ky5.global.trade@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="Nouvelle demande depuis le site KY5 GLOBAL TRADE">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="true">
+                <input type="hidden" name="Service demandé" id="selectedService">
+                <div class="appointment-field"><label for="clientName">Nom et prénom *</label><input type="text" id="clientName" name="Nom et prénom" required></div>
+                <div class="appointment-field"><label for="clientPhone">Téléphone / WhatsApp *</label><input type="tel" id="clientPhone" name="Téléphone / WhatsApp" required></div>
+                <div class="appointment-field"><label for="clientEmail">Adresse e-mail *</label><input type="email" id="clientEmail" name="E-mail" required></div>
+                <div class="appointment-field"><label for="clientCity">Ville *</label><input type="text" id="clientCity" name="Ville" placeholder="Ex. Kinshasa" required></div>
+                <div class="appointment-field"><label for="clientType">Type de client *</label><select id="clientType" name="Type de client" required><option value="">Sélectionnez</option><option>Particulier</option><option>Entreprise</option><option>Partenaire</option><option>Promoteur de projet</option></select></div>
+                <div class="appointment-field"><label for="requestType">Type de demande *</label><select id="requestType" name="Type de demande" required><option value="">Sélectionnez</option><option>Demande d'information</option><option>Demande de devis / prospect</option><option>Prise de rendez-vous</option><option>Commande</option></select></div>
+                <div class="appointment-field"><label for="appointmentDate">Date souhaitée</label><input type="date" id="appointmentDate" name="Date souhaitée"></div>
+                <div class="appointment-field"><label for="appointmentTime">Heure souhaitée</label><input type="time" id="appointmentTime" name="Heure souhaitée"></div>
+                <div class="appointment-field full"><label for="clientMessage">Décrivez votre besoin *</label><textarea id="clientMessage" name="Message / besoin" placeholder="Expliquez-nous votre projet, votre besoin ou votre demande..." required></textarea></div>
+                <p class="appointment-note">Après l'envoi, les informations sont transmises à <strong>ky5.global.trade@gmail.com</strong> pour traitement par l'équipe KY5 GLOBAL TRADE.</p>
+                <button type="submit" class="appointment-submit">ENVOYER MA DEMANDE</button>
+            </form>
+        </div>
+    </div>
+
     <!-- =====================================================
          FOOTER
     ===================================================== -->
@@ -2958,6 +3094,21 @@
 
     </footer>
 
+
+
+    <script>
+        const appointmentModal=document.getElementById("appointmentModal");
+        const closeAppointment=document.getElementById("closeAppointment");
+        const selectedService=document.getElementById("selectedService");
+        const requestType=document.getElementById("requestType");
+        function openAppointment(service){selectedService.value=service;appointmentModal.classList.add("show");appointmentModal.setAttribute("aria-hidden","false");document.body.classList.add("modal-open");document.getElementById("clientName").focus();}
+        function closeModal(){appointmentModal.classList.remove("show");appointmentModal.setAttribute("aria-hidden","true");document.body.classList.remove("modal-open");}
+        document.querySelectorAll(".service-action").forEach(button=>button.addEventListener("click",()=>openAppointment(button.dataset.service)));
+        closeAppointment.addEventListener("click",closeModal);
+        appointmentModal.addEventListener("click",e=>{if(e.target===appointmentModal)closeModal();});
+        document.addEventListener("keydown",e=>{if(e.key==="Escape"&&appointmentModal.classList.contains("show"))closeModal();});
+        requestType.addEventListener("change",()=>{const a=requestType.value==="Prise de rendez-vous";document.getElementById("appointmentDate").required=a;document.getElementById("appointmentTime").required=a;});
+    </script>
 
 </body>
 

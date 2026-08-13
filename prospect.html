@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>Demande de service | KY5 GLOBAL TRADE</title>
+
+    <meta name="description"
+          content="Contactez KY5 GLOBAL TRADE pour une demande de service, un devis, une commande ou un rendez-vous.">
+
+    <style>
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: #17243a;
+            background: #f4f8fc;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+
+            width: 100%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #001329 0%,
+                    #002b59 50%,
+                    #004d88 100%
+                );
+
+            border-bottom: 1px solid rgba(112, 218, 255, .35);
+
+            box-shadow:
+                0 8px 25px rgba(0, 20, 50, .25);
+        }
+
+        .header-inner {
+            width: 100%;
+            max-width: 1450px;
+            min-height: 88px;
+
+            margin: 0 auto;
+            padding: 12px 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+
+        /* LOGO */
+
+        .brand {
+            display: flex;
+            align-items: center;
+
+            min-width: 0;
+        }
+
+        .brand-logo {
+            width: 58px;
+            height: 58px;
+
+            flex: 0 0 58px;
+
+            object-fit: contain;
+
+            filter:
+                drop-shadow(0 5px 12px rgba(0,0,0,.30));
+
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+
+        .brand-name {
+            margin-left: 11px;
+
+            color: #ffffff;
+
+            font-size: clamp(19px, 3vw, 31px);
+            font-weight: 900;
+
+            line-height: 1.05;
+
+            letter-spacing: .7px;
+
+            white-space: nowrap;
+        }
+
+        .brand-subtitle {
+            display: block;
+
+            margin-top: 5px;
+
+            color: #8edfff;
+
+            font-size: 8px;
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            white-space: nowrap;
+        }
+
+
+        /* MENU DESKTOP */
+
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .desktop-nav ul {
+            display: flex;
+            align-items: center;
+
+            gap: 3px;
+
+            list-style: none;
+        }
+
+        .desktop-nav a {
+            display: block;
+
+            padding: 10px 11px;
+
+            border-radius: 8px;
+
+            color: #ffffff;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: .25s ease;
+        }
+
+        .desktop-nav a:hover,
+        .desktop-nav a.active {
+            background: rgba(255,255,255,.13);
+            color: #7de2ff;
+        }
+
+
+        /* BOUTON MENU MOBILE */
+
+        .mobile-menu-button {
+            display: none;
+
+            width: 44px;
+            height: 44px;
+
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 10px;
+
+            background: rgba(255,255,255,.08);
+
+            color: white;
+
+            cursor: pointer;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-direction: column;
+
+            gap: 5px;
+        }
+
+        .mobile-menu-button span {
+            display: block;
+
+            width: 21px;
+            height: 2px;
+
+            border-radius: 10px;
+
+            background: white;
+
+            transition: .25s ease;
+        }
+
+
+        /* MENU MOBILE */
+
+        .mobile-nav {
+            display: none;
+
+            width: 100%;
+
+            padding: 0 15px 15px;
+        }
+
+        .mobile-nav.open {
+            display: block;
+        }
+
+        .mobile-nav ul {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+
+            list-style: none;
+        }
+
+        .mobile-nav a {
+            display: block;
+
+            padding: 14px 15px;
+
+            border-radius: 9px;
+
+            color: white;
+
+            background: rgba(255,255,255,.07);
+
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .mobile-nav a.active {
+            background: rgba(41,177,235,.20);
+            color: #8de5ff;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            position: relative;
+
+            width: 100%;
+
+            padding:
+                55px 18px
+                60px;
+
+            text-align: center;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(90,220,255,.20),
+                    transparent 32%
+                ),
+                linear-gradient(
+                    135deg,
+                    #03142a,
+                    #07518d,
+                    #078dce
+                );
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 230px;
+            height: 230px;
+
+            right: -100px;
+            bottom: -100px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,.15);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+
+            width: 100%;
+            max-width: 850px;
+
+            margin: auto;
+        }
+
+        .hero-label {
+            margin-bottom: 13px;
+
+            color: #8de4ff;
+
+            font-size: 11px;
+            font-weight: 800;
+
+            letter-spacing: 3px;
+        }
+
+        .hero h1 {
+            margin-bottom: 17px;
+
+            color: white;
+
+            font-size: clamp(32px, 8vw, 62px);
+            font-weight: 900;
+
+            line-height: 1.05;
+        }
+
+        .hero h1 span {
+            color: #72ddff;
+        }
+
+        .hero-description {
+            max-width: 700px;
+
+            margin: auto;
+
+            color: #eaf8ff;
+
+            font-size: 15px;
+
+            line-height: 1.75;
+        }
+
+
+        /* =========================================================
+           SECTION FORMULAIRE
+        ========================================================= */
+
+        .form-section {
+            width: 100%;
+
+            padding:
+                45px 15px
+                60px;
+        }
+
+        .form-card {
+            width: 100%;
+            max-width: 920px;
+
+            margin: auto;
+
+            background: #ffffff;
+
+            border: 1px solid #e4edf5;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 18px 55px rgba(0,55,110,.10);
+
+            overflow: hidden;
+        }
+
+
+        /* ENTÊTE FORMULAIRE */
+
+        .form-card-header {
+            padding: 25px 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4fbff,
+                    #ffffff
+                );
+
+            border-bottom: 1px solid #e4edf5;
+        }
+
+        .form-card-header h2 {
+            margin-bottom: 8px;
+
+            color: #082e5b;
+
+            font-size: clamp(22px, 5vw, 31px);
+            font-weight: 900;
+        }
+
+        .form-card-header p {
+            color: #69788b;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        /* FORMULAIRE */
+
+        .prospect-form {
+            padding: 22px 20px 25px;
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+        }
+
+        .field {
+            min-width: 0;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+        .field-full {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            color: #173457;
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .required {
+            color: #d62828;
+        }
+
+
+        /* CHAMPS */
+
+        .field input,
+        .field select,
+        .field textarea {
+
+            display: block;
+
+            width: 100%;
+            max-width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #d7e4ef;
+            border-radius: 10px;
+
+            outline: none;
+
+            background: #f9fcff;
+
+            color: #17243a;
+
+            font-size: 15px;
+
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease,
+                background .2s ease;
+        }
+
+        .field input,
+        .field select {
+            min-height: 48px;
+        }
+
+        .field textarea {
+            min-height: 135px;
+
+            resize: vertical;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+
+            border-color: #1599dc;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 0 0 3px rgba(21,153,220,.11);
+        }
+
+
+        /* SERVICE */
+
+        #service {
+            color: #075ca8;
+
+            font-weight: 700;
+
+            background: #f1f9ff;
+        }
+
+
+        /* NOTE */
+
+        .form-note {
+            grid-column: 1 / -1;
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            background: #f4f8fc;
+
+            color: #68788c;
+
+            font-size: 12px;
+
+            line-height: 1.65;
+        }
+
+
+        /* BOUTON */
+
+        .submit-button {
+            grid-column: 1 / -1;
+
+            width: 100%;
+
+            min-height: 52px;
+
+            padding: 14px 20px;
+
+            border: 0;
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #075ca8,
+                    #1599dc
+                );
+
+            color: #ffffff;
+
+            font-size: 14px;
+            font-weight: 900;
+
+            letter-spacing: .4px;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 25px rgba(0,90,160,.20);
+
+            transition: .25s ease;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 30px rgba(0,90,160,.27);
+        }
+
+        .submit-button:active {
+            transform: scale(.98);
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            width: 100%;
+
+            padding: 38px 18px;
+
+            text-align: center;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #020b1b,
+                    #03254a
+                );
+        }
+
+        .footer-brand {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 11px;
+
+            margin-bottom: 12px;
+        }
+
+        .footer-brand img {
+            width: 45px;
+            height: 45px;
+
+            object-fit: contain;
+        }
+
+        .footer-brand strong {
+            font-size: 19px;
+        }
+
+        footer p {
+            color: #a9bfd8;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           ANIMATION
+        ========================================================= */
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+
+        /* =========================================================
+           TABLETTE
+        ========================================================= */
+
+        @media (max-width: 1050px) {
+
+            .desktop-nav a {
+                padding: 9px 8px;
+
+                font-size: 12px;
+            }
+
+            .brand-name {
+                font-size: 23px;
+            }
+
+            .brand-logo {
+                width: 54px;
+                height: 54px;
+            }
+        }
+
+
+        /* =========================================================
+           MOBILE
+        ========================================================= */
+
+        @media (max-width: 760px) {
+
+            .header-inner {
+                min-height: 76px;
+
+                padding: 10px 14px;
+            }
+
+            .brand-logo {
+                width: 50px;
+                height: 50px;
+
+                flex-basis: 50px;
+            }
+
+            .brand-name {
+                margin-left: 8px;
+
+                font-size: 19px;
+
+                letter-spacing: .4px;
+            }
+
+            .brand-subtitle {
+                margin-top: 4px;
+
+                font-size: 7px;
+
+                letter-spacing: 1.4px;
+            }
+
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-menu-button {
+                display: flex;
+            }
+
+            .hero {
+                padding:
+                    45px 17px
+                    50px;
+            }
+
+            .hero-label {
+                font-size: 9px;
+
+                letter-spacing: 2.3px;
+            }
+
+            .hero-description {
+                font-size: 14px;
+
+                line-height: 1.7;
+            }
+
+            .form-section {
+                padding:
+                    30px 12px
+                    45px;
+            }
+
+            .form-card {
+                border-radius: 16px;
+            }
+
+            .form-card-header {
+                padding: 23px 17px;
+            }
+
+            .prospect-form {
+                padding:
+                    20px 16px
+                    22px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+
+                gap: 16px;
+            }
+
+            .field-full,
+            .form-note,
+            .submit-button {
+                grid-column: auto;
+            }
+
+            .field input,
+            .field select,
+            .field textarea {
+                font-size: 16px;
+            }
+
+            .submit-button {
+                min-height: 55px;
+
+                font-size: 14px;
+            }
+        }
+
+
+        /* =========================================================
+           PETIT MOBILE
+        ========================================================= */
+
+        @media (max-width: 420px) {
+
+            .header-inner {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .brand-logo {
+                width: 44px;
+                height: 44px;
+
+                flex-basis: 44px;
+            }
+
+            .brand-name {
+                font-size: 16px;
+            }
+
+            .brand-subtitle {
+                font-size: 6px;
+
+                letter-spacing: 1px;
+            }
+
+            .mobile-menu-button {
+                width: 42px;
+                height: 42px;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .form-section {
+                padding-left: 9px;
+                padding-right: 9px;
+            }
+
+            .form-card-header {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .prospect-form {
+                padding-left: 13px;
+                padding-right: 13px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         HEADER
+    ========================================================= -->
+
+    <header class="site-header">
+
+        <div class="header-inner">
+
+            <a href="index.html" class="brand">
+
+                <img
+                    src="logo sté.png"
+                    alt="KY5 GLOBAL TRADE"
+                    class="brand-logo"
+                >
+
+                <div>
+
+                    <div class="brand-name">
+                        KY5 GLOBAL TRADE
+                    </div>
+
+                    <span class="brand-subtitle">
+                        GLOBAL TRADE • BTP • IMMOBILIER
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- NAVIGATION ORDINATEUR -->
+
+            <nav class="desktop-nav">
+
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Accueil
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="apropos.html">
+                            À propos
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="services.html">
+                            Services
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="produits.html">
+                            Produits
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="projets.html">
+                            Projets
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="activites.html">
+                            Nos activités
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="contact.html">
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+
+            <!-- BOUTON MOBILE -->
+
+            <button
+                type="button"
+                class="mobile-menu-button"
+                id="mobileMenuButton"
+                aria-label="Ouvrir le menu"
+                aria-expanded="false"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
+
+        <!-- MENU MOBILE -->
+
+        <nav
+            class="mobile-nav"
+            id="mobileNav"
+        >
+
+            <ul>
+
+                <li>
+                    <a href="index.html">
+                        Accueil
+                    </a>
+                </li>
+
+                <li>
+                    <a href="apropos.html">
+                        À propos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="services.html">
+                        Services
+                    </a>
+                </li>
+
+                <li>
+                    <a href="produits.html">
+                        Produits
+                    </a>
+                </li>
+
+                <li>
+                    <a href="projets.html">
+                        Projets
+                    </a>
+                </li>
+
+                <li>
+                    <a href="activites.html">
+                        Nos activités
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================================================
+         HERO
+    ========================================================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-label">
+                KY5 GLOBAL TRADE
+            </div>
+
+            <h1>
+                VOTRE <span>PROJET</span>
+            </h1>
+
+            <p class="hero-description">
+                Présentez-nous votre besoin et notre équipe vous
+                orientera vers le service adapté à votre projet.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         FORMULAIRE
+    ========================================================= -->
+
+    <main class="form-section">
+
+        <div class="form-card">
+
+
+            <div class="form-card-header">
+
+                <h2>
+                    Demande de service
+                </h2>
+
+                <p>
+                    Remplissez les informations ci-dessous afin
+                    que notre équipe puisse vous contacter et
+                    traiter votre demande.
+                </p>
+
+            </div>
+
+
+
+            <form
+                class="prospect-form"
+                action="https://formsubmit.co/ky5.global.trade@gmail.com"
+                method="POST"
+            >
+
+                <!-- FORM SUBMIT -->
+
+                <input
+                    type="hidden"
+                    name="_subject"
+                    value="Nouvelle demande - KY5 GLOBAL TRADE"
+                >
+
+                <input
+                    type="hidden"
+                    name="_template"
+                    value="table"
+                >
+
+                <input
+                    type="hidden"
+                    name="_captcha"
+                    value="true"
+                >
+
+                <input
+                    type="hidden"
+                    name="_next"
+                    value="https://ky5globaltrade.com/prospect.html"
+                >
+
+
+                <div class="form-grid">
+
+
+                    <!-- NOM -->
+
+                    <div class="field">
+
+                        <label for="nom">
+                            Nom et prénom
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nom"
+                            name="Nom et prénom"
+                            placeholder="Votre nom complet"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- ENTREPRISE -->
+
+                    <div class="field">
+
+                        <label for="entreprise">
+                            Entreprise / Organisation
+                        </label>
+
+                        <input
+                            type="text"
+                            id="entreprise"
+                            name="Entreprise / Organisation"
+                            placeholder="Nom de votre entreprise"
+                            autocomplete="organization"
+                        >
+
+                    </div>
+
+
+                    <!-- TELEPHONE -->
+
+                    <div class="field">
+
+                        <label for="telephone">
+                            Téléphone / WhatsApp
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="telephone"
+                            name="Téléphone / WhatsApp"
+                            placeholder="+243 ..."
+                            autocomplete="tel"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="field">
+
+                        <label for="email">
+                            Adresse e-mail
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="Adresse e-mail"
+                            placeholder="exemple@email.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- VILLE -->
+
+                    <div class="field">
+
+                        <label for="ville">
+                            Ville
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="ville"
+                            name="Ville"
+                            placeholder="Ex. Kinshasa"
+                            autocomplete="address-level2"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- TYPE CLIENT -->
+
+                    <div class="field">
+
+                        <label for="typeClient">
+                            Type de client
+                            <span class="required">*</span>
+                        </label>
+
+                        <select
+                            id="typeClient"
+                            name="Type de client"
+                            required
+                        >
+
+                            <option value="">
+                                Sélectionnez
+                            </option>
+
+                            <option value="Particulier">
+                                Particulier
+                            </option>
+
+                            <option value="Entreprise">
+                                Entreprise
+                            </option>
+
+                            <option value="Partenaire">
+                                Partenaire
+                            </option>
+
+                            <option value="Promoteur de projet">
+                                Promoteur de projet
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SERVICE -->
+
+                    <div class="field field-full">
+
+                        <label for="service">
+                            Service recherché
+                            <span class="required">*</span>
+                        </label>
+
+                        <select
+                            id="service"
+                            name="Service recherché"
+                            required
+                        >
+
+                            <option value="">
+                                Sélectionnez le service
+                            </option>
+
+                            <option>
+                                Importation BTP et Fourniture
+                            </option>
+
+                            <option>
+                                Carrelage
+                            </option>
+
+                            <option>
+                                Sanitaires
+                            </option>
+
+                            <option>
+                                Plomberie
+                            </option>
+
+                            <option>
+                                Électricité
+                            </option>
+
+                            <option>
+                                Décoration
+                            </option>
+
+                            <option>
+                                Bétonnière
+                            </option>
+
+                            <option>
+                                Groupe électrogène
+                            </option>
+
+                            <option>
+                                Panneau solaire
+                            </option>
+
+                            <option>
+                                Échafaudage
+                            </option>
+
+                            <option>
+                                Machine à ciment
+                            </option>
+
+                            <option>
+                                Gestion des maisons et appartements
+                            </option>
+
+                            <option>
+                                Gestion des bureaux
+                            </option>
+
+                            <option>
+                                Recherche de locataires
+                            </option>
+
+                            <option>
+                                Suivi des contrats de loyer
+                            </option>
+
+                            <option>
+                                Suivi des loyers
+                            </option>
+
+                            <option>
+                                Entretien immobilier
+                            </option>
+
+                            <option>
+                                Aménagement intérieur
+                            </option>
+
+                            <option>
+                                Construction clé en main
+                            </option>
+
+                            <option>
+                                Plans architecturaux
+                            </option>
+
+                            <option>
+                                Devis et permis
+                            </option>
+
+                            <option>
+                                Fondations
+                            </option>
+
+                            <option>
+                                Élévation
+                            </option>
+
+                            <option>
+                                Toiture
+                            </option>
+
+                            <option>
+                                Peinture
+                            </option>
+
+                            <option>
+                                Clôtures, pavage et espaces verts
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- TYPE DE DEMANDE -->
+
+                    <div class="field field-full">
+
+                        <label for="demande">
+                            Type de demande
+                            <span class="required">*</span>
+                        </label>
+
+                        <select
+                            id="demande"
+                            name="Type de demande"
+                            required
+                        >
+
+                            <option value="">
+                                Sélectionnez
+                            </option>
+
+                            <option>
+                                Demande d'information
+                            </option>
+
+                            <option>
+                                Demande de prospect
+                            </option>
+
+                            <option>
+                                Demande de devis
+                            </option>
+
+                            <option>
+                                Prise de rendez-vous
+                            </option>
+
+                            <option>
+                                Passer une commande
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DATE -->
+
+                    <div class="field">
+
+                        <label for="date">
+                            Date souhaitée
+                        </label>
+
+                        <input
+                            type="date"
+                            id="date"
+                            name="Date souhaitée"
+                        >
+
+                    </div>
+
+
+                    <!-- HEURE -->
+
+                    <div class="field">
+
+                        <label for="heure">
+                            Heure souhaitée
+                        </label>
+
+                        <input
+                            type="time"
+                            id="heure"
+                            name="Heure souhaitée"
+                        >
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div class="field field-full">
+
+                        <label for="message">
+                            Décrivez votre besoin
+                            <span class="required">*</span>
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="Description du besoin"
+                            placeholder="Décrivez votre projet, votre commande ou votre besoin..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- INFORMATION -->
+
+                    <div class="form-note">
+
+                        <strong>Confidentialité :</strong>
+                        les informations fournies servent uniquement
+                        au traitement de votre demande par KY5 GLOBAL TRADE.
+
+                    </div>
+
+
+                    <!-- BOUTON -->
+
+                    <button
+                        type="submit"
+                        class="submit-button"
+                    >
+                        ENVOYER MA DEMANDE
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
+
+    <footer>
+
+        <div class="footer-brand">
+
+            <img
+                src="logo sté.png"
+                alt="Logo KY5 GLOBAL TRADE"
+            >
+
+            <strong>
+                KY5 GLOBAL TRADE
+            </strong>
+
+        </div>
+
+        <p>
+            Importation • Transport • Logistique • BTP •
+            Gestion immobilière • Business Consulting
+        </p>
+
+        <p style="margin-top:10px;">
+            © 2026 KY5 GLOBAL TRADE — Tous droits réservés.
+        </p>
+
+    </footer>
+
+
+
+    <!-- =========================================================
+         MENU MOBILE
+    ========================================================= -->
+
+    <script>
+
+        const menuButton =
+            document.getElementById("mobileMenuButton");
+
+        const mobileNav =
+            document.getElementById("mobileNav");
+
+
+        menuButton.addEventListener("click", function () {
+
+            const isOpen =
+                mobileNav.classList.toggle("open");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+
+        });
+
+
+        /* Fermer le menu après avoir choisi une page */
+
+        mobileNav
+            .querySelectorAll("a")
+            .forEach(function (link) {
+
+                link.addEventListener("click", function () {
+
+                    mobileNav.classList.remove("open");
+
+                    menuButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                });
+
+            });
+
+    </script>
+
+
+</body>
+</html>
