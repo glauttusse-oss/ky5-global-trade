@@ -4,12 +4,18 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>KY5 GLOBAL TRADE</title>
 
-    <meta name="description"
-        content="KY5 GLOBAL TRADE - Importation, Exportation, BTP, Construction, Gestion Immobilière et Business Consulting.">
+    <meta
+        name="description"
+        content="KY5 GLOBAL TRADE - Import / Export, BTP et Gestion Immobilière, Business Consulting, Solutions Numériques et Prestations de Services."
+    >
 
     <style>
 
@@ -23,9 +29,11 @@
             box-sizing: border-box;
         }
 
+
         html {
             scroll-behavior: smooth;
         }
+
 
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -34,14 +42,17 @@
             overflow-x: hidden;
         }
 
+
         img {
             display: block;
             max-width: 100%;
         }
 
+
         a {
             text-decoration: none;
         }
+
 
 
         /* =====================================================
@@ -66,11 +77,13 @@
             --background: #f4f8fc;
 
             --border: #dce8f3;
+
         }
 
 
+
         /* =====================================================
-           HEADER PROFESSIONNEL
+           HEADER
         ===================================================== */
 
         header {
@@ -103,6 +116,7 @@
 
             animation:
                 headerAppear 0.8s ease;
+
         }
 
 
@@ -113,9 +127,11 @@
             position: absolute;
 
             top: 0;
+
             left: 0;
 
             width: 100%;
+
             height: 3px;
 
             background:
@@ -132,7 +148,9 @@
 
             animation:
                 lightMove 5s linear infinite;
+
         }
+
 
 
         /* =====================================================
@@ -159,7 +177,9 @@
             justify-content: space-between;
 
             gap: 45px;
+
         }
+
 
 
         /* =====================================================
@@ -180,6 +200,7 @@
 
             animation:
                 logoEntrance 1s ease;
+
         }
 
 
@@ -190,6 +211,7 @@
             position: absolute;
 
             width: 95px;
+
             height: 95px;
 
             left: -7px;
@@ -202,6 +224,7 @@
 
             animation:
                 logoRotation 8s linear infinite;
+
         }
 
 
@@ -212,6 +235,7 @@
             z-index: 2;
 
             width: 90px;
+
             height: 90px;
 
             object-fit: contain;
@@ -228,6 +252,7 @@
             transition:
                 transform 0.4s ease,
                 filter 0.4s ease;
+
         }
 
 
@@ -242,11 +267,13 @@
                     0 0 18px
                     rgba(103,217,255,0.65)
                 );
+
         }
 
 
+
         /* =====================================================
-           NOM DE LA SOCIÉTÉ
+           NOM DE L'ENTREPRISE
         ===================================================== */
 
         .logo-text {
@@ -256,6 +283,7 @@
             flex-direction: column;
 
             justify-content: center;
+
         }
 
 
@@ -281,6 +309,7 @@
 
             animation:
                 companyAppear 1s ease;
+
         }
 
 
@@ -290,37 +319,209 @@
 
             color: #8edfff;
 
-            font-size: 12px;
+            font-size: 11px;
 
             font-weight: 700;
 
-            letter-spacing: 4px;
+            letter-spacing: 3px;
 
             text-transform: uppercase;
+
         }
 
 
+
         /* =====================================================
-           NAVIGATION
+           BOUTON MENU
         ===================================================== */
+
+        .menu-toggle,
+        .menu-close {
+
+            border: 0;
+
+            cursor: pointer;
+
+            font: inherit;
+
+        }
+
+
+        .menu-toggle {
+
+            display: flex;
+
+            position: relative;
+
+            width: 48px;
+
+            height: 48px;
+
+            margin-left: auto;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,.08);
+
+            border:
+                1px solid
+                rgba(255,255,255,.16);
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            gap: 5px;
+
+            transition: .3s ease;
+
+        }
+
+
+        .menu-toggle::before {
+
+            content: "MENU";
+
+            position: absolute;
+
+            right: 58px;
+
+            color: #8edfff;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            opacity: .85;
+
+        }
+
+
+        .menu-toggle span {
+
+            width: 21px;
+
+            height: 2px;
+
+            border-radius: 10px;
+
+            background: #fff;
+
+            transition: .3s ease;
+
+        }
+
+
+        .menu-toggle:hover {
+
+            background:
+                rgba(103,217,255,.16);
+
+            border-color:
+                rgba(103,217,255,.5);
+
+            transform:
+                translateY(-1px);
+
+        }
+
+
+
+        /* =====================================================
+           MENU LATÉRAL
+        ===================================================== */
+
+        header nav {
+
+            position: fixed;
+
+            top: 0;
+
+            right: 0;
+
+            width: min(390px, 90vw);
+
+            height: 100dvh;
+
+            padding:
+                0 22px 30px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #001329 0%,
+                    #002653 100%
+                );
+
+            box-shadow:
+                -18px 0 50px
+                rgba(0,12,30,.38);
+
+            border-left:
+                1px solid
+                rgba(103,217,255,.18);
+
+            transform:
+                translateX(105%);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+            transition:
+                transform .38s cubic-bezier(.22,.61,.36,1),
+                opacity .25s ease,
+                visibility .38s ease;
+
+            z-index: 100001;
+
+            overflow-y: auto;
+
+        }
+
+
+        header.nav-open nav {
+
+            transform:
+                translateX(0);
+
+            opacity: 1;
+
+            visibility: visible;
+
+            pointer-events: auto;
+
+        }
+
 
         nav ul {
 
             display: flex;
 
-            align-items: center;
+            flex-direction: column;
 
-            justify-content: flex-end;
+            align-items: stretch;
 
-            gap: 8px;
+            gap: 5px;
+
+            width: 100%;
 
             list-style: none;
+
         }
 
 
         nav li {
 
-            position: relative;
+            width: 100%;
+
         }
 
 
@@ -332,7 +533,11 @@
 
             align-items: center;
 
-            justify-content: center;
+            justify-content: flex-start;
+
+            width: 100%;
+
+            min-height: 56px;
 
             padding:
                 14px 16px;
@@ -343,12 +548,13 @@
 
             font-weight: 700;
 
-            letter-spacing: 0.3px;
+            letter-spacing: .3px;
 
-            border-radius: 9px;
+            border-radius: 13px;
 
             transition:
-                0.35s ease;
+                .35s ease;
+
         }
 
 
@@ -357,10 +563,11 @@
             color: #ffffff;
 
             background:
-                rgba(255,255,255,0.11);
+                rgba(255,255,255,.08);
 
             transform:
-                translateY(-3px);
+                translateX(4px);
+
         }
 
 
@@ -370,9 +577,9 @@
 
             position: absolute;
 
-            left: 50%;
+            left: 16px;
 
-            bottom: 4px;
+            bottom: 7px;
 
             width: 0;
 
@@ -387,34 +594,144 @@
                     #ffffff
                 );
 
-            transform:
-                translateX(-50%);
-
             transition:
-                width 0.35s ease;
+                width .35s ease;
+
         }
 
 
         nav a:hover::after,
         nav a.active::after {
 
-            width: 70%;
+            width: 28px;
+
         }
 
 
         nav a.active {
 
             background:
-                rgba(255,255,255,0.14);
+                rgba(255,255,255,.14);
 
             box-shadow:
                 inset 0 0 0 1px
-                rgba(255,255,255,0.08);
+                rgba(255,255,255,.08);
+
         }
 
 
+
         /* =====================================================
-           HERO ACCUEIL
+           EN-TÊTE DU MENU MOBILE
+        ===================================================== */
+
+        .nav-mobile-head {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            min-height: 88px;
+
+            color: #8edfff;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+            letter-spacing: 4px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.10);
+
+            margin-bottom: 14px;
+
+        }
+
+
+        .menu-close {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 12px;
+
+            color: #fff;
+
+            background:
+                rgba(255,255,255,.08);
+
+            border:
+                1px solid
+                rgba(255,255,255,.13);
+
+            font-size: 30px;
+
+            line-height: 1;
+
+            transition: .3s ease;
+
+        }
+
+
+        .menu-close:hover {
+
+            background: #075ca8;
+
+            transform:
+                rotate(90deg);
+
+        }
+
+
+        header.nav-open::after {
+
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0,8,20,.55);
+
+            backdrop-filter:
+                blur(3px);
+
+            z-index: 100000;
+
+        }
+
+
+        body.menu-locked {
+
+            overflow: hidden;
+
+        }
+
+
+        header.scrolled {
+
+            background:
+                rgba(0,19,41,.94);
+
+            box-shadow:
+                0 10px 32px
+                rgba(0,18,45,.30);
+
+            backdrop-filter:
+                blur(18px);
+
+        }
+
+
+
+        /* =====================================================
+           HERO
         ===================================================== */
 
         .hero {
@@ -459,11 +776,13 @@
                     #07518f,
                     #078bd0
                 );
+
         }
 
 
+
         /* =====================================================
-           CERCLES DÉCORATIFS
+           CERCLES HERO
         ===================================================== */
 
         .hero::before {
@@ -473,9 +792,11 @@
             position: absolute;
 
             width: 520px;
+
             height: 520px;
 
             right: -200px;
+
             top: -220px;
 
             border:
@@ -485,6 +806,7 @@
             border-radius: 50%;
 
             box-shadow:
+
                 0 0 0 45px
                 rgba(255,255,255,0.025),
 
@@ -493,6 +815,7 @@
 
             animation:
                 rotation 18s linear infinite;
+
         }
 
 
@@ -503,9 +826,11 @@
             position: absolute;
 
             width: 330px;
+
             height: 330px;
 
             left: -150px;
+
             bottom: -170px;
 
             border-radius: 50%;
@@ -515,7 +840,9 @@
 
             animation:
                 flottement 6s ease-in-out infinite;
+
         }
+
 
 
         /* =====================================================
@@ -527,6 +854,7 @@
             position: absolute;
 
             width: 10px;
+
             height: 10px;
 
             border-radius: 50%;
@@ -540,41 +868,51 @@
 
             animation:
                 floating 5s ease-in-out infinite;
+
         }
 
 
         .light-one {
 
             top: 22%;
+
             left: 15%;
+
         }
 
 
         .light-two {
 
             top: 67%;
+
             right: 17%;
 
             animation-delay: 1s;
+
         }
 
 
         .light-three {
 
             top: 32%;
+
             right: 28%;
 
             animation-delay: 2s;
+
         }
 
 
         .light-four {
 
             bottom: 20%;
+
             left: 30%;
 
             animation-delay: 3s;
+
         }
+
 
 
         /* =====================================================
@@ -595,6 +933,7 @@
 
             animation:
                 apparition 1.1s ease;
+
         }
 
 
@@ -613,7 +952,8 @@
             margin-bottom: 25px;
 
             animation:
-                apparition 1s ease 0.1s both;
+                apparition 1s ease .1s both;
+
         }
 
 
@@ -635,7 +975,8 @@
                 rgba(0,0,0,0.20);
 
             animation:
-                apparition 1s ease 0.2s both;
+                apparition 1s ease .2s both;
+
         }
 
 
@@ -650,12 +991,13 @@
             text-shadow:
                 0 0 30px
                 rgba(103,217,255,0.25);
+
         }
 
 
         .hero-description {
 
-            max-width: 850px;
+            max-width: 900px;
 
             margin:
                 0 auto 38px;
@@ -668,8 +1010,10 @@
             line-height: 1.8;
 
             animation:
-                apparition 1s ease 0.35s both;
+                apparition 1s ease .35s both;
+
         }
+
 
 
         /* =====================================================
@@ -689,7 +1033,8 @@
             flex-wrap: wrap;
 
             animation:
-                apparition 1s ease 0.5s both;
+                apparition 1s ease .5s both;
+
         }
 
 
@@ -711,7 +1056,8 @@
             font-weight: 900;
 
             transition:
-                0.35s ease;
+                .35s ease;
+
         }
 
 
@@ -724,6 +1070,7 @@
             box-shadow:
                 0 12px 30px
                 rgba(0,0,0,0.18);
+
         }
 
 
@@ -738,9 +1085,6 @@
 
             color: #ffffff;
 
-            box-shadow:
-                0 18px 35px
-                rgba(0,0,0,0.25);
         }
 
 
@@ -750,13 +1094,14 @@
 
             border:
                 2px solid
-                rgba(255,255,255,0.8);
+                rgba(255,255,255,.8);
 
             background:
-                rgba(255,255,255,0.06);
+                rgba(255,255,255,.06);
 
             backdrop-filter:
                 blur(5px);
+
         }
 
 
@@ -768,11 +1113,13 @@
 
             transform:
                 translateY(-5px);
+
         }
 
 
+
         /* =====================================================
-           EXPERTISE
+           NOS DOMAINES
         ===================================================== */
 
         .expertise {
@@ -782,6 +1129,7 @@
 
             background:
                 #ffffff;
+
         }
 
 
@@ -793,6 +1141,7 @@
                 0 auto 60px;
 
             text-align: center;
+
         }
 
 
@@ -807,6 +1156,7 @@
             letter-spacing: 4px;
 
             text-transform: uppercase;
+
         }
 
 
@@ -821,6 +1171,7 @@
 
             margin:
                 14px 0;
+
         }
 
 
@@ -831,11 +1182,13 @@
             font-size: 17px;
 
             line-height: 1.8;
+
         }
 
 
+
         /* =====================================================
-           CARTES EXPERTISE
+           GRILLE DES DOMAINES
         ===================================================== */
 
         .expertise-grid {
@@ -847,11 +1200,17 @@
             display: grid;
 
             grid-template-columns:
-                repeat(4, 1fr);
+                repeat(2, 1fr);
 
             gap: 24px;
+
         }
 
+
+
+        /* =====================================================
+           CARTES DOMAINES
+        ===================================================== */
 
         .expertise-card {
 
@@ -862,7 +1221,7 @@
             padding:
                 35px 28px;
 
-            min-height: 260px;
+            min-height: 280px;
 
             border-radius: 20px;
 
@@ -882,10 +1241,11 @@
                 rgba(0,72,140,0.08);
 
             transition:
-                0.45s ease;
+                .45s ease;
 
             animation:
-                cardAppear 0.8s ease both;
+                cardAppear .8s ease both;
+
         }
 
 
@@ -896,9 +1256,11 @@
             position: absolute;
 
             top: 0;
+
             left: 0;
 
             width: 5px;
+
             height: 100%;
 
             background:
@@ -906,6 +1268,7 @@
                     #087dcc,
                     #63d7ff
                 );
+
         }
 
 
@@ -915,11 +1278,13 @@
 
             position: absolute;
 
-            width: 120px;
-            height: 120px;
+            width: 140px;
 
-            right: -50px;
-            top: -50px;
+            height: 140px;
+
+            right: -55px;
+
+            top: -55px;
 
             border-radius: 50%;
 
@@ -927,7 +1292,8 @@
                 rgba(8,125,204,0.06);
 
             transition:
-                0.5s ease;
+                .5s ease;
+
         }
 
 
@@ -939,6 +1305,7 @@
             box-shadow:
                 0 25px 55px
                 rgba(0,72,140,0.17);
+
         }
 
 
@@ -946,6 +1313,7 @@
 
             transform:
                 scale(1.6);
+
         }
 
 
@@ -964,6 +1332,7 @@
             letter-spacing: 2px;
 
             margin-bottom: 17px;
+
         }
 
 
@@ -975,11 +1344,12 @@
 
             color: #10234a;
 
-            font-size: 22px;
+            font-size: 25px;
 
             line-height: 1.3;
 
             margin-bottom: 15px;
+
         }
 
 
@@ -991,10 +1361,29 @@
 
             color: #687386;
 
-            font-size: 15px;
+            font-size: 16px;
 
             line-height: 1.75;
+
         }
+
+
+
+        /* =====================================================
+           CARTE NUMÉRIQUE MISE EN AVANT
+        ===================================================== */
+
+        .expertise-card.digital {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #fafdff,
+                    #e9f6ff
+                );
+
+        }
+
 
 
         /* =====================================================
@@ -1026,6 +1415,7 @@
                     #064b88,
                     #087fc9
                 );
+
         }
 
 
@@ -1036,9 +1426,11 @@
             position: absolute;
 
             width: 400px;
+
             height: 400px;
 
             right: -180px;
+
             top: -180px;
 
             border:
@@ -1049,6 +1441,7 @@
 
             animation:
                 rotation 20s linear infinite;
+
         }
 
 
@@ -1066,6 +1459,7 @@
             gap: 70px;
 
             align-items: center;
+
         }
 
 
@@ -1077,6 +1471,7 @@
 
             animation:
                 slideLeft 1s ease;
+
         }
 
 
@@ -1091,6 +1486,7 @@
             letter-spacing: 4px;
 
             text-transform: uppercase;
+
         }
 
 
@@ -1103,6 +1499,7 @@
 
             margin:
                 15px 0 22px;
+
         }
 
 
@@ -1115,12 +1512,9 @@
             line-height: 1.85;
 
             margin-bottom: 28px;
+
         }
 
-
-        /* =====================================================
-           BLOC DROITE
-        ===================================================== */
 
         .presentation-box {
 
@@ -1143,24 +1537,24 @@
             border-radius: 28px;
 
             background:
-
                 linear-gradient(
                     145deg,
-                    rgba(8,125,204,0.80),
-                    rgba(2,29,65,0.85)
+                    rgba(8,125,204,.80),
+                    rgba(2,29,65,.85)
                 );
 
             border:
                 1px solid
-                rgba(255,255,255,0.15);
+                rgba(255,255,255,.15);
 
             box-shadow:
                 0 25px 60px
-                rgba(0,0,0,0.25);
+                rgba(0,0,0,.25);
 
             animation:
                 slideRight 1s ease,
                 flottement 5s ease-in-out infinite;
+
         }
 
 
@@ -1171,16 +1565,18 @@
             position: absolute;
 
             width: 180px;
+
             height: 180px;
 
             border:
                 1px solid
-                rgba(255,255,255,0.15);
+                rgba(255,255,255,.15);
 
             border-radius: 50%;
 
             animation:
                 rotation 10s linear infinite;
+
         }
 
 
@@ -1189,6 +1585,7 @@
             position: relative;
 
             z-index: 3;
+
         }
 
 
@@ -1198,6 +1595,7 @@
                 clamp(30px, 4vw, 43px);
 
             line-height: 1.15;
+
         }
 
 
@@ -1208,7 +1606,9 @@
             color: #d8e6f5;
 
             line-height: 1.8;
+
         }
+
 
 
         /* =====================================================
@@ -1228,6 +1628,7 @@
                     #ffffff,
                     #edf7ff
                 );
+
         }
 
 
@@ -1239,6 +1640,7 @@
                 clamp(34px, 5vw, 52px);
 
             margin-bottom: 18px;
+
         }
 
 
@@ -1253,6 +1655,7 @@
             font-size: 17px;
 
             line-height: 1.8;
+
         }
 
 
@@ -1271,7 +1674,8 @@
 
             box-shadow:
                 0 12px 30px
-                rgba(0,100,180,0.25);
+                rgba(0,100,180,.25);
+
         }
 
 
@@ -1280,7 +1684,9 @@
             transform:
                 translateY(-5px)
                 scale(1.04);
+
         }
+
 
 
         /* =====================================================
@@ -1297,12 +1703,12 @@
             color: #ffffff;
 
             background:
-
                 linear-gradient(
                     135deg,
                     #020b1b,
                     #031d3d
                 );
+
         }
 
 
@@ -1317,15 +1723,18 @@
             gap: 15px;
 
             margin-bottom: 20px;
+
         }
 
 
         .footer-logo img {
 
             width: 60px;
+
             height: 60px;
 
             object-fit: contain;
+
         }
 
 
@@ -1336,6 +1745,7 @@
             font-weight: 900;
 
             letter-spacing: 1px;
+
         }
 
 
@@ -1346,7 +1756,9 @@
             font-size: 14px;
 
             line-height: 1.7;
+
         }
+
 
 
         /* =====================================================
@@ -1356,64 +1768,90 @@
         @keyframes headerAppear {
 
             from {
+
                 opacity: 0;
+
                 transform:
                     translateY(-25px);
+
             }
 
             to {
+
                 opacity: 1;
+
                 transform:
                     translateY(0);
+
             }
+
         }
 
 
         @keyframes lightMove {
 
             from {
+
                 background-position:
                     0% 50%;
+
             }
 
             to {
+
                 background-position:
                     200% 50%;
+
             }
+
         }
 
 
         @keyframes logoEntrance {
 
             from {
+
                 opacity: 0;
+
                 transform:
                     translateX(-35px)
-                    scale(0.8);
+                    scale(.8);
+
             }
 
             to {
+
                 opacity: 1;
+
                 transform:
                     translateX(0)
                     scale(1);
+
             }
+
         }
 
 
         @keyframes companyAppear {
 
             from {
+
                 opacity: 0;
+
                 transform:
                     translateX(-25px);
+
             }
 
             to {
+
                 opacity: 1;
+
                 transform:
                     translateX(0);
+
             }
+
         }
 
 
@@ -1421,42 +1859,57 @@
 
             0%,
             100% {
+
                 transform:
                     translateY(0);
+
             }
 
             50% {
+
                 transform:
                     translateY(-6px);
+
             }
+
         }
 
 
         @keyframes logoRotation {
 
             from {
+
                 transform:
                     rotate(0deg);
+
             }
 
             to {
+
                 transform:
                     rotate(360deg);
+
             }
+
         }
 
 
         @keyframes rotation {
 
             from {
+
                 transform:
                     rotate(0deg);
+
             }
 
             to {
+
                 transform:
                     rotate(360deg);
+
             }
+
         }
 
 
@@ -1464,14 +1917,19 @@
 
             0%,
             100% {
+
                 transform:
                     translateY(0);
+
             }
 
             50% {
+
                 transform:
                     translateY(-12px);
+
             }
+
         }
 
 
@@ -1479,104 +1937,150 @@
 
             0%,
             100% {
+
                 transform:
                     translateY(0);
+
             }
 
             50% {
+
                 transform:
                     translateY(-25px);
+
             }
+
         }
 
 
         @keyframes apparition {
 
             from {
+
                 opacity: 0;
+
                 transform:
                     translateY(35px);
+
             }
 
             to {
+
                 opacity: 1;
+
                 transform:
                     translateY(0);
+
             }
+
         }
 
 
         @keyframes cardAppear {
 
             from {
+
                 opacity: 0;
+
                 transform:
                     translateY(30px);
+
             }
 
             to {
+
                 opacity: 1;
+
                 transform:
                     translateY(0);
+
             }
+
         }
 
 
         @keyframes slideLeft {
 
             from {
+
                 opacity: 0;
+
                 transform:
                     translateX(-60px);
+
             }
 
             to {
+
                 opacity: 1;
+
                 transform:
                     translateX(0);
+
             }
+
         }
 
 
         @keyframes slideRight {
 
             from {
+
                 opacity: 0;
+
                 transform:
                     translateX(60px);
+
             }
 
             to {
+
                 opacity: 1;
+
                 transform:
                     translateX(0);
+
             }
+
         }
 
 
+
         /* =====================================================
-           ANIMATION CARTES
+           ANIMATION DES CARTES
         ===================================================== */
 
         .expertise-card:nth-child(2) {
 
             animation-delay:
-                0.12s;
+                .12s;
+
         }
 
 
         .expertise-card:nth-child(3) {
 
             animation-delay:
-                0.24s;
+                .24s;
+
         }
 
 
         .expertise-card:nth-child(4) {
 
             animation-delay:
-                0.36s;
+                .36s;
+
         }
+
+
+        .expertise-card:nth-child(5) {
+
+            animation-delay:
+                .48s;
+
+        }
+
 
 
         /* =====================================================
@@ -1591,41 +2095,32 @@
                     15px 25px;
 
                 gap: 25px;
+
             }
 
 
             .logo img {
 
                 width: 78px;
+
                 height: 78px;
+
             }
 
 
             .logo::before {
 
                 width: 83px;
+
                 height: 83px;
+
             }
 
 
             .logo-text h1 {
 
                 font-size: 28px;
-            }
 
-
-            nav ul {
-
-                gap: 3px;
-            }
-
-
-            nav a {
-
-                padding:
-                    11px 10px;
-
-                font-size: 14px;
             }
 
 
@@ -1633,8 +2128,11 @@
 
                 grid-template-columns:
                     repeat(2, 1fr);
+
             }
+
         }
+
 
 
         /* =====================================================
@@ -1643,94 +2141,82 @@
 
         @media (max-width: 750px) {
 
-            header {
-
-                position: relative;
-            }
-
-
             .header-container {
 
-                min-height: auto;
-
-                flex-direction: column;
+                min-height: 78px;
 
                 padding:
-                    18px 15px;
+                    10px 16px;
 
-                gap: 18px;
             }
 
 
             .logo {
 
-                gap: 15px;
+                gap: 12px;
 
-                justify-content: center;
             }
 
 
             .logo img {
 
-                width: 68px;
-                height: 68px;
+                width: 56px;
+
+                height: 56px;
+
             }
 
 
             .logo::before {
 
-                width: 74px;
-                height: 74px;
+                width: 62px;
+
+                height: 62px;
+
             }
 
 
             .logo-text h1 {
 
-                font-size: 22px;
+                font-size: 17px;
 
-                letter-spacing: 1px;
+                letter-spacing: .7px;
+
             }
 
 
             .logo-text span {
 
-                font-size: 8px;
+                font-size: 7px;
 
-                letter-spacing: 2px;
+                letter-spacing: 1.5px;
+
             }
 
 
-            nav {
+            .menu-toggle {
 
-                width: 100%;
+                width: 44px;
+
+                height: 44px;
+
             }
 
 
-            nav ul {
+            .menu-toggle::before {
 
-                flex-wrap: wrap;
+                display: none;
 
-                justify-content: center;
-
-                gap: 4px;
-            }
-
-
-            nav a {
-
-                padding:
-                    9px 8px;
-
-                font-size: 13px;
             }
 
 
             .hero {
 
-                min-height: 70vh;
+                min-height: 75vh;
 
                 padding:
                     75px 20px;
+
             }
 
 
@@ -1739,12 +2225,14 @@
                 font-size: 10px;
 
                 letter-spacing: 4px;
+
             }
 
 
             .hero h1 {
 
                 font-size: 43px;
+
             }
 
 
@@ -1753,12 +2241,14 @@
                 font-size: 16px;
 
                 line-height: 1.7;
+
             }
 
 
             .hero-buttons {
 
                 flex-direction: column;
+
             }
 
 
@@ -1767,6 +2257,7 @@
                 width: 100%;
 
                 max-width: 310px;
+
             }
 
 
@@ -1774,6 +2265,30 @@
 
                 padding:
                     70px 20px;
+
+            }
+
+
+            .section-title {
+
+                margin-bottom:
+                    45px;
+
+            }
+
+
+            .section-title h2 {
+
+                font-size:
+                    34px;
+
+            }
+
+
+            .section-title p {
+
+                font-size: 16px;
+
             }
 
 
@@ -1781,6 +2296,33 @@
 
                 grid-template-columns:
                     1fr;
+
+                gap: 18px;
+
+            }
+
+
+            .expertise-card {
+
+                min-height: auto;
+
+                padding:
+                    30px 24px;
+
+            }
+
+
+            .expertise-card h3 {
+
+                font-size: 23px;
+
+            }
+
+
+            .expertise-card p {
+
+                font-size: 15px;
+
             }
 
 
@@ -1788,6 +2330,7 @@
 
                 padding:
                     70px 20px;
+
             }
 
 
@@ -1797,6 +2340,7 @@
                     1fr;
 
                 gap: 45px;
+
             }
 
 
@@ -1805,6 +2349,7 @@
                 min-height: 300px;
 
                 padding: 30px;
+
             }
 
 
@@ -1812,8 +2357,11 @@
 
                 padding:
                     70px 20px;
+
             }
+
         }
+
 
 
         /* =====================================================
@@ -1824,42 +2372,53 @@
 
             .logo-text h1 {
 
-                font-size: 18px;
+                font-size: 16px;
+
             }
 
 
             .logo-text span {
 
-                font-size: 7px;
+                font-size: 6px;
 
-                letter-spacing: 1.5px;
-            }
+                letter-spacing: 1px;
 
-
-            nav ul {
-
-                gap: 2px;
-            }
-
-
-            nav a {
-
-                font-size: 11px;
-
-                padding:
-                    8px 6px;
             }
 
 
             .hero h1 {
 
                 font-size: 37px;
+
             }
+
+
+            .hero-description {
+
+                font-size: 15px;
+
+            }
+
+
+            .expertise-card {
+
+                border-radius: 17px;
+
+            }
+
+
+            .presentation-box {
+
+                border-radius: 22px;
+
+            }
+
         }
 
     </style>
 
 </head>
+
 
 
 <body>
@@ -1889,7 +2448,7 @@
                     </h1>
 
                     <span>
-                        Global Trade • BTP • Immobilier
+                        connecter le monde, bâtir l'avenir
                     </span>
 
                 </div>
@@ -1897,53 +2456,114 @@
             </div>
 
 
-            <nav>
+
+            <!-- BOUTON MENU -->
+
+            <button
+                class="menu-toggle"
+                type="button"
+                aria-label="Ouvrir le menu"
+                aria-expanded="false"
+                aria-controls="main-navigation"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+
+
+            <!-- MENU -->
+
+            <nav
+                id="main-navigation"
+                aria-label="Navigation principale"
+            >
+
+                <div class="nav-mobile-head">
+
+                    <span>
+                        MENU
+                    </span>
+
+                    <button
+                        class="menu-close"
+                        type="button"
+                        aria-label="Fermer le menu"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
 
                 <ul>
 
                     <li>
+
                         <a
                             href="index.html"
                             class="active"
                         >
                             Accueil
                         </a>
+
                     </li>
 
+
                     <li>
+
                         <a href="apropos.html">
                             À propos
                         </a>
+
                     </li>
 
+
                     <li>
+
                         <a href="services.html">
                             Services
                         </a>
+
                     </li>
 
+
                     <li>
+
                         <a href="produits.html">
                             Produits
                         </a>
+
                     </li>
 
+
                     <li>
+
                         <a href="projets.html">
                             Projets
                         </a>
+
                     </li>
 
+
                     <li>
+
                         <a href="activites.html">
                             Nos activités
                         </a>
+
                     </li>
 
+
                     <li>
+
                         <a href="contact.html">
                             Contact
                         </a>
+
                     </li>
 
                 </ul>
@@ -1955,11 +2575,18 @@
     </header>
 
 
+
     <!-- =====================================================
-         HERO ACCUEIL
+         CONTENU PRINCIPAL
     ===================================================== -->
 
     <main>
+
+
+
+        <!-- =================================================
+             HERO ACCUEIL
+        ================================================= -->
 
         <section class="hero">
 
@@ -1973,12 +2600,16 @@
             <div class="hero-light light-four"></div>
 
 
+
             <div class="hero-content">
 
 
                 <div class="hero-small">
+
                     KY5 GLOBAL TRADE
+
                 </div>
+
 
 
                 <h1>
@@ -1992,15 +2623,16 @@
                 </h1>
 
 
+
                 <p class="hero-description">
 
                     Des solutions professionnelles en
-                    Importation & Exportation,
-                    BTP & Construction,
-                    Gestion Immobilière et
-                    Business Consulting.
+                    Import / Export, BTP / Gestion Immobilière,
+                    Business Consulting, Solutions Numériques
+                    et Prestations de Services.
 
                 </p>
+
 
 
                 <div class="hero-buttons">
@@ -2010,23 +2642,30 @@
                         href="services.html"
                         class="btn btn-primary"
                     >
+
                         DÉCOUVRIR NOS SERVICES
+
                     </a>
+
 
 
                     <a
                         href="contact.html"
                         class="btn btn-secondary"
                     >
+
                         NOUS CONTACTER
+
                     </a>
 
 
                 </div>
 
+
             </div>
 
         </section>
+
 
 
         <!-- =================================================
@@ -2040,20 +2679,22 @@
 
 
                 <small>
-                    Notre expertise
+                    Nos domaines d'activité
                 </small>
 
 
                 <h2>
-                    Des solutions adaptées à vos ambitions
+                    Des solutions adaptées
+                    à vos ambitions
                 </h2>
 
 
                 <p>
 
-                    KY5 GLOBAL TRADE accompagne les entreprises,
-                    commerçants, investisseurs et particuliers
-                    dans leurs projets en Afrique.
+                    KY5 GLOBAL TRADE intervient dans plusieurs
+                    secteurs stratégiques afin d'accompagner
+                    les entreprises, commerçants, investisseurs,
+                    partenaires et particuliers dans leurs projets.
 
                 </p>
 
@@ -2061,10 +2702,14 @@
             </div>
 
 
+
             <div class="expertise-grid">
 
 
-                <!-- 01 -->
+
+                <!-- =================================================
+                     01 — IMPORT / EXPORT
+                ================================================= -->
 
                 <div class="expertise-card">
 
@@ -2075,7 +2720,7 @@
 
 
                     <h3>
-                        Importation & Exportation
+                        Import / Export
                     </h3>
 
 
@@ -2083,8 +2728,8 @@
 
                         Nous facilitons l'approvisionnement,
                         l'importation et l'exportation de
-                        marchandises selon les besoins
-                        de nos clients.
+                        marchandises selon les besoins de
+                        nos clients et partenaires.
 
                     </p>
 
@@ -2092,26 +2737,31 @@
                 </div>
 
 
-                <!-- 02 -->
+
+                <!-- =================================================
+                     02 — BTP / GESTION IMMOBILIÈRE
+                ================================================= -->
 
                 <div class="expertise-card">
 
 
                     <div class="expertise-number">
-                        02 — BTP
+                        02 — BTP & IMMOBILIER
                     </div>
 
 
                     <h3>
-                        BTP & Construction
+                        BTP / Gestion Immobilière
                     </h3>
 
 
                     <p>
 
-                        Des solutions adaptées aux projets
-                        de construction, d'aménagement
-                        et de développement.
+                        Nous accompagnons les projets de
+                        construction, d'aménagement et de
+                        développement immobilier, ainsi que
+                        la gestion et la valorisation des
+                        biens immobiliers.
 
                     </p>
 
@@ -2119,40 +2769,16 @@
                 </div>
 
 
-                <!-- 03 -->
+
+                <!-- =================================================
+                     03 — BUSINESS CONSULTING
+                ================================================= -->
 
                 <div class="expertise-card">
 
 
                     <div class="expertise-number">
-                        03 — IMMOBILIER
-                    </div>
-
-
-                    <h3>
-                        Gestion Immobilière
-                    </h3>
-
-
-                    <p>
-
-                        Nous accompagnons nos clients dans
-                        leurs projets immobiliers et leurs
-                        investissements.
-
-                    </p>
-
-
-                </div>
-
-
-                <!-- 04 -->
-
-                <div class="expertise-card">
-
-
-                    <div class="expertise-number">
-                        04 — CONSEIL
+                        03 — CONSEIL
                     </div>
 
 
@@ -2163,9 +2789,11 @@
 
                     <p>
 
-                        Des conseils et solutions pour
-                        développer, structurer et faire
-                        évoluer vos activités.
+                        Nous accompagnons les entreprises,
+                        entrepreneurs et investisseurs dans
+                        leurs stratégies, leurs projets,
+                        leurs opportunités d'affaires et
+                        leur développement.
 
                     </p>
 
@@ -2173,10 +2801,75 @@
                 </div>
 
 
+
+                <!-- =================================================
+                     04 — SOLUTION NUMÉRIQUE
+                ================================================= -->
+
+                <div class="expertise-card digital">
+
+
+                    <div class="expertise-number">
+                        04 — DIGITAL
+                    </div>
+
+
+                    <h3>
+                        Solution Numérique
+                    </h3>
+
+
+                    <p>
+
+                        Nous concevons et développons des
+                        applications et des solutions numériques
+                        adaptées aux besoins des entreprises
+                        afin de faciliter leurs activités,
+                        automatiser leurs processus et améliorer
+                        leur présence digitale.
+
+                    </p>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     05 — PRESTATION DE SERVICE
+                ================================================= -->
+
+                <div class="expertise-card">
+
+
+                    <div class="expertise-number">
+                        05 — SERVICES
+                    </div>
+
+
+                    <h3>
+                        Prestation de Service
+                    </h3>
+
+
+                    <p>
+
+                        Nous proposons des prestations de
+                        services adaptées aux besoins de nos
+                        clients, entreprises, partenaires
+                        et particuliers.
+
+                    </p>
+
+
+                </div>
+
+
+
             </div>
 
-
         </section>
+
 
 
         <!-- =================================================
@@ -2207,11 +2900,12 @@
 
                     <p>
 
-                        Nous mettons notre expertise et notre
-                        réseau au service de projets ambitieux
-                        afin de créer des solutions professionnelles,
-                        fiables et adaptées aux réalités du
-                        marché africain.
+                        Nous mettons notre expertise, notre
+                        réseau et nos solutions au service
+                        de projets ambitieux afin de créer
+                        des solutions professionnelles,
+                        fiables et adaptées aux réalités
+                        du marché africain.
 
                     </p>
 
@@ -2220,11 +2914,14 @@
                         href="apropos.html"
                         class="btn btn-primary"
                     >
+
                         EN SAVOIR PLUS
+
                     </a>
 
 
                 </div>
+
 
 
                 <div class="presentation-box">
@@ -2236,7 +2933,9 @@
                         <h3>
 
                             Votre partenaire
+
                             <br>
+
                             de confiance
 
                         </h3>
@@ -2244,8 +2943,8 @@
 
                         <p>
 
-                            Commerce • Construction •
-                            Immobilier • Conseil
+                            connecter le monde,
+                            bâtir l'avenir
 
                         </p>
 
@@ -2262,6 +2961,7 @@
         </section>
 
 
+
         <!-- =================================================
              CTA
         ================================================= -->
@@ -2270,6 +2970,7 @@
 
 
             <div class="section-title">
+
 
                 <small>
                     KY5 GLOBAL TRADE
@@ -2283,9 +2984,9 @@
 
                 <p>
 
-                    Parlons de vos besoins, de votre projet
-                    ou de votre prochaine opportunité
-                    d'affaires.
+                    Parlons de vos besoins,
+                    de votre projet ou de votre
+                    prochaine opportunité d'affaires.
 
                 </p>
 
@@ -2294,8 +2995,11 @@
                     href="contact.html"
                     class="btn"
                 >
+
                     NOUS CONTACTER
+
                 </a>
+
 
             </div>
 
@@ -2304,6 +3008,7 @@
 
 
     </main>
+
 
 
     <!-- =====================================================
@@ -2332,20 +3037,206 @@
 
         <p>
 
-            Importation • Transport • Logistique • BTP •
-            Gestion immobilière • Business Consulting
+            connecter le monde,
+            bâtir l'avenir
 
         </p>
 
 
         <p style="margin-top:15px;">
 
-            © 2026 KY5 GLOBAL TRADE — Tous droits réservés.
+            © 2026 KY5 GLOBAL TRADE —
+            Tous droits réservés.
 
         </p>
 
 
     </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT — MENU MOBILE
+    ===================================================== -->
+
+    <script>
+
+        (() => {
+
+
+            const header =
+                document.querySelector('header');
+
+
+            const toggle =
+                document.querySelector('.menu-toggle');
+
+
+            const close =
+                document.querySelector('.menu-close');
+
+
+            const nav =
+                document.querySelector('#main-navigation');
+
+
+
+            if (!header || !toggle || !nav) {
+
+                return;
+
+            }
+
+
+
+            /* ================================================
+               OUVERTURE / FERMETURE DU MENU
+            ================================================ */
+
+            const setMenu = (open) => {
+
+
+                header.classList.toggle(
+                    'nav-open',
+                    open
+                );
+
+
+                document.body.classList.toggle(
+                    'menu-locked',
+                    open
+                );
+
+
+                toggle.setAttribute(
+                    'aria-expanded',
+                    String(open)
+                );
+
+
+                toggle.setAttribute(
+                    'aria-label',
+                    open
+                        ? 'Fermer le menu'
+                        : 'Ouvrir le menu'
+                );
+
+            };
+
+
+
+            /* ================================================
+               BOUTON MENU
+            ================================================ */
+
+            toggle.addEventListener(
+                'click',
+                () => {
+
+                    setMenu(
+                        !header.classList.contains(
+                            'nav-open'
+                        )
+                    );
+
+                }
+            );
+
+
+
+            /* ================================================
+               BOUTON FERMER
+            ================================================ */
+
+            if (close) {
+
+                close.addEventListener(
+                    'click',
+                    () => setMenu(false)
+                );
+
+            }
+
+
+
+            /* ================================================
+               FERMER APRÈS UN CLIC SUR UN LIEN
+            ================================================ */
+
+            nav
+                .querySelectorAll('a')
+                .forEach(link => {
+
+                    link.addEventListener(
+                        'click',
+                        () => setMenu(false)
+                    );
+
+                });
+
+
+
+            /* ================================================
+               TOUCHE ESC
+            ================================================ */
+
+            document.addEventListener(
+                'keydown',
+                event => {
+
+                    if (event.key === 'Escape') {
+
+                        setMenu(false);
+
+                    }
+
+                }
+            );
+
+
+
+            /* ================================================
+               REDIMENSIONNEMENT
+            ================================================ */
+
+            window.addEventListener(
+                'resize',
+                () => {
+
+                    if (window.innerWidth > 1050) {
+
+                        setMenu(false);
+
+                    }
+
+                }
+            );
+
+
+
+            /* ================================================
+               EFFET HEADER AU DÉFILEMENT
+            ================================================ */
+
+            window.addEventListener(
+                'scroll',
+                () => {
+
+                    header.classList.toggle(
+                        'scrolled',
+                        window.scrollY > 18
+                    );
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+
+        })();
+
+    </script>
 
 
 </body>

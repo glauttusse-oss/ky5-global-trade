@@ -4,12 +4,18 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>À propos - KY5 GLOBAL TRADE</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="description"
-        content="Découvrez KY5 GLOBAL TRADE, son identité, ses valeurs, son expertise et ses domaines d'intervention.">
+    <title>À propos | KY5 GLOBAL TRADE</title>
+
+    <meta
+        name="description"
+        content="Découvrez KY5 GLOBAL TRADE, son identité, ses valeurs, son expertise et ses domaines d'intervention."
+    >
 
     <style>
 
@@ -34,6 +40,10 @@
             overflow-x: hidden;
         }
 
+        body.menu-locked {
+            overflow: hidden;
+        }
+
         img {
             display: block;
             max-width: 100%;
@@ -43,13 +53,16 @@
             text-decoration: none;
         }
 
+        button {
+            font-family: inherit;
+        }
+
 
         /* =====================================================
            COULEURS
         ===================================================== */
 
         :root {
-
             --header-dark: #001329;
             --header-blue: #002c5f;
             --header-blue-2: #004b89;
@@ -64,23 +77,18 @@
             --muted: #69778a;
 
             --background: #f4f8fc;
-
             --border: #dce8f3;
         }
 
 
         /* =====================================================
-           EN-TÊTE PROFESSIONNEL
+           HEADER — MÊME STRUCTURE QUE INDEX
         ===================================================== */
 
         header {
-
             position: sticky;
-
             top: 0;
-
             z-index: 99999;
-
             width: 100%;
 
             background:
@@ -93,11 +101,11 @@
 
             border-bottom:
                 2px solid
-                rgba(103, 217, 255, 0.35);
+                rgba(103,217,255,0.35);
 
             box-shadow:
                 0 12px 35px
-                rgba(0, 18, 45, 0.42);
+                rgba(0,18,45,0.42);
 
             backdrop-filter: blur(14px);
 
@@ -106,10 +114,7 @@
         }
 
 
-        /* ligne lumineuse supérieure */
-
         header::before {
-
             content: "";
 
             position: absolute;
@@ -142,9 +147,7 @@
         ===================================================== */
 
         .header-container {
-
             width: 100%;
-
             max-width: 1500px;
 
             min-height: 120px;
@@ -169,7 +172,6 @@
         ===================================================== */
 
         .logo {
-
             position: relative;
 
             display: flex;
@@ -186,7 +188,6 @@
 
 
         .logo::before {
-
             content: "";
 
             position: absolute;
@@ -200,7 +201,7 @@
 
             border:
                 1px solid
-                rgba(103, 217, 255, 0.30);
+                rgba(103,217,255,0.30);
 
             animation:
                 logoRotation 8s linear infinite;
@@ -208,7 +209,6 @@
 
 
         .logo img {
-
             position: relative;
 
             z-index: 2;
@@ -228,13 +228,12 @@
                 logoFloat 4s ease-in-out infinite;
 
             transition:
-                transform 0.4s ease,
-                filter 0.4s ease;
+                transform .4s ease,
+                filter .4s ease;
         }
 
 
         .logo img:hover {
-
             transform:
                 scale(1.10)
                 rotate(-3deg);
@@ -252,17 +251,13 @@
         ===================================================== */
 
         .logo-text {
-
             display: flex;
-
             flex-direction: column;
-
             justify-content: center;
         }
 
 
         .logo-text h1 {
-
             color: #ffffff;
 
             font-size: 36px;
@@ -287,7 +282,6 @@
 
 
         .logo-text span {
-
             margin-top: 8px;
 
             color: #8edfff;
@@ -303,11 +297,10 @@
 
 
         /* =====================================================
-           NAVIGATION
+           NAVIGATION DESKTOP
         ===================================================== */
 
         nav ul {
-
             display: flex;
 
             align-items: center;
@@ -321,13 +314,11 @@
 
 
         nav li {
-
             position: relative;
         }
 
 
         nav a {
-
             position: relative;
 
             display: flex;
@@ -345,21 +336,20 @@
 
             font-weight: 700;
 
-            letter-spacing: 0.3px;
+            letter-spacing: .3px;
 
             border-radius: 9px;
 
             transition:
-                0.35s ease;
+                .35s ease;
         }
 
 
         nav a:hover {
-
             color: #ffffff;
 
             background:
-                rgba(255,255,255,0.11);
+                rgba(255,255,255,.11);
 
             transform:
                 translateY(-3px);
@@ -367,7 +357,6 @@
 
 
         nav a::after {
-
             content: "";
 
             position: absolute;
@@ -393,25 +382,106 @@
                 translateX(-50%);
 
             transition:
-                width 0.35s ease;
+                width .35s ease;
         }
 
 
         nav a:hover::after,
         nav a.active::after {
-
             width: 70%;
         }
 
 
         nav a.active {
-
             background:
-                rgba(255,255,255,0.14);
+                rgba(255,255,255,.14);
 
             box-shadow:
                 inset 0 0 0 1px
-                rgba(255,255,255,0.08);
+                rgba(255,255,255,.08);
+        }
+
+
+        /* =====================================================
+           MENU RESPONSIVE — IDENTIQUE À INDEX
+        ===================================================== */
+
+        .menu-toggle,
+        .menu-close {
+            border: 0;
+            cursor: pointer;
+            font: inherit;
+        }
+
+
+        .menu-toggle {
+            display: none;
+
+            width: 48px;
+            height: 48px;
+
+            margin-left: auto;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,.08);
+
+            border:
+                1px solid
+                rgba(255,255,255,.16);
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            gap: 5px;
+
+            transition: .3s ease;
+        }
+
+
+        .menu-toggle span {
+            width: 21px;
+            height: 2px;
+
+            border-radius: 10px;
+
+            background: #fff;
+
+            transition: .3s ease;
+        }
+
+
+        .menu-toggle:hover {
+            background:
+                rgba(103,217,255,.16);
+
+            border-color:
+                rgba(103,217,255,.5);
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        .nav-mobile-head {
+            display: none;
+        }
+
+
+        header.scrolled {
+            background:
+                rgba(0,19,41,.94);
+
+            box-shadow:
+                0 10px 32px
+                rgba(0,18,45,.30);
+
+            backdrop-filter:
+                blur(18px);
         }
 
 
@@ -420,10 +490,10 @@
         ===================================================== */
 
         .about-hero {
-
             position: relative;
 
-            min-height: 68vh;
+            min-height:
+                calc(100vh - 120px);
 
             overflow: hidden;
 
@@ -442,13 +512,13 @@
 
                 radial-gradient(
                     circle at 10% 20%,
-                    rgba(103,217,255,0.22),
+                    rgba(103,217,255,.22),
                     transparent 30%
                 ),
 
                 radial-gradient(
                     circle at 90% 80%,
-                    rgba(0,85,170,0.35),
+                    rgba(0,85,170,.35),
                     transparent 35%
                 ),
 
@@ -462,7 +532,6 @@
 
 
         .about-hero::before {
-
             content: "";
 
             position: absolute;
@@ -475,7 +544,7 @@
 
             border:
                 1px solid
-                rgba(255,255,255,0.14);
+                rgba(255,255,255,.14);
 
             border-radius: 50%;
 
@@ -485,7 +554,6 @@
 
 
         .about-hero::after {
-
             content: "";
 
             position: absolute;
@@ -498,7 +566,7 @@
 
             border:
                 1px solid
-                rgba(255,255,255,0.12);
+                rgba(255,255,255,.12);
 
             border-radius: 50%;
 
@@ -508,7 +576,6 @@
 
 
         .hero-light {
-
             position: absolute;
 
             width: 10px;
@@ -516,11 +583,12 @@
 
             border-radius: 50%;
 
-            background: #67d9ff;
+            background:
+                #67d9ff;
 
             box-shadow:
                 0 0 20px
-                rgba(103,217,255,0.9);
+                rgba(103,217,255,.9);
 
             animation:
                 floating 5s ease-in-out infinite;
@@ -528,14 +596,12 @@
 
 
         .light-one {
-
             left: 15%;
             top: 25%;
         }
 
 
         .light-two {
-
             right: 17%;
             top: 65%;
 
@@ -544,7 +610,6 @@
 
 
         .light-three {
-
             right: 27%;
             top: 30%;
 
@@ -553,7 +618,6 @@
 
 
         .hero-content {
-
             position: relative;
 
             z-index: 5;
@@ -566,7 +630,6 @@
 
 
         .hero-small {
-
             color: #86e0ff;
 
             font-size: 14px;
@@ -582,11 +645,10 @@
 
 
         .about-hero h1 {
-
             color: #ffffff;
 
             font-size:
-                clamp(48px, 7vw, 82px);
+                clamp(48px,7vw,82px);
 
             line-height: 1;
 
@@ -599,7 +661,6 @@
 
 
         .about-hero h1 span {
-
             color: #69d8ff;
 
             display: block;
@@ -608,12 +669,11 @@
 
             text-shadow:
                 0 0 25px
-                rgba(103,217,255,0.25);
+                rgba(103,217,255,.25);
         }
 
 
         .about-hero p {
-
             max-width: 850px;
 
             margin: auto;
@@ -626,12 +686,7 @@
         }
 
 
-        /* =====================================================
-           BOUTON HERO
-        ===================================================== */
-
         .hero-button {
-
             display: inline-flex;
 
             margin-top: 35px;
@@ -649,15 +704,14 @@
 
             box-shadow:
                 0 12px 30px
-                rgba(0,0,0,0.20);
+                rgba(0,0,0,.20);
 
             transition:
-                0.35s ease;
+                .35s ease;
         }
 
 
         .hero-button:hover {
-
             transform:
                 translateY(-5px)
                 scale(1.03);
@@ -665,25 +719,16 @@
             background:
                 #63d7ff;
 
-            color: #ffffff;
+            color:
+                #ffffff;
         }
 
 
         /* =====================================================
-           SECTION PRÉSENTATION
+           TITRES DE SECTION
         ===================================================== */
 
-        .about-section {
-
-            padding:
-                100px 7%;
-
-            background: #ffffff;
-        }
-
-
         .section-title {
-
             max-width: 850px;
 
             margin:
@@ -694,7 +739,6 @@
 
 
         .section-title span {
-
             color: #0785d1;
 
             font-size: 14px;
@@ -708,11 +752,10 @@
 
 
         .section-title h2 {
-
             color: #092d5c;
 
             font-size:
-                clamp(34px, 5vw, 52px);
+                clamp(34px,5vw,52px);
 
             margin:
                 14px 0;
@@ -720,7 +763,6 @@
 
 
         .section-title p {
-
             color: #69778a;
 
             line-height: 1.8;
@@ -730,11 +772,19 @@
 
 
         /* =====================================================
-           GRILLE PRÉSENTATION
+           PRÉSENTATION
         ===================================================== */
 
-        .about-grid {
+        .about-section {
+            padding:
+                100px 7%;
 
+            background:
+                #ffffff;
+        }
+
+
+        .about-grid {
             max-width: 1200px;
 
             margin: auto;
@@ -751,25 +801,22 @@
 
 
         .about-text {
-
             animation:
                 slideLeft 1s ease;
         }
 
 
         .about-text h3 {
-
             color: #075ca8;
 
             font-size:
-                clamp(28px, 4vw, 38px);
+                clamp(28px,4vw,38px);
 
             margin-bottom: 25px;
         }
 
 
         .about-text p {
-
             color: #5d6878;
 
             line-height: 1.9;
@@ -780,12 +827,7 @@
         }
 
 
-        /* =====================================================
-           IMAGE
-        ===================================================== */
-
         .about-image {
-
             position: relative;
 
             animation:
@@ -794,7 +836,6 @@
 
 
         .about-image img {
-
             width: 100%;
 
             min-height: 420px;
@@ -808,7 +849,6 @@
             border-radius: 25px;
 
             background:
-
                 linear-gradient(
                     145deg,
                     #f2f8fd,
@@ -821,22 +861,20 @@
 
             box-shadow:
                 0 25px 60px
-                rgba(0,70,140,0.16);
+                rgba(0,70,140,.16);
 
             transition:
-                transform 0.5s ease;
+                transform .5s ease;
         }
 
 
         .about-image:hover img {
-
             transform:
                 scale(1.025);
         }
 
 
         .image-decoration {
-
             position: absolute;
 
             width: 110px;
@@ -862,16 +900,14 @@
 
 
         /* =====================================================
-           BANDEAU CHIFFRES
+           BANDEAU
         ===================================================== */
 
         .stats {
-
             padding:
                 65px 7%;
 
             background:
-
                 linear-gradient(
                     135deg,
                     #edf7ff,
@@ -881,7 +917,6 @@
 
 
         .stats-grid {
-
             max-width: 1050px;
 
             margin: auto;
@@ -889,20 +924,20 @@
             display: grid;
 
             grid-template-columns:
-                repeat(3, 1fr);
+                repeat(3,1fr);
 
             gap: 25px;
         }
 
 
         .stat-card {
-
             padding:
                 35px 25px;
 
             text-align: center;
 
-            background: #ffffff;
+            background:
+                #ffffff;
 
             border:
                 1px solid
@@ -912,31 +947,29 @@
 
             box-shadow:
                 0 12px 35px
-                rgba(0,70,140,0.08);
+                rgba(0,70,140,.08);
 
             transition:
-                0.4s ease;
+                .4s ease;
         }
 
 
         .stat-card:hover {
-
             transform:
                 translateY(-8px);
 
             box-shadow:
                 0 20px 45px
-                rgba(0,70,140,0.15);
+                rgba(0,70,140,.15);
         }
 
 
         .stat-card strong {
-
             display: block;
 
             color: #075ca8;
 
-            font-size: 38px;
+            font-size: 32px;
 
             font-weight: 900;
 
@@ -945,7 +978,6 @@
 
 
         .stat-card span {
-
             color: #687386;
 
             font-size: 14px;
@@ -959,16 +991,14 @@
 
 
         /* =====================================================
-           NOS VALEURS
+           VALEURS
         ===================================================== */
 
         .values {
-
             padding:
                 100px 7%;
 
             background:
-
                 linear-gradient(
                     135deg,
                     #eef7ff,
@@ -978,7 +1008,6 @@
 
 
         .values-grid {
-
             max-width: 1200px;
 
             margin: auto;
@@ -986,20 +1015,20 @@
             display: grid;
 
             grid-template-columns:
-                repeat(3, 1fr);
+                repeat(3,1fr);
 
             gap: 25px;
         }
 
 
         .value-card {
-
             position: relative;
 
             padding:
                 38px 30px;
 
-            background: #ffffff;
+            background:
+                #ffffff;
 
             border-radius: 20px;
 
@@ -1009,17 +1038,16 @@
 
             box-shadow:
                 0 12px 35px
-                rgba(0,70,140,0.10);
+                rgba(0,70,140,.10);
 
             transition:
-                0.4s ease;
+                .4s ease;
 
             overflow: hidden;
         }
 
 
         .value-card::after {
-
             content: "";
 
             position: absolute;
@@ -1033,23 +1061,21 @@
             border-radius: 50%;
 
             background:
-                rgba(8,125,204,0.07);
+                rgba(8,125,204,.07);
         }
 
 
         .value-card:hover {
-
             transform:
                 translateY(-12px);
 
             box-shadow:
                 0 22px 50px
-                rgba(0,70,140,0.18);
+                rgba(0,70,140,.18);
         }
 
 
         .value-number {
-
             color: #1595e5;
 
             font-size: 13px;
@@ -1063,7 +1089,6 @@
 
 
         .value-card h3 {
-
             color: #092d5c;
 
             font-size: 24px;
@@ -1073,7 +1098,6 @@
 
 
         .value-card p {
-
             color: #687386;
 
             line-height: 1.75;
@@ -1085,16 +1109,15 @@
         ===================================================== */
 
         .domains {
-
             padding:
                 100px 7%;
 
-            background: #ffffff;
+            background:
+                #ffffff;
         }
 
 
         .domains-grid {
-
             max-width: 1200px;
 
             margin: auto;
@@ -1102,14 +1125,13 @@
             display: grid;
 
             grid-template-columns:
-                repeat(3, 1fr);
+                repeat(2,1fr);
 
             gap: 25px;
         }
 
 
         .domain-card {
-
             position: relative;
 
             padding:
@@ -1120,7 +1142,6 @@
             border-radius: 20px;
 
             background:
-
                 linear-gradient(
                     145deg,
                     #f5faff,
@@ -1132,14 +1153,13 @@
                 #d5eaff;
 
             transition:
-                0.45s ease;
+                .45s ease;
 
             overflow: hidden;
         }
 
 
         .domain-card::before {
-
             content: "";
 
             position: absolute;
@@ -1153,15 +1173,14 @@
             bottom: -55px;
 
             background:
-                rgba(8,125,204,0.08);
+                rgba(8,125,204,.08);
 
             transition:
-                0.4s ease;
+                .4s ease;
         }
 
 
         .domain-card:hover {
-
             transform:
                 translateY(-9px);
 
@@ -1172,28 +1191,28 @@
                     #07529b
                 );
 
-            color: white;
+            color:
+                white;
 
             box-shadow:
                 0 20px 45px
-                rgba(0,75,150,0.22);
+                rgba(0,75,150,.22);
         }
 
 
         .domain-card:hover::before {
-
             transform:
                 scale(1.8);
         }
 
 
         .domain-card h3 {
-
             position: relative;
 
             z-index: 2;
 
-            color: #0758a5;
+            color:
+                #0758a5;
 
             margin-bottom: 15px;
 
@@ -1202,26 +1221,26 @@
 
 
         .domain-card:hover h3 {
-
-            color: #ffffff;
+            color:
+                #ffffff;
         }
 
 
         .domain-card p {
-
             position: relative;
 
             z-index: 2;
 
-            color: #637083;
+            color:
+                #637083;
 
             line-height: 1.75;
         }
 
 
         .domain-card:hover p {
-
-            color: #edf8ff;
+            color:
+                #edf8ff;
         }
 
 
@@ -1230,7 +1249,6 @@
         ===================================================== */
 
         .cta {
-
             position: relative;
 
             overflow: hidden;
@@ -1246,7 +1264,7 @@
 
                 radial-gradient(
                     circle at 20% 20%,
-                    rgba(80,200,255,0.25),
+                    rgba(80,200,255,.25),
                     transparent 30%
                 ),
 
@@ -1259,7 +1277,6 @@
 
 
         .cta::before {
-
             content: "";
 
             position: absolute;
@@ -1272,7 +1289,7 @@
 
             border:
                 1px solid
-                rgba(255,255,255,0.13);
+                rgba(255,255,255,.13);
 
             border-radius: 50%;
 
@@ -1282,20 +1299,18 @@
 
 
         .cta h2 {
-
             position: relative;
 
             z-index: 2;
 
             font-size:
-                clamp(32px, 5vw, 50px);
+                clamp(32px,5vw,50px);
 
             margin-bottom: 18px;
         }
 
 
         .cta p {
-
             position: relative;
 
             z-index: 2;
@@ -1307,14 +1322,14 @@
 
             line-height: 1.8;
 
-            color: #e4f5ff;
+            color:
+                #e4f5ff;
 
             font-size: 17px;
         }
 
 
         .btn {
-
             position: relative;
 
             z-index: 2;
@@ -1326,19 +1341,20 @@
 
             border-radius: 50px;
 
-            background: #ffffff;
+            background:
+                #ffffff;
 
-            color: #075ba5;
+            color:
+                #075ba5;
 
             font-weight: 900;
 
             transition:
-                0.35s ease;
+                .35s ease;
         }
 
 
         .btn:hover {
-
             transform:
                 translateY(-5px)
                 scale(1.04);
@@ -1346,7 +1362,8 @@
             background:
                 #63d7ff;
 
-            color: #ffffff;
+            color:
+                #ffffff;
         }
 
 
@@ -1355,7 +1372,6 @@
         ===================================================== */
 
         footer {
-
             padding:
                 50px 7% 25px;
 
@@ -1364,7 +1380,6 @@
             color: #ffffff;
 
             background:
-
                 linear-gradient(
                     135deg,
                     #020b1b,
@@ -1374,7 +1389,6 @@
 
 
         .footer-logo {
-
             display: flex;
 
             align-items: center;
@@ -1388,7 +1402,6 @@
 
 
         .footer-logo img {
-
             width: 60px;
             height: 60px;
 
@@ -1397,7 +1410,6 @@
 
 
         .footer-logo h3 {
-
             font-size: 22px;
 
             font-weight: 900;
@@ -1407,7 +1419,6 @@
 
 
         footer p {
-
             color: #a9bfd8;
 
             font-size: 14px;
@@ -1433,6 +1444,7 @@
                 transform:
                     translateY(0);
             }
+
         }
 
 
@@ -1447,6 +1459,7 @@
                 background-position:
                     200% 50%;
             }
+
         }
 
 
@@ -1456,7 +1469,7 @@
                 opacity: 0;
                 transform:
                     translateX(-35px)
-                    scale(0.8);
+                    scale(.8);
             }
 
             to {
@@ -1465,6 +1478,7 @@
                     translateX(0)
                     scale(1);
             }
+
         }
 
 
@@ -1481,6 +1495,7 @@
                 transform:
                     translateX(0);
             }
+
         }
 
 
@@ -1496,6 +1511,7 @@
                 transform:
                     translateY(-6px);
             }
+
         }
 
 
@@ -1510,6 +1526,7 @@
                 transform:
                     rotate(360deg);
             }
+
         }
 
 
@@ -1524,6 +1541,7 @@
                 transform:
                     rotate(360deg);
             }
+
         }
 
 
@@ -1538,6 +1556,7 @@
                 transform:
                     rotate(0deg);
             }
+
         }
 
 
@@ -1553,6 +1572,7 @@
                 transform:
                     translateY(-25px);
             }
+
         }
 
 
@@ -1569,6 +1589,7 @@
                 transform:
                     translateY(0);
             }
+
         }
 
 
@@ -1585,6 +1606,7 @@
                 transform:
                     translateX(0);
             }
+
         }
 
 
@@ -1601,6 +1623,7 @@
                 transform:
                     translateX(0);
             }
+
         }
 
 
@@ -1615,63 +1638,237 @@
                 transform:
                     rotate(360deg);
             }
+
         }
 
 
         /* =====================================================
-           TABLETTE
+           MENU MOBILE — MÊME LOGIQUE QUE INDEX
         ===================================================== */
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1050px) {
 
             .header-container {
+                min-height: 86px;
 
                 padding:
-                    15px 25px;
+                    12px 24px;
 
-                gap: 25px;
+                gap: 20px;
             }
 
 
-            .logo img {
-
-                width: 78px;
-                height: 78px;
+            .menu-toggle {
+                display: flex;
             }
 
 
-            .logo::before {
+            header nav {
+                position: fixed;
 
-                width: 83px;
-                height: 83px;
-            }
+                top: 0;
+                right: 0;
 
+                width:
+                    min(390px, 88vw);
 
-            .logo-text h1 {
-
-                font-size: 28px;
-            }
-
-
-            nav ul {
-
-                gap: 3px;
-            }
-
-
-            nav a {
+                height: 100vh;
 
                 padding:
-                    11px 10px;
+                    0 22px 30px;
 
-                font-size: 14px;
+                background:
+                    linear-gradient(
+                        180deg,
+                        #001329,
+                        #002653 55%,
+                        #003f76
+                    );
+
+                border-left:
+                    1px solid
+                    rgba(103,217,255,.20);
+
+                box-shadow:
+                    -20px 0 55px
+                    rgba(0,0,0,.30);
+
+                transform:
+                    translateX(105%);
+
+                opacity: 0;
+
+                visibility: hidden;
+
+                pointer-events: none;
+
+                transition:
+                    transform .38s
+                    cubic-bezier(.22,.61,.36,1),
+                    opacity .25s ease,
+                    visibility .38s ease;
+
+                z-index: 100001;
+
+                overflow-y: auto;
+            }
+
+
+            header.nav-open nav {
+                transform:
+                    translateX(0);
+
+                opacity: 1;
+
+                visibility: visible;
+
+                pointer-events: auto;
+            }
+
+
+            .nav-mobile-head {
+                display: flex;
+
+                align-items: center;
+
+                justify-content: space-between;
+
+                min-height: 88px;
+
+                color: #8edfff;
+
+                font-size: 12px;
+
+                font-weight: 900;
+
+                letter-spacing: 4px;
+
+                border-bottom:
+                    1px solid
+                    rgba(255,255,255,.10);
+
+                margin-bottom: 14px;
+            }
+
+
+            .menu-close {
+                width: 42px;
+                height: 42px;
+
+                border-radius: 12px;
+
+                color: #fff;
+
+                background:
+                    rgba(255,255,255,.08);
+
+                border:
+                    1px solid
+                    rgba(255,255,255,.13);
+
+                font-size: 30px;
+
+                line-height: 1;
+
+                transition: .3s ease;
+            }
+
+
+            .menu-close:hover {
+                background:
+                    #075ca8;
+
+                transform:
+                    rotate(90deg);
+            }
+
+
+            header nav ul {
+                display: flex;
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+                gap: 5px;
+
+                width: 100%;
+            }
+
+
+            header nav li {
+                width: 100%;
+            }
+
+
+            header nav a {
+                width: 100%;
+
+                min-height: 52px;
+
+                justify-content:
+                    flex-start;
+
+                padding:
+                    14px 16px;
+
+                border-radius: 13px;
+
+                font-size: 15px;
+            }
+
+
+            header nav a:hover {
+                transform:
+                    translateX(4px);
+
+                background:
+                    rgba(255,255,255,.08);
+            }
+
+
+            header nav a::after {
+                left: 16px;
+
+                bottom: 7px;
+
+                transform: none;
+            }
+
+
+            header nav a:hover::after,
+            header nav a.active::after {
+                width: 28px;
+            }
+
+
+            header.nav-open::after {
+                content: "";
+
+                position: fixed;
+
+                inset: 0;
+
+                background:
+                    rgba(0,8,20,.55);
+
+                backdrop-filter:
+                    blur(3px);
+
+                z-index: 100000;
+            }
+
+
+            .about-hero {
+                min-height:
+                    calc(100vh - 86px);
             }
 
 
             .about-grid {
-
                 gap: 40px;
             }
+
         }
 
 
@@ -1681,91 +1878,9 @@
 
         @media (max-width: 750px) {
 
-            header {
-
-                position: relative;
-            }
-
-
-            .header-container {
-
-                min-height: auto;
-
-                flex-direction: column;
-
-                padding:
-                    18px 15px;
-
-                gap: 18px;
-            }
-
-
-            .logo {
-
-                gap: 15px;
-
-                justify-content: center;
-            }
-
-
-            .logo img {
-
-                width: 68px;
-                height: 68px;
-            }
-
-
-            .logo::before {
-
-                width: 74px;
-                height: 74px;
-            }
-
-
-            .logo-text h1 {
-
-                font-size: 22px;
-
-                letter-spacing: 1px;
-            }
-
-
-            .logo-text span {
-
-                font-size: 8px;
-
-                letter-spacing: 2px;
-            }
-
-
-            nav {
-
-                width: 100%;
-            }
-
-
-            nav ul {
-
-                flex-wrap: wrap;
-
-                justify-content: center;
-
-                gap: 4px;
-            }
-
-
-            nav a {
-
-                padding:
-                    9px 8px;
-
-                font-size: 13px;
-            }
-
-
             .about-hero {
-
-                min-height: 65vh;
+                min-height:
+                    75vh;
 
                 padding:
                     75px 20px;
@@ -1773,7 +1888,6 @@
 
 
             .hero-small {
-
                 font-size: 10px;
 
                 letter-spacing: 4px;
@@ -1781,13 +1895,11 @@
 
 
             .about-hero h1 {
-
                 font-size: 43px;
             }
 
 
             .about-hero p {
-
                 font-size: 16px;
             }
 
@@ -1796,14 +1908,12 @@
             .stats,
             .values,
             .domains {
-
                 padding:
                     70px 20px;
             }
 
 
             .about-grid {
-
                 grid-template-columns:
                     1fr;
 
@@ -1812,7 +1922,6 @@
 
 
             .about-image img {
-
                 min-height: 300px;
 
                 padding: 25px;
@@ -1820,7 +1929,6 @@
 
 
             .image-decoration {
-
                 display: none;
             }
 
@@ -1828,17 +1936,30 @@
             .stats-grid,
             .values-grid,
             .domains-grid {
-
                 grid-template-columns:
                     1fr;
             }
 
 
             .cta {
-
                 padding:
                     70px 20px;
             }
+
+
+            .cta h2 {
+                font-size: 34px;
+            }
+
+
+            .btn {
+                width: 100%;
+
+                max-width: 320px;
+
+                justify-content: center;
+            }
+
         }
 
 
@@ -1846,41 +1967,50 @@
            PETIT TÉLÉPHONE
         ===================================================== */
 
-        @media (max-width: 480px) {
+        @media (max-width: 520px) {
+
+            .header-container {
+                padding:
+                    10px 16px;
+            }
+
+
+            .logo img {
+                width: 56px;
+                height: 56px;
+            }
+
+
+            .logo::before {
+                width: 62px;
+                height: 62px;
+            }
+
 
             .logo-text h1 {
+                font-size: 17px;
 
-                font-size: 18px;
+                letter-spacing: .7px;
             }
 
 
             .logo-text span {
-
                 font-size: 7px;
 
                 letter-spacing: 1.5px;
             }
 
 
-            nav ul {
-
-                gap: 2px;
-            }
-
-
-            nav a {
-
-                font-size: 11px;
-
-                padding:
-                    8px 6px;
+            .menu-toggle {
+                width: 44px;
+                height: 44px;
             }
 
 
             .about-hero h1 {
-
                 font-size: 37px;
             }
+
         }
 
     </style>
@@ -1892,7 +2022,7 @@
 
 
     <!-- =====================================================
-         EN-TÊTE
+         HEADER
     ===================================================== -->
 
     <header>
@@ -1915,7 +2045,7 @@
                     </h1>
 
                     <span>
-                        Global Trade • BTP • Immobilier
+                        connecter le monde, bâtir l'avenir
                     </span>
 
                 </div>
@@ -1923,7 +2053,46 @@
             </div>
 
 
-            <nav>
+            <!-- BOUTON MENU -->
+
+            <button
+                class="menu-toggle"
+                type="button"
+                aria-label="Ouvrir le menu"
+                aria-expanded="false"
+                aria-controls="main-navigation"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+
+            <!-- MENU LATÉRAL -->
+
+            <nav
+                id="main-navigation"
+                aria-label="Navigation principale"
+            >
+
+                <div class="nav-mobile-head">
+
+                    <span>
+                        MENU
+                    </span>
+
+                    <button
+                        class="menu-close"
+                        type="button"
+                        aria-label="Fermer le menu"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
 
                 <ul>
 
@@ -1932,6 +2101,7 @@
                             Accueil
                         </a>
                     </li>
+
 
                     <li>
                         <a
@@ -1942,11 +2112,13 @@
                         </a>
                     </li>
 
+
                     <li>
                         <a href="services.html">
                             Services
                         </a>
                     </li>
+
 
                     <li>
                         <a href="produits.html">
@@ -1954,17 +2126,20 @@
                         </a>
                     </li>
 
+
                     <li>
                         <a href="projets.html">
                             Projets
                         </a>
                     </li>
 
+
                     <li>
                         <a href="activites.html">
                             Nos activités
                         </a>
                     </li>
+
 
                     <li>
                         <a href="contact.html">
@@ -1981,387 +2156,409 @@
     </header>
 
 
+
     <!-- =====================================================
-         HERO
+         CONTENU
     ===================================================== -->
 
-    <section class="about-hero">
-
-        <div class="hero-light light-one"></div>
-
-        <div class="hero-light light-two"></div>
-
-        <div class="hero-light light-three"></div>
+    <main>
 
 
-        <div class="hero-content">
+        <!-- =================================================
+             HERO
+        ================================================= -->
 
-            <div class="hero-small">
-                KY5 GLOBAL TRADE
+        <section class="about-hero">
+
+
+            <div class="hero-light light-one"></div>
+
+            <div class="hero-light light-two"></div>
+
+            <div class="hero-light light-three"></div>
+
+
+            <div class="hero-content">
+
+
+                <div class="hero-small">
+                    KY5 GLOBAL TRADE
+                </div>
+
+
+                <h1>
+
+                    À PROPOS DE
+
+                    <span>
+                        KY5 GLOBAL TRADE
+                    </span>
+
+                </h1>
+
+
+                <p>
+
+                    Votre partenaire stratégique dans l'Import / Export,
+                    le BTP et la Gestion Immobilière, le Business Consulting,
+                    les Solutions Numériques et les Prestations de Services.
+
+                </p>
+
+
+                <a
+                    href="#presentation"
+                    class="hero-button"
+                >
+                    DÉCOUVRIR NOTRE ENTREPRISE
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PRÉSENTATION
+        ================================================= -->
+
+        <section
+            class="about-section"
+            id="presentation"
+        >
+
+
+            <div class="section-title">
+
+                <span>
+                    Qui sommes-nous ?
+                </span>
+
+
+                <h2>
+                    Une vision tournée vers l'avenir
+                </h2>
+
+
+                <p>
+
+                    KY5 GLOBAL TRADE développe des solutions
+                    professionnelles adaptées aux réalités
+                    du marché africain.
+
+                </p>
+
             </div>
 
 
-            <h1>
-                À PROPOS DE
-                <span>KY5 GLOBAL TRADE</span>
-            </h1>
+            <div class="about-grid">
+
+
+                <div class="about-text">
+
+
+                    <h3>
+                        Une entreprise au service de vos ambitions
+                    </h3>
+
+
+                    <p>
+
+                        KY5 GLOBAL TRADE est une entreprise
+                        orientée vers le développement des affaires,
+                        la gestion immobilière, le BTP, la construction
+                        et le business consulting.
+
+                    </p>
+
+
+                    <p>
+
+                        Notre objectif est de créer des connexions
+                        fiables entre les opportunités, les entreprises
+                        et les différents acteurs économiques.
+
+                    </p>
+
+
+                    <p>
+
+                        Nous privilégions une approche professionnelle,
+                        transparente et orientée vers des résultats
+                        concrets.
+
+                    </p>
+
+
+                </div>
+
+
+                <div class="about-image">
+
+                    <img
+                        src="logo.png"
+                        alt="KY5 GLOBAL TRADE"
+                    >
+
+                    <div class="image-decoration"></div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             NOS VALEURS
+        ================================================= -->
+
+        <section class="values">
+
+
+            <div class="section-title">
+
+
+                <span>
+                    Notre identité
+                </span>
+
+
+                <h2>
+                    Nos valeurs
+                </h2>
+
+
+                <p>
+
+                    Les principes qui orientent notre manière
+                    de travailler.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="values-grid">
+
+
+                <div class="value-card">
+
+
+                    <div class="value-number">
+                        01 — FIABILITÉ
+                    </div>
+
+
+                    <h3>
+                        La confiance
+                    </h3>
+
+
+                    <p>
+
+                        Nous construisons des relations
+                        professionnelles basées sur la confiance,
+                        la transparence et le respect de nos
+                        engagements.
+
+                    </p>
+
+
+                </div>
+
+
+                <div class="value-card">
+
+
+                    <div class="value-number">
+                        02 — EXPERTISE
+                    </div>
+
+
+                    <h3>
+                        Le professionnalisme
+                    </h3>
+
+
+                    <p>
+
+                        Nous mettons notre savoir-faire et notre
+                        expérience au service des projets de
+                        nos partenaires.
+
+                    </p>
+
+
+                </div>
+
+
+                <div class="value-card">
+
+
+                    <div class="value-number">
+                        03 — VISION
+                    </div>
+
+
+                    <h3>
+                        L'innovation
+                    </h3>
+
+
+                    <p>
+
+                        Nous recherchons constamment des solutions
+                        modernes permettant de répondre efficacement
+                        aux besoins de nos clients.
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             DOMAINES
+        ================================================= -->
+
+        <section class="domains">
+
+            <div class="section-title">
+
+                <span>
+                    Notre expertise
+                </span>
+
+                <h2>
+                    Nos domaines d'intervention
+                </h2>
+
+                <p>
+                    KY5 GLOBAL TRADE intervient dans plusieurs secteurs
+                    stratégiques afin d'apporter des solutions professionnelles,
+                    adaptées aux besoins de ses clients et partenaires.
+                </p>
+
+            </div>
+
+            <div class="domains-grid">
+
+                <!-- 01 — IMPORT / EXPORT -->
+                <div class="domain-card">
+                    <h3>
+                        Import / Export
+                    </h3>
+                    <p>
+                        Nous facilitons l'approvisionnement, l'importation
+                        et l'exportation de marchandises, en accompagnant
+                        nos clients dans leurs opérations commerciales
+                        et leurs échanges avec différents marchés.
+                    </p>
+                </div>
+
+                <!-- 02 — BTP / GESTION IMMOBILIÈRE -->
+                <div class="domain-card">
+                    <h3>
+                        BTP / Gestion Immobilière
+                    </h3>
+                    <p>
+                        Nous accompagnons les projets de construction,
+                        d'aménagement et de développement immobilier,
+                        ainsi que la gestion, la valorisation et le suivi
+                        des projets et biens immobiliers.
+                    </p>
+                </div>
+
+                <!-- 03 — BUSINESS CONSULTING -->
+                <div class="domain-card">
+                    <h3>
+                        Business Consulting
+                    </h3>
+                    <p>
+                        Nous conseillons et accompagnons les entreprises,
+                        entrepreneurs et investisseurs dans leurs projets,
+                        leurs stratégies, leurs opportunités d'affaires
+                        et leur développement.
+                    </p>
+                </div>
+
+                <!-- 04 — SOLUTION NUMÉRIQUE -->
+                <div class="domain-card">
+                    <h3>
+                        Solution Numérique
+                    </h3>
+                    <p>
+                        Nous concevons et développons des applications,
+                        sites web et solutions numériques adaptés aux
+                        besoins des entreprises afin d'automatiser leurs
+                        processus et d'améliorer leur présence digitale.
+                    </p>
+                </div>
+
+                <!-- 05 — PRESTATION DE SERVICE -->
+                <div class="domain-card">
+                    <h3>
+                        Prestation de Service
+                    </h3>
+                    <p>
+                        Nous proposons différentes prestations de services
+                        adaptées aux besoins des entreprises, partenaires
+                        et particuliers, avec une approche professionnelle
+                        et orientée vers des résultats concrets.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CTA
+        ================================================= -->
+
+        <section class="cta">
+
+
+            <h2>
+                Construisons ensemble vos projets
+            </h2>
 
 
             <p>
-                Votre partenaire stratégique pour le développement
-                des affaires, le BTP, la construction et la gestion
-                immobilière en Afrique.
+
+                Vous avez un projet ou une opportunité d'affaires ?
+                KY5 GLOBAL TRADE est à vos côtés pour vous accompagner.
+
             </p>
 
 
             <a
-                href="#presentation"
-                class="hero-button"
+                href="contact.html"
+                class="btn"
             >
-                DÉCOUVRIR NOTRE ENTREPRISE
+                NOUS CONTACTER
             </a>
 
-        </div>
 
-    </section>
+        </section>
 
 
-    <!-- =====================================================
-         PRÉSENTATION
-    ===================================================== -->
+    </main>
 
-    <section
-        class="about-section"
-        id="presentation"
-    >
-
-        <div class="section-title">
-
-            <span>
-                Qui sommes-nous ?
-            </span>
-
-
-            <h2>
-                Une vision tournée vers l'avenir
-            </h2>
-
-
-            <p>
-                KY5 GLOBAL TRADE développe des solutions
-                professionnelles adaptées aux réalités
-                du marché africain.
-            </p>
-
-        </div>
-
-
-        <div class="about-grid">
-
-
-            <div class="about-text">
-
-                <h3>
-                    Une entreprise au service de vos ambitions
-                </h3>
-
-
-                <p>
-                    KY5 GLOBAL TRADE est une entreprise orientée
-                    vers le développement des affaires, la gestion
-                    immobilière, le BTP, la construction et le
-                    business consulting.
-                </p>
-
-
-                <p>
-                    Notre objectif est de créer des connexions
-                    fiables entre les opportunités, les entreprises
-                    et les différents acteurs économiques.
-                </p>
-
-
-                <p>
-                    Nous privilégions une approche professionnelle,
-                    transparente et orientée vers des résultats
-                    concrets.
-                </p>
-
-            </div>
-
-
-            <div class="about-image">
-
-                <img
-                    src="logo.png"
-                    alt="KY5 GLOBAL TRADE"
-                >
-
-                <div class="image-decoration"></div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         CHIFFRES / IDENTITÉ
-    ===================================================== -->
-
-    <section class="stats">
-
-        <div class="stats-grid">
-
-
-            <div class="stat-card">
-
-                <strong>
-                    BTP
-                </strong>
-
-                <span>
-                    Construction
-                </span>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <strong>
-                    IMMOBILIER
-                </strong>
-
-                <span>
-                    Gestion immobilière
-                </span>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <strong>
-                    GLOBAL
-                </strong>
-
-                <span>
-                    Business & Commerce
-                </span>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         NOS VALEURS
-    ===================================================== -->
-
-    <section class="values">
-
-        <div class="section-title">
-
-            <span>
-                Notre identité
-            </span>
-
-
-            <h2>
-                Nos valeurs
-            </h2>
-
-
-            <p>
-                Les principes qui orientent notre manière
-                de travailler.
-            </p>
-
-        </div>
-
-
-        <div class="values-grid">
-
-
-            <div class="value-card">
-
-                <div class="value-number">
-                    01 — FIABILITÉ
-                </div>
-
-
-                <h3>
-                    La confiance
-                </h3>
-
-
-                <p>
-                    Nous construisons des relations professionnelles
-                    basées sur la confiance, la transparence et
-                    le respect de nos engagements.
-                </p>
-
-            </div>
-
-
-            <div class="value-card">
-
-                <div class="value-number">
-                    02 — EXPERTISE
-                </div>
-
-
-                <h3>
-                    Le professionnalisme
-                </h3>
-
-
-                <p>
-                    Nous mettons notre savoir-faire et notre expérience
-                    au service des projets de nos partenaires.
-                </p>
-
-            </div>
-
-
-            <div class="value-card">
-
-                <div class="value-number">
-                    03 — VISION
-                </div>
-
-
-                <h3>
-                    L'innovation
-                </h3>
-
-
-                <p>
-                    Nous recherchons constamment des solutions modernes
-                    permettant de répondre efficacement aux besoins
-                    de nos clients.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         DOMAINES
-    ===================================================== -->
-
-    <section class="domains">
-
-        <div class="section-title">
-
-            <span>
-                Notre expertise
-            </span>
-
-
-            <h2>
-                Nos domaines d'intervention
-            </h2>
-
-
-            <p>
-                Des solutions professionnelles dans plusieurs
-                secteurs stratégiques.
-            </p>
-
-        </div>
-
-
-        <div class="domains-grid">
-
-
-            <div class="domain-card">
-
-                <h3>
-                    Gestion immobilière
-                </h3>
-
-
-                <p>
-                    Gestion, accompagnement et développement
-                    de projets immobiliers adaptés aux besoins
-                    de nos partenaires.
-                </p>
-
-            </div>
-
-
-            <div class="domain-card">
-
-                <h3>
-                    BTP & Construction
-                </h3>
-
-
-                <p>
-                    Accompagnement des projets de construction,
-                    développement immobilier et solutions adaptées
-                    aux besoins des entreprises.
-                </p>
-
-            </div>
-
-
-            <div class="domain-card">
-
-                <h3>
-                    Business Consulting
-                </h3>
-
-
-                <p>
-                    Conseil et accompagnement des entreprises
-                    dans leurs projets, stratégies et opportunités
-                    d'affaires.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         CTA
-    ===================================================== -->
-
-    <section class="cta">
-
-        <h2>
-            Construisons ensemble vos projets
-        </h2>
-
-
-        <p>
-            Vous avez un projet ou une opportunité d'affaires ?
-            KY5 GLOBAL TRADE est à vos côtés pour vous accompagner.
-        </p>
-
-
-        <a
-            href="contact.html"
-            class="btn"
-        >
-            NOUS CONTACTER
-        </a>
-
-    </section>
 
 
     <!-- =====================================================
@@ -2370,7 +2567,9 @@
 
     <footer>
 
+
         <div class="footer-logo">
+
 
             <img
                 src="logo sté.png"
@@ -2382,12 +2581,12 @@
                 KY5 GLOBAL TRADE
             </h3>
 
+
         </div>
 
 
         <p>
-            Importation • Transport • Logistique • BTP •
-            Gestion immobilière • Business Consulting
+            connecter le monde, bâtir l'avenir
         </p>
 
 
@@ -2395,7 +2594,190 @@
             © 2026 KY5 GLOBAL TRADE — Tous droits réservés.
         </p>
 
+
     </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT — MÊME LOGIQUE QUE INDEX
+    ===================================================== -->
+
+    <script>
+
+        (() => {
+
+            const header =
+                document.querySelector('header');
+
+            const toggle =
+                document.querySelector('.menu-toggle');
+
+            const close =
+                document.querySelector('.menu-close');
+
+            const nav =
+                document.querySelector('#main-navigation');
+
+
+            if (!header || !toggle || !nav) {
+                return;
+            }
+
+
+            /* ================================================
+               OUVRIR / FERMER LE MENU
+            ================================================ */
+
+            const setMenu = (open) => {
+
+                header.classList.toggle(
+                    'nav-open',
+                    open
+                );
+
+
+                document.body.classList.toggle(
+                    'menu-locked',
+                    open
+                );
+
+
+                toggle.setAttribute(
+                    'aria-expanded',
+                    String(open)
+                );
+
+
+                toggle.setAttribute(
+                    'aria-label',
+                    open
+                        ? 'Fermer le menu'
+                        : 'Ouvrir le menu'
+                );
+
+            };
+
+
+            /* ================================================
+               BOUTON MENU
+            ================================================ */
+
+            toggle.addEventListener(
+                'click',
+                () => {
+
+                    setMenu(
+                        !header.classList.contains(
+                            'nav-open'
+                        )
+                    );
+
+                }
+            );
+
+
+            /* ================================================
+               BOUTON X
+            ================================================ */
+
+            if (close) {
+
+                close.addEventListener(
+                    'click',
+                    () => {
+
+                        setMenu(false);
+
+                    }
+                );
+
+            }
+
+
+            /* ================================================
+               CLIC SUR UN LIEN
+            ================================================ */
+
+            nav
+                .querySelectorAll('a')
+                .forEach(link => {
+
+                    link.addEventListener(
+                        'click',
+                        () => {
+
+                            setMenu(false);
+
+                        }
+                    );
+
+                });
+
+
+            /* ================================================
+               TOUCHE ESC
+            ================================================ */
+
+            document.addEventListener(
+                'keydown',
+                event => {
+
+                    if (
+                        event.key === 'Escape'
+                    ) {
+
+                        setMenu(false);
+
+                    }
+
+                }
+            );
+
+
+            /* ================================================
+               REDIMENSIONNEMENT
+            ================================================ */
+
+            window.addEventListener(
+                'resize',
+                () => {
+
+                    if (
+                        window.innerWidth > 1050
+                    ) {
+
+                        setMenu(false);
+
+                    }
+
+                }
+            );
+
+
+            /* ================================================
+               HEADER AU SCROLL
+            ================================================ */
+
+            window.addEventListener(
+                'scroll',
+                () => {
+
+                    header.classList.toggle(
+                        'scrolled',
+                        window.scrollY > 18
+                    );
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+
+        })();
+
+    </script>
 
 
 </body>
