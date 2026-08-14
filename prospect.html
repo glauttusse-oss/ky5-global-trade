@@ -10,850 +10,636 @@
           content="Contactez KY5 GLOBAL TRADE pour une demande de service, un devis, une commande ou un rendez-vous.">
 
     <style>
+:root{
+ --navy:#03172f; --navy2:#062d55; --blue:#0877c9; --cyan:#63ddff;
+ --ink:#0a1e36; --muted:#6b7d91; --line:#dbe8f2; --soft:#f4f9fc;
+ --white:#fff; --green:#20c878;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Arial,Helvetica,sans-serif;color:var(--ink);background:#f3f8fc;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit}
+
+.site-header{position:sticky;top:0;z-index:10000;background:rgba(2,18,39,.96);border-bottom:1px solid rgba(99,221,255,.28);box-shadow:0 15px 45px rgba(0,20,50,.30);backdrop-filter:blur(18px)}
+.header-inner{max-width:1500px;min-height:104px;margin:auto;padding:14px 28px;display:flex;align-items:center;gap:30px}
+.brand{display:flex;align-items:center;gap:15px}
+.brand-logo{width:76px;height:76px;object-fit:contain;filter:drop-shadow(0 0 15px rgba(99,221,255,.25));animation:float 4s ease-in-out infinite}
+.brand-copy strong{display:block;color:#fff;font-size:clamp(19px,2.2vw,29px);font-weight:950;letter-spacing:1px}
+.brand-copy span{display:block;margin-top:5px;color:#8fe6ff;font-size:8px;font-weight:900;letter-spacing:2.6px}
+.desktop-nav{margin-left:auto}
+.desktop-nav ul{display:flex;gap:5px;list-style:none}
+.desktop-nav a{display:block;padding:11px 13px;border-radius:10px;color:#fff;font-size:12px;font-weight:800;transition:.3s}
+.desktop-nav a:hover,.desktop-nav a.active{color:#7ee3ff;background:rgba(99,221,255,.12)}
+.mobile-menu-button{display:none;margin-left:auto;width:58px;height:58px;border:1px solid rgba(99,221,255,.4);border-radius:15px;background:rgba(99,221,255,.08);cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;box-shadow:0 0 20px rgba(99,221,255,.12)}
+.mobile-menu-button span{width:25px;height:2px;background:#8fe8ff;box-shadow:0 0 8px #63ddff}
+.mobile-nav{display:none;padding:0 20px 20px;background:#03172f}
+.mobile-nav.open{display:block}.mobile-nav ul{list-style:none;display:grid;gap:6px}.mobile-nav a{display:block;padding:14px;border-radius:11px;color:#fff;background:rgba(255,255,255,.06);font-weight:800}.mobile-nav a.active{color:#8fe8ff;background:rgba(99,221,255,.13)}
+
+.hero{position:relative;min-height:500px;display:grid;place-items:center;text-align:center;padding:75px 20px;overflow:hidden;background:
+ radial-gradient(circle at 15% 25%,rgba(99,221,255,.20),transparent 25%),
+ radial-gradient(circle at 85% 70%,rgba(24,162,224,.20),transparent 30%),
+ linear-gradient(125deg,#02152d,#063c70 55%,#087fb9)}
+.hero::before{content:"";position:absolute;width:650px;height:650px;border:1px solid rgba(99,221,255,.15);border-radius:50%;right:-210px;top:-260px;box-shadow:0 0 0 40px rgba(99,221,255,.025),0 0 0 90px rgba(99,221,255,.015);animation:spin 20s linear infinite}
+.hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:45px 45px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+.hero-content{position:relative;z-index:2;max-width:900px}
+.hero-label{display:inline-flex;align-items:center;gap:12px;color:#8fe6ff;font-size:10px;font-weight:950;letter-spacing:4px;margin-bottom:20px}
+.hero-label::before,.hero-label::after{content:"";width:38px;height:2px;background:linear-gradient(90deg,transparent,#63ddff)}
+.hero-label::after{background:linear-gradient(90deg,#63ddff,transparent)}
+.hero h1{color:#fff;font-size:clamp(45px,7vw,82px);line-height:.95;letter-spacing:-3px;font-weight:950;text-shadow:0 8px 35px rgba(0,0,0,.25)}
+.hero h1 span{color:#73e0ff}
+.hero-description{max-width:700px;margin:24px auto 0;color:rgba(255,255,255,.78);font-size:16px;line-height:1.8}
+
+.form-section{position:relative;padding:70px 20px 95px;background:radial-gradient(circle at 5% 20%,rgba(24,162,224,.08),transparent 25%),linear-gradient(180deg,#f6fafc,#edf5f9)}
+.form-card{max-width:1080px;margin:auto;background:#fff;border:1px solid rgba(7,92,168,.12);border-radius:30px;overflow:hidden;box-shadow:0 35px 90px rgba(0,45,90,.13)}
+.form-card-header{position:relative;padding:42px 46px;background:linear-gradient(135deg,#fff,#f0f9fe);border-bottom:1px solid var(--line)}
+.form-card-header::after{content:"";position:absolute;right:40px;top:30px;width:120px;height:120px;border:1px solid rgba(99,221,255,.18);border-radius:50%;box-shadow:0 0 0 20px rgba(99,221,255,.025)}
+.form-card-header h2{font-size:clamp(28px,4vw,42px);letter-spacing:-1px;color:#082e5b;font-weight:950}
+.form-card-header p{max-width:700px;margin-top:10px;color:var(--muted);font-size:14px;line-height:1.75}
+.prospect-form{padding:40px 46px 48px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:23px}
+.field{display:flex;flex-direction:column;gap:8px}.field-full{grid-column:1/-1}
+.field label{font-size:11px;font-weight:950;color:#193653;letter-spacing:.8px;text-transform:uppercase}
+.required{color:#0b8bc9}
+.field input,.field select,.field textarea{width:100%;padding:15px 16px;border:1px solid #d6e3ed;border-radius:13px;background:#f9fcfe;color:#122a45;outline:none;transition:.3s;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
+.field input,.field select{min-height:52px}.field textarea{min-height:155px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#18a2e0;background:#fff;box-shadow:0 0 0 4px rgba(24,162,224,.09),0 8px 25px rgba(7,92,168,.06)}
+.form-note{grid-column:1/-1;padding:17px 19px;border-radius:13px;background:linear-gradient(90deg,#f1f9fd,#f8fcff);border-left:3px solid #18a2e0;color:#687a8d;font-size:11px;line-height:1.7}
+.submit-button{position:relative;overflow:hidden;grid-column:1/-1;min-height:58px;border:1px solid rgba(130,232,255,.7);border-radius:14px;color:#fff;background:linear-gradient(135deg,#075ca8,#18a2e0);font-size:12px;font-weight:950;letter-spacing:1.8px;cursor:pointer;box-shadow:0 12px 30px rgba(7,92,168,.25),0 0 22px rgba(24,162,224,.16);transition:.3s}
+.submit-button::before{content:"";position:absolute;top:-40%;left:-55%;width:30%;height:180%;transform:rotate(18deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);animation:shine 3.5s infinite}
+.submit-button:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(7,92,168,.32),0 0 35px rgba(24,162,224,.28)}
+
+footer{padding:45px 20px;text-align:center;color:#fff;background:linear-gradient(135deg,#020b1b,#032c54);border-top:1px solid rgba(99,221,255,.18)}
+.footer-brand{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:12px}.footer-brand img{width:52px;height:52px;object-fit:contain}.footer-brand strong{font-size:20px}.footer-brand+ p,footer p{color:#a9bfd8;font-size:11px;line-height:1.7}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes shine{0%,35%{left:-55%;opacity:0}48%{opacity:1}65%,100%{left:125%;opacity:0}}
+
+@media(max-width:1050px){.desktop-nav{display:none}.mobile-menu-button{display:flex}.header-inner{min-height:94px;padding:10px 18px}.brand-logo{width:68px;height:68px}}
+@media(max-width:760px){.hero{min-height:430px;padding:55px 17px}.hero h1{letter-spacing:-2px}.form-section{padding:40px 12px 60px}.form-card{border-radius:22px}.form-card-header{padding:30px 22px}.prospect-form{padding:25px 20px 30px}.form-grid{grid-template-columns:1fr;gap:17px}.field-full,.form-note,.submit-button{grid-column:auto}.brand-copy strong{font-size:18px}.brand-copy span{font-size:6px;letter-spacing:1.6px}}
+@media(max-width:420px){.brand-logo{width:57px;height:57px}.header-inner{min-height:82px;padding:8px 12px}.mobile-menu-button{width:50px;height:50px}.brand-copy strong{font-size:15px}.brand-copy span{display:none}.hero h1{font-size:42px}.form-card-header h2{font-size:28px}}
 
         /* =========================================================
-           RESET
+           IDENTITÉ OFFICIELLE KY5 — HEADER
         ========================================================= */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            width: 100%;
-            min-height: 100vh;
-            overflow-x: hidden;
-
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-
-            color: #17243a;
-            background: #f4f8fc;
-        }
-
-        button,
-        input,
-        select,
-        textarea {
-            font: inherit;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-
-        /* =========================================================
-           HEADER
-        ========================================================= */
-
-        .site-header {
-            position: sticky;
-            top: 0;
-            z-index: 9999;
-
-            width: 100%;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #001329 0%,
-                    #002b59 50%,
-                    #004d88 100%
-                );
-
-            border-bottom: 1px solid rgba(112, 218, 255, .35);
-
-            box-shadow:
-                0 8px 25px rgba(0, 20, 50, .25);
-        }
-
-        .header-inner {
-            width: 100%;
-            max-width: 1450px;
-            min-height: 88px;
-
-            margin: 0 auto;
-            padding: 12px 18px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 15px;
-        }
-
-
-        /* LOGO */
 
         .brand {
-            display: flex;
-            align-items: center;
-
+            gap: 16px;
             min-width: 0;
         }
 
         .brand-logo {
-            width: 58px;
-            height: 58px;
-
-            flex: 0 0 58px;
-
+            width: 76px !important;
+            height: 76px !important;
+            flex: 0 0 76px !important;
             object-fit: contain;
-
             filter:
-                drop-shadow(0 5px 12px rgba(0,0,0,.30));
+                drop-shadow(0 0 8px rgba(255,255,255,.30))
+                drop-shadow(0 7px 18px rgba(0,0,0,.30));
+        }
 
-            animation: logoFloat 4s ease-in-out infinite;
+        .brand-identity {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 7px;
+            min-width: 0;
         }
 
         .brand-name {
-            margin-left: 11px;
+            margin: 0 !important;
+            color: #fff;
+            font-size: clamp(21px, 3vw, 31px) !important;
+            font-weight: 950;
+            line-height: 1;
+            letter-spacing: 1.1px;
+            white-space: nowrap;
+        }
 
-            color: #ffffff;
-
-            font-size: clamp(19px, 3vw, 31px);
+        .brand-slogan {
+            display: block;
+            color: #8de7ff;
+            font-size: clamp(8px, 1vw, 11px);
             font-weight: 900;
-
-            line-height: 1.05;
-
-            letter-spacing: .7px;
-
+            letter-spacing: 2.4px;
+            line-height: 1;
             white-space: nowrap;
+            text-shadow: 0 0 12px rgba(103,217,255,.35);
         }
 
-        .brand-subtitle {
-            display: block;
-
-            margin-top: 5px;
-
-            color: #8edfff;
-
-            font-size: 8px;
-            font-weight: 700;
-
-            letter-spacing: 2px;
-
-            white-space: nowrap;
+        .site-header {
+            min-height: 104px;
+            background:
+                linear-gradient(135deg, #001329 0%, #002b59 54%, #004d88 100%);
+            border-bottom: 1px solid rgba(103,217,255,.32);
+            box-shadow:
+                0 10px 35px rgba(0,20,50,.30),
+                inset 0 -1px 0 rgba(255,255,255,.04);
         }
 
-
-        /* MENU DESKTOP */
-
-        .desktop-nav {
-            display: flex;
-            align-items: center;
+        .header-inner {
+            min-height: 104px !important;
+            padding: 12px 22px !important;
         }
 
-        .desktop-nav ul {
-            display: flex;
-            align-items: center;
+        @media (max-width: 760px) {
+            .brand-logo {
+                width: 62px !important;
+                height: 62px !important;
+                flex-basis: 62px !important;
+            }
 
-            gap: 3px;
+            .brand-name {
+                font-size: 19px !important;
+            }
 
-            list-style: none;
+            .brand-slogan {
+                font-size: 7px;
+                letter-spacing: 1.45px;
+            }
+
+            .site-header,
+            .header-inner {
+                min-height: 82px !important;
+            }
         }
 
-        .desktop-nav a {
-            display: block;
+        @media (max-width: 420px) {
+            .brand-logo {
+                width: 52px !important;
+                height: 52px !important;
+                flex-basis: 52px !important;
+            }
 
-            padding: 10px 11px;
+            .brand-name {
+                font-size: 16px !important;
+            }
 
-            border-radius: 8px;
-
-            color: #ffffff;
-
-            font-size: 13px;
-            font-weight: 700;
-
-            transition: .25s ease;
+            .brand-slogan {
+                font-size: 6px;
+                letter-spacing: 1px;
+            }
         }
 
-        .desktop-nav a:hover,
-        .desktop-nav a.active {
-            background: rgba(255,255,255,.13);
-            color: #7de2ff;
-        }
-
-
-        /* BOUTON MENU MOBILE */
-
-        .mobile-menu-button {
-            display: none;
-
-            width: 44px;
-            height: 44px;
-
-            border: 1px solid rgba(255,255,255,.25);
-            border-radius: 10px;
-
-            background: rgba(255,255,255,.08);
-
-            color: white;
-
-            cursor: pointer;
-
-            align-items: center;
-            justify-content: center;
-
-            flex-direction: column;
-
-            gap: 5px;
-        }
-
-        .mobile-menu-button span {
-            display: block;
-
-            width: 21px;
-            height: 2px;
-
-            border-radius: 10px;
-
-            background: white;
-
-            transition: .25s ease;
-        }
-
-
-        /* MENU MOBILE */
-
-        .mobile-nav {
-            display: none;
-
-            width: 100%;
-
-            padding: 0 15px 15px;
-        }
-
-        .mobile-nav.open {
-            display: block;
-        }
-
-        .mobile-nav ul {
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 5px;
-
-            list-style: none;
-        }
-
-        .mobile-nav a {
-            display: block;
-
-            padding: 14px 15px;
-
-            border-radius: 9px;
-
-            color: white;
-
-            background: rgba(255,255,255,.07);
-
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .mobile-nav a.active {
-            background: rgba(41,177,235,.20);
-            color: #8de5ff;
-        }
-
-
+    
         /* =========================================================
-           HERO
+           PROSPECT — IDENTITÉ VISUELLE PREMIUM / CONVERSION
         ========================================================= */
 
         .hero {
-            position: relative;
-
-            width: 100%;
-
-            padding:
-                55px 18px
-                60px;
-
-            text-align: center;
-
-            overflow: hidden;
-
+            min-height: 470px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            isolation: isolate;
             background:
-                radial-gradient(
-                    circle at 10% 20%,
-                    rgba(90,220,255,.20),
-                    transparent 32%
-                ),
-                linear-gradient(
-                    135deg,
-                    #03142a,
-                    #07518d,
-                    #078dce
-                );
+                radial-gradient(circle at 18% 35%, rgba(255,194,64,.18), transparent 19%),
+                radial-gradient(circle at 82% 30%, rgba(255,73,72,.15), transparent 18%),
+                radial-gradient(circle at 58% 78%, rgba(83,221,255,.16), transparent 22%),
+                linear-gradient(135deg,#020e20 0%,#06345f 48%,#057cb5 100%);
+        }
+
+        .hero::before {
+            content:"";
+            position:absolute;
+            width:580px;
+            height:580px;
+            right:-190px;
+            top:-240px;
+            border-radius:50%;
+            border:1px solid rgba(255,205,93,.20);
+            box-shadow:
+                0 0 0 35px rgba(255,205,93,.025),
+                0 0 0 75px rgba(255,205,93,.018),
+                0 0 80px rgba(255,175,40,.08);
+            animation: premiumOrbit 18s linear infinite;
+            pointer-events:none;
         }
 
         .hero::after {
-            content: "";
-
-            position: absolute;
-
-            width: 230px;
-            height: 230px;
-
-            right: -100px;
-            bottom: -100px;
-
-            border-radius: 50%;
-
-            border: 1px solid rgba(255,255,255,.15);
+            width:360px;
+            height:360px;
+            left:-170px;
+            bottom:-190px;
+            border-color:rgba(255,74,74,.16);
+            box-shadow:0 0 80px rgba(255,55,55,.08);
+            animation: premiumOrbit 14s linear infinite reverse;
         }
 
         .hero-content {
-            position: relative;
-            z-index: 2;
-
-            width: 100%;
-            max-width: 850px;
-
-            margin: auto;
+            max-width:920px;
+            padding:45px 25px;
         }
 
         .hero-label {
-            margin-bottom: 13px;
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            padding:9px 14px;
+            border:1px solid rgba(255,211,102,.35);
+            border-radius:999px;
+            background:rgba(255,196,57,.07);
+            box-shadow:0 0 25px rgba(255,190,40,.08);
+            color:#ffd66d;
+        }
 
-            color: #8de4ff;
-
-            font-size: 11px;
-            font-weight: 800;
-
-            letter-spacing: 3px;
+        .hero-label::before {
+            content:"";
+            width:7px;
+            height:7px;
+            border-radius:50%;
+            background:#ffd66d;
+            box-shadow:0 0 12px #ffd66d,0 0 24px rgba(255,174,37,.7);
+            animation: liveDot 1.8s ease-in-out infinite;
         }
 
         .hero h1 {
-            margin-bottom: 17px;
-
-            color: white;
-
-            font-size: clamp(32px, 8vw, 62px);
-            font-weight: 900;
-
-            line-height: 1.05;
+            font-size:clamp(43px,8vw,78px);
+            letter-spacing:-2px;
+            text-shadow:
+                0 7px 35px rgba(0,0,0,.32),
+                0 0 30px rgba(83,221,255,.12);
         }
 
         .hero h1 span {
-            color: #72ddff;
+            color:#79e1ff;
+            text-shadow:0 0 22px rgba(103,217,255,.34);
         }
 
         .hero-description {
-            max-width: 700px;
-
-            margin: auto;
-
-            color: #eaf8ff;
-
-            font-size: 15px;
-
-            line-height: 1.75;
+            max-width:760px;
+            font-size:16px;
         }
 
+        .hero-light-orb {
+            position:absolute;
+            z-index:-1;
+            border-radius:50%;
+            pointer-events:none;
+            filter:blur(1px);
+        }
 
-        /* =========================================================
-           SECTION FORMULAIRE
-        ========================================================= */
+        .orb-gold {
+            width:11px;height:11px;
+            left:18%;top:28%;
+            background:#ffd66d;
+            box-shadow:0 0 10px #fff,0 0 28px #ffc13e,0 0 55px rgba(255,180,30,.7);
+            animation:floatParticle 5s ease-in-out infinite;
+        }
+
+        .orb-red {
+            width:8px;height:8px;
+            right:22%;top:26%;
+            background:#ff8178;
+            box-shadow:0 0 10px #fff,0 0 25px #ff4c4c,0 0 50px rgba(255,50,50,.7);
+            animation:floatParticle 6s ease-in-out infinite reverse;
+        }
+
+        .orb-cyan {
+            width:9px;height:9px;
+            right:29%;bottom:22%;
+            background:#7ce9ff;
+            box-shadow:0 0 10px #fff,0 0 28px #23bde9,0 0 55px rgba(20,170,220,.7);
+            animation:floatParticle 4.5s ease-in-out infinite;
+        }
+
+        .hero-grid-lines {
+            position:absolute;
+            inset:0;
+            z-index:-2;
+            opacity:.18;
+            background-image:
+                linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+                linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+            background-size:45px 45px;
+            mask-image:radial-gradient(circle at center,black,transparent 78%);
+        }
+
+        .prospect-journey {
+            position:relative;
+            padding:58px 18px 20px;
+            background:
+                radial-gradient(circle at 15% 50%,rgba(255,196,57,.08),transparent 22%),
+                linear-gradient(180deg,#f5f9fc 0%,#edf5fa 100%);
+        }
+
+        .section-divider {
+            max-width:1160px;
+            margin:0 auto 35px;
+            display:flex;
+            align-items:center;
+            gap:18px;
+            color:#7890a6;
+            font-size:9px;
+            font-weight:900;
+            letter-spacing:3px;
+            text-align:center;
+        }
+
+        .section-divider span {
+            flex:1;
+            height:1px;
+            background:linear-gradient(90deg,transparent,#8fdcf4,transparent);
+        }
+
+        .journey-grid {
+            max-width:1160px;
+            margin:auto;
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:12px;
+        }
+
+        .journey-card {
+            position:relative;
+            overflow:hidden;
+            min-height:190px;
+            padding:22px;
+            border:1px solid rgba(7,92,168,.10);
+            border-radius:20px;
+            background:rgba(255,255,255,.82);
+            box-shadow:0 12px 35px rgba(0,55,110,.06);
+            transition:.35s ease;
+        }
+
+        .journey-card::before {
+            content:"";
+            position:absolute;
+            left:0;right:0;top:0;
+            height:3px;
+            background:linear-gradient(90deg,#075ca8,#67d9ff,#ffd15d,#ff6d61);
+            background-size:220% 100%;
+            animation:gradientMove 5s linear infinite;
+        }
+
+        .journey-card:hover {
+            transform:translateY(-7px);
+            box-shadow:0 20px 45px rgba(0,55,110,.12);
+            border-color:rgba(103,217,255,.30);
+        }
+
+        .journey-index {
+            position:absolute;
+            top:16px;
+            right:18px;
+            color:#b7c8d8;
+            font-size:9px;
+            font-weight:900;
+            letter-spacing:2px;
+        }
+
+        .journey-icon {
+            width:44px;
+            height:44px;
+            display:grid;
+            place-items:center;
+            margin-bottom:25px;
+            border-radius:14px;
+            color:#075ca8;
+            background:linear-gradient(135deg,#edfaff,#fff4d7);
+            border:1px solid rgba(103,217,255,.20);
+            box-shadow:0 0 18px rgba(103,217,255,.10);
+            font-size:10px;
+            font-weight:900;
+        }
+
+        .journey-card strong {
+            display:block;
+            margin-bottom:9px;
+            color:#082e5b;
+            font-size:11px;
+            letter-spacing:1.2px;
+        }
+
+        .journey-card p {
+            color:#6a7c8e;
+            font-size:11px;
+            line-height:1.65;
+        }
 
         .form-section {
-            width: 100%;
-
-            padding:
-                45px 15px
-                60px;
+            padding-top:48px;
+            background:
+                radial-gradient(circle at 85% 20%,rgba(255,192,54,.06),transparent 20%),
+                linear-gradient(180deg,#edf5fa,#f8fbfd);
         }
 
         .form-card {
-            width: 100%;
-            max-width: 920px;
-
-            margin: auto;
-
-            background: #ffffff;
-
-            border: 1px solid #e4edf5;
-
-            border-radius: 20px;
-
+            max-width:1040px;
+            border-radius:30px;
+            border:1px solid rgba(7,92,168,.12);
             box-shadow:
-                0 18px 55px rgba(0,55,110,.10);
-
-            overflow: hidden;
+                0 30px 90px rgba(0,45,90,.14),
+                0 0 0 1px rgba(255,255,255,.65) inset;
         }
 
-
-        /* ENTÊTE FORMULAIRE */
-
         .form-card-header {
-            padding: 25px 20px;
-
+            position:relative;
+            overflow:hidden;
+            padding:38px 40px 34px;
             background:
-                linear-gradient(
-                    135deg,
-                    #f4fbff,
-                    #ffffff
-                );
+                radial-gradient(circle at 90% 10%,rgba(255,195,56,.13),transparent 20%),
+                radial-gradient(circle at 5% 95%,rgba(103,217,255,.10),transparent 25%),
+                linear-gradient(135deg,#f7fcff,#fff);
+        }
 
-            border-bottom: 1px solid #e4edf5;
+        .form-card-header::after {
+            content:"";
+            position:absolute;
+            width:180px;
+            height:180px;
+            right:-80px;
+            bottom:-100px;
+            border-radius:50%;
+            border:1px solid rgba(255,187,46,.18);
+            box-shadow:0 0 40px rgba(255,187,46,.08);
+        }
+
+        .form-header-badge {
+            display:inline-flex;
+            align-items:center;
+            gap:9px;
+            margin-bottom:14px;
+            padding:7px 11px;
+            border-radius:999px;
+            color:#8a6200;
+            background:#fff7dc;
+            border:1px solid rgba(255,193,57,.30);
+            font-size:8px;
+            font-weight:900;
+            letter-spacing:2px;
+        }
+
+        .badge-light {
+            width:6px;
+            height:6px;
+            border-radius:50%;
+            background:#ffc83d;
+            box-shadow:0 0 8px #ffc83d,0 0 16px rgba(255,174,37,.7);
         }
 
         .form-card-header h2 {
-            margin-bottom: 8px;
-
-            color: #082e5b;
-
-            font-size: clamp(22px, 5vw, 31px);
-            font-weight: 900;
+            font-size:clamp(28px,5vw,43px);
+            line-height:1.05;
+            letter-spacing:-1px;
         }
 
-        .form-card-header p {
-            color: #69788b;
-
-            font-size: 14px;
-
-            line-height: 1.7;
+        .form-card-header h2 span {
+            display:block;
+            color:#0a74b9;
         }
 
+        .form-confidence {
+            display:flex;
+            align-items:center;
+            flex-wrap:wrap;
+            gap:10px;
+            margin-top:21px;
+            color:#8493a3;
+            font-size:8px;
+            font-weight:900;
+            letter-spacing:1.3px;
+        }
 
-        /* FORMULAIRE */
+        .form-confidence i {
+            width:4px;
+            height:4px;
+            border-radius:50%;
+            background:#ffc33f;
+            box-shadow:0 0 8px rgba(255,174,37,.6);
+        }
 
         .prospect-form {
-            padding: 22px 20px 25px;
+            padding:34px 40px 40px;
         }
-
-        .form-grid {
-            display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 18px;
-        }
-
-        .field {
-            min-width: 0;
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 7px;
-        }
-
-        .field-full {
-            grid-column: 1 / -1;
-        }
-
-        .field label {
-            color: #173457;
-
-            font-size: 13px;
-            font-weight: 800;
-        }
-
-        .required {
-            color: #d62828;
-        }
-
-
-        /* CHAMPS */
 
         .field input,
         .field select,
         .field textarea {
-
-            display: block;
-
-            width: 100%;
-            max-width: 100%;
-
-            padding: 13px 14px;
-
-            border: 1px solid #d7e4ef;
-            border-radius: 10px;
-
-            outline: none;
-
-            background: #f9fcff;
-
-            color: #17243a;
-
-            font-size: 15px;
-
-            transition:
-                border-color .2s ease,
-                box-shadow .2s ease,
-                background .2s ease;
-        }
-
-        .field input,
-        .field select {
-            min-height: 48px;
+            min-height:52px;
+            border-radius:13px;
+            background:#fbfdff;
+            border-color:#d4e2ec;
+            box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
         }
 
         .field textarea {
-            min-height: 135px;
+            min-height:155px;
+        }
 
-            resize: vertical;
+        .field input:hover,
+        .field select:hover,
+        .field textarea:hover {
+            border-color:#a8d8ec;
         }
 
         .field input:focus,
         .field select:focus,
         .field textarea:focus {
-
-            border-color: #1599dc;
-
-            background: #ffffff;
-
+            border-color:#18a2e0;
             box-shadow:
-                0 0 0 3px rgba(21,153,220,.11);
+                0 0 0 4px rgba(24,162,224,.08),
+                0 0 18px rgba(103,217,255,.10);
         }
-
-
-        /* SERVICE */
-
-        #service {
-            color: #075ca8;
-
-            font-weight: 700;
-
-            background: #f1f9ff;
-        }
-
-
-        /* NOTE */
-
-        .form-note {
-            grid-column: 1 / -1;
-
-            padding: 13px 15px;
-
-            border-radius: 10px;
-
-            background: #f4f8fc;
-
-            color: #68788c;
-
-            font-size: 12px;
-
-            line-height: 1.65;
-        }
-
-
-        /* BOUTON */
 
         .submit-button {
-            grid-column: 1 / -1;
-
-            width: 100%;
-
-            min-height: 52px;
-
-            padding: 14px 20px;
-
-            border: 0;
-            border-radius: 11px;
-
+            position:relative;
+            overflow:hidden;
+            min-height:60px;
+            border-radius:15px;
             background:
-                linear-gradient(
-                    135deg,
-                    #075ca8,
-                    #1599dc
-                );
-
-            color: #ffffff;
-
-            font-size: 14px;
-            font-weight: 900;
-
-            letter-spacing: .4px;
-
-            cursor: pointer;
-
+                linear-gradient(100deg,#075ca8,#13a4df,#ffc640,#ff625b,#13a4df);
+            background-size:280% 100%;
             box-shadow:
-                0 10px 25px rgba(0,90,160,.20);
+                0 12px 30px rgba(7,92,168,.22),
+                0 0 25px rgba(255,194,57,.10);
+            animation:buttonGradient 7s ease infinite;
+        }
 
-            transition: .25s ease;
+        .submit-button::after {
+            content:"";
+            position:absolute;
+            top:-40%;
+            left:-30%;
+            width:22%;
+            height:180%;
+            transform:rotate(18deg);
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent);
+            animation:buttonSweep 3.8s ease-in-out infinite;
         }
 
         .submit-button:hover {
-            transform: translateY(-2px);
-
+            transform:translateY(-3px);
             box-shadow:
-                0 14px 30px rgba(0,90,160,.27);
+                0 18px 42px rgba(7,92,168,.28),
+                0 0 35px rgba(255,194,57,.22);
         }
 
-        .submit-button:active {
-            transform: scale(.98);
+        @keyframes premiumOrbit {
+            from { transform:rotate(0deg); }
+            to { transform:rotate(360deg); }
         }
 
-
-        /* =========================================================
-           FOOTER
-        ========================================================= */
-
-        footer {
-            width: 100%;
-
-            padding: 38px 18px;
-
-            text-align: center;
-
-            color: white;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #020b1b,
-                    #03254a
-                );
+        @keyframes liveDot {
+            0%,100% { transform:scale(.75); opacity:.65; }
+            50% { transform:scale(1.25); opacity:1; }
         }
 
-        .footer-brand {
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            gap: 11px;
-
-            margin-bottom: 12px;
+        @keyframes floatParticle {
+            0%,100% { transform:translate3d(0,0,0); opacity:.45; }
+            50% { transform:translate3d(12px,-18px,0); opacity:1; }
         }
 
-        .footer-brand img {
-            width: 45px;
-            height: 45px;
-
-            object-fit: contain;
+        @keyframes gradientMove {
+            from { background-position:0 0; }
+            to { background-position:220% 0; }
         }
 
-        .footer-brand strong {
-            font-size: 19px;
+        @keyframes buttonGradient {
+            0%,100% { background-position:0% 50%; }
+            50% { background-position:100% 50%; }
         }
 
-        footer p {
-            color: #a9bfd8;
-
-            font-size: 12px;
-
-            line-height: 1.7;
+        @keyframes buttonSweep {
+            0%,25% { left:-30%; opacity:0; }
+            42% { opacity:1; }
+            65%,100% { left:125%; opacity:0; }
         }
 
-
-        /* =========================================================
-           ANIMATION
-        ========================================================= */
-
-        @keyframes logoFloat {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-5px);
+        @media (max-width:900px) {
+            .journey-grid {
+                grid-template-columns:repeat(2,1fr);
             }
         }
 
-
-        /* =========================================================
-           TABLETTE
-        ========================================================= */
-
-        @media (max-width: 1050px) {
-
-            .desktop-nav a {
-                padding: 9px 8px;
-
-                font-size: 12px;
-            }
-
-            .brand-name {
-                font-size: 23px;
-            }
-
-            .brand-logo {
-                width: 54px;
-                height: 54px;
-            }
-        }
-
-
-        /* =========================================================
-           MOBILE
-        ========================================================= */
-
-        @media (max-width: 760px) {
-
-            .header-inner {
-                min-height: 76px;
-
-                padding: 10px 14px;
-            }
-
-            .brand-logo {
-                width: 50px;
-                height: 50px;
-
-                flex-basis: 50px;
-            }
-
-            .brand-name {
-                margin-left: 8px;
-
-                font-size: 19px;
-
-                letter-spacing: .4px;
-            }
-
-            .brand-subtitle {
-                margin-top: 4px;
-
-                font-size: 7px;
-
-                letter-spacing: 1.4px;
-            }
-
-            .desktop-nav {
-                display: none;
-            }
-
-            .mobile-menu-button {
-                display: flex;
-            }
-
+        @media (max-width:600px) {
             .hero {
-                padding:
-                    45px 17px
-                    50px;
+                min-height:430px;
             }
 
-            .hero-label {
-                font-size: 9px;
-
-                letter-spacing: 2.3px;
+            .journey-grid {
+                grid-template-columns:1fr;
             }
 
-            .hero-description {
-                font-size: 14px;
-
-                line-height: 1.7;
-            }
-
-            .form-section {
-                padding:
-                    30px 12px
-                    45px;
-            }
-
-            .form-card {
-                border-radius: 16px;
+            .journey-card {
+                min-height:155px;
             }
 
             .form-card-header {
-                padding: 23px 17px;
+                padding:30px 22px;
             }
 
             .prospect-form {
-                padding:
-                    20px 16px
-                    22px;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-
-                gap: 16px;
-            }
-
-            .field-full,
-            .form-note,
-            .submit-button {
-                grid-column: auto;
-            }
-
-            .field input,
-            .field select,
-            .field textarea {
-                font-size: 16px;
-            }
-
-            .submit-button {
-                min-height: 55px;
-
-                font-size: 14px;
-            }
-        }
-
-
-        /* =========================================================
-           PETIT MOBILE
-        ========================================================= */
-
-        @media (max-width: 420px) {
-
-            .header-inner {
-                padding-left: 10px;
-                padding-right: 10px;
-            }
-
-            .brand-logo {
-                width: 44px;
-                height: 44px;
-
-                flex-basis: 44px;
-            }
-
-            .brand-name {
-                font-size: 16px;
-            }
-
-            .brand-subtitle {
-                font-size: 6px;
-
-                letter-spacing: 1px;
-            }
-
-            .mobile-menu-button {
-                width: 42px;
-                height: 42px;
-            }
-
-            .hero h1 {
-                font-size: 34px;
-            }
-
-            .form-section {
-                padding-left: 9px;
-                padding-right: 9px;
-            }
-
-            .form-card-header {
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-
-            .prospect-form {
-                padding-left: 13px;
-                padding-right: 13px;
+                padding:26px 20px 30px;
             }
         }
 
     </style>
-</head>
+<style>
+.trust-strip{display:grid;grid-template-columns:repeat(4,1fr);max-width:1080px;margin:-34px auto 0;position:relative;z-index:4;background:rgba(255,255,255,.96);border:1px solid rgba(7,92,168,.10);border-radius:18px;box-shadow:0 18px 45px rgba(0,45,90,.10);overflow:hidden}
+.trust-strip div{padding:18px 20px;text-align:center;border-right:1px solid #e5eef4}.trust-strip div:last-child{border-right:0}
+.trust-strip strong{display:block;color:#0877c9;font-size:18px}.trust-strip span{display:block;margin-top:4px;color:#708195;font-size:9px;font-weight:950;letter-spacing:2px}
+@media(max-width:760px){.trust-strip{grid-template-columns:1fr 1fr;margin:-28px 12px 0}.trust-strip div:nth-child(2){border-right:0}.trust-strip div:nth-child(-n+2){border-bottom:1px solid #e5eef4}}
+</style></head>
 
 
 <body>
@@ -867,26 +653,12 @@
 
         <div class="header-inner">
 
-            <a href="index.html" class="brand">
-
-                <img
-                    src="logo sté.png"
-                    alt="KY5 GLOBAL TRADE"
-                    class="brand-logo"
-                >
-
-                <div>
-
-                    <div class="brand-name">
-                        KY5 GLOBAL TRADE
-                    </div>
-
-                    <span class="brand-subtitle">
-                        GLOBAL TRADE • BTP • IMMOBILIER
-                    </span>
-
+            <a href="index.html" class="brand" aria-label="KY5 GLOBAL TRADE — Accueil">
+                <img src="logo sté.png" alt="KY5 GLOBAL TRADE" class="brand-logo">
+                <div class="brand-identity">
+                    <div class="brand-name">KY5 GLOBAL TRADE</div>
+                    <span class="brand-slogan">CONNECTER LE MONDE, BÂTIR L’AVENIR</span>
                 </div>
-
             </a>
 
 
@@ -911,6 +683,12 @@
                     <li>
                         <a href="services.html">
                             Services
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="prospect.html" class="active">
+                            Prospect
                         </a>
                     </li>
 
@@ -990,6 +768,12 @@
                 </li>
 
                 <li>
+                    <a href="prospect.html" class="active">
+                        Prospect
+                    </a>
+                </li>
+
+                <li>
                     <a href="produits.html">
                         Produits
                     </a>
@@ -1034,41 +818,105 @@
             </div>
 
             <h1>
-                VOTRE <span>PROJET</span>
+                VOTRE <span>PROJET</span>, NOTRE ENGAGEMENT
             </h1>
 
             <p class="hero-description">
-                Présentez-nous votre besoin et notre équipe vous
-                orientera vers le service adapté à votre projet.
+                Une demande commerciale, un projet de construction, une fourniture ou un partenariat ? Présentez-nous votre besoin et notre équipe vous orientera vers la solution la plus adaptée.
             </p>
 
         </div>
 
+    
+            <div class="hero-light-orb orb-gold"></div>
+            <div class="hero-light-orb orb-red"></div>
+            <div class="hero-light-orb orb-cyan"></div>
+            <div class="hero-grid-lines"></div>
+</section>
+
+
+
+    <section class="trust-strip">
+        <div><strong>01</strong><span>ÉCOUTE</span></div>
+        <div><strong>02</strong><span>ANALYSE</span></div>
+        <div><strong>03</strong><span>SOLUTION</span></div>
+        <div><strong>04</strong><span>ACCOMPAGNEMENT</span></div>
     </section>
-
-
-
-    <!-- =========================================================
+        <!-- =========================================================
          FORMULAIRE
     ========================================================= -->
 
-    <main class="form-section">
+    
+    <!-- =========================================================
+         PARCOURS PROSPECT — EXPERIENCE PREMIUM
+    ========================================================= -->
+    <section class="prospect-journey">
+        <div class="section-divider">
+            <span></span>
+            <b>VOTRE PARCOURS AVEC KY5</b>
+            <span></span>
+        </div>
+
+        <div class="journey-grid">
+            <div class="journey-card journey-active">
+                <div class="journey-index">01</div>
+                <div class="journey-icon">01</div>
+                <strong>PRÉSENTEZ-VOUS</strong>
+                <p>Quelques informations pour comprendre votre profil et votre activité.</p>
+            </div>
+
+            <div class="journey-card">
+                <div class="journey-index">02</div>
+                <div class="journey-icon">02</div>
+                <strong>EXPLIQUEZ VOTRE BESOIN</strong>
+                <p>Décrivez votre projet, votre demande ou l'opportunité que vous souhaitez présenter.</p>
+            </div>
+
+            <div class="journey-card">
+                <div class="journey-index">03</div>
+                <div class="journey-icon">03</div>
+                <strong>NOUS ANALYSONS</strong>
+                <p>Notre équipe examine votre demande afin d'identifier la meilleure orientation.</p>
+            </div>
+
+            <div class="journey-card">
+                <div class="journey-index">04</div>
+                <div class="journey-icon">04</div>
+                <strong>NOUS VOUS CONTACTONS</strong>
+                <p>Un échange professionnel est organisé selon la nature de votre projet.</p>
+            </div>
+        </div>
+    </section>
+
+<main class="form-section">
 
         <div class="form-card">
 
 
             <div class="form-card-header">
+                <div class="form-header-badge">
+                    <span class="badge-light"></span>
+                    ESPACE PROSPECT KY5
+                </div>
 
                 <h2>
-                    Demande de service
+                    Faisons connaissance.
+                    <span>Votre projet commence ici.</span>
                 </h2>
 
                 <p>
-                    Remplissez les informations ci-dessous afin
-                    que notre équipe puisse vous contacter et
-                    traiter votre demande.
+                    Prenez quelques instants pour nous présenter votre profil,
+                    votre besoin ou votre opportunité. Plus votre demande est
+                    précise, plus notre équipe pourra vous orienter efficacement.
                 </p>
 
+                <div class="form-confidence">
+                    <span>CONFIDENTIEL</span>
+                    <i></i>
+                    <span>PROFESSIONNEL</span>
+                    <i></i>
+                    <span>RÉPONSE PERSONNALISÉE</span>
+                </div>
             </div>
 
 

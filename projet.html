@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Projets et perspectives d'expansion de KY5 GLOBAL TRADE.">
+<title>Projets — KY5 GLOBAL TRADE</title>
+
+<style>
+:root{
+    --navy:#03172f;
+    --navy2:#062d55;
+    --blue:#087dcc;
+    --cyan:#68dcff;
+    --white:#fff;
+    --gold:#ffd15a;
+    --red:#ff6b61;
+    --text:#17324f;
+    --muted:#71839a;
+    --light:#f4f9fc;
+    --line:#dce9f2;
+    --shadow:0 25px 70px rgba(0,43,85,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    margin:0;
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    color:var(--text);
+    background:var(--light);
+}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+
+.site-header{
+    position:sticky;
+    top:0;
+    z-index:9999;
+    min-height:106px;
+    background:linear-gradient(135deg,#011329,#06335f 60%,#07588f);
+    border-bottom:1px solid rgba(104,220,255,.25);
+    box-shadow:0 14px 45px rgba(0,17,40,.30);
+    backdrop-filter:blur(18px);
+}
+.header-inner{
+    max-width:1500px;
+    min-height:106px;
+    margin:auto;
+    padding:12px 4%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+.brand{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    color:#fff;
+}
+.brand-logo{
+    width:76px;height:76px;
+    object-fit:contain;
+    filter:drop-shadow(0 0 9px rgba(255,255,255,.25));
+}
+.brand-name{
+    display:block;
+    font-size:clamp(20px,3vw,29px);
+    font-weight:950;
+    letter-spacing:1.1px;
+}
+.brand-slogan{
+    display:block;
+    margin-top:7px;
+    color:#8de7ff;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:2.4px;
+}
+.menu-toggle{
+    width:62px;height:62px;
+    border:1px solid rgba(104,220,255,.35);
+    border-radius:16px;
+    background:rgba(255,255,255,.07);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    cursor:pointer;
+    transition:.3s;
+}
+.menu-toggle span{
+    width:28px;height:2px;
+    background:#8de7ff;
+    box-shadow:0 0 9px rgba(104,220,255,.7);
+}
+.menu-toggle small{
+    margin-top:4px;
+    color:#b8efff;
+    font-size:7px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+.navigation{
+    position:fixed;
+    inset:0 0 0 auto;
+    width:min(410px,92vw);
+    padding:25px;
+    background:linear-gradient(180deg,#011329,#043665);
+    border-left:1px solid rgba(104,220,255,.22);
+    box-shadow:-25px 0 70px rgba(0,12,30,.42);
+    transform:translateX(105%);
+    transition:.4s ease;
+    visibility:hidden;
+}
+body.menu-open .navigation{
+    transform:translateX(0);
+    visibility:visible;
+}
+.nav-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 0 25px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+.nav-head span{
+    display:block;
+    color:var(--cyan);
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:3px;
+}
+.nav-head strong{
+    display:block;
+    margin-top:6px;
+    color:#fff;
+}
+.nav-close{
+    width:42px;height:42px;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:12px;
+    color:#fff;
+    background:rgba(255,255,255,.07);
+    cursor:pointer;
+    font-size:25px;
+}
+.navigation ul{
+    list-style:none;
+    padding:20px 0;
+    margin:0;
+}
+.navigation li{margin:5px 0}
+.navigation a{
+    display:block;
+    padding:15px 16px;
+    border-radius:13px;
+    color:#fff;
+    font-weight:750;
+    transition:.3s;
+}
+.navigation a:hover,
+.navigation a.active{
+    color:#8de7ff;
+    background:rgba(104,220,255,.10);
+    transform:translateX(4px);
+}
+.nav-footer{
+    border-top:1px solid rgba(255,255,255,.1);
+    padding-top:20px;
+    color:#8da7c0;
+    font-size:10px;
+    line-height:1.7;
+}
+
+/* HERO */
+.projects-hero{
+    position:relative;
+    min-height:590px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    background:
+        radial-gradient(circle at 14% 30%,rgba(255,205,90,.18),transparent 19%),
+        radial-gradient(circle at 84% 25%,rgba(255,85,76,.14),transparent 20%),
+        radial-gradient(circle at 65% 85%,rgba(80,220,255,.17),transparent 24%),
+        linear-gradient(125deg,#011329,#063968 55%,#057db9);
+}
+.projects-hero:before{
+    content:"";
+    position:absolute;
+    width:620px;height:620px;
+    right:-240px;top:-250px;
+    border:1px solid rgba(104,220,255,.22);
+    border-radius:50%;
+    box-shadow:
+        0 0 0 35px rgba(104,220,255,.025),
+        0 0 0 75px rgba(104,220,255,.015);
+    animation:orbit 18s linear infinite;
+}
+.projects-hero:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    opacity:.14;
+    background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(circle at center,#000,transparent 82%);
+}
+.hero-inner{
+    position:relative;
+    z-index:2;
+    width:min(1250px,90%);
+    margin:auto;
+}
+.hero-kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    color:#ffd96c;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:3px;
+}
+.hero-kicker i{
+    width:8px;height:8px;
+    border-radius:50%;
+    background:#ffd15a;
+    box-shadow:0 0 9px #fff,0 0 24px #ffb82e;
+}
+.hero-inner h1{
+    max-width:900px;
+    margin:20px 0 22px;
+    color:#fff;
+    font-size:clamp(48px,8vw,92px);
+    line-height:.94;
+    letter-spacing:-3px;
+}
+.hero-inner h1 span{
+    display:block;
+    color:#7de3ff;
+    text-shadow:0 0 30px rgba(104,220,255,.25);
+}
+.hero-inner p{
+    max-width:730px;
+    color:rgba(255,255,255,.76);
+    font-size:16px;
+    line-height:1.8;
+}
+.hero-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:13px;
+    min-height:52px;
+    padding:0 22px;
+    border-radius:999px;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1.2px;
+    transition:.3s;
+}
+.btn-primary{
+    color:#064d7d;
+    background:linear-gradient(135deg,#fff,#9feaff);
+    box-shadow:0 0 25px rgba(104,220,255,.30),0 13px 35px rgba(0,30,70,.22);
+}
+.btn-primary:hover{transform:translateY(-4px);box-shadow:0 0 38px rgba(104,220,255,.55)}
+.btn-dark{
+    color:#fff;
+    border:1px solid rgba(255,255,255,.22);
+    background:rgba(255,255,255,.07);
+}
+.btn-dark:hover{background:rgba(255,255,255,.13);transform:translateY(-3px)}
+
+/* BANDE */
+.section-band{
+    background:#fff;
+    border-bottom:1px solid var(--line);
+    border-top:1px solid var(--line);
+}
+.band-inner{
+    width:min(1250px,90%);
+    margin:auto;
+    min-height:100px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+}
+.band-item{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    border-right:1px solid var(--line);
+    text-align:center;
+}
+.band-item:last-child{border:0}
+.band-number{
+    color:#0a7ab8;
+    font-size:10px;
+    font-weight:950;
+}
+.band-item strong{
+    display:block;
+    font-size:10px;
+    letter-spacing:1px;
+}
+
+/* PROJETS */
+.projects-section{
+    padding:95px 0;
+    background:
+        radial-gradient(circle at 5% 20%,rgba(104,220,255,.07),transparent 25%),
+        radial-gradient(circle at 95% 75%,rgba(255,201,70,.06),transparent 22%),
+        #f4f9fc;
+}
+.container{width:min(1250px,90%);margin:auto}
+.section-heading{text-align:center;max-width:760px;margin:0 auto 55px}
+.section-heading .eyebrow{
+    color:#087dcc;
+    font-size:9px;
+    font-weight:950;
+    letter-spacing:3px;
+}
+.section-heading h2{
+    margin:13px 0 15px;
+    color:#082e55;
+    font-size:clamp(34px,5vw,54px);
+    line-height:1;
+    letter-spacing:-1.5px;
+}
+.section-heading p{
+    color:var(--muted);
+    line-height:1.8;
+    font-size:14px;
+}
+
+/* Cartes */
+.project-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+.project-card{
+    position:relative;
+    overflow:hidden;
+    min-height:290px;
+    padding:27px;
+    border:1px solid rgba(8,125,204,.12);
+    border-radius:24px;
+    background:rgba(255,255,255,.88);
+    box-shadow:0 18px 48px rgba(0,43,85,.07);
+    transition:.4s ease;
+}
+.project-card:before{
+    content:"";
+    position:absolute;
+    left:0;right:0;top:0;
+    height:3px;
+    background:linear-gradient(90deg,#087dcc,#69dcff,#ffd15a,#ff6b61);
+    background-size:250% 100%;
+    animation:gradientMove 6s linear infinite;
+}
+.project-card:after{
+    content:"";
+    position:absolute;
+    width:150px;height:150px;
+    right:-80px;top:-80px;
+    border-radius:50%;
+    border:1px solid rgba(104,220,255,.18);
+}
+.project-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(104,220,255,.35);
+    box-shadow:0 28px 65px rgba(0,43,85,.13);
+}
+.project-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+.country-code{
+    color:#087dcc;
+    font-size:10px;
+    font-weight:950;
+    letter-spacing:2px;
+}
+.status{
+    padding:6px 9px;
+    border-radius:999px;
+    color:#8a6200;
+    background:#fff6d8;
+    font-size:7px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+.project-card h3{
+    margin:0 0 10px;
+    color:#082e55;
+    font-size:22px;
+}
+.project-card p{
+    margin:0;
+    color:#6f8193;
+    font-size:11px;
+    line-height:1.75;
+}
+.project-footer{
+    position:absolute;
+    left:27px;right:27px;bottom:24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:15px;
+    border-top:1px solid #e7eef4;
+}
+.project-footer span{
+    color:#8a9aaa;
+    font-size:8px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+.project-footer b{
+    color:#087dcc;
+    font-size:17px;
+}
+
+/* CARTE STRATÉGIE */
+.expansion{
+    padding:100px 0;
+    color:#fff;
+    background:
+        radial-gradient(circle at 15% 30%,rgba(255,199,71,.12),transparent 20%),
+        radial-gradient(circle at 85% 75%,rgba(255,81,71,.10),transparent 18%),
+        linear-gradient(135deg,#02162f,#063967 60%,#075e91);
+}
+.expansion-box{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+.expansion h2{
+    margin:12px 0 18px;
+    font-size:clamp(34px,5vw,58px);
+    line-height:.98;
+    letter-spacing:-1.5px;
+}
+.expansion p{
+    color:rgba(255,255,255,.72);
+    line-height:1.8;
+}
+.expansion-list{
+    display:grid;
+    gap:10px;
+}
+.expansion-list div{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:15px 17px;
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:15px;
+    background:rgba(255,255,255,.055);
+    backdrop-filter:blur(10px);
+}
+.expansion-list i{
+    width:9px;height:9px;
+    border-radius:50%;
+    background:#ffd15a;
+    box-shadow:0 0 9px #ffd15a,0 0 20px rgba(255,178,37,.65);
+}
+.expansion-list strong{font-size:12px}
+.expansion-list span{
+    margin-left:auto;
+    color:#8edfff;
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+/* CTA PROSPECT */
+.project-cta{
+    padding:90px 0;
+    background:#f5f9fc;
+}
+.cta-box{
+    position:relative;
+    overflow:hidden;
+    padding:62px;
+    border-radius:30px;
+    color:#fff;
+    background:
+        radial-gradient(circle at 88% 20%,rgba(255,199,71,.18),transparent 20%),
+        radial-gradient(circle at 12% 85%,rgba(255,81,71,.13),transparent 20%),
+        linear-gradient(135deg,#03172f,#075d92);
+    box-shadow:var(--shadow);
+}
+.cta-box h2{
+    max-width:700px;
+    margin:0 0 15px;
+    font-size:clamp(32px,5vw,55px);
+    line-height:1;
+}
+.cta-box p{
+    max-width:650px;
+    color:rgba(255,255,255,.70);
+    line-height:1.8;
+}
+.cta-box .btn{margin-top:15px}
+
+.footer{
+    padding:32px 5%;
+    color:#8497aa;
+    background:#011329;
+    text-align:center;
+    font-size:9px;
+    letter-spacing:1px;
+}
+
+@keyframes orbit{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes gradientMove{from{background-position:0 0}to{background-position:250% 0}}
+
+@media(max-width:900px){
+    .project-grid{grid-template-columns:repeat(2,1fr)}
+    .expansion-box{grid-template-columns:1fr;gap:35px}
+    .band-inner{grid-template-columns:repeat(2,1fr)}
+    .band-item{min-height:80px}
+}
+@media(max-width:600px){
+    .site-header,.header-inner{min-height:84px}
+    .brand-logo{width:58px;height:58px}
+    .brand-name{font-size:17px}
+    .brand-slogan{font-size:6px;letter-spacing:1.3px}
+    .menu-toggle{width:52px;height:52px}
+    .projects-hero{min-height:540px}
+    .hero-inner h1{letter-spacing:-1.5px}
+    .project-grid{grid-template-columns:1fr}
+    .band-inner{grid-template-columns:1fr 1fr}
+    .band-item{font-size:8px}
+    .cta-box{padding:38px 24px}
+}
+
+/* =========================================================
+   MENU NAVIGATION — CORRECTION DEFINITIVE
+   Le menu ne participe plus au flux de la page.
+========================================================= */
+
+.site-header{
+    position:sticky !important;
+    top:0 !important;
+    z-index:100000 !important;
+}
+
+.navigation{
+    position:fixed !important;
+    top:0 !important;
+    right:0 !important;
+    bottom:0 !important;
+    left:auto !important;
+    width:min(410px,92vw) !important;
+    height:100vh !important;
+    height:100dvh !important;
+    margin:0 !important;
+    padding:25px !important;
+    display:block !important;
+    z-index:100001 !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+    transform:translate3d(105%,0,0) !important;
+    visibility:hidden !important;
+    opacity:0 !important;
+    pointer-events:none !important;
+    transition:
+        transform .38s cubic-bezier(.22,.61,.36,1),
+        opacity .25s ease,
+        visibility .38s ease !important;
+}
+
+body.menu-open .navigation{
+    transform:translate3d(0,0,0) !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
+}
+
+body.menu-open{
+    overflow:hidden !important;
+}
+
+body.menu-open::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:rgba(0,8,22,.62);
+    backdrop-filter:blur(3px);
+}
+
+.navigation .nav-head{
+    position:relative;
+    z-index:2;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    width:100% !important;
+}
+
+.navigation ul{
+    position:relative;
+    z-index:2;
+    display:flex !important;
+    flex-direction:column !important;
+    width:100% !important;
+    margin:0 !important;
+    padding:20px 0 !important;
+}
+
+.navigation li{
+    display:block !important;
+    width:100% !important;
+    margin:5px 0 !important;
+}
+
+.navigation ul li a{
+    display:flex !important;
+    align-items:center !important;
+    width:100% !important;
+    min-height:52px !important;
+    margin:0 !important;
+    padding:14px 16px !important;
+}
+
+.navigation .nav-footer{
+    position:relative;
+    z-index:2;
+    width:100%;
+}
+
+@media(max-width:600px){
+    .navigation{
+        width:min(370px,94vw) !important;
+        padding:20px !important;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+        <a href="index.html" class="brand">
+            <img src="logo sté.png" alt="KY5 GLOBAL TRADE" class="brand-logo">
+            <div>
+                <span class="brand-name">KY5 GLOBAL TRADE</span>
+                <span class="brand-slogan">CONNECTER LE MONDE, BÂTIR L’AVENIR</span>
+            </div>
+        </a>
+
+        <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+            <small>MENU</small>
+        </button>
+    </div>
+</header>
+
+<nav class="navigation" aria-label="Navigation principale">
+    <div class="nav-head">
+        <div>
+            <span>NAVIGATION</span>
+            <strong>KY5 GLOBAL TRADE</strong>
+        </div>
+        <button class="nav-close" aria-label="Fermer">×</button>
+    </div>
+
+    <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À propos</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="prospect.html">Prospect</a></li>
+        <li><a href="projets.html" class="active">Projets</a></li>
+        <li><a href="activites.html">Nos activités</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-footer">
+        Kinshasa • République Démocratique du Congo<br>
+        Brazzaville • République du Congo
+    </div>
+</nav>
+
+<main>
+
+<section class="projects-hero">
+    <div class="hero-inner">
+        <div class="hero-kicker"><i></i> PROJETS & PERSPECTIVES</div>
+
+        <h1>
+            Construire aujourd’hui
+            <span>le réseau de demain.</span>
+        </h1>
+
+        <p>
+            Découvrez les projets, orientations et perspectives d’expansion
+            de KY5 GLOBAL TRADE. Notre ambition est de développer des
+            connexions commerciales solides et de construire progressivement
+            une présence internationale.
+        </p>
+
+        <div class="hero-actions">
+            <a href="#implantations" class="btn btn-primary">DÉCOUVRIR NOS PROJETS →</a>
+            <a href="prospect.html" class="btn btn-dark">PRÉSENTER UN PROJET</a>
+        </div>
+    </div>
+</section>
+
+<section class="section-band">
+    <div class="band-inner">
+        <div class="band-item"><span class="band-number">01</span><strong>EXPANSION</strong></div>
+        <div class="band-item"><span class="band-number">02</span><strong>PARTENARIATS</strong></div>
+        <div class="band-item"><span class="band-number">03</span><strong>INVESTISSEMENTS</strong></div>
+        <div class="band-item"><span class="band-number">04</span><strong>OPPORTUNITÉS</strong></div>
+    </div>
+</section>
+
+<section class="projects-section" id="implantations">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="eyebrow">NOTRE VISION INTERNATIONALE</div>
+            <h2>Des perspectives au-delà des frontières.</h2>
+            <p>
+                Cette section présente les marchés et territoires identifiés
+                comme perspectives de développement de la structure.
+                Les implantations seront développées progressivement selon
+                les opportunités, les partenariats et les projets.
+            </p>
+        </div>
+
+        <div class="project-grid">
+
+            <article class="project-card">
+                <div class="project-top"><span class="country-code">USA</span><span class="status">PERSPECTIVE</span></div>
+                <h3>États-Unis d’Amérique</h3>
+                <p>Perspective de développement de relations commerciales, partenariats et opportunités internationales.</p>
+                <div class="project-footer"><span>NORTH AMERICA</span><b>→</b></div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-top"><span class="country-code">BE</span><span class="status">PERSPECTIVE</span></div>
+                <h3>Belgique</h3>
+                <p>Marché stratégique pour renforcer les connexions commerciales entre l’Europe et l’Afrique.</p>
+                <div class="project-footer"><span>EUROPE</span><b>→</b></div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-top"><span class="country-code">FR</span><span class="status">PERSPECTIVE</span></div>
+                <h3>France</h3>
+                <p>Développement potentiel de partenariats, échanges et opportunités avec des acteurs économiques.</p>
+                <div class="project-footer"><span>EUROPE</span><b>→</b></div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-top"><span class="country-code">MA</span><span class="status">PERSPECTIVE</span></div>
+                <h3>Maroc</h3>
+                <p>Perspective de connexion avec un marché africain stratégique et des partenaires régionaux.</p>
+                <div class="project-footer"><span>AFRIQUE DU NORD</span><b>→</b></div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-top"><span class="country-code">CI</span><span class="status">PERSPECTIVE</span></div>
+                <h3>Côte d’Ivoire</h3>
+                <p>Possibilités de développement commercial et de coopération avec l’Afrique de l’Ouest.</p>
+                <div class="project-footer"><span>AFRIQUE DE L’OUEST</span><b>→</b></div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-top"><span class="country-code">ZA</span><span class="status">PERSPECTIVE</span></div>
+                <h3>Afrique du Sud</h3>
+                <p>Perspective de connexion avec un pôle économique majeur du continent africain.</p>
+                <div class="project-footer"><span>AFRIQUE AUSTRALE</span><b>→</b></div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-top"><span class="country-code">CF</span><span class="status">PERSPECTIVE</span></div>
+                <h3>République centrafricaine</h3>
+                <p>Développement potentiel de relations commerciales et de projets à l’échelle régionale.</p>
+                <div class="project-footer"><span>AFRIQUE CENTRALE</span><b>→</b></div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-top"><span class="country-code">CM</span><span class="status">PERSPECTIVE</span></div>
+                <h3>Cameroun</h3>
+                <p>Perspective de coopération et de développement de nouvelles opportunités en Afrique centrale.</p>
+                <div class="project-footer"><span>AFRIQUE CENTRALE</span><b>→</b></div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-top"><span class="country-code">GA</span><span class="status">PERSPECTIVE</span></div>
+                <h3>Gabon</h3>
+                <p>Possibilités de partenariats et de développement d’activités dans la région.</p>
+                <div class="project-footer"><span>AFRIQUE CENTRALE</span><b>→</b></div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-top"><span class="country-code">EG</span><span class="status">PERSPECTIVE</span></div>
+                <h3>Égypte</h3>
+                <p>Perspective de connexion entre l’Afrique, le Moyen-Orient et les réseaux commerciaux internationaux.</p>
+                <div class="project-footer"><span>AFRIQUE DU NORD</span><b>→</b></div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<section class="expansion">
+    <div class="container expansion-box">
+        <div>
+            <div class="hero-kicker"><i></i> STRATÉGIE D’EXPANSION</div>
+            <h2>Étendre notre structure. Renforcer nos connexions.</h2>
+            <p>
+                KY5 GLOBAL TRADE souhaite progressivement développer son
+                réseau autour de marchés complémentaires, en privilégiant
+                les partenariats fiables, les projets structurés et les
+                opportunités à valeur durable.
+            </p>
+            <a href="prospect.html" class="btn btn-primary">PROPOSER UNE OPPORTUNITÉ →</a>
+        </div>
+
+        <div class="expansion-list">
+            <div><i></i><strong>Développer des partenariats internationaux</strong><span>01</span></div>
+            <div><i></i><strong>Identifier de nouveaux marchés</strong><span>02</span></div>
+            <div><i></i><strong>Créer des connexions entre l’Afrique et l’international</strong><span>03</span></div>
+            <div><i></i><strong>Accompagner des projets structurés</strong><span>04</span></div>
+            <div><i></i><strong>Construire une présence durable</strong><span>05</span></div>
+        </div>
+    </div>
+</section>
+
+<section class="project-cta">
+    <div class="container">
+        <div class="cta-box">
+            <h2>Vous avez un projet ou une opportunité ?</h2>
+            <p>
+                Présentez-nous votre idée, votre besoin ou votre proposition.
+                Votre projet peut devenir une nouvelle connexion pour KY5 GLOBAL TRADE.
+            </p>
+            <a href="prospect.html" class="btn btn-primary">PRÉSENTER MON PROJET →</a>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="footer">
+    © 2026 KY5 GLOBAL TRADE — CONNECTER LE MONDE, BÂTIR L’AVENIR
+</footer>
+
+<script>
+const menuToggle=document.querySelector('.menu-toggle');
+const nav=document.querySelector('.navigation');
+const navClose=document.querySelector('.nav-close');
+
+menuToggle.addEventListener('click',()=>{
+    document.body.classList.add('menu-open');
+    menuToggle.setAttribute('aria-expanded','true');
+});
+navClose.addEventListener('click',()=>{
+    document.body.classList.remove('menu-open');
+    menuToggle.setAttribute('aria-expanded','false');
+});
+document.querySelectorAll('.navigation a').forEach(link=>{
+    link.addEventListener('click',()=>{
+        document.body.classList.remove('menu-open');
+        menuToggle.setAttribute('aria-expanded','false');
+    });
+});
+document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){
+        document.body.classList.remove('menu-open');
+        menuToggle.setAttribute('aria-expanded','false');
+    }
+});
+</script>
+
+
+<script>
+(function(){
+    const toggle = document.querySelector('.menu-toggle');
+    const panel = document.querySelector('.navigation');
+    const close = document.querySelector('.nav-close');
+
+    if(!toggle || !panel || !close) return;
+
+    function openMenu(){
+        document.body.classList.add('menu-open');
+        toggle.setAttribute('aria-expanded','true');
+    }
+
+    function closeMenu(){
+        document.body.classList.remove('menu-open');
+        toggle.setAttribute('aria-expanded','false');
+    }
+
+    toggle.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        openMenu();
+    });
+
+    close.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        closeMenu();
+    });
+
+    panel.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click', function(){
+            closeMenu();
+        });
+    });
+
+    document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape') closeMenu();
+    });
+
+    document.addEventListener('click', function(e){
+        if(document.body.classList.contains('menu-open')
+           && !panel.contains(e.target)
+           && !toggle.contains(e.target)){
+            closeMenu();
+        }
+    });
+})();
+</script>
+
+</body>
+</html>
