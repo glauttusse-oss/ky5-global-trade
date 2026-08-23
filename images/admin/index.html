@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+
+    <title>Administration | KY5 GLOBAL TRADE</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bleu-fonce: #061b33;
+            --bleu: #0056b3;
+            --bleu-clair: #00a8ff;
+            --bleu-tres-clair: #eaf7ff;
+            --blanc: #ffffff;
+            --gris: #6c757d;
+            --rouge: #dc3545;
+            --vert: #198754;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(0, 168, 255, 0.28),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(0, 86, 179, 0.35),
+                    transparent 40%
+                ),
+                linear-gradient(
+                    135deg,
+                    #020c17,
+                    #061b33 55%,
+                    #07294d
+                );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 25px;
+
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+
+            position: fixed;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 35px 35px;
+
+            pointer-events: none;
+        }
+
+        .admin-container {
+            width: 100%;
+            max-width: 1080px;
+            min-height: 620px;
+
+            background: rgba(255, 255, 255, 0.97);
+
+            border-radius: 26px;
+
+            overflow: hidden;
+
+            display: grid;
+
+            grid-template-columns:
+                1.05fr 0.95fr;
+
+            box-shadow:
+                0 35px 80px rgba(0, 0, 0, 0.38),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+
+            position: relative;
+            z-index: 1;
+        }
+
+        /* =========================================
+           PRÉSENTATION
+        ========================================= */
+
+        .presentation {
+            position: relative;
+
+            padding: 55px;
+
+            background:
+                linear-gradient(
+                    150deg,
+                    rgba(0, 86, 179, 0.96),
+                    rgba(2, 25, 50, 0.98)
+                );
+
+            color: var(--blanc);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            overflow: hidden;
+        }
+
+        .presentation::before {
+            content: "";
+
+            position: absolute;
+
+            width: 360px;
+            height: 360px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(0, 168, 255, 0.18);
+
+            top: -130px;
+            right: -130px;
+        }
+
+        .presentation::after {
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.06);
+
+            bottom: -120px;
+            left: -80px;
+        }
+
+        .brand,
+        .presentation-content,
+        .presentation-footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-box {
+            width: 68px;
+            height: 68px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blanc),
+                    #d8f2ff
+                );
+
+            color: var(--bleu);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 24px;
+            font-weight: 900;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.2),
+                0 0 25px rgba(0, 168, 255, 0.3);
+        }
+
+        .brand-text h1 {
+            font-size: 20px;
+            letter-spacing: 0.7px;
+            margin-bottom: 5px;
+        }
+
+        .brand-text p {
+            color: #bfeaff;
+            font-size: 13px;
+        }
+
+        .presentation-content {
+            margin: 70px 0;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            background:
+                rgba(255, 255, 255, 0.12);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.18);
+
+            border-radius: 30px;
+
+            padding: 9px 15px;
+
+            font-size: 13px;
+
+            margin-bottom: 22px;
+        }
+
+        .badge-point {
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #57d4ff;
+
+            box-shadow:
+                0 0 12px #57d4ff;
+        }
+
+        .presentation-content h2 {
+            font-size: 40px;
+            line-height: 1.15;
+
+            margin-bottom: 22px;
+
+            max-width: 470px;
+        }
+
+        .presentation-content h2 span {
+            color: #71d8ff;
+        }
+
+        .presentation-content p {
+            color: #d2e8f7;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+
+            max-width: 470px;
+        }
+
+        .features {
+            margin-top: 30px;
+
+            display: grid;
+
+            gap: 13px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            color: #e8f7ff;
+
+            font-size: 14px;
+        }
+
+        .feature-icon {
+            width: 30px;
+            height: 30px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(0, 168, 255, 0.16);
+
+            border:
+                1px solid rgba(113, 216, 255, 0.25);
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            flex-shrink: 0;
+        }
+
+        .presentation-footer {
+            font-size: 12px;
+
+            color: #a9c6dc;
+        }
+
+        /* =========================================
+           CONNEXION
+        ========================================= */
+
+        .login-section {
+            padding: 58px 52px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            background: var(--blanc);
+        }
+
+        .mobile-brand {
+            display: none;
+        }
+
+        .login-header {
+            margin-bottom: 34px;
+        }
+
+        .login-header .small-title {
+            color: var(--bleu);
+
+            font-size: 12px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.8px;
+
+            margin-bottom: 9px;
+        }
+
+        .login-header h2 {
+            color: var(--bleu-fonce);
+
+            font-size: 31px;
+
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: var(--gris);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           MESSAGES
+        ========================================= */
+
+        .message {
+            display: none;
+
+            padding: 13px 15px;
+
+            margin-bottom: 20px;
+
+            border-radius: 11px;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+        .message.error {
+            display: block;
+
+            background: #fff0f1;
+
+            color: #a61b29;
+
+            border:
+                1px solid #ffd0d5;
+        }
+
+        .message.success {
+            display: block;
+
+            background: #edf9f3;
+
+            color: #146c43;
+
+            border:
+                1px solid #c4ebd7;
+        }
+
+        /* =========================================
+           FORMULAIRE
+        ========================================= */
+
+        .form-group {
+            margin-bottom: 21px;
+        }
+
+        .form-group label {
+            display: block;
+
+            color: #1e3349;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            margin-bottom: 9px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 16px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 18px;
+
+            pointer-events: none;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            height: 54px;
+
+            border:
+                1.5px solid #dbe5ee;
+
+            background: #f9fbfd;
+
+            border-radius: 12px;
+
+            outline: none;
+
+            padding:
+                0 48px;
+
+            font-size: 15px;
+
+            color: #142638;
+
+            transition:
+                0.25s ease;
+        }
+
+        .form-group input:focus {
+            border-color:
+                var(--bleu-clair);
+
+            background:
+                var(--blanc);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(0, 168, 255, 0.09);
+        }
+
+        .form-group input::placeholder {
+            color: #9aa9b7;
+        }
+
+        .toggle-password {
+            position: absolute;
+
+            right: 15px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            width: 32px;
+            height: 32px;
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            border-radius: 7px;
+        }
+
+        .toggle-password:hover {
+            background: #eaf7ff;
+        }
+
+        .form-options {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-top: -3px;
+
+            margin-bottom: 26px;
+        }
+
+        .remember {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            font-size: 13px;
+
+            color: #5d6d7d;
+
+            cursor: pointer;
+        }
+
+        .remember input {
+            width: 16px;
+            height: 16px;
+
+            accent-color:
+                var(--bleu);
+        }
+
+        .forgot {
+            color: var(--bleu);
+
+            font-size: 13px;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+        .forgot:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================================
+           BOUTON
+        ========================================= */
+
+        .login-button {
+            width: 100%;
+
+            min-height: 55px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    var(--bleu),
+                    var(--bleu-clair)
+                );
+
+            color: var(--blanc);
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.8px;
+
+            cursor: pointer;
+
+            transition:
+                0.3s ease;
+
+            box-shadow:
+                0 13px 28px
+                rgba(0, 114, 188, 0.25);
+        }
+
+        .login-button:hover {
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 17px 32px
+                rgba(0, 114, 188, 0.32);
+        }
+
+        .login-button:disabled {
+            opacity: 0.65;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+        /* =========================================
+           SÉCURITÉ
+        ========================================= */
+
+        .security-info {
+            margin-top: 27px;
+
+            padding: 15px;
+
+            background:
+                var(--bleu-tres-clair);
+
+            border-radius: 12px;
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 11px;
+        }
+
+        .security-info .lock {
+            font-size: 19px;
+
+            margin-top: 1px;
+        }
+
+        .security-info p {
+            color: #416078;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        .back-site {
+            margin-top: 25px;
+
+            text-align: center;
+        }
+
+        .back-site a {
+            color: #64798c;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition:
+                0.2s ease;
+        }
+
+        .back-site a:hover {
+            color: var(--bleu);
+        }
+
+        /* =========================================
+           SPINNER
+        ========================================= */
+
+        .spinner {
+            width: 18px;
+            height: 18px;
+
+            border:
+                2px solid
+                rgba(255, 255, 255, 0.45);
+
+            border-top-color:
+                #ffffff;
+
+            border-radius: 50%;
+
+            display: inline-block;
+
+            animation:
+                spin 0.7s linear infinite;
+
+            vertical-align: middle;
+
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to {
+                transform:
+                    rotate(360deg);
+            }
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .admin-container {
+                grid-template-columns:
+                    1fr;
+
+                max-width: 560px;
+
+                min-height: auto;
+            }
+
+            .presentation {
+                display: none;
+            }
+
+            .login-section {
+                padding:
+                    45px 35px;
+            }
+
+            .mobile-brand {
+                display: flex;
+
+                align-items: center;
+
+                gap: 12px;
+
+                margin-bottom: 40px;
+            }
+
+            .mobile-logo {
+                width: 52px;
+                height: 52px;
+
+                border-radius: 14px;
+
+                background:
+                    linear-gradient(
+                        135deg,
+                        var(--bleu),
+                        var(--bleu-clair)
+                    );
+
+                color: white;
+
+                display: flex;
+
+                justify-content: center;
+                align-items: center;
+
+                font-weight: 900;
+
+                box-shadow:
+                    0 10px 22px
+                    rgba(0, 86, 179, 0.23);
+            }
+
+            .mobile-brand strong {
+                display: block;
+
+                color:
+                    var(--bleu-fonce);
+
+                font-size: 16px;
+            }
+
+            .mobile-brand span {
+                color: var(--gris);
+
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            body {
+                padding: 14px;
+
+                align-items:
+                    flex-start;
+            }
+
+            .admin-container {
+                margin-top: 18px;
+
+                border-radius: 20px;
+            }
+
+            .login-section {
+                padding:
+                    32px 22px;
+            }
+
+            .login-header h2 {
+                font-size: 27px;
+            }
+
+            .form-options {
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="admin-container">
+
+        <!-- =====================================
+             PRÉSENTATION
+        ====================================== -->
+
+        <section class="presentation">
+
+            <div class="brand">
+
+                <div class="logo-box">
+                    KY5
+                </div>
+
+                <div class="brand-text">
+
+                    <h1>
+                        KY5 GLOBAL TRADE
+                    </h1>
+
+                    <p>
+                        Connecter le monde,
+                        bâtir l'avenir
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="presentation-content">
+
+                <div class="badge">
+
+                    <span
+                        class="badge-point"
+                    ></span>
+
+                    Espace sécurisé
+
+                </div>
+
+                <h2>
+                    Pilotez votre entreprise
+                    depuis un
+                    <span>
+                        seul espace.
+                    </span>
+                </h2>
+
+                <p>
+                    L'espace administrateur
+                    KY5 permet aux personnes
+                    autorisées de gérer les
+                    contenus du site internet
+                    depuis une interface
+                    centralisée.
+                </p>
+
+                <div class="features">
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            ✓
+                        </div>
+
+                        <span>
+                            Gestion des produits
+                            et services
+                        </span>
+
+                    </div>
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            ✓
+                        </div>
+
+                        <span>
+                            Gestion des projets
+                            et publications
+                        </span>
+
+                    </div>
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            ✓
+                        </div>
+
+                        <span>
+                            Consultation des
+                            demandes reçues
+                        </span>
+
+                    </div>
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            ✓
+                        </div>
+
+                        <span>
+                            Accès réservé aux
+                            administrateurs
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="presentation-footer">
+
+                ©
+                <span id="currentYear"></span>
+
+                KY5 GLOBAL TRADE.
+                Tous droits réservés.
+
+            </div>
+
+        </section>
+
+        <!-- =====================================
+             CONNEXION
+        ====================================== -->
+
+        <section class="login-section">
+
+            <div class="mobile-brand">
+
+                <div class="mobile-logo">
+                    KY5
+                </div>
+
+                <div>
+
+                    <strong>
+                        KY5 GLOBAL TRADE
+                    </strong>
+
+                    <span>
+                        Administration
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="login-header">
+
+                <div class="small-title">
+                    Portail administrateur
+                </div>
+
+                <h2>
+                    Connexion
+                </h2>
+
+                <p>
+                    Identifiez-vous pour
+                    accéder au tableau de bord
+                    de KY5 GLOBAL TRADE.
+                </p>
+
+            </div>
+
+            <div
+                id="message"
+                class="message"
+                role="alert"
+            ></div>
+
+            <form
+                id="loginForm"
+                autocomplete="on"
+            >
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Adresse e-mail
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            ✉
+                        </span>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="administrateur@ky5global.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Mot de passe
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            🔒
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Votre mot de passe"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="toggle-password"
+                            id="togglePassword"
+                            aria-label="Afficher le mot de passe"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="form-options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        <span>
+                            Rester connecté
+                        </span>
+
+                    </label>
+
+                    <a
+                        href="#"
+                        class="forgot"
+                        id="forgotPassword"
+                    >
+                        Mot de passe oublié ?
+                    </a>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="login-button"
+                    id="loginButton"
+                >
+                    Se connecter
+                </button>
+
+            </form>
+
+            <div class="security-info">
+
+                <span class="lock">
+                    🛡️
+                </span>
+
+                <p>
+                    Cet espace est réservé
+                    aux personnes autorisées
+                    par KY5 GLOBAL TRADE.
+                    Les identifiants ne doivent
+                    jamais être partagés.
+                </p>
+
+            </div>
+
+            <div class="back-site">
+
+                <a href="../index.html">
+                    ← Retour au site
+                    KY5 GLOBAL TRADE
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- =========================================
+         CONFIGURATION DU PROJET
+    ========================================== -->
+
+    <script src="config.js"></script>
+
+    <!-- =========================================
+         BIBLIOTHÈQUE OFFICIELLE SUPABASE
+    ========================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+
+        /*
+        ==========================================================
+        KY5 GLOBAL TRADE
+        AUTHENTIFICATION ADMINISTRATEUR
+        ==========================================================
+        */
+
+        const loginForm =
+            document.getElementById(
+                "loginForm"
+            );
+
+        const emailInput =
+            document.getElementById(
+                "email"
+            );
+
+        const passwordInput =
+            document.getElementById(
+                "password"
+            );
+
+        const loginButton =
+            document.getElementById(
+                "loginButton"
+            );
+
+        const togglePassword =
+            document.getElementById(
+                "togglePassword"
+            );
+
+        const messageBox =
+            document.getElementById(
+                "message"
+            );
+
+        const forgotPassword =
+            document.getElementById(
+                "forgotPassword"
+            );
+
+        const currentYear =
+            document.getElementById(
+                "currentYear"
+            );
+
+
+        /*
+        ==========================================================
+        ANNÉE
+        ==========================================================
+        */
+
+        currentYear.textContent =
+            new Date().getFullYear();
+
+
+        /*
+        ==========================================================
+        INITIALISATION SUPABASE
+        ==========================================================
+        */
+
+        let supabaseClient = null;
+
+        try {
+
+            if (
+                typeof SUPABASE_URL ===
+                    "undefined" ||
+
+                typeof SUPABASE_PUBLISHABLE_KEY ===
+                    "undefined"
+            ) {
+
+                throw new Error(
+                    "Configuration Supabase introuvable."
+                );
+
+            }
+
+            supabaseClient =
+                window.supabase.createClient(
+                    SUPABASE_URL,
+                    SUPABASE_PUBLISHABLE_KEY
+                );
+
+        }
+        catch (error) {
+
+            console.error(
+                "Erreur configuration :",
+                error
+            );
+
+        }
+
+
+        /*
+        ==========================================================
+        MESSAGES
+        ==========================================================
+        */
+
+        function showMessage(
+            text,
+            type = "error"
+        ) {
+
+            messageBox.textContent =
+                text;
+
+            messageBox.className =
+                "message " + type;
+
+        }
+
+
+        function hideMessage() {
+
+            messageBox.textContent = "";
+
+            messageBox.className =
+                "message";
+
+        }
+
+
+        /*
+        ==========================================================
+        MOT DE PASSE VISIBLE / MASQUÉ
+        ==========================================================
+        */
+
+        togglePassword.addEventListener(
+            "click",
+            function () {
+
+                const hidden =
+                    passwordInput.type ===
+                    "password";
+
+                passwordInput.type =
+                    hidden
+                        ? "text"
+                        : "password";
+
+                togglePassword.textContent =
+                    hidden
+                        ? "🙈"
+                        : "👁";
+
+            }
+        );
+
+
+        /*
+        ==========================================================
+        CONNEXION
+        ==========================================================
+        */
+
+        loginForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+                hideMessage();
+
+                const email =
+                    emailInput.value
+                        .trim();
+
+                const password =
+                    passwordInput.value;
+
+
+                if (!email) {
+
+                    showMessage(
+                        "Veuillez saisir votre adresse e-mail."
+                    );
+
+                    return;
+                }
+
+
+                if (!password) {
+
+                    showMessage(
+                        "Veuillez saisir votre mot de passe."
+                    );
+
+                    return;
+                }
+
+
+                if (!supabaseClient) {
+
+                    showMessage(
+                        "Impossible de charger le système de connexion."
+                    );
+
+                    return;
+                }
+
+
+                loginButton.disabled =
+                    true;
+
+                loginButton.innerHTML =
+                    '<span class="spinner"></span>Connexion...';
+
+
+                try {
+
+                    const {
+                        data,
+                        error
+                    } =
+                    await supabaseClient
+                        .auth
+                        .signInWithPassword({
+
+                            email:
+                                email,
+
+                            password:
+                                password
+
+                        });
+
+
+                    if (error) {
+
+                        console.error(
+                            error
+                        );
+
+                        showMessage(
+                            "Adresse e-mail ou mot de passe incorrect."
+                        );
+
+                        return;
+                    }
+
+
+                    if (
+                        !data ||
+                        !data.user
+                    ) {
+
+                        showMessage(
+                            "La connexion n'a pas pu être vérifiée."
+                        );
+
+                        return;
+                    }
+
+
+                    showMessage(
+                        "Connexion réussie. Ouverture du tableau de bord...",
+                        "success"
+                    );
+
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "dashboard.html";
+
+                        },
+                        800
+                    );
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "Erreur de connexion :",
+                        error
+                    );
+
+                    showMessage(
+                        "Une erreur est survenue pendant la connexion."
+                    );
+
+                }
+                finally {
+
+                    loginButton.disabled =
+                        false;
+
+                    loginButton.textContent =
+                        "Se connecter";
+
+                }
+
+            }
+        );
+
+
+        /*
+        ==========================================================
+        SESSION DÉJÀ ACTIVE
+        ==========================================================
+        */
+
+        async function checkExistingSession() {
+
+            if (!supabaseClient) {
+                return;
+            }
+
+            try {
+
+                const {
+                    data
+                } =
+                await supabaseClient
+                    .auth
+                    .getSession();
+
+
+                if (
+                    data &&
+                    data.session
+                ) {
+
+                    window.location.href =
+                        "dashboard.html";
+
+                }
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Erreur session :",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /*
+        ==========================================================
+        MOT DE PASSE OUBLIÉ
+        ==========================================================
+        */
+
+        forgotPassword.addEventListener(
+            "click",
+            async function (event) {
+
+                event.preventDefault();
+
+                hideMessage();
+
+                const email =
+                    emailInput.value
+                        .trim();
+
+
+                if (!email) {
+
+                    showMessage(
+                        "Entrez d'abord votre adresse e-mail."
+                    );
+
+                    emailInput.focus();
+
+                    return;
+                }
+
+
+                if (!supabaseClient) {
+
+                    showMessage(
+                        "Le système de récupération n'est pas disponible."
+                    );
+
+                    return;
+                }
+
+
+                try {
+
+                    const {
+                        error
+                    } =
+                    await supabaseClient
+                        .auth
+                        .resetPasswordForEmail(
+                            email
+                        );
+
+
+                    if (error) {
+
+                        console.error(
+                            error
+                        );
+
+                        showMessage(
+                            "Impossible d'envoyer la demande de récupération."
+                        );
+
+                        return;
+                    }
+
+
+                    showMessage(
+                        "Si cette adresse est autorisée, les instructions de récupération ont été envoyées.",
+                        "success"
+                    );
+
+                }
+                catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+                    showMessage(
+                        "Une erreur est survenue."
+                    );
+
+                }
+
+            }
+        );
+
+
+        /*
+        ==========================================================
+        VÉRIFICATION AU CHARGEMENT
+        ==========================================================
+        */
+
+        checkExistingSession();
+
+    </script>
+
+</body>
+</html>

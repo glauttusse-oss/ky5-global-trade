@@ -1,0 +1,2572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+
+    <title>Tableau de bord | KY5 GLOBAL TRADE</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bleu-fonce: #061b33;
+            --bleu-fonce-2: #092848;
+            --bleu: #0056b3;
+            --bleu-clair: #00a8ff;
+            --bleu-tres-clair: #eaf7ff;
+            --blanc: #ffffff;
+            --gris-fond: #f4f7fb;
+            --gris: #6c757d;
+            --gris-clair: #e4ebf2;
+            --texte: #17324d;
+            --vert: #198754;
+            --rouge: #dc3545;
+            --orange: #f59f00;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--gris-fond);
+            color: var(--texte);
+        }
+
+        button,
+        a {
+            font-family: inherit;
+        }
+
+        /* =========================================
+           ÉCRAN DE CHARGEMENT
+        ========================================= */
+
+        .page-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #020c17,
+                    #061b33,
+                    #08487c
+                );
+
+            color: white;
+        }
+
+        .page-loader.hidden {
+            display: none;
+        }
+
+        .loader-logo {
+            width: 85px;
+            height: 85px;
+
+            border-radius: 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #c9efff
+                );
+
+            color: var(--bleu);
+
+            font-weight: 900;
+            font-size: 27px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(0, 168, 255, 0.25);
+        }
+
+        .loader-spinner {
+            width: 37px;
+            height: 37px;
+
+            border: 3px solid rgba(255, 255, 255, 0.25);
+            border-top-color: white;
+
+            border-radius: 50%;
+
+            animation: spin 0.8s linear infinite;
+
+            margin-bottom: 15px;
+        }
+
+        .page-loader p {
+            font-size: 13px;
+            color: #c9e9f8;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =========================================
+           STRUCTURE
+        ========================================= */
+
+        .admin-layout {
+            min-height: 100vh;
+
+            display: grid;
+
+            grid-template-columns:
+                265px 1fr;
+        }
+
+        /* =========================================
+           MENU LATÉRAL
+        ========================================= */
+
+        .sidebar {
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    var(--bleu-fonce),
+                    #03111f
+                );
+
+            color: white;
+
+            padding: 25px 18px;
+
+            position: fixed;
+
+            width: 265px;
+
+            top: 0;
+            bottom: 0;
+            left: 0;
+
+            overflow-y: auto;
+
+            z-index: 1000;
+
+            box-shadow:
+                6px 0 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .sidebar-brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 5px 8px 25px;
+
+            margin-bottom: 20px;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-logo {
+            width: 52px;
+            height: 52px;
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    white,
+                    #c8efff
+                );
+
+            color: var(--bleu);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-weight: 900;
+            font-size: 18px;
+
+            flex-shrink: 0;
+        }
+
+        .sidebar-brand-text strong {
+            display: block;
+
+            font-size: 14px;
+
+            letter-spacing: 0.4px;
+        }
+
+        .sidebar-brand-text span {
+            display: block;
+
+            color: #96d8f7;
+
+            font-size: 10px;
+
+            margin-top: 5px;
+        }
+
+        .menu-label {
+            color: #7092ac;
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            font-weight: 800;
+
+            padding: 10px 13px;
+
+            margin-top: 12px;
+        }
+
+        .sidebar-nav {
+            display: grid;
+
+            gap: 6px;
+        }
+
+        .nav-item {
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 13px 14px;
+
+            border-radius: 11px;
+
+            color: #cbdce8;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition: 0.2s ease;
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            text-align: left;
+        }
+
+        .nav-item:hover {
+            background:
+                rgba(0, 168, 255, 0.12);
+
+            color: white;
+        }
+
+        .nav-item.active {
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(0, 86, 179, 0.55),
+                    rgba(0, 168, 255, 0.28)
+                );
+
+            color: white;
+
+            border:
+                1px solid rgba(0, 168, 255, 0.2);
+        }
+
+        .nav-icon {
+            width: 28px;
+            height: 28px;
+
+            border-radius: 8px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                rgba(255, 255, 255, 0.07);
+
+            flex-shrink: 0;
+
+            font-size: 15px;
+        }
+
+        .sidebar-bottom {
+            margin-top: 30px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logout-button {
+            color: #ffd0d5;
+        }
+
+        .logout-button:hover {
+            background:
+                rgba(220, 53, 69, 0.14);
+
+            color: white;
+        }
+
+        /* =========================================
+           CONTENU
+        ========================================= */
+
+        .main-content {
+            grid-column: 2;
+
+            min-height: 100vh;
+        }
+
+        /* =========================================
+           EN-TÊTE
+        ========================================= */
+
+        .topbar {
+            min-height: 82px;
+
+            background: white;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            padding:
+                16px 32px;
+
+            border-bottom:
+                1px solid #e8edf2;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 500;
+
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.025);
+        }
+
+        .topbar-left {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        .mobile-menu-button {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #edf7fd;
+
+            color: var(--bleu);
+
+            font-size: 21px;
+
+            cursor: pointer;
+        }
+
+        .page-title h1 {
+            color: var(--bleu-fonce);
+
+            font-size: 22px;
+
+            margin-bottom: 5px;
+        }
+
+        .page-title p {
+            color: var(--gris);
+
+            font-size: 12px;
+        }
+
+        .topbar-right {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+        }
+
+        .site-button {
+            min-height: 41px;
+
+            padding: 0 16px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            background: #edf7fd;
+
+            color: var(--bleu);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            border:
+                1px solid #d4edf9;
+
+            transition: 0.2s ease;
+        }
+
+        .site-button:hover {
+            background: var(--bleu);
+
+            color: white;
+        }
+
+        .admin-profile {
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            padding-left: 14px;
+
+            border-left:
+                1px solid #e1e8ee;
+        }
+
+        .profile-avatar {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--bleu),
+                    var(--bleu-clair)
+                );
+
+            color: white;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 7px 18px
+                rgba(0, 86, 179, 0.22);
+        }
+
+        .profile-text {
+            max-width: 210px;
+        }
+
+        .profile-text strong {
+            display: block;
+
+            color: var(--bleu-fonce);
+
+            font-size: 12px;
+
+            margin-bottom: 3px;
+        }
+
+        .profile-text span {
+            display: block;
+
+            color: var(--gris);
+
+            font-size: 10px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+        /* =========================================
+           DASHBOARD
+        ========================================= */
+
+        .dashboard-content {
+            padding:
+                30px 32px 50px;
+        }
+
+        .welcome-banner {
+            min-height: 210px;
+
+            border-radius: 22px;
+
+            padding: 34px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    var(--bleu),
+                    #0077c8 55%,
+                    var(--bleu-clair)
+                );
+
+            color: white;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 18px 45px
+                rgba(0, 86, 179, 0.18);
+        }
+
+        .welcome-banner::before {
+            content: "";
+
+            width: 310px;
+            height: 310px;
+
+            border-radius: 50%;
+
+            position: absolute;
+
+            right: -80px;
+            top: -140px;
+
+            background:
+                rgba(255, 255, 255, 0.11);
+        }
+
+        .welcome-banner::after {
+            content: "";
+
+            width: 200px;
+            height: 200px;
+
+            border-radius: 50%;
+
+            position: absolute;
+
+            right: 120px;
+            bottom: -150px;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 2;
+
+            max-width: 670px;
+        }
+
+        .welcome-small {
+            display: inline-block;
+
+            padding:
+                7px 13px;
+
+            border-radius: 30px;
+
+            background:
+                rgba(255, 255, 255, 0.13);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.18);
+
+            font-size: 11px;
+
+            margin-bottom: 15px;
+        }
+
+        .welcome-content h2 {
+            font-size: 30px;
+
+            margin-bottom: 12px;
+        }
+
+        .welcome-content p {
+            color: #dff4ff;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            max-width: 620px;
+        }
+
+        /* =========================================
+           STATISTIQUES
+        ========================================= */
+
+        .stats-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+
+            min-height: 135px;
+
+            border-radius: 17px;
+
+            padding: 21px;
+
+            border:
+                1px solid #e6edf3;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content:
+                space-between;
+
+            box-shadow:
+                0 8px 25px
+                rgba(21, 45, 65, 0.04);
+
+            transition: 0.25s ease;
+        }
+
+        .stat-card:hover {
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 14px 32px
+                rgba(21, 45, 65, 0.08);
+        }
+
+        .stat-top {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+        }
+
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 12px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+                var(--bleu-tres-clair);
+
+            font-size: 19px;
+        }
+
+        .stat-status {
+            font-size: 10px;
+
+            color: var(--vert);
+
+            background: #eaf8f0;
+
+            padding:
+                5px 8px;
+
+            border-radius: 20px;
+
+            font-weight: 700;
+        }
+
+        .stat-value {
+            font-size: 27px;
+
+            color: var(--bleu-fonce);
+
+            font-weight: 800;
+
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+
+            color: var(--gris);
+        }
+
+        /* =========================================
+           MODULES
+        ========================================= */
+
+        .section-header {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 17px;
+        }
+
+        .section-header h3 {
+            color: var(--bleu-fonce);
+
+            font-size: 17px;
+        }
+
+        .section-header p {
+            color: var(--gris);
+
+            font-size: 11px;
+
+            margin-top: 5px;
+        }
+
+        .modules-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 35px;
+        }
+
+        .module-card {
+            background: white;
+
+            border:
+                1px solid #e6edf3;
+
+            border-radius: 17px;
+
+            padding: 22px;
+
+            text-decoration: none;
+
+            color: inherit;
+
+            transition: 0.25s ease;
+
+            position: relative;
+
+            overflow: hidden;
+
+            min-height: 180px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content:
+                space-between;
+
+            cursor: pointer;
+        }
+
+        .module-card:hover {
+            transform:
+                translateY(-4px);
+
+            border-color:
+                #bee9ff;
+
+            box-shadow:
+                0 16px 36px
+                rgba(0, 86, 179, 0.09);
+        }
+
+        .module-icon {
+            width: 50px;
+            height: 50px;
+
+            border-radius: 14px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e7f6ff,
+                    #d7f1ff
+                );
+
+            font-size: 23px;
+
+            margin-bottom: 17px;
+        }
+
+        .module-card h4 {
+            color: var(--bleu-fonce);
+
+            font-size: 15px;
+
+            margin-bottom: 7px;
+        }
+
+        .module-card p {
+            color: var(--gris);
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+        .module-bottom {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            margin-top: 17px;
+        }
+
+        .module-status {
+            font-size: 10px;
+
+            padding:
+                5px 9px;
+
+            border-radius: 20px;
+
+            background: #f0f4f7;
+
+            color: #708190;
+        }
+
+        .module-arrow {
+            color: var(--bleu);
+
+            font-size: 17px;
+
+            font-weight: 800;
+        }
+
+        /* =========================================
+           ACTIVITÉ
+        ========================================= */
+
+        .bottom-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.4fr 0.6fr;
+
+            gap: 20px;
+        }
+
+        .panel {
+            background: white;
+
+            border:
+                1px solid #e6edf3;
+
+            border-radius: 17px;
+
+            padding: 23px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(21, 45, 65, 0.035);
+        }
+
+        .panel h3 {
+            color: var(--bleu-fonce);
+
+            font-size: 16px;
+
+            margin-bottom: 6px;
+        }
+
+        .panel-subtitle {
+            color: var(--gris);
+
+            font-size: 11px;
+
+            margin-bottom: 20px;
+        }
+
+        .activity-list {
+            display: grid;
+
+            gap: 14px;
+        }
+
+        .activity-item {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 13px;
+
+            padding-bottom: 14px;
+
+            border-bottom:
+                1px solid #eef2f5;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+
+            padding-bottom: 0;
+        }
+
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+
+            border-radius: 11px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background: #edf7fd;
+
+            flex-shrink: 0;
+        }
+
+        .activity-text strong {
+            display: block;
+
+            color: #2a4054;
+
+            font-size: 11px;
+
+            margin-bottom: 4px;
+        }
+
+        .activity-text span {
+            color: var(--gris);
+
+            font-size: 10px;
+
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           SÉCURITÉ
+        ========================================= */
+
+        .security-card {
+            background:
+                linear-gradient(
+                    150deg,
+                    #061b33,
+                    #0b416d
+                );
+
+            color: white;
+
+            border-radius: 17px;
+
+            padding: 24px;
+
+            min-height: 100%;
+        }
+
+        .security-symbol {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+                rgba(0, 168, 255, 0.17);
+
+            margin-bottom: 19px;
+
+            font-size: 22px;
+        }
+
+        .security-card h3 {
+            font-size: 16px;
+
+            margin-bottom: 10px;
+        }
+
+        .security-card p {
+            color: #c6e1f1;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+        }
+
+        .security-indicator {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            margin-top: 20px;
+
+            padding:
+                10px 12px;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            font-size: 10px;
+        }
+
+        .green-dot {
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #47e39c;
+
+            box-shadow:
+                0 0 10px
+                rgba(71, 227, 156, 0.7);
+        }
+
+        /* =========================================
+           OVERLAY MOBILE
+        ========================================= */
+
+        .sidebar-overlay {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0, 0, 0, 0.45);
+
+            z-index: 900;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 1100px) {
+
+            .stats-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .modules-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .bottom-grid {
+                grid-template-columns:
+                    1fr;
+            }
+        }
+
+        @media (max-width: 850px) {
+
+            .admin-layout {
+                display: block;
+            }
+
+            .sidebar {
+                transform:
+                    translateX(-100%);
+
+                transition:
+                    0.3s ease;
+            }
+
+            .sidebar.open {
+                transform:
+                    translateX(0);
+            }
+
+            .main-content {
+                width: 100%;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+
+            .topbar {
+                padding:
+                    14px 18px;
+            }
+
+            .dashboard-content {
+                padding:
+                    22px 18px 40px;
+            }
+
+            .profile-text {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .site-button {
+                display: none;
+            }
+
+            .page-title h1 {
+                font-size: 18px;
+            }
+
+            .welcome-banner {
+                padding: 25px;
+
+                min-height: 195px;
+            }
+
+            .welcome-content h2 {
+                font-size: 24px;
+            }
+
+            .stats-grid,
+            .modules-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .dashboard-content {
+                padding:
+                    18px 14px 35px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================
+         CHARGEMENT
+    ========================================== -->
+
+    <div
+        class="page-loader"
+        id="pageLoader"
+    >
+
+        <div class="loader-logo">
+            KY5
+        </div>
+
+        <div class="loader-spinner"></div>
+
+        <p>
+            Vérification de votre accès...
+        </p>
+
+    </div>
+
+
+    <!-- =========================================
+         OVERLAY MOBILE
+    ========================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =========================================
+         STRUCTURE
+    ========================================== -->
+
+    <div class="admin-layout">
+
+
+        <!-- =====================================
+             MENU LATÉRAL
+        ====================================== -->
+
+        <aside
+            class="sidebar"
+            id="sidebar"
+        >
+
+            <div class="sidebar-brand">
+
+                <div class="sidebar-logo">
+                    KY5
+                </div>
+
+                <div class="sidebar-brand-text">
+
+                    <strong>
+                        KY5 GLOBAL TRADE
+                    </strong>
+
+                    <span>
+                        Administration
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="menu-label">
+                Général
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a
+                    href="dashboard.html"
+                    class="nav-item active"
+                >
+
+                    <span class="nav-icon">
+                        🏠
+                    </span>
+
+                    Tableau de bord
+
+                </a>
+
+            </nav>
+
+
+            <div class="menu-label">
+                Gestion du site
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <button
+                    type="button"
+                    class="nav-item module-coming"
+                    data-module="Produits"
+                >
+
+                    <span class="nav-icon">
+                        📦
+                    </span>
+
+                    Produits
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nav-item module-coming"
+                    data-module="Services"
+                >
+
+                    <span class="nav-icon">
+                        🛠️
+                    </span>
+
+                    Services
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nav-item module-coming"
+                    data-module="Projets"
+                >
+
+                    <span class="nav-icon">
+                        🏗️
+                    </span>
+
+                    Projets
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nav-item module-coming"
+                    data-module="Actualités"
+                >
+
+                    <span class="nav-icon">
+                        📰
+                    </span>
+
+                    Actualités
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nav-item module-coming"
+                    data-module="Images"
+                >
+
+                    <span class="nav-icon">
+                        🖼️
+                    </span>
+
+                    Images
+
+                </button>
+
+            </nav>
+
+
+            <div class="menu-label">
+                Communication
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <button
+                    type="button"
+                    class="nav-item module-coming"
+                    data-module="Messages"
+                >
+
+                    <span class="nav-icon">
+                        ✉️
+                    </span>
+
+                    Messages reçus
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nav-item module-coming"
+                    data-module="Informations entreprise"
+                >
+
+                    <span class="nav-icon">
+                        🏢
+                    </span>
+
+                    Informations
+
+                </button>
+
+            </nav>
+
+
+            <div class="menu-label">
+                Administration
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <button
+                    type="button"
+                    class="nav-item module-coming"
+                    data-module="Administrateurs"
+                >
+
+                    <span class="nav-icon">
+                        👥
+                    </span>
+
+                    Administrateurs
+
+                </button>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <a
+                    href="../index.html"
+                    class="nav-item"
+                    target="_blank"
+                >
+
+                    <span class="nav-icon">
+                        🌐
+                    </span>
+
+                    Voir le site
+
+                </a>
+
+
+                <button
+                    type="button"
+                    class="nav-item logout-button"
+                    id="logoutButton"
+                >
+
+                    <span class="nav-icon">
+                        🚪
+                    </span>
+
+                    Se déconnecter
+
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =====================================
+             CONTENU PRINCIPAL
+        ====================================== -->
+
+        <main class="main-content">
+
+
+            <!-- ================================
+                 TOP BAR
+            ================================= -->
+
+            <header class="topbar">
+
+                <div class="topbar-left">
+
+                    <button
+                        type="button"
+                        class="mobile-menu-button"
+                        id="mobileMenuButton"
+                    >
+                        ☰
+                    </button>
+
+                    <div class="page-title">
+
+                        <h1>
+                            Tableau de bord
+                        </h1>
+
+                        <p>
+                            Administration du site
+                            KY5 GLOBAL TRADE
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="topbar-right">
+
+                    <a
+                        href="../index.html"
+                        target="_blank"
+                        class="site-button"
+                    >
+                        🌐 Voir le site
+                    </a>
+
+
+                    <div class="admin-profile">
+
+                        <div class="profile-avatar">
+                            A
+                        </div>
+
+                        <div class="profile-text">
+
+                            <strong>
+                                Administrateur
+                            </strong>
+
+                            <span id="adminEmail">
+                                Chargement...
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- ================================
+                 DASHBOARD
+            ================================= -->
+
+            <div class="dashboard-content">
+
+
+                <!-- ============================
+                     BIENVENUE
+                ============================= -->
+
+                <section class="welcome-banner">
+
+                    <div class="welcome-content">
+
+                        <div class="welcome-small">
+                            ● Administration sécurisée
+                        </div>
+
+                        <h2 id="welcomeTitle">
+                            Bienvenue dans KY5 Admin
+                        </h2>
+
+                        <p>
+                            Gérez progressivement
+                            les produits, les services,
+                            les projets, les publications
+                            et les informations du site
+                            KY5 GLOBAL TRADE depuis
+                            cet espace centralisé.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ============================
+                     STATISTIQUES
+                ============================= -->
+
+                <section class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon">
+                                📦
+                            </div>
+
+                            <span class="stat-status">
+                                Actif
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <div class="stat-value">
+                                0
+                            </div>
+
+                            <div class="stat-label">
+                                Produits publiés
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon">
+                                🛠️
+                            </div>
+
+                            <span class="stat-status">
+                                Actif
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <div class="stat-value">
+                                0
+                            </div>
+
+                            <div class="stat-label">
+                                Services
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon">
+                                🏗️
+                            </div>
+
+                            <span class="stat-status">
+                                Actif
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <div class="stat-value">
+                                0
+                            </div>
+
+                            <div class="stat-label">
+                                Projets
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon">
+                                ✉️
+                            </div>
+
+                            <span class="stat-status">
+                                Actif
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <div class="stat-value">
+                                0
+                            </div>
+
+                            <div class="stat-label">
+                                Messages reçus
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ============================
+                     MODULES
+                ============================= -->
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h3>
+                            Gestion du site
+                        </h3>
+
+                        <p>
+                            Les principaux modules
+                            de votre espace administrateur.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <section class="modules-grid">
+
+                    <div
+                        class="module-card module-coming"
+                        data-module="Produits"
+                    >
+
+                        <div>
+
+                            <div class="module-icon">
+                                📦
+                            </div>
+
+                            <h4>
+                                Produits
+                            </h4>
+
+                            <p>
+                                Ajouter, modifier
+                                et supprimer les produits
+                                affichés sur le site.
+                            </p>
+
+                        </div>
+
+                        <div class="module-bottom">
+
+                            <span class="module-status">
+                                Prochaine étape
+                            </span>
+
+                            <span class="module-arrow">
+                                →
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="module-card module-coming"
+                        data-module="Services"
+                    >
+
+                        <div>
+
+                            <div class="module-icon">
+                                🛠️
+                            </div>
+
+                            <h4>
+                                Services
+                            </h4>
+
+                            <p>
+                                Administrer les différents
+                                services proposés par
+                                KY5 GLOBAL TRADE.
+                            </p>
+
+                        </div>
+
+                        <div class="module-bottom">
+
+                            <span class="module-status">
+                                À configurer
+                            </span>
+
+                            <span class="module-arrow">
+                                →
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="module-card module-coming"
+                        data-module="Projets"
+                    >
+
+                        <div>
+
+                            <div class="module-icon">
+                                🏗️
+                            </div>
+
+                            <h4>
+                                Projets
+                            </h4>
+
+                            <p>
+                                Ajouter les réalisations,
+                                projets en cours et projets
+                                futurs de l'entreprise.
+                            </p>
+
+                        </div>
+
+                        <div class="module-bottom">
+
+                            <span class="module-status">
+                                À configurer
+                            </span>
+
+                            <span class="module-arrow">
+                                →
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="module-card module-coming"
+                        data-module="Actualités"
+                    >
+
+                        <div>
+
+                            <div class="module-icon">
+                                📰
+                            </div>
+
+                            <h4>
+                                Actualités
+                            </h4>
+
+                            <p>
+                                Publier des annonces,
+                                informations et nouvelles
+                                de l'entreprise.
+                            </p>
+
+                        </div>
+
+                        <div class="module-bottom">
+
+                            <span class="module-status">
+                                À configurer
+                            </span>
+
+                            <span class="module-arrow">
+                                →
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="module-card module-coming"
+                        data-module="Messages"
+                    >
+
+                        <div>
+
+                            <div class="module-icon">
+                                ✉️
+                            </div>
+
+                            <h4>
+                                Messages
+                            </h4>
+
+                            <p>
+                                Consulter les demandes
+                                et messages transmis
+                                depuis le site.
+                            </p>
+
+                        </div>
+
+                        <div class="module-bottom">
+
+                            <span class="module-status">
+                                À configurer
+                            </span>
+
+                            <span class="module-arrow">
+                                →
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="module-card module-coming"
+                        data-module="Paramètres"
+                    >
+
+                        <div>
+
+                            <div class="module-icon">
+                                ⚙️
+                            </div>
+
+                            <h4>
+                                Paramètres
+                            </h4>
+
+                            <p>
+                                Modifier les informations
+                                générales et les données
+                                de l'entreprise.
+                            </p>
+
+                        </div>
+
+                        <div class="module-bottom">
+
+                            <span class="module-status">
+                                À configurer
+                            </span>
+
+                            <span class="module-arrow">
+                                →
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ============================
+                     ACTIVITÉ + SÉCURITÉ
+                ============================= -->
+
+                <section class="bottom-grid">
+
+                    <div class="panel">
+
+                        <h3>
+                            Activité récente
+                        </h3>
+
+                        <p class="panel-subtitle">
+                            Informations concernant
+                            votre espace administrateur.
+                        </p>
+
+
+                        <div class="activity-list">
+
+                            <div class="activity-item">
+
+                                <div class="activity-icon">
+                                    🔐
+                                </div>
+
+                                <div class="activity-text">
+
+                                    <strong>
+                                        Connexion administrateur
+                                    </strong>
+
+                                    <span>
+                                        Une session sécurisée
+                                        est actuellement active.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="activity-item">
+
+                                <div class="activity-icon">
+                                    ☁️
+                                </div>
+
+                                <div class="activity-text">
+
+                                    <strong>
+                                        Supabase connecté
+                                    </strong>
+
+                                    <span>
+                                        Le système
+                                        d'authentification
+                                        KY5 est opérationnel.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="activity-item">
+
+                                <div class="activity-icon">
+                                    🌐
+                                </div>
+
+                                <div class="activity-text">
+
+                                    <strong>
+                                        Site public
+                                    </strong>
+
+                                    <span>
+                                        Le site KY5 reste
+                                        accessible séparément
+                                        de l'administration.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="security-card">
+
+                        <div class="security-symbol">
+                            🛡️
+                        </div>
+
+                        <h3>
+                            Sécurité
+                        </h3>
+
+                        <p>
+                            L'accès à ce tableau de bord
+                            nécessite une session
+                            administrateur valide.
+                            Les visiteurs non connectés
+                            sont automatiquement redirigés
+                            vers la page de connexion.
+                        </p>
+
+                        <div class="security-indicator">
+
+                            <span class="green-dot"></span>
+
+                            Session sécurisée active
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================================
+         CONFIGURATION SUPABASE
+    ========================================== -->
+
+    <script src="config.js"></script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
+    <script>
+
+        /*
+        ==========================================================
+        KY5 GLOBAL TRADE
+        TABLEAU DE BORD ADMINISTRATEUR
+        ==========================================================
+        */
+
+
+        const pageLoader =
+            document.getElementById(
+                "pageLoader"
+            );
+
+        const logoutButton =
+            document.getElementById(
+                "logoutButton"
+            );
+
+        const adminEmail =
+            document.getElementById(
+                "adminEmail"
+            );
+
+        const welcomeTitle =
+            document.getElementById(
+                "welcomeTitle"
+            );
+
+        const sidebar =
+            document.getElementById(
+                "sidebar"
+            );
+
+        const sidebarOverlay =
+            document.getElementById(
+                "sidebarOverlay"
+            );
+
+        const mobileMenuButton =
+            document.getElementById(
+                "mobileMenuButton"
+            );
+
+
+        /*
+        ==========================================================
+        INITIALISATION SUPABASE
+        ==========================================================
+        */
+
+        let supabaseClient = null;
+
+
+        try {
+
+            if (
+                typeof SUPABASE_URL === "undefined" ||
+                typeof SUPABASE_PUBLISHABLE_KEY === "undefined"
+            ) {
+
+                throw new Error(
+                    "Configuration Supabase introuvable."
+                );
+
+            }
+
+
+            if (
+                !window.supabase
+            ) {
+
+                throw new Error(
+                    "Bibliothèque Supabase introuvable."
+                );
+
+            }
+
+
+            supabaseClient =
+                window.supabase.createClient(
+                    SUPABASE_URL,
+                    SUPABASE_PUBLISHABLE_KEY
+                );
+
+        }
+        catch (error) {
+
+            console.error(
+                "Erreur de configuration Supabase :",
+                error
+            );
+
+            window.location.href =
+                "index.html";
+
+        }
+
+
+        /*
+        ==========================================================
+        VÉRIFICATION DE LA SESSION
+        ==========================================================
+        */
+
+        async function verifyAdminSession() {
+
+            if (!supabaseClient) {
+
+                window.location.href =
+                    "index.html";
+
+                return;
+
+            }
+
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                await supabaseClient
+                    .auth
+                    .getSession();
+
+
+                if (error) {
+
+                    console.error(
+                        "Erreur session :",
+                        error
+                    );
+
+                    window.location.href =
+                        "index.html";
+
+                    return;
+
+                }
+
+
+                if (
+                    !data ||
+                    !data.session ||
+                    !data.session.user
+                ) {
+
+                    window.location.href =
+                        "index.html";
+
+                    return;
+
+                }
+
+
+                const user =
+                    data.session.user;
+
+
+                if (user.email) {
+
+                    adminEmail.textContent =
+                        user.email;
+
+                }
+                else {
+
+                    adminEmail.textContent =
+                        "Administrateur KY5";
+
+                }
+
+
+                /*
+                ==============================================
+                BIENVENUE
+                ==============================================
+                */
+
+                welcomeTitle.textContent =
+                    "Bienvenue dans votre espace administrateur";
+
+
+                /*
+                ==============================================
+                AFFICHER LE DASHBOARD
+                ==============================================
+                */
+
+                pageLoader.classList.add(
+                    "hidden"
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Erreur pendant la vérification :",
+                    error
+                );
+
+                window.location.href =
+                    "index.html";
+
+            }
+
+        }
+
+
+        /*
+        ==========================================================
+        DÉCONNEXION
+        ==========================================================
+        */
+
+        logoutButton.addEventListener(
+            "click",
+            async function () {
+
+                if (!supabaseClient) {
+
+                    window.location.href =
+                        "index.html";
+
+                    return;
+
+                }
+
+
+                const confirmation =
+                    confirm(
+                        "Voulez-vous vraiment vous déconnecter ?"
+                    );
+
+
+                if (!confirmation) {
+
+                    return;
+
+                }
+
+
+                logoutButton.disabled =
+                    true;
+
+
+                try {
+
+                    const {
+                        error
+                    } =
+                    await supabaseClient
+                        .auth
+                        .signOut();
+
+
+                    if (error) {
+
+                        console.error(
+                            "Erreur de déconnexion :",
+                            error
+                        );
+
+                    }
+
+
+                    window.location.href =
+                        "index.html";
+
+                }
+                catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+                    window.location.href =
+                        "index.html";
+
+                }
+
+            }
+        );
+
+
+        /*
+        ==========================================================
+        MENU MOBILE
+        ==========================================================
+        */
+
+        mobileMenuButton.addEventListener(
+            "click",
+            function () {
+
+                sidebar.classList.add(
+                    "open"
+                );
+
+                sidebarOverlay.classList.add(
+                    "active"
+                );
+
+            }
+        );
+
+
+        sidebarOverlay.addEventListener(
+            "click",
+            closeMobileSidebar
+        );
+
+
+        function closeMobileSidebar() {
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+            sidebarOverlay.classList.remove(
+                "active"
+            );
+
+        }
+
+
+        /*
+        ==========================================================
+        MODULES À CRÉER
+        ==========================================================
+        */
+
+        const comingModules =
+            document.querySelectorAll(
+                ".module-coming"
+            );
+
+
+        comingModules.forEach(
+            function (element) {
+
+                element.addEventListener(
+                    "click",
+                    function () {
+
+                        const moduleName =
+                            element.getAttribute(
+                                "data-module"
+                            ) || "Ce module";
+
+
+                        alert(
+                            moduleName +
+                            " sera configuré dans la prochaine étape."
+                        );
+
+                        closeMobileSidebar();
+
+                    }
+                );
+
+            }
+        );
+
+
+        /*
+        ==========================================================
+        SURVEILLER L'ÉTAT DE CONNEXION
+        ==========================================================
+        */
+
+        if (supabaseClient) {
+
+            supabaseClient
+                .auth
+                .onAuthStateChange(
+                    function (
+                        event,
+                        session
+                    ) {
+
+                        if (
+                            event ===
+                            "SIGNED_OUT"
+                        ) {
+
+                            window.location.href =
+                                "index.html";
+
+                        }
+
+
+                        if (
+                            !session &&
+                            event !==
+                            "INITIAL_SESSION"
+                        ) {
+
+                            window.location.href =
+                                "index.html";
+
+                        }
+
+                    }
+                );
+
+        }
+
+
+        /*
+        ==========================================================
+        DÉMARRAGE
+        ==========================================================
+        */
+
+        verifyAdminSession();
+
+    </script>
+
+</body>
+</html>
