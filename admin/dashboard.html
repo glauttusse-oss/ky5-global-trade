@@ -41,9 +41,17 @@
 
         body {
             min-height: 100vh;
-            font-family: Arial, Helvetica, sans-serif;
-            background: var(--gris-fond);
-            color: var(--texte);
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                var(--gris-fond);
+
+            color:
+                var(--texte);
         }
 
         button,
@@ -55,18 +63,24 @@
             cursor: pointer;
         }
 
-        /* =========================================
+
+        /* =====================================================
            CHARGEMENT
-        ========================================= */
+        ===================================================== */
 
         .page-loader {
             position: fixed;
+
             inset: 0;
+
             z-index: 9999;
 
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
             justify-content: center;
 
             background:
@@ -89,47 +103,76 @@
             height: 82px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             border-radius: 22px;
 
-            background: white;
+            background:
+                linear-gradient(
+                    135deg,
+                    white,
+                    #c9efff
+                );
 
-            color: var(--bleu);
+            color:
+                var(--bleu);
 
             font-size: 26px;
+
             font-weight: 900;
 
             margin-bottom: 20px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, .30);
         }
 
         .loader-spinner {
             width: 36px;
             height: 36px;
 
-            border: 3px solid rgba(255,255,255,.25);
-            border-top-color: white;
+            border:
+                3px solid
+                rgba(255, 255, 255, .25);
 
-            border-radius: 50%;
+            border-top-color:
+                white;
 
-            animation: spin .8s linear infinite;
+            border-radius:
+                50%;
 
-            margin-bottom: 15px;
+            animation:
+                spin .8s linear infinite;
+
+            margin-bottom:
+                15px;
+        }
+
+        .page-loader p {
+            color:
+                #c9e9f8;
+
+            font-size:
+                12px;
         }
 
         @keyframes spin {
 
             to {
-                transform: rotate(360deg);
+                transform:
+                    rotate(360deg);
             }
 
         }
 
 
-        /* =========================================
+        /* =====================================================
            STRUCTURE
-        ========================================= */
+        ===================================================== */
 
         .admin-layout {
             min-height: 100vh;
@@ -141,9 +184,9 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            SIDEBAR
-        ========================================= */
+        ===================================================== */
 
         .sidebar {
             position: fixed;
@@ -154,11 +197,14 @@
 
             width: 265px;
 
-            padding: 25px 18px;
+            padding:
+                25px 18px;
 
-            overflow-y: auto;
+            overflow-y:
+                auto;
 
-            color: white;
+            color:
+                white;
 
             background:
                 linear-gradient(
@@ -168,10 +214,15 @@
                 );
 
             z-index: 1000;
+
+            box-shadow:
+                6px 0 25px
+                rgba(0, 0, 0, .08);
         }
 
         .sidebar-brand {
             display: flex;
+
             align-items: center;
 
             gap: 13px;
@@ -179,22 +230,28 @@
             padding:
                 5px 8px 25px;
 
-            margin-bottom: 20px;
+            margin-bottom:
+                20px;
 
             border-bottom:
                 1px solid
-                rgba(255,255,255,.1);
+                rgba(255, 255, 255, .10);
         }
 
         .sidebar-logo {
             width: 52px;
             height: 52px;
 
-            border-radius: 15px;
+            flex-shrink: 0;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
+            border-radius:
+                15px;
 
             background:
                 linear-gradient(
@@ -203,44 +260,62 @@
                     #c8efff
                 );
 
-            color: var(--bleu);
+            color:
+                var(--bleu);
 
-            font-weight: 900;
+            font-weight:
+                900;
+
+            font-size:
+                18px;
         }
 
         .sidebar-brand-text strong {
             display: block;
 
-            font-size: 14px;
+            font-size:
+                14px;
         }
 
         .sidebar-brand-text span {
             display: block;
 
-            margin-top: 5px;
+            margin-top:
+                5px;
 
-            color: #96d8f7;
+            color:
+                #96d8f7;
 
-            font-size: 10px;
+            font-size:
+                10px;
         }
 
         .menu-label {
-            padding: 10px 13px;
+            padding:
+                10px 13px;
 
-            margin-top: 12px;
+            margin-top:
+                12px;
 
-            color: #7092ac;
+            color:
+                #7092ac;
 
-            font-size: 10px;
-            font-weight: 800;
+            font-size:
+                10px;
 
-            text-transform: uppercase;
+            font-weight:
+                800;
 
-            letter-spacing: 1.4px;
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                1.4px;
         }
 
         .sidebar-nav {
             display: grid;
+
             gap: 6px;
         }
 
@@ -248,191 +323,309 @@
             width: 100%;
 
             display: flex;
+
             align-items: center;
 
             gap: 13px;
 
-            padding: 13px 14px;
+            padding:
+                13px 14px;
 
             border: none;
-            border-radius: 11px;
 
-            background: transparent;
+            border-radius:
+                11px;
 
-            color: #cbdce8;
+            background:
+                transparent;
 
-            text-decoration: none;
+            color:
+                #cbdce8;
 
-            font-size: 13px;
+            text-decoration:
+                none;
 
-            text-align: left;
+            font-size:
+                13px;
 
-            transition: .2s;
+            text-align:
+                left;
+
+            transition:
+                .2s ease;
         }
 
-        .nav-item:hover,
+        .nav-item:hover {
+            color: white;
+
+            background:
+                rgba(
+                    0,
+                    168,
+                    255,
+                    .14
+                );
+        }
+
         .nav-item.active {
             color: white;
 
             background:
-                rgba(0,168,255,.14);
+                linear-gradient(
+                    120deg,
+                    rgba(
+                        0,
+                        86,
+                        179,
+                        .55
+                    ),
+                    rgba(
+                        0,
+                        168,
+                        255,
+                        .28
+                    )
+                );
+
+            border:
+                1px solid
+                rgba(
+                    0,
+                    168,
+                    255,
+                    .20
+                );
         }
 
         .nav-icon {
             width: 28px;
             height: 28px;
 
+            flex-shrink: 0;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
-            border-radius: 8px;
+            border-radius:
+                8px;
 
             background:
-                rgba(255,255,255,.07);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .07
+                );
         }
 
         .sidebar-bottom {
-            margin-top: 30px;
+            margin-top:
+                30px;
 
-            padding-top: 20px;
+            padding-top:
+                20px;
 
             border-top:
                 1px solid
-                rgba(255,255,255,.1);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .10
+                );
         }
 
         .logout-button {
-            color: #ffd0d5;
+            color:
+                #ffd0d5;
         }
 
 
-        /* =========================================
+        /* =====================================================
            CONTENU
-        ========================================= */
+        ===================================================== */
 
         .main-content {
             grid-column: 2;
 
-            min-height: 100vh;
+            min-height:
+                100vh;
         }
 
 
-        /* =========================================
+        /* =====================================================
            TOPBAR
-        ========================================= */
+        ===================================================== */
 
         .topbar {
-            min-height: 82px;
+            min-height:
+                82px;
 
-            position: sticky;
+            position:
+                sticky;
+
             top: 0;
 
-            z-index: 500;
+            z-index:
+                500;
 
             display: flex;
-            align-items: center;
-            justify-content: space-between;
 
-            gap: 20px;
+            align-items: center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
 
             padding:
                 16px 32px;
 
-            background: white;
+            background:
+                white;
 
             border-bottom:
-                1px solid #e8edf2;
+                1px solid
+                #e8edf2;
+
+            box-shadow:
+                0 4px 20px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    .025
+                );
         }
 
         .topbar-left {
             display: flex;
-            align-items: center;
 
-            gap: 15px;
+            align-items:
+                center;
+
+            gap:
+                15px;
         }
 
         .mobile-menu-button {
             display: none;
 
-            width: 42px;
-            height: 42px;
+            width:
+                42px;
+
+            height:
+                42px;
 
             border: none;
-            border-radius: 10px;
 
-            background: #edf7fd;
+            border-radius:
+                10px;
 
-            color: var(--bleu);
+            background:
+                #edf7fd;
 
-            font-size: 21px;
+            color:
+                var(--bleu);
+
+            font-size:
+                21px;
         }
 
         .page-title h1 {
-            color: var(--bleu-fonce);
+            color:
+                var(--bleu-fonce);
 
-            font-size: 22px;
+            font-size:
+                22px;
         }
 
         .page-title p {
-            margin-top: 5px;
+            margin-top:
+                5px;
 
-            color: var(--gris);
+            color:
+                var(--gris);
 
-            font-size: 12px;
+            font-size:
+                12px;
         }
 
         .topbar-right {
             display: flex;
-            align-items: center;
 
-            gap: 15px;
+            align-items:
+                center;
+
+            gap:
+                15px;
         }
 
         .site-button {
-            padding: 12px 15px;
+            padding:
+                12px 15px;
 
-            border-radius: 10px;
+            border-radius:
+                10px;
 
-            background: #edf7fd;
+            background:
+                #edf7fd;
 
-            color: var(--bleu);
+            color:
+                var(--bleu);
 
-            font-size: 12px;
-            font-weight: 700;
+            font-size:
+                12px;
 
-            text-decoration: none;
+            font-weight:
+                700;
+
+            text-decoration:
+                none;
         }
 
         .admin-profile {
-            padding-left: 14px;
+            padding-left:
+                14px;
 
             border-left:
-                1px solid #e1e8ee;
+                1px solid
+                #e1e8ee;
         }
 
         .admin-profile strong {
-            display: block;
+            display:
+                block;
 
-            color: var(--bleu-fonce);
+            color:
+                var(--bleu-fonce);
 
-            font-size: 12px;
+            font-size:
+                12px;
         }
 
         .admin-profile span {
-            display: block;
+            display:
+                block;
 
-            margin-top: 3px;
+            margin-top:
+                3px;
 
-            color: var(--gris);
+            color:
+                var(--gris);
 
-            font-size: 10px;
+            font-size:
+                10px;
         }
 
 
-        /* =========================================
+        /* =====================================================
            DASHBOARD
-        ========================================= */
+        ===================================================== */
 
         .dashboard-content {
             padding:
@@ -440,22 +633,32 @@
         }
 
         .welcome-banner {
-            position: relative;
+            position:
+                relative;
 
-            min-height: 200px;
+            min-height:
+                200px;
 
-            display: flex;
-            align-items: center;
+            display:
+                flex;
 
-            padding: 34px;
+            align-items:
+                center;
 
-            margin-bottom: 28px;
+            padding:
+                34px;
 
-            border-radius: 22px;
+            margin-bottom:
+                28px;
 
-            overflow: hidden;
+            border-radius:
+                22px;
 
-            color: white;
+            overflow:
+                hidden;
+
+            color:
+                white;
 
             background:
                 linear-gradient(
@@ -467,325 +670,507 @@
 
             box-shadow:
                 0 18px 45px
-                rgba(0,86,179,.18);
+                rgba(
+                    0,
+                    86,
+                    179,
+                    .18
+                );
         }
 
-        .welcome-banner::after {
+        .welcome-banner::before {
             content: "";
 
-            position: absolute;
+            position:
+                absolute;
 
-            width: 300px;
-            height: 300px;
+            width:
+                300px;
 
-            right: -100px;
-            top: -140px;
+            height:
+                300px;
 
-            border-radius: 50%;
+            right:
+                -100px;
+
+            top:
+                -140px;
+
+            border-radius:
+                50%;
 
             background:
-                rgba(255,255,255,.12);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .12
+                );
         }
 
         .welcome-content {
-            position: relative;
+            position:
+                relative;
 
-            z-index: 2;
+            z-index:
+                2;
 
-            max-width: 680px;
+            max-width:
+                680px;
         }
 
         .welcome-small {
-            display: inline-block;
+            display:
+                inline-block;
 
             padding:
                 7px 13px;
 
-            margin-bottom: 15px;
+            margin-bottom:
+                15px;
 
-            border-radius: 30px;
+            border-radius:
+                30px;
 
             background:
-                rgba(255,255,255,.13);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .13
+                );
 
-            font-size: 11px;
+            font-size:
+                11px;
         }
 
         .welcome-content h2 {
-            margin-bottom: 12px;
+            margin-bottom:
+                12px;
 
-            font-size: 30px;
+            font-size:
+                30px;
         }
 
         .welcome-content p {
-            color: #dff4ff;
+            color:
+                #dff4ff;
 
-            font-size: 13px;
+            font-size:
+                13px;
 
-            line-height: 1.7;
+            line-height:
+                1.7;
         }
 
 
-        /* =========================================
+        /* =====================================================
            STATS
-        ========================================= */
+        ===================================================== */
 
         .stats-grid {
-            display: grid;
+            display:
+                grid;
 
             grid-template-columns:
-                repeat(4,1fr);
+                repeat(
+                    4,
+                    1fr
+                );
 
-            gap: 18px;
+            gap:
+                18px;
 
-            margin-bottom: 30px;
+            margin-bottom:
+                30px;
         }
 
         .stat-card {
-            min-height: 135px;
+            min-height:
+                135px;
 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            display:
+                flex;
 
-            padding: 21px;
+            flex-direction:
+                column;
+
+            justify-content:
+                space-between;
+
+            padding:
+                21px;
 
             border:
-                1px solid #e6edf3;
+                1px solid
+                #e6edf3;
 
-            border-radius: 17px;
+            border-radius:
+                17px;
 
-            background: white;
+            background:
+                white;
 
             box-shadow:
                 0 8px 25px
-                rgba(21,45,65,.04);
+                rgba(
+                    21,
+                    45,
+                    65,
+                    .04
+                );
         }
 
         .stat-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
         }
 
         .stat-icon {
-            width: 42px;
-            height: 42px;
+            width:
+                42px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height:
+                42px;
 
-            border-radius: 12px;
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                12px;
 
             background:
                 var(--bleu-tres-clair);
 
-            font-size: 19px;
+            font-size:
+                19px;
         }
 
         .stat-status {
             padding:
                 5px 8px;
 
-            border-radius: 20px;
+            border-radius:
+                20px;
 
-            background: #eaf8f0;
+            background:
+                #eaf8f0;
 
-            color: var(--vert);
+            color:
+                var(--vert);
 
-            font-size: 10px;
-            font-weight: 700;
+            font-size:
+                10px;
+
+            font-weight:
+                700;
         }
 
         .stat-value {
-            color: var(--bleu-fonce);
+            color:
+                var(--bleu-fonce);
 
-            font-size: 27px;
-            font-weight: 800;
+            font-size:
+                27px;
+
+            font-weight:
+                800;
         }
 
         .stat-label {
-            margin-top: 4px;
+            margin-top:
+                4px;
 
-            color: var(--gris);
+            color:
+                var(--gris);
 
-            font-size: 11px;
+            font-size:
+                11px;
         }
 
 
-        /* =========================================
+        /* =====================================================
            MODULES
-        ========================================= */
+        ===================================================== */
 
         .section-header {
-            margin-bottom: 17px;
+            margin-bottom:
+                17px;
         }
 
         .section-header h3 {
-            color: var(--bleu-fonce);
+            color:
+                var(--bleu-fonce);
 
-            font-size: 17px;
+            font-size:
+                17px;
         }
 
         .section-header p {
-            margin-top: 5px;
+            margin-top:
+                5px;
 
-            color: var(--gris);
+            color:
+                var(--gris);
 
-            font-size: 11px;
+            font-size:
+                11px;
         }
 
         .modules-grid {
-            display: grid;
+            display:
+                grid;
 
             grid-template-columns:
-                repeat(3,1fr);
+                repeat(
+                    3,
+                    1fr
+                );
 
-            gap: 18px;
+            gap:
+                18px;
 
-            margin-bottom: 35px;
+            margin-bottom:
+                35px;
         }
 
         .module-card {
-            min-height: 165px;
+            min-height:
+                165px;
 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            display:
+                flex;
 
-            padding: 22px;
+            flex-direction:
+                column;
+
+            justify-content:
+                space-between;
+
+            padding:
+                22px;
 
             border:
-                1px solid #e6edf3;
+                1px solid
+                #e6edf3;
 
-            border-radius: 17px;
+            border-radius:
+                17px;
 
-            background: white;
+            background:
+                white;
 
-            transition: .25s;
+            color:
+                inherit;
+
+            text-decoration:
+                none;
+
+            transition:
+                .25s ease;
         }
 
         .module-card:hover {
             transform:
                 translateY(-3px);
 
-            border-color: #bee9ff;
+            border-color:
+                #bee9ff;
 
             box-shadow:
                 0 15px 35px
-                rgba(0,86,179,.09);
+                rgba(
+                    0,
+                    86,
+                    179,
+                    .09
+                );
         }
 
         .module-icon {
-            width: 50px;
-            height: 50px;
+            width:
+                50px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height:
+                50px;
 
-            margin-bottom: 17px;
+            display:
+                flex;
 
-            border-radius: 14px;
+            align-items:
+                center;
 
-            background: #e7f6ff;
+            justify-content:
+                center;
 
-            font-size: 23px;
+            margin-bottom:
+                17px;
+
+            border-radius:
+                14px;
+
+            background:
+                #e7f6ff;
+
+            font-size:
+                23px;
         }
 
         .module-card h4 {
-            margin-bottom: 7px;
+            margin-bottom:
+                7px;
 
-            color: var(--bleu-fonce);
+            color:
+                var(--bleu-fonce);
 
-            font-size: 15px;
+            font-size:
+                15px;
         }
 
         .module-card p {
-            color: var(--gris);
+            color:
+                var(--gris);
 
-            font-size: 11px;
+            font-size:
+                11px;
 
-            line-height: 1.6;
+            line-height:
+                1.6;
         }
 
         .module-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display:
+                flex;
 
-            margin-top: 17px;
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            margin-top:
+                17px;
         }
 
         .module-status {
             padding:
                 5px 9px;
 
-            border-radius: 20px;
+            border-radius:
+                20px;
 
-            background: #f0f4f7;
+            background:
+                #f0f4f7;
 
-            color: #708190;
+            color:
+                #708190;
 
-            font-size: 10px;
+            font-size:
+                10px;
+        }
+
+        .module-status.active {
+            background:
+                #eaf8f0;
+
+            color:
+                var(--vert);
         }
 
         .module-arrow {
-            color: var(--bleu);
+            color:
+                var(--bleu);
 
-            font-size: 17px;
-            font-weight: 800;
+            font-size:
+                17px;
+
+            font-weight:
+                800;
         }
 
         .clickable {
-            cursor: pointer;
+            cursor:
+                pointer;
         }
 
 
-        /* =========================================
+        /* =====================================================
            PROSPECTS
-        ========================================= */
+        ===================================================== */
 
         .prospects-panel {
-            padding: 23px;
+            padding:
+                23px;
 
-            margin-bottom: 35px;
+            margin-bottom:
+                35px;
 
             border:
-                1px solid #e6edf3;
+                1px solid
+                #e6edf3;
 
-            border-radius: 17px;
+            border-radius:
+                17px;
 
-            background: white;
+            background:
+                white;
 
             box-shadow:
                 0 8px 25px
-                rgba(21,45,65,.04);
+                rgba(
+                    21,
+                    45,
+                    65,
+                    .04
+                );
         }
 
         .prospects-toolbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display:
+                flex;
 
-            gap: 15px;
+            align-items:
+                center;
 
-            margin-bottom: 18px;
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            margin-bottom:
+                18px;
         }
 
         .prospects-toolbar h3 {
-            color: var(--bleu-fonce);
+            color:
+                var(--bleu-fonce);
 
-            font-size: 18px;
+            font-size:
+                18px;
         }
 
         .prospects-toolbar p {
-            margin-top: 5px;
+            margin-top:
+                5px;
 
-            color: var(--gris);
+            color:
+                var(--gris);
 
-            font-size: 11px;
+            font-size:
+                11px;
         }
 
         .refresh-button {
@@ -793,83 +1178,116 @@
                 11px 14px;
 
             border:
-                1px solid #cfe8f6;
+                1px solid
+                #cfe8f6;
 
-            border-radius: 10px;
+            border-radius:
+                10px;
 
-            background: #edf7fd;
+            background:
+                #edf7fd;
 
-            color: var(--bleu);
+            color:
+                var(--bleu);
 
-            font-size: 11px;
-            font-weight: 800;
+            font-size:
+                11px;
+
+            font-weight:
+                800;
         }
 
         .prospects-summary {
-            display: flex;
-            flex-wrap: wrap;
+            display:
+                flex;
 
-            gap: 10px;
+            flex-wrap:
+                wrap;
 
-            margin-bottom: 17px;
+            gap:
+                10px;
+
+            margin-bottom:
+                17px;
         }
 
         .summary-badge {
             padding:
                 7px 11px;
 
-            border-radius: 999px;
+            border-radius:
+                999px;
 
-            background: #f0f4f7;
+            background:
+                #f0f4f7;
 
-            color: #5d7182;
+            color:
+                #5d7182;
 
-            font-size: 10px;
-            font-weight: 800;
+            font-size:
+                10px;
+
+            font-weight:
+                800;
         }
 
         .summary-badge.new {
-            background: #fff3cd;
+            background:
+                #fff3cd;
 
-            color: #8a6200;
+            color:
+                #8a6200;
         }
 
         .summary-badge.done {
-            background: #eaf8f0;
+            background:
+                #eaf8f0;
 
-            color: var(--vert);
+            color:
+                var(--vert);
         }
 
         .table-wrap {
-            width: 100%;
+            width:
+                100%;
 
-            overflow-x: auto;
+            overflow-x:
+                auto;
         }
 
         .prospects-table {
-            width: 100%;
+            width:
+                100%;
 
-            min-width: 1050px;
+            min-width:
+                1050px;
 
-            border-collapse: collapse;
+            border-collapse:
+                collapse;
         }
 
         .prospects-table th {
             padding:
                 12px 10px;
 
-            background: #f6f9fc;
+            background:
+                #f6f9fc;
 
             border-bottom:
-                1px solid #e4ebf2;
+                1px solid
+                #e4ebf2;
 
-            color: #60758a;
+            color:
+                #60758a;
 
-            font-size: 10px;
+            font-size:
+                10px;
 
-            text-align: left;
+            text-align:
+                left;
 
-            text-transform: uppercase;
+            text-transform:
+                uppercase;
         }
 
         .prospects-table td {
@@ -877,174 +1295,236 @@
                 13px 10px;
 
             border-bottom:
-                1px solid #eef2f5;
+                1px solid
+                #eef2f5;
 
-            color: #324b61;
+            color:
+                #324b61;
 
-            font-size: 11px;
+            font-size:
+                11px;
 
-            vertical-align: top;
+            vertical-align:
+                top;
         }
 
         .prospects-table tr.unread {
-            background: #f7fcff;
+            background:
+                #f7fcff;
         }
 
         .prospect-name {
-            color: var(--bleu-fonce);
+            color:
+                var(--bleu-fonce);
 
-            font-weight: 800;
+            font-weight:
+                800;
         }
 
         .prospect-contact {
-            display: grid;
+            display:
+                grid;
 
-            gap: 4px;
+            gap:
+                4px;
         }
 
         .prospect-message {
-            max-width: 250px;
+            max-width:
+                250px;
 
-            line-height: 1.5;
+            line-height:
+                1.5;
         }
 
         .prospect-notes {
-            margin-top: 6px;
+            margin-top:
+                6px;
 
-            color: #8595a4;
+            color:
+                #8595a4;
 
-            font-size: 9px;
+            font-size:
+                9px;
 
-            line-height: 1.5;
+            line-height:
+                1.5;
         }
 
         .status-pill {
-            display: inline-flex;
+            display:
+                inline-flex;
 
             padding:
                 5px 8px;
 
-            border-radius: 999px;
+            border-radius:
+                999px;
 
-            font-size: 9px;
-            font-weight: 800;
+            font-size:
+                9px;
 
-            text-transform: uppercase;
+            font-weight:
+                800;
+
+            text-transform:
+                uppercase;
         }
 
         .status-nouveau {
-            background: #fff3cd;
+            background:
+                #fff3cd;
 
-            color: #8a6200;
+            color:
+                #8a6200;
         }
 
         .status-lu {
-            background: #e7f5ff;
+            background:
+                #e7f5ff;
 
-            color: #0a6ea8;
+            color:
+                #0a6ea8;
         }
 
         .status-traite {
-            background: #eaf8f0;
+            background:
+                #eaf8f0;
 
-            color: var(--vert);
+            color:
+                var(--vert);
         }
 
         .prospect-actions {
-            display: flex;
-            flex-wrap: wrap;
+            display:
+                flex;
 
-            gap: 6px;
+            flex-wrap:
+                wrap;
+
+            gap:
+                6px;
         }
 
         .action-button {
             padding:
                 7px 9px;
 
-            border: none;
-            border-radius: 8px;
+            border:
+                none;
 
-            font-size: 9px;
-            font-weight: 800;
+            border-radius:
+                8px;
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
         }
 
         .action-read {
-            background: #e7f5ff;
+            background:
+                #e7f5ff;
 
-            color: #0a6ea8;
+            color:
+                #0a6ea8;
         }
 
         .action-done {
-            background: #eaf8f0;
+            background:
+                #eaf8f0;
 
-            color: var(--vert);
+            color:
+                var(--vert);
         }
 
         .action-button:disabled {
-            opacity: .45;
+            opacity:
+                .45;
 
-            cursor: not-allowed;
+            cursor:
+                not-allowed;
         }
 
         .table-message {
-            padding: 28px !important;
+            padding:
+                28px !important;
 
-            text-align: center;
+            text-align:
+                center;
 
-            color: var(--gris) !important;
+            color:
+                var(--gris) !important;
         }
 
         .table-error {
-            color: var(--rouge) !important;
+            color:
+                var(--rouge) !important;
         }
 
 
-        /* =========================================
-           SÉCURITÉ
-        ========================================= */
+        /* =====================================================
+           BAS PAGE
+        ===================================================== */
 
         .bottom-grid {
-            display: grid;
+            display:
+                grid;
 
             grid-template-columns:
                 1.4fr .6fr;
 
-            gap: 20px;
+            gap:
+                20px;
         }
 
         .panel {
-            padding: 23px;
+            padding:
+                23px;
 
             border:
-                1px solid #e6edf3;
+                1px solid
+                #e6edf3;
 
-            border-radius: 17px;
+            border-radius:
+                17px;
 
-            background: white;
+            background:
+                white;
         }
 
         .panel h3 {
-            color: var(--bleu-fonce);
+            color:
+                var(--bleu-fonce);
 
-            font-size: 16px;
+            font-size:
+                16px;
         }
 
         .panel p {
-            margin-top: 8px;
+            margin-top:
+                8px;
 
-            color: var(--gris);
+            color:
+                var(--gris);
 
-            font-size: 11px;
+            font-size:
+                11px;
 
-            line-height: 1.7;
+            line-height:
+                1.7;
         }
 
         .security-card {
-            padding: 24px;
+            padding:
+                24px;
 
-            border-radius: 17px;
+            border-radius:
+                17px;
 
-            color: white;
+            color:
+                white;
 
             background:
                 linear-gradient(
@@ -1060,73 +1540,109 @@
         }
 
         .security-card p {
-            color: #c6e1f1;
+            color:
+                #c6e1f1;
 
-            font-size: 11px;
+            font-size:
+                11px;
 
-            line-height: 1.7;
+            line-height:
+                1.7;
         }
 
         .security-indicator {
-            display: flex;
-            align-items: center;
+            display:
+                flex;
 
-            gap: 8px;
+            align-items:
+                center;
 
-            margin-top: 20px;
+            gap:
+                8px;
+
+            margin-top:
+                20px;
 
             padding:
                 10px 12px;
 
-            border-radius: 10px;
+            border-radius:
+                10px;
 
             background:
-                rgba(255,255,255,.08);
+                rgba(
+                    255,
+                    255,
+                    255,
+                    .08
+                );
 
-            font-size: 10px;
+            font-size:
+                10px;
         }
 
         .green-dot {
-            width: 9px;
-            height: 9px;
+            width:
+                9px;
 
-            border-radius: 50%;
+            height:
+                9px;
 
-            background: #47e39c;
+            border-radius:
+                50%;
+
+            background:
+                #47e39c;
         }
 
 
-        /* =========================================
+        /* =====================================================
            MOBILE
-        ========================================= */
+        ===================================================== */
 
         .sidebar-overlay {
-            display: none;
+            display:
+                none;
 
-            position: fixed;
+            position:
+                fixed;
 
-            inset: 0;
+            inset:
+                0;
 
-            z-index: 900;
+            z-index:
+                900;
 
             background:
-                rgba(0,0,0,.45);
+                rgba(
+                    0,
+                    0,
+                    0,
+                    .45
+                );
         }
 
         .sidebar-overlay.active {
-            display: block;
+            display:
+                block;
         }
 
         @media (max-width: 1100px) {
 
             .stats-grid {
                 grid-template-columns:
-                    repeat(2,1fr);
+                    repeat(
+                        2,
+                        1fr
+                    );
             }
 
             .modules-grid {
                 grid-template-columns:
-                    repeat(2,1fr);
+                    repeat(
+                        2,
+                        1fr
+                    );
             }
 
             .bottom-grid {
@@ -1139,14 +1655,16 @@
         @media (max-width: 850px) {
 
             .admin-layout {
-                display: block;
+                display:
+                    block;
             }
 
             .sidebar {
                 transform:
                     translateX(-100%);
 
-                transition: .3s;
+                transition:
+                    .3s;
             }
 
             .sidebar.open {
@@ -1155,11 +1673,13 @@
             }
 
             .main-content {
-                width: 100%;
+                width:
+                    100%;
             }
 
             .mobile-menu-button {
-                display: block;
+                display:
+                    block;
             }
 
             .topbar {
@@ -1173,7 +1693,8 @@
             }
 
             .admin-profile {
-                display: none;
+                display:
+                    none;
             }
 
         }
@@ -1181,7 +1702,8 @@
         @media (max-width: 600px) {
 
             .site-button {
-                display: none;
+                display:
+                    none;
             }
 
             .stats-grid,
@@ -1191,13 +1713,16 @@
             }
 
             .welcome-content h2 {
-                font-size: 24px;
+                font-size:
+                    24px;
             }
 
             .prospects-toolbar {
-                align-items: flex-start;
+                align-items:
+                    flex-start;
 
-                flex-direction: column;
+                flex-direction:
+                    column;
             }
 
         }
@@ -1209,7 +1734,9 @@
 <body>
 
 
-    <!-- CHARGEMENT -->
+    <!-- =====================================================
+         CHARGEMENT
+    ===================================================== -->
 
     <div
         class="page-loader"
@@ -1238,7 +1765,9 @@
     <div class="admin-layout">
 
 
-        <!-- SIDEBAR -->
+        <!-- =================================================
+             MENU LATÉRAL
+        ================================================= -->
 
         <aside
             class="sidebar"
@@ -1276,8 +1805,13 @@
                     href="dashboard.html"
                     class="nav-item active"
                 >
-                    <span class="nav-icon">🏠</span>
+
+                    <span class="nav-icon">
+                        🏠
+                    </span>
+
                     Tableau de bord
+
                 </a>
 
             </nav>
@@ -1289,49 +1823,88 @@
 
             <nav class="sidebar-nav">
 
+
+                <!-- PRODUITS -->
+
                 <button
                     type="button"
                     class="nav-item module-coming"
                     data-module="Produits"
                 >
-                    <span class="nav-icon">📦</span>
+
+                    <span class="nav-icon">
+                        📦
+                    </span>
+
                     Produits
+
                 </button>
 
-                <button
-                    type="button"
-                    class="nav-item module-coming"
-                    data-module="Services"
+
+                <!-- SERVICES : ACTIF -->
+
+                <a
+                    href="services.html"
+                    class="nav-item"
                 >
-                    <span class="nav-icon">🛠️</span>
+
+                    <span class="nav-icon">
+                        🛠️
+                    </span>
+
                     Services
-                </button>
+
+                </a>
+
+
+                <!-- PROJETS -->
 
                 <button
                     type="button"
                     class="nav-item module-coming"
                     data-module="Projets"
                 >
-                    <span class="nav-icon">🏗️</span>
+
+                    <span class="nav-icon">
+                        🏗️
+                    </span>
+
                     Projets
+
                 </button>
+
+
+                <!-- ACTUALITÉS -->
 
                 <button
                     type="button"
                     class="nav-item module-coming"
                     data-module="Actualités"
                 >
-                    <span class="nav-icon">📰</span>
+
+                    <span class="nav-icon">
+                        📰
+                    </span>
+
                     Actualités
+
                 </button>
+
+
+                <!-- IMAGES -->
 
                 <button
                     type="button"
                     class="nav-item module-coming"
                     data-module="Images"
                 >
-                    <span class="nav-icon">🖼️</span>
+
+                    <span class="nav-icon">
+                        🖼️
+                    </span>
+
                     Images
+
                 </button>
 
             </nav>
@@ -1343,22 +1916,34 @@
 
             <nav class="sidebar-nav">
 
+
                 <button
                     type="button"
                     class="nav-item"
                     id="messagesNavButton"
                 >
-                    <span class="nav-icon">✉️</span>
+
+                    <span class="nav-icon">
+                        ✉️
+                    </span>
+
                     Messages reçus
+
                 </button>
+
 
                 <button
                     type="button"
                     class="nav-item module-coming"
                     data-module="Informations entreprise"
                 >
-                    <span class="nav-icon">🏢</span>
+
+                    <span class="nav-icon">
+                        🏢
+                    </span>
+
                     Informations
+
                 </button>
 
             </nav>
@@ -1368,20 +1953,31 @@
 
                 <a
                     href="../index.html"
-                    class="nav-item"
                     target="_blank"
+                    class="nav-item"
                 >
-                    <span class="nav-icon">🌐</span>
+
+                    <span class="nav-icon">
+                        🌐
+                    </span>
+
                     Voir le site
+
                 </a>
+
 
                 <button
                     type="button"
                     class="nav-item logout-button"
                     id="logoutButton"
                 >
-                    <span class="nav-icon">🚪</span>
+
+                    <span class="nav-icon">
+                        🚪
+                    </span>
+
                     Se déconnecter
+
                 </button>
 
             </div>
@@ -1389,10 +1985,14 @@
         </aside>
 
 
-        <!-- CONTENU -->
+        <!-- =================================================
+             CONTENU
+        ================================================= -->
 
         <main class="main-content">
 
+
+            <!-- TOPBAR -->
 
             <header class="topbar">
 
@@ -1406,6 +2006,7 @@
                         ☰
                     </button>
 
+
                     <div class="page-title">
 
                         <h1>
@@ -1413,7 +2014,8 @@
                         </h1>
 
                         <p>
-                            Administration du site KY5 GLOBAL TRADE
+                            Administration du site
+                            KY5 GLOBAL TRADE
                         </p>
 
                     </div>
@@ -1430,6 +2032,7 @@
                     >
                         🌐 Voir le site
                     </a>
+
 
                     <div class="admin-profile">
 
@@ -1451,7 +2054,9 @@
             <div class="dashboard-content">
 
 
-                <!-- BIENVENUE -->
+                <!-- =================================================
+                     BIENVENUE
+                ================================================= -->
 
                 <section class="welcome-banner">
 
@@ -1466,9 +2071,10 @@
                         </h2>
 
                         <p>
-                            Gérez le site KY5 GLOBAL TRADE et consultez
-                            directement les demandes envoyées par les
-                            prospects depuis cet espace administrateur.
+                            Gérez progressivement le site
+                            KY5 GLOBAL TRADE et consultez
+                            directement les demandes reçues
+                            depuis cet espace administrateur.
                         </p>
 
                     </div>
@@ -1476,9 +2082,12 @@
                 </section>
 
 
-                <!-- STATISTIQUES -->
+                <!-- =================================================
+                     STATISTIQUES
+                ================================================= -->
 
                 <section class="stats-grid">
+
 
                     <div class="stat-card">
 
@@ -1607,7 +2216,9 @@
                 </section>
 
 
-                <!-- MODULES -->
+                <!-- =================================================
+                     MODULES
+                ================================================= -->
 
                 <div class="section-header">
 
@@ -1616,13 +2227,17 @@
                     </h3>
 
                     <p>
-                        Accédez aux principaux modules administratifs.
+                        Accédez aux principaux modules
+                        administratifs.
                     </p>
 
                 </div>
 
 
                 <section class="modules-grid">
+
+
+                    <!-- MESSAGES -->
 
                     <div
                         class="module-card clickable"
@@ -1640,11 +2255,12 @@
                             </h4>
 
                             <p>
-                                Consultez toutes les demandes reçues
-                                depuis le formulaire Prospect.
+                                Consultez toutes les demandes
+                                reçues depuis le formulaire Prospect.
                             </p>
 
                         </div>
+
 
                         <div class="module-bottom">
 
@@ -1664,9 +2280,11 @@
                     </div>
 
 
-                    <div
-                        class="module-card clickable module-coming"
-                        data-module="Services"
+                    <!-- SERVICES : VRAI MODULE ACTIF -->
+
+                    <a
+                        href="services.html"
+                        class="module-card"
                     >
 
                         <div>
@@ -1680,15 +2298,18 @@
                             </h4>
 
                             <p>
-                                Administrer les services proposés par KY5.
+                                Ajouter, modifier, masquer
+                                ou supprimer les services proposés
+                                par KY5 GLOBAL TRADE.
                             </p>
 
                         </div>
 
+
                         <div class="module-bottom">
 
-                            <span class="module-status">
-                                Prochaine étape
+                            <span class="module-status active">
+                                Gestion active
                             </span>
 
                             <span class="module-arrow">
@@ -1697,8 +2318,10 @@
 
                         </div>
 
-                    </div>
+                    </a>
 
+
+                    <!-- PROJETS -->
 
                     <div
                         class="module-card clickable module-coming"
@@ -1716,10 +2339,132 @@
                             </h4>
 
                             <p>
-                                Ajouter et modifier les projets de l'entreprise.
+                                Ajouter et modifier
+                                les projets de l'entreprise.
                             </p>
 
                         </div>
+
+
+                        <div class="module-bottom">
+
+                            <span class="module-status">
+                                Prochaine étape
+                            </span>
+
+                            <span class="module-arrow">
+                                →
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRODUITS -->
+
+                    <div
+                        class="module-card clickable module-coming"
+                        data-module="Produits"
+                    >
+
+                        <div>
+
+                            <div class="module-icon">
+                                📦
+                            </div>
+
+                            <h4>
+                                Produits
+                            </h4>
+
+                            <p>
+                                Gérer les produits,
+                                fournitures et équipements.
+                            </p>
+
+                        </div>
+
+
+                        <div class="module-bottom">
+
+                            <span class="module-status">
+                                Prochaine étape
+                            </span>
+
+                            <span class="module-arrow">
+                                →
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACTUALITÉS -->
+
+                    <div
+                        class="module-card clickable module-coming"
+                        data-module="Actualités"
+                    >
+
+                        <div>
+
+                            <div class="module-icon">
+                                📰
+                            </div>
+
+                            <h4>
+                                Actualités
+                            </h4>
+
+                            <p>
+                                Publier les annonces
+                                et nouvelles de l'entreprise.
+                            </p>
+
+                        </div>
+
+
+                        <div class="module-bottom">
+
+                            <span class="module-status">
+                                Prochaine étape
+                            </span>
+
+                            <span class="module-arrow">
+                                →
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- INFORMATIONS -->
+
+                    <div
+                        class="module-card clickable module-coming"
+                        data-module="Informations entreprise"
+                    >
+
+                        <div>
+
+                            <div class="module-icon">
+                                🏢
+                            </div>
+
+                            <h4>
+                                Informations
+                            </h4>
+
+                            <p>
+                                Modifier les coordonnées
+                                et informations de KY5.
+                            </p>
+
+                        </div>
+
 
                         <div class="module-bottom">
 
@@ -1738,7 +2483,9 @@
                 </section>
 
 
-                <!-- PROSPECTS -->
+                <!-- =================================================
+                     PROSPECTS
+                ================================================= -->
 
                 <section
                     class="prospects-panel"
@@ -1754,11 +2501,12 @@
                             </h3>
 
                             <p>
-                                Données reçues directement depuis
-                                le formulaire Prospect du site.
+                                Données reçues directement
+                                depuis le formulaire Prospect du site.
                             </p>
 
                         </div>
+
 
                         <button
                             type="button"
@@ -1774,24 +2522,35 @@
                     <div class="prospects-summary">
 
                         <span class="summary-badge">
+
                             Total :
+
                             <strong id="prospectsSummaryTotal">
                                 0
                             </strong>
+
                         </span>
 
+
                         <span class="summary-badge new">
+
                             Non lus :
+
                             <strong id="prospectsUnread">
                                 0
                             </strong>
+
                         </span>
 
+
                         <span class="summary-badge done">
+
                             Traités :
+
                             <strong id="prospectsDone">
                                 0
                             </strong>
+
                         </span>
 
                     </div>
@@ -1860,9 +2619,12 @@
                 </section>
 
 
-                <!-- INFORMATIONS -->
+                <!-- =================================================
+                     INFORMATIONS
+                ================================================= -->
 
                 <section class="bottom-grid">
+
 
                     <div class="panel">
 
@@ -1871,16 +2633,18 @@
                         </h3>
 
                         <p>
-                            Les nouvelles demandes de prospects sont
-                            automatiquement enregistrées dans Supabase
-                            et deviennent visibles dans ce tableau de bord.
+                            Les nouvelles demandes de prospects
+                            sont automatiquement enregistrées
+                            dans Supabase.
                         </p>
 
                         <p>
-                            Utilisez le bouton <strong>Lu</strong>
-                            lorsqu'une demande a été consultée, puis
-                            <strong>Traité</strong> lorsque le suivi
-                            du prospect a été effectué.
+                            Utilisez le bouton
+                            <strong>Lu</strong>
+                            lorsqu'une demande a été consultée,
+                            puis
+                            <strong>Traité</strong>
+                            lorsque le suivi a été effectué.
                         </p>
 
                     </div>
@@ -1897,8 +2661,9 @@
                         </h3>
 
                         <p>
-                            L'accès à ce tableau de bord nécessite
-                            une session administrateur Supabase valide.
+                            L'accès à ce tableau de bord
+                            nécessite une session administrateur
+                            Supabase valide.
                         </p>
 
                         <div class="security-indicator">
@@ -1921,7 +2686,9 @@
     </div>
 
 
-    <!-- CONFIGURATION -->
+    <!-- =====================================================
+         CONFIGURATION SUPABASE
+    ===================================================== -->
 
     <script src="config.js"></script>
 
@@ -1935,10 +2702,14 @@
         /*
         ==========================================================
         KY5 GLOBAL TRADE
-        TABLEAU DE BORD ADMIN
+        TABLEAU DE BORD ADMINISTRATEUR
         ==========================================================
         */
 
+
+        /* =====================================================
+           ÉLÉMENTS
+        ===================================================== */
 
         const pageLoader =
             document.getElementById(
@@ -2054,18 +2825,22 @@
             );
 
 
-        /* =========================================
-           SUPABASE
-        ========================================= */
+        /* =====================================================
+           INITIALISATION SUPABASE
+        ===================================================== */
 
-        let supabaseClient = null;
+        let supabaseClient =
+            null;
 
 
         try {
 
             if (
-                typeof SUPABASE_URL === "undefined" ||
-                typeof SUPABASE_PUBLISHABLE_KEY === "undefined"
+                typeof SUPABASE_URL ===
+                    "undefined" ||
+
+                typeof SUPABASE_PUBLISHABLE_KEY ===
+                    "undefined"
             ) {
 
                 throw new Error(
@@ -2075,7 +2850,9 @@
             }
 
 
-            if (!window.supabase) {
+            if (
+                !window.supabase
+            ) {
 
                 throw new Error(
                     "Bibliothèque Supabase introuvable."
@@ -2101,6 +2878,7 @@
                 error
             );
 
+
             alert(
                 "Impossible de charger la configuration Supabase."
             );
@@ -2108,13 +2886,17 @@
         }
 
 
-        /* =========================================
-           SÉCURITÉ TEXTE
-        ========================================= */
+        /* =====================================================
+           SÉCURISER LE TEXTE
+        ===================================================== */
 
-        function escapeHtml(value) {
+        function escapeHtml(
+            value
+        ) {
 
-            return String(value ?? "")
+            return String(
+                value ?? ""
+            )
 
                 .replace(
                     /&/g,
@@ -2144,11 +2926,13 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            DATE
-        ========================================= */
+        ===================================================== */
 
-        function formatDate(value) {
+        function formatDate(
+            value
+        ) {
 
             if (!value) {
 
@@ -2158,7 +2942,9 @@
 
 
             const date =
-                new Date(value);
+                new Date(
+                    value
+                );
 
 
             if (
@@ -2191,11 +2977,13 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            STATUT
-        ========================================= */
+        ===================================================== */
 
-        function getStatus(prospect) {
+        function getStatus(
+            prospect
+        ) {
 
             const statut =
                 String(
@@ -2214,7 +3002,9 @@
             }
 
 
-            if (prospect.lu) {
+            if (
+                prospect.lu
+            ) {
 
                 return "lu";
 
@@ -2226,12 +3016,13 @@
         }
 
 
-        /* =========================================
-           AFFICHER LES PROSPECTS
-        ========================================= */
+        /* =====================================================
+           AFFICHAGE PROSPECTS
+        ===================================================== */
 
-        function renderProspects(prospects) {
-
+        function renderProspects(
+            prospects
+        ) {
 
             const total =
                 prospects.length;
@@ -2240,9 +3031,13 @@
             const unread =
                 prospects.filter(
 
-                    function (prospect) {
+                    function (
+                        prospect
+                    ) {
 
-                        return !prospect.lu;
+                        return (
+                            !prospect.lu
+                        );
 
                     }
 
@@ -2252,7 +3047,9 @@
             const done =
                 prospects.filter(
 
-                    function (prospect) {
+                    function (
+                        prospect
+                    ) {
 
                         const statut =
                             String(
@@ -2306,8 +3103,9 @@
                       " demande(s)";
 
 
-            if (total === 0) {
-
+            if (
+                total === 0
+            ) {
 
                 prospectsTableBody.innerHTML = `
 
@@ -2336,8 +3134,9 @@
 
                     .map(
 
-                        function (prospect) {
-
+                        function (
+                            prospect
+                        ) {
 
                             const status =
                                 getStatus(
@@ -2542,46 +3341,30 @@
                                         >
 
                                             <button
-
                                                 type="button"
-
                                                 class="
                                                     action-button
                                                     action-read
                                                 "
-
                                                 data-action="read"
-
                                                 data-id="${prospect.id}"
-
                                                 ${readDisabled}
-
                                             >
-
                                                 Lu
-
                                             </button>
 
 
                                             <button
-
                                                 type="button"
-
                                                 class="
                                                     action-button
                                                     action-done
                                                 "
-
                                                 data-action="done"
-
                                                 data-id="${prospect.id}"
-
                                                 ${doneDisabled}
-
                                             >
-
                                                 Traité
-
                                             </button>
 
                                         </div>
@@ -2601,14 +3384,15 @@
         }
 
 
-        /* =========================================
-           CHARGER SUPABASE
-        ========================================= */
+        /* =====================================================
+           CHARGER PROSPECTS
+        ===================================================== */
 
         async function loadProspects() {
 
-
-            if (!supabaseClient) {
+            if (
+                !supabaseClient
+            ) {
 
                 return;
 
@@ -2624,7 +3408,6 @@
 
 
             try {
-
 
                 const {
                     data,
@@ -2667,7 +3450,9 @@
                         );
 
 
-                if (error) {
+                if (
+                    error
+                ) {
 
                     throw error;
 
@@ -2678,17 +3463,14 @@
                     data || []
                 );
 
-
             }
-            catch (error) {
-
+            catch (
+                error
+            ) {
 
                 console.error(
-
                     "Erreur chargement prospects :",
-
                     error
-
                 );
 
 
@@ -2720,7 +3502,6 @@
             }
             finally {
 
-
                 refreshProspectsButton.disabled =
                     false;
 
@@ -2733,12 +3514,13 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            MARQUER LU
-        ========================================= */
+        ===================================================== */
 
-        async function markAsRead(id) {
-
+        async function markAsRead(
+            id
+        ) {
 
             const {
                 error
@@ -2766,7 +3548,9 @@
                     );
 
 
-            if (error) {
+            if (
+                error
+            ) {
 
                 throw error;
 
@@ -2775,12 +3559,13 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            MARQUER TRAITÉ
-        ========================================= */
+        ===================================================== */
 
-        async function markAsDone(id) {
-
+        async function markAsDone(
+            id
+        ) {
 
             const {
                 error
@@ -2812,7 +3597,9 @@
                     );
 
 
-            if (error) {
+            if (
+                error
+            ) {
 
                 throw error;
 
@@ -2821,16 +3608,17 @@
         }
 
 
-        /* =========================================
-           CLIC ACTIONS
-        ========================================= */
+        /* =====================================================
+           ACTIONS PROSPECT
+        ===================================================== */
 
         prospectsTableBody.addEventListener(
 
             "click",
 
-            async function (event) {
-
+            async function (
+                event
+            ) {
 
                 const button =
 
@@ -2841,7 +3629,9 @@
                     );
 
 
-                if (!button) {
+                if (
+                    !button
+                ) {
 
                     return;
 
@@ -2866,7 +3656,9 @@
                     );
 
 
-                if (!id) {
+                if (
+                    !id
+                ) {
 
                     return;
 
@@ -2878,7 +3670,6 @@
 
 
                 try {
-
 
                     if (
                         action === "read"
@@ -2904,24 +3695,19 @@
 
                     await loadProspects();
 
-
                 }
-                catch (error) {
-
+                catch (
+                    error
+                ) {
 
                     console.error(
-
                         "Erreur modification prospect :",
-
                         error
-
                     );
 
 
                     alert(
-
                         "Impossible de modifier cette demande."
-
                     );
 
 
@@ -2935,14 +3721,15 @@
         );
 
 
-        /* =========================================
+        /* =====================================================
            SESSION ADMIN
-        ========================================= */
+        ===================================================== */
 
         async function verifyAdminSession() {
 
-
-            if (!supabaseClient) {
+            if (
+                !supabaseClient
+            ) {
 
                 window.location.href =
                     "index.html";
@@ -2953,7 +3740,6 @@
 
 
             try {
-
 
                 const {
                     data,
@@ -2967,7 +3753,9 @@
                         .getSession();
 
 
-                if (error) {
+                if (
+                    error
+                ) {
 
                     throw error;
 
@@ -3011,17 +3799,14 @@
                     "hidden"
                 );
 
-
             }
-            catch (error) {
-
+            catch (
+                error
+            ) {
 
                 console.error(
-
                     "Erreur session :",
-
                     error
-
                 );
 
 
@@ -3033,9 +3818,9 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            ACTUALISER
-        ========================================= */
+        ===================================================== */
 
         refreshProspectsButton.addEventListener(
 
@@ -3046,12 +3831,11 @@
         );
 
 
-        /* =========================================
+        /* =====================================================
            ALLER AUX MESSAGES
-        ========================================= */
+        ===================================================== */
 
         function openProspects() {
-
 
             prospectsSection.scrollIntoView({
 
@@ -3087,9 +3871,9 @@
         );
 
 
-        /* =========================================
+        /* =====================================================
            DÉCONNEXION
-        ========================================= */
+        ===================================================== */
 
         logoutButton.addEventListener(
 
@@ -3097,25 +3881,27 @@
 
             async function () {
 
-
                 const confirmation =
 
                     confirm(
-
                         "Voulez-vous vraiment vous déconnecter ?"
-
                     );
 
 
-                if (!confirmation) {
+                if (
+                    !confirmation
+                ) {
 
                     return;
 
                 }
 
 
-                try {
+                logoutButton.disabled =
+                    true;
 
+
+                try {
 
                     await supabaseClient
 
@@ -3123,12 +3909,13 @@
 
                         .signOut();
 
-
                 }
-                catch (error) {
-
+                catch (
+                    error
+                ) {
 
                     console.error(
+                        "Erreur déconnexion :",
                         error
                     );
 
@@ -3143,16 +3930,15 @@
         );
 
 
-        /* =========================================
-           MENU MOBILE
-        ========================================= */
+        /* =====================================================
+           MOBILE
+        ===================================================== */
 
         mobileMenuButton.addEventListener(
 
             "click",
 
             function () {
-
 
                 sidebar.classList.add(
                     "open"
@@ -3179,7 +3965,6 @@
 
         function closeMobileSidebar() {
 
-
             sidebar.classList.remove(
                 "open"
             );
@@ -3192,9 +3977,9 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            MODULES FUTURS
-        ========================================= */
+        ===================================================== */
 
         document
 
@@ -3204,15 +3989,15 @@
 
             .forEach(
 
-                function (element) {
-
+                function (
+                    element
+                ) {
 
                     element.addEventListener(
 
                         "click",
 
                         function () {
-
 
                             const moduleName =
 
@@ -3243,12 +4028,13 @@
             );
 
 
-        /* =========================================
-           SESSION CHANGÉE
-        ========================================= */
+        /* =====================================================
+           SURVEILLANCE SESSION
+        ===================================================== */
 
-        if (supabaseClient) {
-
+        if (
+            supabaseClient
+        ) {
 
             supabaseClient
 
@@ -3260,7 +4046,6 @@
                         event,
                         session
                     ) {
-
 
                         if (
                             event ===
@@ -3291,9 +4076,9 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
            DÉMARRAGE
-        ========================================= */
+        ===================================================== */
 
         verifyAdminSession();
 
