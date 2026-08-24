@@ -1119,6 +1119,48 @@
                 );
         }
 
+        .dynamic-service-media {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .dynamic-service-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #04152c;
+        }
+
+        .dynamic-service-ad {
+            width: 100%;
+            margin: 14px 0 0;
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: #eef8fd;
+            color: #315b78;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .dynamic-service-link {
+            width: 100%;
+            min-height: 40px;
+            margin-top: 10px;
+            padding: 11px 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: #075ca8;
+            color: #ffffff;
+            font-size: 8px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
         .dynamic-service-icon {
             font-size: 78px;
 
@@ -3525,180 +3567,104 @@
 
             try {
 
-                const {
-                    data,
-                    error
-                } =
+                const { data, error } = await ky5Supabase
+                    .from("services")
+                    .select(`
+                        id,
+                        titre,
+                        description,
+                        icone,
+                        ordre,
+                        actif,
+                        categorie,
+                        photo_url,
+                        video_url,
+                        video_lien,
+                        texte_publicitaire,
+                        lien_publicitaire,
+                        bouton_publicitaire
+                    `)
+                    .eq("actif", true)
+                    .order("ordre", { ascending: true });
 
-                    await ky5Supabase
+                if (error) throw error;
 
-                        .from(
-                            "services"
-                        )
+                const services = data || [];
 
-                        .select(
-                            `
-                            id,
-                            titre,
-                            description,
-                            icone,
-                            ordre,
-                            actif
-                            `
-                        )
-
-                        .eq(
-                            "actif",
-                            true
-                        )
-
-                        .order(
-                            "ordre",
-                            {
-                                ascending:
-                                    true
-                            }
-                        );
-
-
-                if (error) {
-
-                    throw error;
-
-                }
-
-
-                const services =
-                    data || [];
-
-
-                if (
-                    services.length === 0
-                ) {
-
-                    servicesAdminContainer.style.display =
-                        "none";
-
+                if (services.length === 0) {
+                    servicesAdminContainer.style.display = "none";
                     return;
-
                 }
 
+                dynamicServicesGrid.innerHTML = services.map(function (service) {
+                    const titre = escapeHtml(service.titre || "Service KY5");
+                    const description = escapeHtml(service.description || "Service proposé par KY5 GLOBAL TRADE.");
+                    const icone = escapeHtml(service.icone || "🛠️");
+                    const categorie = escapeHtml(service.categorie || "KY5");
+                    const photoUrl = escapeHtml(service.photo_url || "");
+                    const videoUrl = escapeHtml(service.video_url || "");
+                    const videoLien = escapeHtml(service.video_lien || "");
+                    const textePublicitaire = escapeHtml(service.texte_publicitaire || "");
+                    const lienPublicitaire = escapeHtml(service.lien_publicitaire || "");
+                    const boutonPublicitaire = escapeHtml(service.bouton_publicitaire || "En savoir plus");
 
-                dynamicServicesGrid.innerHTML =
+                    let mediaHtml = `
+                        <div class="service-image dynamic-service-image">
+                            <div class="dynamic-service-icon">${icone}</div>
+                        </div>`;
 
-                    services
+                    if (videoUrl) {
+                        mediaHtml = `
+                            <div class="service-image">
+                                <video class="dynamic-service-video" controls playsinline preload="metadata">
+                                    <source src="${videoUrl}">
+                                    Votre navigateur ne prend pas en charge cette vidéo.
+                                </video>
+                            </div>`;
+                    } else if (photoUrl) {
+                        mediaHtml = `
+                            <div class="service-image">
+                                <img class="dynamic-service-media" src="${photoUrl}" alt="${titre}" loading="lazy">
+                            </div>`;
+                    }
 
-                        .map(
+                    const videoLinkHtml = videoLien ? `
+                        <a class="dynamic-service-link" href="${videoLien}" target="_blank" rel="noopener noreferrer">
+                            Voir la vidéo
+                        </a>` : "";
 
-                            function (service) {
+                    const adTextHtml = textePublicitaire ? `
+                        <div class="dynamic-service-ad">${textePublicitaire}</div>` : "";
 
-                                const titre =
-                                    escapeHtml(
-                                        service.titre ||
-                                        "Service KY5"
-                                    );
+                    const adLinkHtml = lienPublicitaire ? `
+                        <a class="dynamic-service-link" href="${lienPublicitaire}" target="_blank" rel="noopener noreferrer">
+                            ${boutonPublicitaire}
+                        </a>` : "";
 
+                    return `
+                        <article class="service-card">
+                            ${mediaHtml}
+                            <span class="service-badge">${categorie}</span>
+                            <div class="service-content">
+                                <h3>${titre}</h3>
+                                <p>${description}</p>
+                                ${adTextHtml}
+                                ${videoLinkHtml}
+                                ${adLinkHtml}
+                                <button type="button" class="service-action dynamic-service-action" data-service="${titre}">
+                                    Déposer une demande
+                                </button>
+                            </div>
+                        </article>`;
+                }).join("");
 
-                                const description =
-                                    escapeHtml(
-                                        service.description ||
-                                        "Service proposé par KY5 GLOBAL TRADE."
-                                    );
-
-
-                                const icone =
-                                    escapeHtml(
-                                        service.icone ||
-                                        "🛠️"
-                                    );
-
-
-                                return `
-
-                                    <article
-                                        class="service-card"
-                                    >
-
-                                        <div
-                                            class="
-                                                service-image
-                                                dynamic-service-image
-                                            "
-                                        >
-
-                                            <div
-                                                class="dynamic-service-icon"
-                                            >
-                                                ${icone}
-                                            </div>
-
-                                        </div>
-
-
-                                        <span
-                                            class="service-badge"
-                                        >
-                                            KY5
-                                        </span>
-
-
-                                        <div
-                                            class="service-content"
-                                        >
-
-                                            <h3>
-                                                ${titre}
-                                            </h3>
-
-                                            <p>
-                                                ${description}
-                                            </p>
-
-
-                                            <button
-                                                type="button"
-                                                class="
-                                                    service-action
-                                                    dynamic-service-action
-                                                "
-                                                data-service="${titre}"
-                                            >
-                                                Déposer une demande
-                                            </button>
-
-                                        </div>
-
-                                    </article>
-
-                                `;
-
-                            }
-
-                        )
-
-                        .join("");
-
-
-                servicesAdminContainer.style.display =
-                    "block";
-
-
+                servicesAdminContainer.style.display = "block";
                 activateServiceButtons();
 
+            } catch (error) {
+                console.error("Erreur chargement services Supabase :", error);
+                servicesAdminContainer.style.display = "none";
             }
-            catch (error) {
-
-                console.error(
-                    "Erreur chargement services Supabase :",
-                    error
-                );
-
-
-                servicesAdminContainer.style.display =
-                    "none";
-
-            }
-
         }
 
 
