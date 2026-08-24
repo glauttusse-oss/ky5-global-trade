@@ -1,0 +1,3081 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+
+    <title>Gestion des services | KY5 GLOBAL TRADE</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bleu-fonce: #061b33;
+            --bleu-fonce-2: #092848;
+            --bleu: #0056b3;
+            --bleu-clair: #00a8ff;
+            --bleu-tres-clair: #eaf7ff;
+            --blanc: #ffffff;
+            --gris-fond: #f4f7fb;
+            --gris: #6c757d;
+            --gris-clair: #e4ebf2;
+            --texte: #17324d;
+            --vert: #198754;
+            --rouge: #dc3545;
+            --orange: #f59f00;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--gris-fond);
+            color: var(--texte);
+        }
+
+        button,
+        input,
+        textarea,
+        select,
+        a {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           CHARGEMENT
+        ===================================================== */
+
+        .page-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #020c17,
+                    #061b33,
+                    #08487c
+                );
+
+            color: white;
+        }
+
+        .page-loader.hidden {
+            display: none;
+        }
+
+        .loader-logo {
+            width: 82px;
+            height: 82px;
+
+            border-radius: 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: white;
+            color: var(--bleu);
+
+            font-size: 26px;
+            font-weight: 900;
+
+            margin-bottom: 20px;
+        }
+
+        .loader-spinner {
+            width: 36px;
+            height: 36px;
+
+            border: 3px solid rgba(255, 255, 255, 0.25);
+            border-top-color: white;
+
+            border-radius: 50%;
+
+            animation: spin 0.8s linear infinite;
+
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* =====================================================
+           STRUCTURE
+        ===================================================== */
+
+        .admin-layout {
+            min-height: 100vh;
+
+            display: grid;
+
+            grid-template-columns:
+                265px 1fr;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+            position: fixed;
+
+            top: 0;
+            bottom: 0;
+            left: 0;
+
+            width: 265px;
+
+            padding: 25px 18px;
+
+            overflow-y: auto;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #061b33,
+                    #03111f
+                );
+
+            z-index: 1000;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+
+            padding:
+                5px 8px 25px;
+
+            margin-bottom: 20px;
+
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-logo {
+            width: 52px;
+            height: 52px;
+
+            border-radius: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    white,
+                    #c8efff
+                );
+
+            color: var(--bleu);
+
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .sidebar-brand-text strong {
+            display: block;
+
+            font-size: 14px;
+        }
+
+        .sidebar-brand-text span {
+            display: block;
+
+            margin-top: 5px;
+
+            color: #96d8f7;
+
+            font-size: 10px;
+        }
+
+        .menu-label {
+            padding: 10px 13px;
+
+            margin-top: 12px;
+
+            color: #7092ac;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.4px;
+        }
+
+        .sidebar-nav {
+            display: grid;
+
+            gap: 6px;
+        }
+
+        .nav-item {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 13px 14px;
+
+            border: none;
+            border-radius: 11px;
+
+            background: transparent;
+
+            color: #cbdce8;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            text-align: left;
+
+            transition: 0.2s ease;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            color: white;
+
+            background:
+                rgba(0, 168, 255, 0.14);
+        }
+
+        .nav-icon {
+            width: 28px;
+            height: 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 8px;
+
+            background:
+                rgba(255, 255, 255, 0.07);
+        }
+
+        .sidebar-bottom {
+            margin-top: 30px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logout-button {
+            color: #ffd0d5;
+        }
+
+
+        /* =====================================================
+           CONTENU
+        ===================================================== */
+
+        .main-content {
+            grid-column: 2;
+
+            min-height: 100vh;
+        }
+
+
+        /* =====================================================
+           TOPBAR
+        ===================================================== */
+
+        .topbar {
+            min-height: 82px;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 500;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+
+            padding:
+                16px 32px;
+
+            background: white;
+
+            border-bottom:
+                1px solid #e8edf2;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        .mobile-menu-button {
+            display: none;
+
+            width: 42px;
+            height: 42px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: #edf7fd;
+
+            color: var(--bleu);
+
+            font-size: 21px;
+        }
+
+        .page-title h1 {
+            color: var(--bleu-fonce);
+
+            font-size: 22px;
+        }
+
+        .page-title p {
+            margin-top: 5px;
+
+            color: var(--gris);
+
+            font-size: 12px;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+
+            gap: 14px;
+        }
+
+        .dashboard-button {
+            padding:
+                12px 16px;
+
+            border-radius: 10px;
+
+            background: #edf7fd;
+
+            color: var(--bleu);
+
+            text-decoration: none;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .admin-profile {
+            padding-left: 14px;
+
+            border-left:
+                1px solid #e1e8ee;
+        }
+
+        .admin-profile strong {
+            display: block;
+
+            color: var(--bleu-fonce);
+
+            font-size: 12px;
+        }
+
+        .admin-profile span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: var(--gris);
+
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .content {
+            padding:
+                30px 32px 50px;
+        }
+
+        .hero {
+            padding: 30px;
+
+            margin-bottom: 25px;
+
+            border-radius: 20px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    var(--bleu),
+                    #0077c8 55%,
+                    var(--bleu-clair)
+                );
+
+            box-shadow:
+                0 18px 45px rgba(0, 86, 179, 0.15);
+        }
+
+        .hero-small {
+            display: inline-block;
+
+            margin-bottom: 13px;
+
+            padding:
+                7px 12px;
+
+            border-radius: 30px;
+
+            background:
+                rgba(255, 255, 255, 0.14);
+
+            font-size: 10px;
+        }
+
+        .hero h2 {
+            margin-bottom: 10px;
+
+            font-size: 28px;
+        }
+
+        .hero p {
+            max-width: 700px;
+
+            color: #dff4ff;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .stats-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            padding: 20px;
+
+            border:
+                1px solid #e5edf3;
+
+            border-radius: 16px;
+
+            background: white;
+        }
+
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 15px;
+
+            border-radius: 12px;
+
+            background: var(--bleu-tres-clair);
+
+            font-size: 19px;
+        }
+
+        .stat-value {
+            color: var(--bleu-fonce);
+
+            font-size: 26px;
+            font-weight: 900;
+        }
+
+        .stat-label {
+            margin-top: 4px;
+
+            color: var(--gris);
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           GRID
+        ===================================================== */
+
+        .management-grid {
+            display: grid;
+
+            grid-template-columns:
+                380px 1fr;
+
+            gap: 20px;
+
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           FORMULAIRE
+        ===================================================== */
+
+        .panel {
+            padding: 23px;
+
+            border:
+                1px solid #e6edf3;
+
+            border-radius: 17px;
+
+            background: white;
+
+            box-shadow:
+                0 8px 25px rgba(21, 45, 65, 0.04);
+        }
+
+        .panel h3 {
+            color: var(--bleu-fonce);
+
+            font-size: 17px;
+        }
+
+        .panel-subtitle {
+            margin:
+                6px 0 20px;
+
+            color: var(--gris);
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #41586c;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .form-control {
+            width: 100%;
+
+            min-height: 44px;
+
+            padding:
+                10px 12px;
+
+            border:
+                1px solid #dbe5ed;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            color: #294257;
+
+            background: white;
+
+            font-size: 12px;
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+
+            resize: vertical;
+        }
+
+        .form-control:focus {
+            border-color: var(--bleu-clair);
+
+            box-shadow:
+                0 0 0 3px rgba(0, 168, 255, 0.08);
+        }
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding:
+                13px 14px;
+
+            margin-bottom: 17px;
+
+            border:
+                1px solid #e3ebf1;
+
+            border-radius: 11px;
+
+            background: #f9fbfd;
+        }
+
+        .toggle-row strong {
+            display: block;
+
+            font-size: 11px;
+        }
+
+        .toggle-row span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: var(--gris);
+
+            font-size: 9px;
+        }
+
+        .toggle-row input {
+            width: 18px;
+            height: 18px;
+        }
+
+        .form-actions {
+            display: flex;
+
+            gap: 10px;
+        }
+
+        .save-button {
+            flex: 1;
+
+            min-height: 44px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    var(--bleu),
+                    var(--bleu-clair)
+                );
+
+            color: white;
+
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        .cancel-button {
+            display: none;
+
+            min-height: 44px;
+
+            padding:
+                0 15px;
+
+            border:
+                1px solid #dbe5ed;
+
+            border-radius: 10px;
+
+            background: white;
+
+            color: var(--gris);
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .cancel-button.visible {
+            display: block;
+        }
+
+        .form-message {
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 11px 12px;
+
+            border-radius: 9px;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+        }
+
+        .form-message.success {
+            display: block;
+
+            background: #eaf8f0;
+
+            color: var(--vert);
+        }
+
+        .form-message.error {
+            display: block;
+
+            background: #fdebed;
+
+            color: var(--rouge);
+        }
+
+
+        /* =====================================================
+           LISTE
+        ===================================================== */
+
+        .services-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+        .services-toolbar-left h3 {
+            color: var(--bleu-fonce);
+
+            font-size: 17px;
+        }
+
+        .services-toolbar-left p {
+            margin-top: 5px;
+
+            color: var(--gris);
+
+            font-size: 10px;
+        }
+
+        .refresh-button {
+            padding:
+                10px 13px;
+
+            border:
+                1px solid #d5eaf6;
+
+            border-radius: 9px;
+
+            background: #edf7fd;
+
+            color: var(--bleu);
+
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .services-list {
+            display: grid;
+
+            gap: 13px;
+        }
+
+        .service-item {
+            display: grid;
+
+            grid-template-columns:
+                54px 1fr auto;
+
+            gap: 14px;
+
+            align-items: center;
+
+            padding: 16px;
+
+            border:
+                1px solid #e8eef3;
+
+            border-radius: 13px;
+
+            background: #fff;
+        }
+
+        .service-item.inactive {
+            opacity: 0.65;
+
+            background: #f8fafc;
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: #eaf7ff;
+
+            font-size: 22px;
+        }
+
+        .service-info h4 {
+            color: var(--bleu-fonce);
+
+            font-size: 13px;
+        }
+
+        .service-info p {
+            margin-top: 6px;
+
+            color: var(--gris);
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+        .service-meta {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 6px;
+
+            margin-top: 9px;
+        }
+
+        .badge {
+            padding:
+                5px 7px;
+
+            border-radius: 20px;
+
+            background: #f0f4f7;
+
+            color: #657989;
+
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        .badge.active {
+            background: #eaf8f0;
+
+            color: var(--vert);
+        }
+
+        .badge.inactive {
+            background: #fdebed;
+
+            color: var(--rouge);
+        }
+
+        .service-actions {
+            display: flex;
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+        .action-button {
+            min-width: 78px;
+
+            padding:
+                8px 10px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .edit-button {
+            background: #e7f5ff;
+
+            color: #0875b4;
+        }
+
+        .delete-button {
+            background: #fdebed;
+
+            color: var(--rouge);
+        }
+
+        .empty-state {
+            padding: 40px 20px;
+
+            text-align: center;
+
+            color: var(--gris);
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        .sidebar-overlay {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0, 0, 0, 0.45);
+
+            z-index: 900;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        @media (max-width: 1100px) {
+
+            .management-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+        }
+
+        @media (max-width: 850px) {
+
+            .admin-layout {
+                display: block;
+            }
+
+            .sidebar {
+                transform:
+                    translateX(-100%);
+
+                transition:
+                    0.3s ease;
+            }
+
+            .sidebar.open {
+                transform:
+                    translateX(0);
+            }
+
+            .main-content {
+                width: 100%;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+
+            .content {
+                padding:
+                    22px 18px 40px;
+            }
+
+            .admin-profile {
+                display: none;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .stats-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .topbar {
+                padding:
+                    14px 16px;
+            }
+
+            .dashboard-button {
+                display: none;
+            }
+
+            .service-item {
+                grid-template-columns:
+                    48px 1fr;
+            }
+
+            .service-actions {
+                grid-column:
+                    1 / -1;
+
+                flex-direction: row;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         CHARGEMENT
+    ====================================================== -->
+
+    <div
+        class="page-loader"
+        id="pageLoader"
+    >
+
+        <div class="loader-logo">
+            KY5
+        </div>
+
+        <div class="loader-spinner"></div>
+
+        <p>
+            Vérification de votre accès...
+        </p>
+
+    </div>
+
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <div class="admin-layout">
+
+
+        <!-- =================================================
+             MENU
+        ================================================== -->
+
+        <aside
+            class="sidebar"
+            id="sidebar"
+        >
+
+            <div class="sidebar-brand">
+
+                <div class="sidebar-logo">
+                    KY5
+                </div>
+
+                <div class="sidebar-brand-text">
+
+                    <strong>
+                        KY5 GLOBAL TRADE
+                    </strong>
+
+                    <span>
+                        Administration
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="menu-label">
+                Général
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a
+                    href="dashboard.html"
+                    class="nav-item"
+                >
+                    <span class="nav-icon">
+                        🏠
+                    </span>
+
+                    Tableau de bord
+                </a>
+
+            </nav>
+
+
+            <div class="menu-label">
+                Gestion du site
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <button
+                    type="button"
+                    class="nav-item module-coming"
+                    data-module="Produits"
+                >
+                    <span class="nav-icon">
+                        📦
+                    </span>
+
+                    Produits
+                </button>
+
+
+                <a
+                    href="services.html"
+                    class="nav-item active"
+                >
+                    <span class="nav-icon">
+                        🛠️
+                    </span>
+
+                    Services
+                </a>
+
+
+                <button
+                    type="button"
+                    class="nav-item module-coming"
+                    data-module="Projets"
+                >
+                    <span class="nav-icon">
+                        🏗️
+                    </span>
+
+                    Projets
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nav-item module-coming"
+                    data-module="Actualités"
+                >
+                    <span class="nav-icon">
+                        📰
+                    </span>
+
+                    Actualités
+                </button>
+
+
+                <button
+                    type="button"
+                    class="nav-item module-coming"
+                    data-module="Images"
+                >
+                    <span class="nav-icon">
+                        🖼️
+                    </span>
+
+                    Images
+                </button>
+
+            </nav>
+
+
+            <div class="menu-label">
+                Communication
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a
+                    href="dashboard.html#prospectsSection"
+                    class="nav-item"
+                >
+                    <span class="nav-icon">
+                        ✉️
+                    </span>
+
+                    Messages reçus
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    class="nav-item"
+                >
+                    <span class="nav-icon">
+                        🌐
+                    </span>
+
+                    Voir le site
+                </a>
+
+
+                <button
+                    type="button"
+                    class="nav-item logout-button"
+                    id="logoutButton"
+                >
+                    <span class="nav-icon">
+                        🚪
+                    </span>
+
+                    Se déconnecter
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             CONTENU
+        ================================================== -->
+
+        <main class="main-content">
+
+
+            <header class="topbar">
+
+                <div class="topbar-left">
+
+                    <button
+                        type="button"
+                        class="mobile-menu-button"
+                        id="mobileMenuButton"
+                    >
+                        ☰
+                    </button>
+
+                    <div class="page-title">
+
+                        <h1>
+                            Gestion des services
+                        </h1>
+
+                        <p>
+                            Administration du site KY5 GLOBAL TRADE
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="topbar-right">
+
+                    <a
+                        href="dashboard.html"
+                        class="dashboard-button"
+                    >
+                        ← Tableau de bord
+                    </a>
+
+                    <div class="admin-profile">
+
+                        <strong>
+                            Administrateur
+                        </strong>
+
+                        <span id="adminEmail">
+                            Chargement...
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <div class="content">
+
+
+                <!-- =================================================
+                     HERO
+                ================================================== -->
+
+                <section class="hero">
+
+                    <div class="hero-small">
+                        ● Module administrateur
+                    </div>
+
+                    <h2>
+                        Services KY5 GLOBAL TRADE
+                    </h2>
+
+                    <p>
+                        Ajoutez, modifiez, activez ou supprimez
+                        les services proposés par l'entreprise.
+                        Les services actifs pourront ensuite être
+                        affichés automatiquement sur le site public.
+                    </p>
+
+                </section>
+
+
+                <!-- =================================================
+                     STATISTIQUES
+                ================================================== -->
+
+                <section class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            🛠️
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="totalServices"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            Services enregistrés
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            ✅
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="activeServices"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            Services actifs
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            ⏸️
+                        </div>
+
+                        <div
+                            class="stat-value"
+                            id="inactiveServices"
+                        >
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            Services masqués
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     GESTION
+                ================================================== -->
+
+                <section class="management-grid">
+
+
+                    <!-- FORMULAIRE -->
+
+                    <div class="panel">
+
+                        <h3 id="formTitle">
+                            Ajouter un service
+                        </h3>
+
+                        <p class="panel-subtitle">
+                            Remplissez les informations du service.
+                        </p>
+
+
+                        <form id="serviceForm">
+
+                            <input
+                                type="hidden"
+                                id="serviceId"
+                            >
+
+
+                            <div class="form-group">
+
+                                <label for="serviceTitle">
+                                    Nom du service *
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="serviceTitle"
+                                    placeholder="Ex. Import-Export"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="serviceDescription">
+                                    Description
+                                </label>
+
+                                <textarea
+                                    class="form-control"
+                                    id="serviceDescription"
+                                    placeholder="Décrivez ce service..."
+                                ></textarea>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="serviceIcon">
+                                    Icône
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="serviceIcon"
+                                    placeholder="Ex. 🌍"
+                                    maxlength="10"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="serviceOrder">
+                                    Ordre d'affichage
+                                </label>
+
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    id="serviceOrder"
+                                    value="0"
+                                    min="0"
+                                >
+
+                            </div>
+
+
+                            <div class="toggle-row">
+
+                                <div>
+
+                                    <strong>
+                                        Service actif
+                                    </strong>
+
+                                    <span>
+                                        Visible sur le site public.
+                                    </span>
+
+                                </div>
+
+                                <input
+                                    type="checkbox"
+                                    id="serviceActive"
+                                    checked
+                                >
+
+                            </div>
+
+
+                            <div class="form-actions">
+
+                                <button
+                                    type="submit"
+                                    class="save-button"
+                                    id="saveButton"
+                                >
+                                    Ajouter le service
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="cancel-button"
+                                    id="cancelEditButton"
+                                >
+                                    Annuler
+                                </button>
+
+                            </div>
+
+
+                            <div
+                                class="form-message"
+                                id="formMessage"
+                            ></div>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- LISTE -->
+
+                    <div class="panel">
+
+                        <div class="services-toolbar">
+
+                            <div class="services-toolbar-left">
+
+                                <h3>
+                                    Services enregistrés
+                                </h3>
+
+                                <p>
+                                    Liste provenant directement de Supabase.
+                                </p>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                class="refresh-button"
+                                id="refreshButton"
+                            >
+                                ↻ Actualiser
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            class="services-list"
+                            id="servicesList"
+                        >
+
+                            <div class="empty-state">
+                                Chargement des services...
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </section>
+
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         SUPABASE
+    ====================================================== -->
+
+    <script src="config.js"></script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
+    <script>
+
+        /*
+        ==========================================================
+        KY5 GLOBAL TRADE
+        GESTION DES SERVICES
+        ==========================================================
+        */
+
+
+        const pageLoader =
+            document.getElementById(
+                "pageLoader"
+            );
+
+
+        const adminEmail =
+            document.getElementById(
+                "adminEmail"
+            );
+
+
+        const logoutButton =
+            document.getElementById(
+                "logoutButton"
+            );
+
+
+        const sidebar =
+            document.getElementById(
+                "sidebar"
+            );
+
+
+        const sidebarOverlay =
+            document.getElementById(
+                "sidebarOverlay"
+            );
+
+
+        const mobileMenuButton =
+            document.getElementById(
+                "mobileMenuButton"
+            );
+
+
+        const serviceForm =
+            document.getElementById(
+                "serviceForm"
+            );
+
+
+        const serviceId =
+            document.getElementById(
+                "serviceId"
+            );
+
+
+        const serviceTitle =
+            document.getElementById(
+                "serviceTitle"
+            );
+
+
+        const serviceDescription =
+            document.getElementById(
+                "serviceDescription"
+            );
+
+
+        const serviceIcon =
+            document.getElementById(
+                "serviceIcon"
+            );
+
+
+        const serviceOrder =
+            document.getElementById(
+                "serviceOrder"
+            );
+
+
+        const serviceActive =
+            document.getElementById(
+                "serviceActive"
+            );
+
+
+        const saveButton =
+            document.getElementById(
+                "saveButton"
+            );
+
+
+        const cancelEditButton =
+            document.getElementById(
+                "cancelEditButton"
+            );
+
+
+        const formTitle =
+            document.getElementById(
+                "formTitle"
+            );
+
+
+        const formMessage =
+            document.getElementById(
+                "formMessage"
+            );
+
+
+        const servicesList =
+            document.getElementById(
+                "servicesList"
+            );
+
+
+        const refreshButton =
+            document.getElementById(
+                "refreshButton"
+            );
+
+
+        const totalServices =
+            document.getElementById(
+                "totalServices"
+            );
+
+
+        const activeServices =
+            document.getElementById(
+                "activeServices"
+            );
+
+
+        const inactiveServices =
+            document.getElementById(
+                "inactiveServices"
+            );
+
+
+        let supabaseClient =
+            null;
+
+
+        let servicesCache =
+            [];
+
+
+        /* =====================================================
+           SUPABASE
+        ====================================================== */
+
+        try {
+
+            if (
+                typeof SUPABASE_URL === "undefined" ||
+                typeof SUPABASE_PUBLISHABLE_KEY === "undefined"
+            ) {
+
+                throw new Error(
+                    "Configuration Supabase introuvable."
+                );
+
+            }
+
+
+            if (!window.supabase) {
+
+                throw new Error(
+                    "Bibliothèque Supabase introuvable."
+                );
+
+            }
+
+
+            supabaseClient =
+                window.supabase.createClient(
+
+                    SUPABASE_URL,
+
+                    SUPABASE_PUBLISHABLE_KEY
+
+                );
+
+        }
+        catch (error) {
+
+            console.error(
+                "Erreur configuration Supabase :",
+                error
+            );
+
+        }
+
+
+        /* =====================================================
+           HTML SÉCURISÉ
+        ====================================================== */
+
+        function escapeHtml(value) {
+
+            return String(
+                value ?? ""
+            )
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =====================================================
+           MESSAGE
+        ====================================================== */
+
+        function showMessage(
+            text,
+            type
+        ) {
+
+            formMessage.textContent =
+                text;
+
+
+            formMessage.className =
+                "form-message " +
+                type;
+
+
+            setTimeout(
+
+                function () {
+
+                    formMessage.className =
+                        "form-message";
+
+                },
+
+                4500
+
+            );
+
+        }
+
+
+        /* =====================================================
+           SESSION
+        ====================================================== */
+
+        async function verifyAdminSession() {
+
+            if (!supabaseClient) {
+
+                window.location.href =
+                    "index.html";
+
+                return;
+
+            }
+
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+
+                    await supabaseClient
+
+                        .auth
+
+                        .getSession();
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                if (
+                    !data ||
+                    !data.session ||
+                    !data.session.user
+                ) {
+
+                    window.location.href =
+                        "index.html";
+
+                    return;
+
+                }
+
+
+                adminEmail.textContent =
+
+                    data.session.user.email ||
+
+                    "Administrateur KY5";
+
+
+                await loadServices();
+
+
+                pageLoader.classList.add(
+                    "hidden"
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Erreur session :",
+                    error
+                );
+
+
+                window.location.href =
+                    "index.html";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           CHARGER SERVICES
+        ====================================================== */
+
+        async function loadServices() {
+
+            refreshButton.disabled =
+                true;
+
+
+            refreshButton.textContent =
+                "Chargement...";
+
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+
+                    await supabaseClient
+
+                        .from(
+                            "services"
+                        )
+
+                        .select(
+                            "*"
+                        )
+
+                        .order(
+                            "ordre",
+                            {
+                                ascending:
+                                    true
+                            }
+                        )
+
+                        .order(
+                            "created_at",
+                            {
+                                ascending:
+                                    false
+                            }
+                        );
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                servicesCache =
+                    data || [];
+
+
+                renderServices(
+                    servicesCache
+                );
+
+                updateStats(
+                    servicesCache
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Erreur chargement services :",
+                    error
+                );
+
+
+                servicesList.innerHTML = `
+
+                    <div class="empty-state">
+
+                        Impossible de charger les services.
+
+                    </div>
+
+                `;
+
+            }
+            finally {
+
+                refreshButton.disabled =
+                    false;
+
+
+                refreshButton.textContent =
+                    "↻ Actualiser";
+
+            }
+
+        }
+
+
+        /* =====================================================
+           STATS
+        ====================================================== */
+
+        function updateStats(
+            services
+        ) {
+
+            const total =
+                services.length;
+
+
+            const actifs =
+
+                services.filter(
+
+                    function (
+                        service
+                    ) {
+
+                        return service.actif;
+
+                    }
+
+                ).length;
+
+
+            const inactifs =
+                total - actifs;
+
+
+            totalServices.textContent =
+                total;
+
+
+            activeServices.textContent =
+                actifs;
+
+
+            inactiveServices.textContent =
+                inactifs;
+
+        }
+
+
+        /* =====================================================
+           AFFICHAGE
+        ====================================================== */
+
+        function renderServices(
+            services
+        ) {
+
+            if (
+                services.length === 0
+            ) {
+
+                servicesList.innerHTML = `
+
+                    <div class="empty-state">
+
+                        Aucun service enregistré.<br><br>
+
+                        Utilisez le formulaire
+                        pour créer le premier service.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            servicesList.innerHTML =
+
+                services
+
+                    .map(
+
+                        function (
+                            service
+                        ) {
+
+                            const itemClass =
+
+                                service.actif
+
+                                    ? "service-item"
+
+                                    : "service-item inactive";
+
+
+                            const statusClass =
+
+                                service.actif
+
+                                    ? "badge active"
+
+                                    : "badge inactive";
+
+
+                            const statusText =
+
+                                service.actif
+
+                                    ? "Actif"
+
+                                    : "Masqué";
+
+
+                            const icon =
+
+                                service.icone ||
+
+                                "🛠️";
+
+
+                            return `
+
+                                <div
+                                    class="${itemClass}"
+                                >
+
+                                    <div
+                                        class="service-icon"
+                                    >
+
+                                        ${escapeHtml(
+                                            icon
+                                        )}
+
+                                    </div>
+
+
+                                    <div
+                                        class="service-info"
+                                    >
+
+                                        <h4>
+
+                                            ${escapeHtml(
+                                                service.titre
+                                            )}
+
+                                        </h4>
+
+
+                                        <p>
+
+                                            ${escapeHtml(
+                                                service.description ||
+                                                "Aucune description."
+                                            )}
+
+                                        </p>
+
+
+                                        <div
+                                            class="service-meta"
+                                        >
+
+                                            <span
+                                                class="${statusClass}"
+                                            >
+
+                                                ${statusText}
+
+                                            </span>
+
+
+                                            <span
+                                                class="badge"
+                                            >
+
+                                                Ordre :
+                                                ${escapeHtml(
+                                                    service.ordre
+                                                )}
+
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div
+                                        class="service-actions"
+                                    >
+
+                                        <button
+                                            type="button"
+                                            class="
+                                                action-button
+                                                edit-button
+                                            "
+                                            data-action="edit"
+                                            data-id="${service.id}"
+                                        >
+
+                                            Modifier
+
+                                        </button>
+
+
+                                        <button
+                                            type="button"
+                                            class="
+                                                action-button
+                                                delete-button
+                                            "
+                                            data-action="delete"
+                                            data-id="${service.id}"
+                                        >
+
+                                            Supprimer
+
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            `;
+
+                        }
+
+                    )
+
+                    .join("");
+
+        }
+
+
+        /* =====================================================
+           AJOUT / MODIFICATION
+        ====================================================== */
+
+        serviceForm.addEventListener(
+
+            "submit",
+
+            async function (
+                event
+            ) {
+
+                event.preventDefault();
+
+
+                const id =
+                    serviceId.value.trim();
+
+
+                const titre =
+                    serviceTitle.value.trim();
+
+
+                const description =
+                    serviceDescription.value.trim();
+
+
+                const icone =
+                    serviceIcon.value.trim();
+
+
+                const ordre =
+
+                    Number(
+                        serviceOrder.value
+                    ) || 0;
+
+
+                const actif =
+                    serviceActive.checked;
+
+
+                if (!titre) {
+
+                    showMessage(
+                        "Le nom du service est obligatoire.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                saveButton.disabled =
+                    true;
+
+
+                saveButton.textContent =
+
+                    id
+
+                        ? "Modification..."
+
+                        : "Ajout...";
+
+
+                try {
+
+                    let error =
+                        null;
+
+
+                    if (id) {
+
+                        const result =
+
+                            await supabaseClient
+
+                                .from(
+                                    "services"
+                                )
+
+                                .update({
+
+                                    titre:
+                                        titre,
+
+                                    description:
+                                        description,
+
+                                    icone:
+                                        icone,
+
+                                    ordre:
+                                        ordre,
+
+                                    actif:
+                                        actif
+
+                                })
+
+                                .eq(
+                                    "id",
+                                    Number(id)
+                                );
+
+
+                        error =
+                            result.error;
+
+                    }
+                    else {
+
+                        const result =
+
+                            await supabaseClient
+
+                                .from(
+                                    "services"
+                                )
+
+                                .insert({
+
+                                    titre:
+                                        titre,
+
+                                    description:
+                                        description,
+
+                                    icone:
+                                        icone,
+
+                                    ordre:
+                                        ordre,
+
+                                    actif:
+                                        actif
+
+                                });
+
+
+                        error =
+                            result.error;
+
+                    }
+
+
+                    if (error) {
+
+                        throw error;
+
+                    }
+
+
+                    showMessage(
+
+                        id
+
+                            ? "Service modifié avec succès."
+
+                            : "Service ajouté avec succès.",
+
+                        "success"
+
+                    );
+
+
+                    resetForm();
+
+
+                    await loadServices();
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "Erreur sauvegarde service :",
+                        error
+                    );
+
+
+                    showMessage(
+                        "Impossible d'enregistrer le service.",
+                        "error"
+                    );
+
+                }
+                finally {
+
+                    saveButton.disabled =
+                        false;
+
+
+                    saveButton.textContent =
+                        "Ajouter le service";
+
+                }
+
+            }
+
+        );
+
+
+        /* =====================================================
+           CLIC LISTE
+        ====================================================== */
+
+        servicesList.addEventListener(
+
+            "click",
+
+            async function (
+                event
+            ) {
+
+                const button =
+
+                    event.target.closest(
+
+                        "button[data-action][data-id]"
+
+                    );
+
+
+                if (!button) {
+
+                    return;
+
+                }
+
+
+                const id =
+
+                    Number(
+
+                        button.getAttribute(
+                            "data-id"
+                        )
+
+                    );
+
+
+                const action =
+
+                    button.getAttribute(
+                        "data-action"
+                    );
+
+
+                if (
+                    action === "edit"
+                ) {
+
+                    startEdit(
+                        id
+                    );
+
+                }
+
+
+                if (
+                    action === "delete"
+                ) {
+
+                    await deleteService(
+                        id
+                    );
+
+                }
+
+            }
+
+        );
+
+
+        /* =====================================================
+           MODIFIER
+        ====================================================== */
+
+        function startEdit(
+            id
+        ) {
+
+            const service =
+
+                servicesCache.find(
+
+                    function (
+                        item
+                    ) {
+
+                        return (
+                            Number(
+                                item.id
+                            ) ===
+                            Number(id)
+                        );
+
+                    }
+
+                );
+
+
+            if (!service) {
+
+                return;
+
+            }
+
+
+            serviceId.value =
+                service.id;
+
+
+            serviceTitle.value =
+                service.titre || "";
+
+
+            serviceDescription.value =
+                service.description || "";
+
+
+            serviceIcon.value =
+                service.icone || "";
+
+
+            serviceOrder.value =
+                service.ordre || 0;
+
+
+            serviceActive.checked =
+                Boolean(
+                    service.actif
+                );
+
+
+            formTitle.textContent =
+                "Modifier le service";
+
+
+            saveButton.textContent =
+                "Enregistrer les modifications";
+
+
+            cancelEditButton.classList.add(
+                "visible"
+            );
+
+
+            window.scrollTo({
+
+                top:
+                    0,
+
+                behavior:
+                    "smooth"
+
+            });
+
+        }
+
+
+        /* =====================================================
+           SUPPRIMER
+        ====================================================== */
+
+        async function deleteService(
+            id
+        ) {
+
+            const service =
+
+                servicesCache.find(
+
+                    function (
+                        item
+                    ) {
+
+                        return (
+                            Number(
+                                item.id
+                            ) ===
+                            Number(id)
+                        );
+
+                    }
+
+                );
+
+
+            if (!service) {
+
+                return;
+
+            }
+
+
+            const confirmation =
+
+                confirm(
+
+                    "Supprimer le service \"" +
+
+                    service.titre +
+
+                    "\" ?"
+
+                );
+
+
+            if (!confirmation) {
+
+                return;
+
+            }
+
+
+            try {
+
+                const {
+                    error
+                } =
+
+                    await supabaseClient
+
+                        .from(
+                            "services"
+                        )
+
+                        .delete()
+
+                        .eq(
+                            "id",
+                            id
+                        );
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                showMessage(
+                    "Service supprimé.",
+                    "success"
+                );
+
+
+                resetForm();
+
+
+                await loadServices();
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Erreur suppression service :",
+                    error
+                );
+
+
+                showMessage(
+                    "Impossible de supprimer ce service.",
+                    "error"
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           ANNULER MODIFICATION
+        ====================================================== */
+
+        cancelEditButton.addEventListener(
+
+            "click",
+
+            resetForm
+
+        );
+
+
+        function resetForm() {
+
+            serviceForm.reset();
+
+
+            serviceId.value =
+                "";
+
+
+            serviceOrder.value =
+                0;
+
+
+            serviceActive.checked =
+                true;
+
+
+            formTitle.textContent =
+                "Ajouter un service";
+
+
+            saveButton.textContent =
+                "Ajouter le service";
+
+
+            cancelEditButton.classList.remove(
+                "visible"
+            );
+
+        }
+
+
+        /* =====================================================
+           ACTUALISER
+        ====================================================== */
+
+        refreshButton.addEventListener(
+
+            "click",
+
+            loadServices
+
+        );
+
+
+        /* =====================================================
+           DÉCONNEXION
+        ====================================================== */
+
+        logoutButton.addEventListener(
+
+            "click",
+
+            async function () {
+
+                const confirmation =
+
+                    confirm(
+
+                        "Voulez-vous vraiment vous déconnecter ?"
+
+                    );
+
+
+                if (!confirmation) {
+
+                    return;
+
+                }
+
+
+                try {
+
+                    await supabaseClient
+
+                        .auth
+
+                        .signOut();
+
+                }
+                catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+                }
+
+
+                window.location.href =
+                    "index.html";
+
+            }
+
+        );
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        mobileMenuButton.addEventListener(
+
+            "click",
+
+            function () {
+
+                sidebar.classList.add(
+                    "open"
+                );
+
+
+                sidebarOverlay.classList.add(
+                    "active"
+                );
+
+            }
+
+        );
+
+
+        sidebarOverlay.addEventListener(
+
+            "click",
+
+            closeSidebar
+
+        );
+
+
+        function closeSidebar() {
+
+            sidebar.classList.remove(
+                "open"
+            );
+
+
+            sidebarOverlay.classList.remove(
+                "active"
+            );
+
+        }
+
+
+        /* =====================================================
+           MODULES FUTURS
+        ====================================================== */
+
+        document
+
+            .querySelectorAll(
+                ".module-coming"
+            )
+
+            .forEach(
+
+                function (
+                    element
+                ) {
+
+                    element.addEventListener(
+
+                        "click",
+
+                        function () {
+
+                            const moduleName =
+
+                                element.getAttribute(
+                                    "data-module"
+                                ) ||
+
+                                "Ce module";
+
+
+                            alert(
+
+                                moduleName +
+
+                                " sera configuré prochainement."
+
+                            );
+
+                        }
+
+                    );
+
+                }
+
+            );
+
+
+        /* =====================================================
+           SESSION
+        ====================================================== */
+
+        if (
+            supabaseClient
+        ) {
+
+            supabaseClient
+
+                .auth
+
+                .onAuthStateChange(
+
+                    function (
+                        event,
+                        session
+                    ) {
+
+                        if (
+                            event ===
+                            "SIGNED_OUT"
+                        ) {
+
+                            window.location.href =
+                                "index.html";
+
+                        }
+
+
+                        if (
+                            !session &&
+                            event !==
+                            "INITIAL_SESSION"
+                        ) {
+
+                            window.location.href =
+                                "index.html";
+
+                        }
+
+                    }
+
+                );
+
+        }
+
+
+        /* =====================================================
+           DÉMARRAGE
+        ====================================================== */
+
+        verifyAdminSession();
+
+    </script>
+
+</body>
+
+</html>
