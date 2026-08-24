@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -16,6 +18,7 @@
     <title>Tableau de bord | KY5 GLOBAL TRADE</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -24,14 +27,12 @@
 
         :root {
             --bleu-fonce: #061b33;
-            --bleu-fonce-2: #092848;
             --bleu: #0056b3;
             --bleu-clair: #00a8ff;
             --bleu-tres-clair: #eaf7ff;
             --blanc: #ffffff;
             --gris-fond: #f4f7fb;
             --gris: #6c757d;
-            --gris-clair: #e4ebf2;
             --texte: #17324d;
             --vert: #198754;
             --rouge: #dc3545;
@@ -50,8 +51,12 @@
             font-family: inherit;
         }
 
+        button {
+            cursor: pointer;
+        }
+
         /* =========================================
-           ÉCRAN DE CHARGEMENT
+           CHARGEMENT
         ========================================= */
 
         .page-loader {
@@ -61,8 +66,8 @@
 
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
 
             background:
                 linear-gradient(
@@ -80,58 +85,47 @@
         }
 
         .loader-logo {
-            width: 85px;
-            height: 85px;
-
-            border-radius: 22px;
+            width: 82px;
+            height: 82px;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #ffffff,
-                    #c9efff
-                );
+            border-radius: 22px;
+
+            background: white;
 
             color: var(--bleu);
 
+            font-size: 26px;
             font-weight: 900;
-            font-size: 27px;
 
-            margin-bottom: 25px;
-
-            box-shadow:
-                0 15px 40px rgba(0, 0, 0, 0.3),
-                0 0 30px rgba(0, 168, 255, 0.25);
+            margin-bottom: 20px;
         }
 
         .loader-spinner {
-            width: 37px;
-            height: 37px;
+            width: 36px;
+            height: 36px;
 
-            border: 3px solid rgba(255, 255, 255, 0.25);
+            border: 3px solid rgba(255,255,255,.25);
             border-top-color: white;
 
             border-radius: 50%;
 
-            animation: spin 0.8s linear infinite;
+            animation: spin .8s linear infinite;
 
             margin-bottom: 15px;
         }
 
-        .page-loader p {
-            font-size: 13px;
-            color: #c9e9f8;
-        }
-
         @keyframes spin {
+
             to {
                 transform: rotate(360deg);
             }
+
         }
+
 
         /* =========================================
            STRUCTURE
@@ -146,53 +140,50 @@
                 265px 1fr;
         }
 
+
         /* =========================================
-           MENU LATÉRAL
+           SIDEBAR
         ========================================= */
 
         .sidebar {
-            min-height: 100vh;
-
-            background:
-                linear-gradient(
-                    180deg,
-                    var(--bleu-fonce),
-                    #03111f
-                );
-
-            color: white;
-
-            padding: 25px 18px;
-
             position: fixed;
-
-            width: 265px;
 
             top: 0;
             bottom: 0;
             left: 0;
 
+            width: 265px;
+
+            padding: 25px 18px;
+
             overflow-y: auto;
 
-            z-index: 1000;
+            color: white;
 
-            box-shadow:
-                6px 0 25px rgba(0, 0, 0, 0.08);
+            background:
+                linear-gradient(
+                    180deg,
+                    #061b33,
+                    #03111f
+                );
+
+            z-index: 1000;
         }
 
         .sidebar-brand {
             display: flex;
-
             align-items: center;
 
             gap: 13px;
 
-            padding: 5px 8px 25px;
+            padding:
+                5px 8px 25px;
 
             margin-bottom: 20px;
 
             border-bottom:
-                1px solid rgba(255, 255, 255, 0.1);
+                1px solid
+                rgba(255,255,255,.1);
         }
 
         .sidebar-logo {
@@ -200,6 +191,10 @@
             height: 52px;
 
             border-radius: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             background:
                 linear-gradient(
@@ -210,53 +205,42 @@
 
             color: var(--bleu);
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
             font-weight: 900;
-            font-size: 18px;
-
-            flex-shrink: 0;
         }
 
         .sidebar-brand-text strong {
             display: block;
 
             font-size: 14px;
-
-            letter-spacing: 0.4px;
         }
 
         .sidebar-brand-text span {
             display: block;
 
+            margin-top: 5px;
+
             color: #96d8f7;
 
             font-size: 10px;
-
-            margin-top: 5px;
         }
 
         .menu-label {
-            color: #7092ac;
-
-            font-size: 10px;
-
-            text-transform: uppercase;
-
-            letter-spacing: 1.5px;
-
-            font-weight: 800;
-
             padding: 10px 13px;
 
             margin-top: 12px;
+
+            color: #7092ac;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.4px;
         }
 
         .sidebar-nav {
             display: grid;
-
             gap: 6px;
         }
 
@@ -264,14 +248,16 @@
             width: 100%;
 
             display: flex;
-
             align-items: center;
 
             gap: 13px;
 
             padding: 13px 14px;
 
+            border: none;
             border-radius: 11px;
+
+            background: transparent;
 
             color: #cbdce8;
 
@@ -279,54 +265,31 @@
 
             font-size: 13px;
 
-            transition: 0.2s ease;
-
-            border: none;
-
-            background: transparent;
-
-            cursor: pointer;
-
             text-align: left;
+
+            transition: .2s;
         }
 
-        .nav-item:hover {
-            background:
-                rgba(0, 168, 255, 0.12);
-
-            color: white;
-        }
-
+        .nav-item:hover,
         .nav-item.active {
-            background:
-                linear-gradient(
-                    120deg,
-                    rgba(0, 86, 179, 0.55),
-                    rgba(0, 168, 255, 0.28)
-                );
-
             color: white;
 
-            border:
-                1px solid rgba(0, 168, 255, 0.2);
+            background:
+                rgba(0,168,255,.14);
         }
 
         .nav-icon {
             width: 28px;
             height: 28px;
 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
             border-radius: 8px;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
             background:
-                rgba(255, 255, 255, 0.07);
-
-            flex-shrink: 0;
-
-            font-size: 15px;
+                rgba(255,255,255,.07);
         }
 
         .sidebar-bottom {
@@ -335,19 +298,14 @@
             padding-top: 20px;
 
             border-top:
-                1px solid rgba(255, 255, 255, 0.1);
+                1px solid
+                rgba(255,255,255,.1);
         }
 
         .logout-button {
             color: #ffd0d5;
         }
 
-        .logout-button:hover {
-            background:
-                rgba(220, 53, 69, 0.14);
-
-            color: white;
-        }
 
         /* =========================================
            CONTENU
@@ -359,43 +317,36 @@
             min-height: 100vh;
         }
 
+
         /* =========================================
-           EN-TÊTE
+           TOPBAR
         ========================================= */
 
         .topbar {
             min-height: 82px;
 
-            background: white;
+            position: sticky;
+            top: 0;
+
+            z-index: 500;
 
             display: flex;
-
-            justify-content:
-                space-between;
-
             align-items: center;
+            justify-content: space-between;
 
             gap: 20px;
 
             padding:
                 16px 32px;
 
+            background: white;
+
             border-bottom:
                 1px solid #e8edf2;
-
-            position: sticky;
-
-            top: 0;
-
-            z-index: 500;
-
-            box-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.025);
         }
 
         .topbar-left {
             display: flex;
-
             align-items: center;
 
             gap: 15px;
@@ -408,7 +359,6 @@
             height: 42px;
 
             border: none;
-
             border-radius: 10px;
 
             background: #edf7fd;
@@ -416,19 +366,17 @@
             color: var(--bleu);
 
             font-size: 21px;
-
-            cursor: pointer;
         }
 
         .page-title h1 {
             color: var(--bleu-fonce);
 
             font-size: 22px;
-
-            margin-bottom: 5px;
         }
 
         .page-title p {
+            margin-top: 5px;
+
             color: var(--gris);
 
             font-size: 12px;
@@ -436,117 +384,51 @@
 
         .topbar-right {
             display: flex;
-
             align-items: center;
 
-            gap: 14px;
+            gap: 15px;
         }
 
         .site-button {
-            min-height: 41px;
-
-            padding: 0 16px;
+            padding: 12px 15px;
 
             border-radius: 10px;
-
-            text-decoration: none;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 7px;
 
             background: #edf7fd;
 
             color: var(--bleu);
 
             font-size: 12px;
-
             font-weight: 700;
 
-            border:
-                1px solid #d4edf9;
-
-            transition: 0.2s ease;
-        }
-
-        .site-button:hover {
-            background: var(--bleu);
-
-            color: white;
+            text-decoration: none;
         }
 
         .admin-profile {
-            display: flex;
-
-            align-items: center;
-
-            gap: 11px;
-
             padding-left: 14px;
 
             border-left:
                 1px solid #e1e8ee;
         }
 
-        .profile-avatar {
-            width: 42px;
-            height: 42px;
-
-            border-radius: 50%;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--bleu),
-                    var(--bleu-clair)
-                );
-
-            color: white;
-
-            font-weight: 800;
-
-            box-shadow:
-                0 7px 18px
-                rgba(0, 86, 179, 0.22);
-        }
-
-        .profile-text {
-            max-width: 210px;
-        }
-
-        .profile-text strong {
+        .admin-profile strong {
             display: block;
 
             color: var(--bleu-fonce);
 
             font-size: 12px;
-
-            margin-bottom: 3px;
         }
 
-        .profile-text span {
+        .admin-profile span {
             display: block;
+
+            margin-top: 3px;
 
             color: var(--gris);
 
             font-size: 10px;
-
-            white-space: nowrap;
-
-            overflow: hidden;
-
-            text-overflow: ellipsis;
         }
+
 
         /* =========================================
            DASHBOARD
@@ -558,19 +440,22 @@
         }
 
         .welcome-banner {
-            min-height: 210px;
+            position: relative;
 
-            border-radius: 22px;
+            min-height: 200px;
+
+            display: flex;
+            align-items: center;
 
             padding: 34px;
 
-            position: relative;
+            margin-bottom: 28px;
+
+            border-radius: 22px;
 
             overflow: hidden;
 
-            display: flex;
-
-            align-items: center;
+            color: white;
 
             background:
                 linear-gradient(
@@ -580,54 +465,34 @@
                     var(--bleu-clair)
                 );
 
-            color: white;
-
-            margin-bottom: 30px;
-
             box-shadow:
                 0 18px 45px
-                rgba(0, 86, 179, 0.18);
-        }
-
-        .welcome-banner::before {
-            content: "";
-
-            width: 310px;
-            height: 310px;
-
-            border-radius: 50%;
-
-            position: absolute;
-
-            right: -80px;
-            top: -140px;
-
-            background:
-                rgba(255, 255, 255, 0.11);
+                rgba(0,86,179,.18);
         }
 
         .welcome-banner::after {
             content: "";
 
-            width: 200px;
-            height: 200px;
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            right: -100px;
+            top: -140px;
 
             border-radius: 50%;
 
-            position: absolute;
-
-            right: 120px;
-            bottom: -150px;
-
             background:
-                rgba(255, 255, 255, 0.08);
+                rgba(255,255,255,.12);
         }
 
         .welcome-content {
             position: relative;
+
             z-index: 2;
 
-            max-width: 670px;
+            max-width: 680px;
         }
 
         .welcome-small {
@@ -636,23 +501,20 @@
             padding:
                 7px 13px;
 
+            margin-bottom: 15px;
+
             border-radius: 30px;
 
             background:
-                rgba(255, 255, 255, 0.13);
-
-            border:
-                1px solid rgba(255, 255, 255, 0.18);
+                rgba(255,255,255,.13);
 
             font-size: 11px;
-
-            margin-bottom: 15px;
         }
 
         .welcome-content h2 {
-            font-size: 30px;
-
             margin-bottom: 12px;
+
+            font-size: 30px;
         }
 
         .welcome-content p {
@@ -661,19 +523,18 @@
             font-size: 13px;
 
             line-height: 1.7;
-
-            max-width: 620px;
         }
 
+
         /* =========================================
-           STATISTIQUES
+           STATS
         ========================================= */
 
         .stats-grid {
             display: grid;
 
             grid-template-columns:
-                repeat(4, 1fr);
+                repeat(4,1fr);
 
             gap: 18px;
 
@@ -681,60 +542,41 @@
         }
 
         .stat-card {
-            background: white;
-
             min-height: 135px;
 
-            border-radius: 17px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
             padding: 21px;
 
             border:
                 1px solid #e6edf3;
 
-            display: flex;
+            border-radius: 17px;
 
-            flex-direction: column;
-
-            justify-content:
-                space-between;
+            background: white;
 
             box-shadow:
                 0 8px 25px
-                rgba(21, 45, 65, 0.04);
-
-            transition: 0.25s ease;
-        }
-
-        .stat-card:hover {
-            transform:
-                translateY(-3px);
-
-            box-shadow:
-                0 14px 32px
-                rgba(21, 45, 65, 0.08);
+                rgba(21,45,65,.04);
         }
 
         .stat-top {
             display: flex;
-
-            justify-content:
-                space-between;
-
             align-items: center;
+            justify-content: space-between;
         }
 
         .stat-icon {
             width: 42px;
             height: 42px;
 
-            border-radius: 12px;
-
             display: flex;
-
+            align-items: center;
             justify-content: center;
 
-            align-items: center;
+            border-radius: 12px;
 
             background:
                 var(--bleu-tres-clair);
@@ -743,50 +585,40 @@
         }
 
         .stat-status {
-            font-size: 10px;
-
-            color: var(--vert);
-
-            background: #eaf8f0;
-
             padding:
                 5px 8px;
 
             border-radius: 20px;
 
+            background: #eaf8f0;
+
+            color: var(--vert);
+
+            font-size: 10px;
             font-weight: 700;
         }
 
         .stat-value {
-            font-size: 27px;
-
             color: var(--bleu-fonce);
 
+            font-size: 27px;
             font-weight: 800;
-
-            margin-bottom: 4px;
         }
 
         .stat-label {
-            font-size: 11px;
+            margin-top: 4px;
 
             color: var(--gris);
+
+            font-size: 11px;
         }
+
 
         /* =========================================
            MODULES
         ========================================= */
 
         .section-header {
-            display: flex;
-
-            justify-content:
-                space-between;
-
-            align-items: center;
-
-            gap: 15px;
-
             margin-bottom: 17px;
         }
 
@@ -797,18 +629,18 @@
         }
 
         .section-header p {
+            margin-top: 5px;
+
             color: var(--gris);
 
             font-size: 11px;
-
-            margin-top: 5px;
         }
 
         .modules-grid {
             display: grid;
 
             grid-template-columns:
-                repeat(3, 1fr);
+                repeat(3,1fr);
 
             gap: 18px;
 
@@ -816,79 +648,58 @@
         }
 
         .module-card {
-            background: white;
+            min-height: 165px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            padding: 22px;
 
             border:
                 1px solid #e6edf3;
 
             border-radius: 17px;
 
-            padding: 22px;
+            background: white;
 
-            text-decoration: none;
-
-            color: inherit;
-
-            transition: 0.25s ease;
-
-            position: relative;
-
-            overflow: hidden;
-
-            min-height: 180px;
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content:
-                space-between;
-
-            cursor: pointer;
+            transition: .25s;
         }
 
         .module-card:hover {
             transform:
-                translateY(-4px);
+                translateY(-3px);
 
-            border-color:
-                #bee9ff;
+            border-color: #bee9ff;
 
             box-shadow:
-                0 16px 36px
-                rgba(0, 86, 179, 0.09);
+                0 15px 35px
+                rgba(0,86,179,.09);
         }
 
         .module-icon {
             width: 50px;
             height: 50px;
 
-            border-radius: 14px;
-
             display: flex;
-
+            align-items: center;
             justify-content: center;
 
-            align-items: center;
+            margin-bottom: 17px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #e7f6ff,
-                    #d7f1ff
-                );
+            border-radius: 14px;
+
+            background: #e7f6ff;
 
             font-size: 23px;
-
-            margin-bottom: 17px;
         }
 
         .module-card h4 {
+            margin-bottom: 7px;
+
             color: var(--bleu-fonce);
 
             font-size: 15px;
-
-            margin-bottom: 7px;
         }
 
         .module-card p {
@@ -901,18 +712,13 @@
 
         .module-bottom {
             display: flex;
-
-            justify-content:
-                space-between;
-
             align-items: center;
+            justify-content: space-between;
 
             margin-top: 17px;
         }
 
         .module-status {
-            font-size: 10px;
-
             padding:
                 5px 9px;
 
@@ -921,165 +727,336 @@
             background: #f0f4f7;
 
             color: #708190;
+
+            font-size: 10px;
         }
 
         .module-arrow {
             color: var(--bleu);
 
             font-size: 17px;
-
             font-weight: 800;
         }
 
-        /* =========================================
-           ACTIVITÉ
-        ========================================= */
-
-        .bottom-grid {
-            display: grid;
-
-            grid-template-columns:
-                1.4fr 0.6fr;
-
-            gap: 20px;
+        .clickable {
+            cursor: pointer;
         }
 
-        .panel {
-            background: white;
+
+        /* =========================================
+           PROSPECTS
+        ========================================= */
+
+        .prospects-panel {
+            padding: 23px;
+
+            margin-bottom: 35px;
 
             border:
                 1px solid #e6edf3;
 
             border-radius: 17px;
 
-            padding: 23px;
+            background: white;
 
             box-shadow:
                 0 8px 25px
-                rgba(21, 45, 65, 0.035);
+                rgba(21,45,65,.04);
+        }
+
+        .prospects-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+        .prospects-toolbar h3 {
+            color: var(--bleu-fonce);
+
+            font-size: 18px;
+        }
+
+        .prospects-toolbar p {
+            margin-top: 5px;
+
+            color: var(--gris);
+
+            font-size: 11px;
+        }
+
+        .refresh-button {
+            padding:
+                11px 14px;
+
+            border:
+                1px solid #cfe8f6;
+
+            border-radius: 10px;
+
+            background: #edf7fd;
+
+            color: var(--bleu);
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .prospects-summary {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-bottom: 17px;
+        }
+
+        .summary-badge {
+            padding:
+                7px 11px;
+
+            border-radius: 999px;
+
+            background: #f0f4f7;
+
+            color: #5d7182;
+
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .summary-badge.new {
+            background: #fff3cd;
+
+            color: #8a6200;
+        }
+
+        .summary-badge.done {
+            background: #eaf8f0;
+
+            color: var(--vert);
+        }
+
+        .table-wrap {
+            width: 100%;
+
+            overflow-x: auto;
+        }
+
+        .prospects-table {
+            width: 100%;
+
+            min-width: 1050px;
+
+            border-collapse: collapse;
+        }
+
+        .prospects-table th {
+            padding:
+                12px 10px;
+
+            background: #f6f9fc;
+
+            border-bottom:
+                1px solid #e4ebf2;
+
+            color: #60758a;
+
+            font-size: 10px;
+
+            text-align: left;
+
+            text-transform: uppercase;
+        }
+
+        .prospects-table td {
+            padding:
+                13px 10px;
+
+            border-bottom:
+                1px solid #eef2f5;
+
+            color: #324b61;
+
+            font-size: 11px;
+
+            vertical-align: top;
+        }
+
+        .prospects-table tr.unread {
+            background: #f7fcff;
+        }
+
+        .prospect-name {
+            color: var(--bleu-fonce);
+
+            font-weight: 800;
+        }
+
+        .prospect-contact {
+            display: grid;
+
+            gap: 4px;
+        }
+
+        .prospect-message {
+            max-width: 250px;
+
+            line-height: 1.5;
+        }
+
+        .prospect-notes {
+            margin-top: 6px;
+
+            color: #8595a4;
+
+            font-size: 9px;
+
+            line-height: 1.5;
+        }
+
+        .status-pill {
+            display: inline-flex;
+
+            padding:
+                5px 8px;
+
+            border-radius: 999px;
+
+            font-size: 9px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+        }
+
+        .status-nouveau {
+            background: #fff3cd;
+
+            color: #8a6200;
+        }
+
+        .status-lu {
+            background: #e7f5ff;
+
+            color: #0a6ea8;
+        }
+
+        .status-traite {
+            background: #eaf8f0;
+
+            color: var(--vert);
+        }
+
+        .prospect-actions {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 6px;
+        }
+
+        .action-button {
+            padding:
+                7px 9px;
+
+            border: none;
+            border-radius: 8px;
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .action-read {
+            background: #e7f5ff;
+
+            color: #0a6ea8;
+        }
+
+        .action-done {
+            background: #eaf8f0;
+
+            color: var(--vert);
+        }
+
+        .action-button:disabled {
+            opacity: .45;
+
+            cursor: not-allowed;
+        }
+
+        .table-message {
+            padding: 28px !important;
+
+            text-align: center;
+
+            color: var(--gris) !important;
+        }
+
+        .table-error {
+            color: var(--rouge) !important;
+        }
+
+
+        /* =========================================
+           SÉCURITÉ
+        ========================================= */
+
+        .bottom-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.4fr .6fr;
+
+            gap: 20px;
+        }
+
+        .panel {
+            padding: 23px;
+
+            border:
+                1px solid #e6edf3;
+
+            border-radius: 17px;
+
+            background: white;
         }
 
         .panel h3 {
             color: var(--bleu-fonce);
 
             font-size: 16px;
-
-            margin-bottom: 6px;
         }
 
-        .panel-subtitle {
+        .panel p {
+            margin-top: 8px;
+
             color: var(--gris);
 
             font-size: 11px;
 
-            margin-bottom: 20px;
+            line-height: 1.7;
         }
-
-        .activity-list {
-            display: grid;
-
-            gap: 14px;
-        }
-
-        .activity-item {
-            display: flex;
-
-            align-items: flex-start;
-
-            gap: 13px;
-
-            padding-bottom: 14px;
-
-            border-bottom:
-                1px solid #eef2f5;
-        }
-
-        .activity-item:last-child {
-            border-bottom: none;
-
-            padding-bottom: 0;
-        }
-
-        .activity-icon {
-            width: 36px;
-            height: 36px;
-
-            border-radius: 11px;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            background: #edf7fd;
-
-            flex-shrink: 0;
-        }
-
-        .activity-text strong {
-            display: block;
-
-            color: #2a4054;
-
-            font-size: 11px;
-
-            margin-bottom: 4px;
-        }
-
-        .activity-text span {
-            color: var(--gris);
-
-            font-size: 10px;
-
-            line-height: 1.5;
-        }
-
-        /* =========================================
-           SÉCURITÉ
-        ========================================= */
 
         .security-card {
+            padding: 24px;
+
+            border-radius: 17px;
+
+            color: white;
+
             background:
                 linear-gradient(
                     150deg,
                     #061b33,
                     #0b416d
                 );
-
-            color: white;
-
-            border-radius: 17px;
-
-            padding: 24px;
-
-            min-height: 100%;
-        }
-
-        .security-symbol {
-            width: 48px;
-            height: 48px;
-
-            border-radius: 13px;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            background:
-                rgba(0, 168, 255, 0.17);
-
-            margin-bottom: 19px;
-
-            font-size: 22px;
         }
 
         .security-card h3 {
-            font-size: 16px;
-
-            margin-bottom: 10px;
+            margin:
+                15px 0 10px;
         }
 
         .security-card p {
@@ -1092,10 +1069,9 @@
 
         .security-indicator {
             display: flex;
-
             align-items: center;
 
-            gap: 9px;
+            gap: 8px;
 
             margin-top: 20px;
 
@@ -1105,7 +1081,7 @@
             border-radius: 10px;
 
             background:
-                rgba(255, 255, 255, 0.08);
+                rgba(255,255,255,.08);
 
             font-size: 10px;
         }
@@ -1117,14 +1093,11 @@
             border-radius: 50%;
 
             background: #47e39c;
-
-            box-shadow:
-                0 0 10px
-                rgba(71, 227, 156, 0.7);
         }
 
+
         /* =========================================
-           OVERLAY MOBILE
+           MOBILE
         ========================================= */
 
         .sidebar-overlay {
@@ -1134,36 +1107,33 @@
 
             inset: 0;
 
-            background:
-                rgba(0, 0, 0, 0.45);
-
             z-index: 900;
+
+            background:
+                rgba(0,0,0,.45);
         }
 
         .sidebar-overlay.active {
             display: block;
         }
 
-        /* =========================================
-           RESPONSIVE
-        ========================================= */
-
         @media (max-width: 1100px) {
 
             .stats-grid {
                 grid-template-columns:
-                    repeat(2, 1fr);
+                    repeat(2,1fr);
             }
 
             .modules-grid {
                 grid-template-columns:
-                    repeat(2, 1fr);
+                    repeat(2,1fr);
             }
 
             .bottom-grid {
                 grid-template-columns:
                     1fr;
             }
+
         }
 
         @media (max-width: 850px) {
@@ -1176,8 +1146,7 @@
                 transform:
                     translateX(-100%);
 
-                transition:
-                    0.3s ease;
+                transition: .3s;
             }
 
             .sidebar.open {
@@ -1203,9 +1172,10 @@
                     22px 18px 40px;
             }
 
-            .profile-text {
+            .admin-profile {
                 display: none;
             }
+
         }
 
         @media (max-width: 600px) {
@@ -1214,39 +1184,32 @@
                 display: none;
             }
 
-            .page-title h1 {
-                font-size: 18px;
-            }
-
-            .welcome-banner {
-                padding: 25px;
-
-                min-height: 195px;
-            }
-
-            .welcome-content h2 {
-                font-size: 24px;
-            }
-
             .stats-grid,
             .modules-grid {
                 grid-template-columns:
                     1fr;
             }
 
-            .dashboard-content {
-                padding:
-                    18px 14px 35px;
+            .welcome-content h2 {
+                font-size: 24px;
             }
+
+            .prospects-toolbar {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
         }
+
     </style>
+
 </head>
 
 <body>
 
-    <!-- =========================================
-         CHARGEMENT
-    ========================================== -->
+
+    <!-- CHARGEMENT -->
 
     <div
         class="page-loader"
@@ -1266,26 +1229,16 @@
     </div>
 
 
-    <!-- =========================================
-         OVERLAY MOBILE
-    ========================================== -->
-
     <div
         class="sidebar-overlay"
         id="sidebarOverlay"
     ></div>
 
 
-    <!-- =========================================
-         STRUCTURE
-    ========================================== -->
-
     <div class="admin-layout">
 
 
-        <!-- =====================================
-             MENU LATÉRAL
-        ====================================== -->
+        <!-- SIDEBAR -->
 
         <aside
             class="sidebar"
@@ -1323,13 +1276,8 @@
                     href="dashboard.html"
                     class="nav-item active"
                 >
-
-                    <span class="nav-icon">
-                        🏠
-                    </span>
-
+                    <span class="nav-icon">🏠</span>
                     Tableau de bord
-
                 </a>
 
             </nav>
@@ -1346,73 +1294,44 @@
                     class="nav-item module-coming"
                     data-module="Produits"
                 >
-
-                    <span class="nav-icon">
-                        📦
-                    </span>
-
+                    <span class="nav-icon">📦</span>
                     Produits
-
                 </button>
-
 
                 <button
                     type="button"
                     class="nav-item module-coming"
                     data-module="Services"
                 >
-
-                    <span class="nav-icon">
-                        🛠️
-                    </span>
-
+                    <span class="nav-icon">🛠️</span>
                     Services
-
                 </button>
-
 
                 <button
                     type="button"
                     class="nav-item module-coming"
                     data-module="Projets"
                 >
-
-                    <span class="nav-icon">
-                        🏗️
-                    </span>
-
+                    <span class="nav-icon">🏗️</span>
                     Projets
-
                 </button>
-
 
                 <button
                     type="button"
                     class="nav-item module-coming"
                     data-module="Actualités"
                 >
-
-                    <span class="nav-icon">
-                        📰
-                    </span>
-
+                    <span class="nav-icon">📰</span>
                     Actualités
-
                 </button>
-
 
                 <button
                     type="button"
                     class="nav-item module-coming"
                     data-module="Images"
                 >
-
-                    <span class="nav-icon">
-                        🖼️
-                    </span>
-
+                    <span class="nav-icon">🖼️</span>
                     Images
-
                 </button>
 
             </nav>
@@ -1426,54 +1345,20 @@
 
                 <button
                     type="button"
-                    class="nav-item module-coming"
-                    data-module="Messages"
+                    class="nav-item"
+                    id="messagesNavButton"
                 >
-
-                    <span class="nav-icon">
-                        ✉️
-                    </span>
-
+                    <span class="nav-icon">✉️</span>
                     Messages reçus
-
                 </button>
-
 
                 <button
                     type="button"
                     class="nav-item module-coming"
                     data-module="Informations entreprise"
                 >
-
-                    <span class="nav-icon">
-                        🏢
-                    </span>
-
+                    <span class="nav-icon">🏢</span>
                     Informations
-
-                </button>
-
-            </nav>
-
-
-            <div class="menu-label">
-                Administration
-            </div>
-
-            <nav class="sidebar-nav">
-
-                <button
-                    type="button"
-                    class="nav-item module-coming"
-                    data-module="Administrateurs"
-                >
-
-                    <span class="nav-icon">
-                        👥
-                    </span>
-
-                    Administrateurs
-
                 </button>
 
             </nav>
@@ -1486,28 +1371,17 @@
                     class="nav-item"
                     target="_blank"
                 >
-
-                    <span class="nav-icon">
-                        🌐
-                    </span>
-
+                    <span class="nav-icon">🌐</span>
                     Voir le site
-
                 </a>
-
 
                 <button
                     type="button"
                     class="nav-item logout-button"
                     id="logoutButton"
                 >
-
-                    <span class="nav-icon">
-                        🚪
-                    </span>
-
+                    <span class="nav-icon">🚪</span>
                     Se déconnecter
-
                 </button>
 
             </div>
@@ -1515,16 +1389,10 @@
         </aside>
 
 
-        <!-- =====================================
-             CONTENU PRINCIPAL
-        ====================================== -->
+        <!-- CONTENU -->
 
         <main class="main-content">
 
-
-            <!-- ================================
-                 TOP BAR
-            ================================= -->
 
             <header class="topbar">
 
@@ -1545,8 +1413,7 @@
                         </h1>
 
                         <p>
-                            Administration du site
-                            KY5 GLOBAL TRADE
+                            Administration du site KY5 GLOBAL TRADE
                         </p>
 
                     </div>
@@ -1564,24 +1431,15 @@
                         🌐 Voir le site
                     </a>
 
-
                     <div class="admin-profile">
 
-                        <div class="profile-avatar">
-                            A
-                        </div>
+                        <strong>
+                            Administrateur
+                        </strong>
 
-                        <div class="profile-text">
-
-                            <strong>
-                                Administrateur
-                            </strong>
-
-                            <span id="adminEmail">
-                                Chargement...
-                            </span>
-
-                        </div>
+                        <span id="adminEmail">
+                            Chargement...
+                        </span>
 
                     </div>
 
@@ -1590,16 +1448,10 @@
             </header>
 
 
-            <!-- ================================
-                 DASHBOARD
-            ================================= -->
-
             <div class="dashboard-content">
 
 
-                <!-- ============================
-                     BIENVENUE
-                ============================= -->
+                <!-- BIENVENUE -->
 
                 <section class="welcome-banner">
 
@@ -1614,12 +1466,9 @@
                         </h2>
 
                         <p>
-                            Gérez progressivement
-                            les produits, les services,
-                            les projets, les publications
-                            et les informations du site
-                            KY5 GLOBAL TRADE depuis
-                            cet espace centralisé.
+                            Gérez le site KY5 GLOBAL TRADE et consultez
+                            directement les demandes envoyées par les
+                            prospects depuis cet espace administrateur.
                         </p>
 
                     </div>
@@ -1627,98 +1476,9 @@
                 </section>
 
 
-                <!-- ============================
-                     STATISTIQUES
-                ============================= -->
+                <!-- STATISTIQUES -->
 
                 <section class="stats-grid">
-
-                    <div class="stat-card">
-
-                        <div class="stat-top">
-
-                            <div class="stat-icon">
-                                📦
-                            </div>
-
-                            <span class="stat-status">
-                                Actif
-                            </span>
-
-                        </div>
-
-                        <div>
-
-                            <div class="stat-value">
-                                0
-                            </div>
-
-                            <div class="stat-label">
-                                Produits publiés
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="stat-card">
-
-                        <div class="stat-top">
-
-                            <div class="stat-icon">
-                                🛠️
-                            </div>
-
-                            <span class="stat-status">
-                                Actif
-                            </span>
-
-                        </div>
-
-                        <div>
-
-                            <div class="stat-value">
-                                0
-                            </div>
-
-                            <div class="stat-label">
-                                Services
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="stat-card">
-
-                        <div class="stat-top">
-
-                            <div class="stat-icon">
-                                🏗️
-                            </div>
-
-                            <span class="stat-status">
-                                Actif
-                            </span>
-
-                        </div>
-
-                        <div>
-
-                            <div class="stat-value">
-                                0
-                            </div>
-
-                            <div class="stat-label">
-                                Projets
-                            </div>
-
-                        </div>
-
-                    </div>
-
 
                     <div class="stat-card">
 
@@ -1736,12 +1496,108 @@
 
                         <div>
 
-                            <div class="stat-value">
+                            <div
+                                class="stat-value"
+                                id="prospectsTotal"
+                            >
                                 0
                             </div>
 
                             <div class="stat-label">
-                                Messages reçus
+                                Demandes reçues
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon">
+                                🔔
+                            </div>
+
+                            <span class="stat-status">
+                                Direct
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <div
+                                class="stat-value"
+                                id="prospectsUnreadCard"
+                            >
+                                0
+                            </div>
+
+                            <div class="stat-label">
+                                Nouvelles demandes
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon">
+                                ✅
+                            </div>
+
+                            <span class="stat-status">
+                                Suivi
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <div
+                                class="stat-value"
+                                id="prospectsDoneCard"
+                            >
+                                0
+                            </div>
+
+                            <div class="stat-label">
+                                Demandes traitées
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-top">
+
+                            <div class="stat-icon">
+                                ☁️
+                            </div>
+
+                            <span class="stat-status">
+                                Connecté
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <div class="stat-value">
+                                KY5
+                            </div>
+
+                            <div class="stat-label">
+                                Base Supabase
                             </div>
 
                         </div>
@@ -1751,24 +1607,17 @@
                 </section>
 
 
-                <!-- ============================
-                     MODULES
-                ============================= -->
+                <!-- MODULES -->
 
                 <div class="section-header">
 
-                    <div>
+                    <h3>
+                        Gestion du site
+                    </h3>
 
-                        <h3>
-                            Gestion du site
-                        </h3>
-
-                        <p>
-                            Les principaux modules
-                            de votre espace administrateur.
-                        </p>
-
-                    </div>
+                    <p>
+                        Accédez aux principaux modules administratifs.
+                    </p>
 
                 </div>
 
@@ -1776,24 +1625,62 @@
                 <section class="modules-grid">
 
                     <div
-                        class="module-card module-coming"
-                        data-module="Produits"
+                        class="module-card clickable"
+                        id="messagesModuleCard"
                     >
 
                         <div>
 
                             <div class="module-icon">
-                                📦
+                                ✉️
                             </div>
 
                             <h4>
-                                Produits
+                                Messages / Prospects
                             </h4>
 
                             <p>
-                                Ajouter, modifier
-                                et supprimer les produits
-                                affichés sur le site.
+                                Consultez toutes les demandes reçues
+                                depuis le formulaire Prospect.
+                            </p>
+
+                        </div>
+
+                        <div class="module-bottom">
+
+                            <span
+                                class="module-status"
+                                id="messagesModuleStatus"
+                            >
+                                Chargement...
+                            </span>
+
+                            <span class="module-arrow">
+                                →
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="module-card clickable module-coming"
+                        data-module="Services"
+                    >
+
+                        <div>
+
+                            <div class="module-icon">
+                                🛠️
+                            </div>
+
+                            <h4>
+                                Services
+                            </h4>
+
+                            <p>
+                                Administrer les services proposés par KY5.
                             </p>
 
                         </div>
@@ -1814,45 +1701,7 @@
 
 
                     <div
-                        class="module-card module-coming"
-                        data-module="Services"
-                    >
-
-                        <div>
-
-                            <div class="module-icon">
-                                🛠️
-                            </div>
-
-                            <h4>
-                                Services
-                            </h4>
-
-                            <p>
-                                Administrer les différents
-                                services proposés par
-                                KY5 GLOBAL TRADE.
-                            </p>
-
-                        </div>
-
-                        <div class="module-bottom">
-
-                            <span class="module-status">
-                                À configurer
-                            </span>
-
-                            <span class="module-arrow">
-                                →
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div
-                        class="module-card module-coming"
+                        class="module-card clickable module-coming"
                         data-module="Projets"
                     >
 
@@ -1867,9 +1716,7 @@
                             </h4>
 
                             <p>
-                                Ajouter les réalisations,
-                                projets en cours et projets
-                                futurs de l'entreprise.
+                                Ajouter et modifier les projets de l'entreprise.
                             </p>
 
                         </div>
@@ -1877,121 +1724,7 @@
                         <div class="module-bottom">
 
                             <span class="module-status">
-                                À configurer
-                            </span>
-
-                            <span class="module-arrow">
-                                →
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div
-                        class="module-card module-coming"
-                        data-module="Actualités"
-                    >
-
-                        <div>
-
-                            <div class="module-icon">
-                                📰
-                            </div>
-
-                            <h4>
-                                Actualités
-                            </h4>
-
-                            <p>
-                                Publier des annonces,
-                                informations et nouvelles
-                                de l'entreprise.
-                            </p>
-
-                        </div>
-
-                        <div class="module-bottom">
-
-                            <span class="module-status">
-                                À configurer
-                            </span>
-
-                            <span class="module-arrow">
-                                →
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div
-                        class="module-card module-coming"
-                        data-module="Messages"
-                    >
-
-                        <div>
-
-                            <div class="module-icon">
-                                ✉️
-                            </div>
-
-                            <h4>
-                                Messages
-                            </h4>
-
-                            <p>
-                                Consulter les demandes
-                                et messages transmis
-                                depuis le site.
-                            </p>
-
-                        </div>
-
-                        <div class="module-bottom">
-
-                            <span class="module-status">
-                                À configurer
-                            </span>
-
-                            <span class="module-arrow">
-                                →
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <div
-                        class="module-card module-coming"
-                        data-module="Paramètres"
-                    >
-
-                        <div>
-
-                            <div class="module-icon">
-                                ⚙️
-                            </div>
-
-                            <h4>
-                                Paramètres
-                            </h4>
-
-                            <p>
-                                Modifier les informations
-                                générales et les données
-                                de l'entreprise.
-                            </p>
-
-                        </div>
-
-                        <div class="module-bottom">
-
-                            <span class="module-status">
-                                À configurer
+                                Prochaine étape
                             </span>
 
                             <span class="module-arrow">
@@ -2005,101 +1738,157 @@
                 </section>
 
 
-                <!-- ============================
-                     ACTIVITÉ + SÉCURITÉ
-                ============================= -->
+                <!-- PROSPECTS -->
+
+                <section
+                    class="prospects-panel"
+                    id="prospectsSection"
+                >
+
+                    <div class="prospects-toolbar">
+
+                        <div>
+
+                            <h3>
+                                Demandes reçues
+                            </h3>
+
+                            <p>
+                                Données reçues directement depuis
+                                le formulaire Prospect du site.
+                            </p>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="refresh-button"
+                            id="refreshProspectsButton"
+                        >
+                            ↻ Actualiser
+                        </button>
+
+                    </div>
+
+
+                    <div class="prospects-summary">
+
+                        <span class="summary-badge">
+                            Total :
+                            <strong id="prospectsSummaryTotal">
+                                0
+                            </strong>
+                        </span>
+
+                        <span class="summary-badge new">
+                            Non lus :
+                            <strong id="prospectsUnread">
+                                0
+                            </strong>
+                        </span>
+
+                        <span class="summary-badge done">
+                            Traités :
+                            <strong id="prospectsDone">
+                                0
+                            </strong>
+                        </span>
+
+                    </div>
+
+
+                    <div class="table-wrap">
+
+                        <table class="prospects-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Date
+                                    </th>
+
+                                    <th>
+                                        Prospect
+                                    </th>
+
+                                    <th>
+                                        Contact
+                                    </th>
+
+                                    <th>
+                                        Service
+                                    </th>
+
+                                    <th>
+                                        Message
+                                    </th>
+
+                                    <th>
+                                        Statut
+                                    </th>
+
+                                    <th>
+                                        Actions
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="prospectsTableBody">
+
+                                <tr>
+
+                                    <td
+                                        colspan="7"
+                                        class="table-message"
+                                    >
+                                        Chargement des demandes...
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+
+                <!-- INFORMATIONS -->
 
                 <section class="bottom-grid">
 
                     <div class="panel">
 
                         <h3>
-                            Activité récente
+                            Activité administrateur
                         </h3>
 
-                        <p class="panel-subtitle">
-                            Informations concernant
-                            votre espace administrateur.
+                        <p>
+                            Les nouvelles demandes de prospects sont
+                            automatiquement enregistrées dans Supabase
+                            et deviennent visibles dans ce tableau de bord.
                         </p>
 
-
-                        <div class="activity-list">
-
-                            <div class="activity-item">
-
-                                <div class="activity-icon">
-                                    🔐
-                                </div>
-
-                                <div class="activity-text">
-
-                                    <strong>
-                                        Connexion administrateur
-                                    </strong>
-
-                                    <span>
-                                        Une session sécurisée
-                                        est actuellement active.
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="activity-item">
-
-                                <div class="activity-icon">
-                                    ☁️
-                                </div>
-
-                                <div class="activity-text">
-
-                                    <strong>
-                                        Supabase connecté
-                                    </strong>
-
-                                    <span>
-                                        Le système
-                                        d'authentification
-                                        KY5 est opérationnel.
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="activity-item">
-
-                                <div class="activity-icon">
-                                    🌐
-                                </div>
-
-                                <div class="activity-text">
-
-                                    <strong>
-                                        Site public
-                                    </strong>
-
-                                    <span>
-                                        Le site KY5 reste
-                                        accessible séparément
-                                        de l'administration.
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </div>
+                        <p>
+                            Utilisez le bouton <strong>Lu</strong>
+                            lorsqu'une demande a été consultée, puis
+                            <strong>Traité</strong> lorsque le suivi
+                            du prospect a été effectué.
+                        </p>
 
                     </div>
 
 
                     <div class="security-card">
 
-                        <div class="security-symbol">
+                        <div style="font-size:24px;">
                             🛡️
                         </div>
 
@@ -2108,12 +1897,8 @@
                         </h3>
 
                         <p>
-                            L'accès à ce tableau de bord
-                            nécessite une session
-                            administrateur valide.
-                            Les visiteurs non connectés
-                            sont automatiquement redirigés
-                            vers la page de connexion.
+                            L'accès à ce tableau de bord nécessite
+                            une session administrateur Supabase valide.
                         </p>
 
                         <div class="security-indicator">
@@ -2128,6 +1913,7 @@
 
                 </section>
 
+
             </div>
 
         </main>
@@ -2135,9 +1921,7 @@
     </div>
 
 
-    <!-- =========================================
-         CONFIGURATION SUPABASE
-    ========================================== -->
+    <!-- CONFIGURATION -->
 
     <script src="config.js"></script>
 
@@ -2151,7 +1935,7 @@
         /*
         ==========================================================
         KY5 GLOBAL TRADE
-        TABLEAU DE BORD ADMINISTRATEUR
+        TABLEAU DE BORD ADMIN
         ==========================================================
         */
 
@@ -2161,30 +1945,36 @@
                 "pageLoader"
             );
 
+
         const logoutButton =
             document.getElementById(
                 "logoutButton"
             );
+
 
         const adminEmail =
             document.getElementById(
                 "adminEmail"
             );
 
+
         const welcomeTitle =
             document.getElementById(
                 "welcomeTitle"
             );
+
 
         const sidebar =
             document.getElementById(
                 "sidebar"
             );
 
+
         const sidebarOverlay =
             document.getElementById(
                 "sidebarOverlay"
             );
+
 
         const mobileMenuButton =
             document.getElementById(
@@ -2192,11 +1982,81 @@
             );
 
 
-        /*
-        ==========================================================
-        INITIALISATION SUPABASE
-        ==========================================================
-        */
+        const prospectsTotal =
+            document.getElementById(
+                "prospectsTotal"
+            );
+
+
+        const prospectsUnreadCard =
+            document.getElementById(
+                "prospectsUnreadCard"
+            );
+
+
+        const prospectsDoneCard =
+            document.getElementById(
+                "prospectsDoneCard"
+            );
+
+
+        const prospectsSummaryTotal =
+            document.getElementById(
+                "prospectsSummaryTotal"
+            );
+
+
+        const prospectsUnread =
+            document.getElementById(
+                "prospectsUnread"
+            );
+
+
+        const prospectsDone =
+            document.getElementById(
+                "prospectsDone"
+            );
+
+
+        const prospectsTableBody =
+            document.getElementById(
+                "prospectsTableBody"
+            );
+
+
+        const refreshProspectsButton =
+            document.getElementById(
+                "refreshProspectsButton"
+            );
+
+
+        const messagesNavButton =
+            document.getElementById(
+                "messagesNavButton"
+            );
+
+
+        const messagesModuleCard =
+            document.getElementById(
+                "messagesModuleCard"
+            );
+
+
+        const messagesModuleStatus =
+            document.getElementById(
+                "messagesModuleStatus"
+            );
+
+
+        const prospectsSection =
+            document.getElementById(
+                "prospectsSection"
+            );
+
+
+        /* =========================================
+           SUPABASE
+        ========================================= */
 
         let supabaseClient = null;
 
@@ -2215,9 +2075,7 @@
             }
 
 
-            if (
-                !window.supabase
-            ) {
+            if (!window.supabase) {
 
                 throw new Error(
                     "Bibliothèque Supabase introuvable."
@@ -2228,31 +2086,861 @@
 
             supabaseClient =
                 window.supabase.createClient(
+
                     SUPABASE_URL,
+
                     SUPABASE_PUBLISHABLE_KEY
+
                 );
 
         }
         catch (error) {
 
             console.error(
-                "Erreur de configuration Supabase :",
+                "Erreur configuration Supabase :",
                 error
             );
 
-            window.location.href =
-                "index.html";
+            alert(
+                "Impossible de charger la configuration Supabase."
+            );
 
         }
 
 
-        /*
-        ==========================================================
-        VÉRIFICATION DE LA SESSION
-        ==========================================================
-        */
+        /* =========================================
+           SÉCURITÉ TEXTE
+        ========================================= */
+
+        function escapeHtml(value) {
+
+            return String(value ?? "")
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =========================================
+           DATE
+        ========================================= */
+
+        function formatDate(value) {
+
+            if (!value) {
+
+                return "—";
+
+            }
+
+
+            const date =
+                new Date(value);
+
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+
+                return "—";
+
+            }
+
+
+            return date.toLocaleString(
+
+                "fr-FR",
+
+                {
+
+                    dateStyle:
+                        "short",
+
+                    timeStyle:
+                        "short"
+
+                }
+
+            );
+
+        }
+
+
+        /* =========================================
+           STATUT
+        ========================================= */
+
+        function getStatus(prospect) {
+
+            const statut =
+                String(
+                    prospect.statut || ""
+                )
+                .toLowerCase();
+
+
+            if (
+                statut === "traité" ||
+                statut === "traite"
+            ) {
+
+                return "traité";
+
+            }
+
+
+            if (prospect.lu) {
+
+                return "lu";
+
+            }
+
+
+            return "nouveau";
+
+        }
+
+
+        /* =========================================
+           AFFICHER LES PROSPECTS
+        ========================================= */
+
+        function renderProspects(prospects) {
+
+
+            const total =
+                prospects.length;
+
+
+            const unread =
+                prospects.filter(
+
+                    function (prospect) {
+
+                        return !prospect.lu;
+
+                    }
+
+                ).length;
+
+
+            const done =
+                prospects.filter(
+
+                    function (prospect) {
+
+                        const statut =
+                            String(
+                                prospect.statut || ""
+                            )
+                            .toLowerCase();
+
+
+                        return (
+                            statut === "traité" ||
+                            statut === "traite"
+                        );
+
+                    }
+
+                ).length;
+
+
+            prospectsTotal.textContent =
+                total;
+
+
+            prospectsUnreadCard.textContent =
+                unread;
+
+
+            prospectsDoneCard.textContent =
+                done;
+
+
+            prospectsSummaryTotal.textContent =
+                total;
+
+
+            prospectsUnread.textContent =
+                unread;
+
+
+            prospectsDone.textContent =
+                done;
+
+
+            messagesModuleStatus.textContent =
+
+                unread > 0
+
+                    ? unread +
+                      " nouvelle(s)"
+
+                    : total +
+                      " demande(s)";
+
+
+            if (total === 0) {
+
+
+                prospectsTableBody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            class="table-message"
+                        >
+                            Aucune demande reçue.
+                        </td>
+
+                    </tr>
+
+                `;
+
+
+                return;
+
+            }
+
+
+            prospectsTableBody.innerHTML =
+
+                prospects
+
+                    .map(
+
+                        function (prospect) {
+
+
+                            const status =
+                                getStatus(
+                                    prospect
+                                );
+
+
+                            const statusClass =
+
+                                status === "traité"
+
+                                    ? "status-traite"
+
+                                    : status === "lu"
+
+                                        ? "status-lu"
+
+                                        : "status-nouveau";
+
+
+                            const unreadClass =
+
+                                prospect.lu
+
+                                    ? ""
+
+                                    : "unread";
+
+
+                            const entreprise =
+
+                                prospect.entreprise
+
+                                    ? `
+
+                                        <div>
+
+                                            ${escapeHtml(
+                                                prospect.entreprise
+                                            )}
+
+                                        </div>
+
+                                    `
+
+                                    : "";
+
+
+                            const notes =
+
+                                prospect.notes
+
+                                    ? `
+
+                                        <div
+                                            class="prospect-notes"
+                                        >
+
+                                            ${escapeHtml(
+                                                prospect.notes
+                                            )}
+
+                                        </div>
+
+                                    `
+
+                                    : "";
+
+
+                            const readDisabled =
+
+                                prospect.lu
+
+                                    ? "disabled"
+
+                                    : "";
+
+
+                            const doneDisabled =
+
+                                status === "traité"
+
+                                    ? "disabled"
+
+                                    : "";
+
+
+                            return `
+
+                                <tr
+                                    class="${unreadClass}"
+                                >
+
+                                    <td>
+
+                                        ${escapeHtml(
+                                            formatDate(
+                                                prospect.created_at
+                                            )
+                                        )}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <div
+                                            class="prospect-name"
+                                        >
+
+                                            ${escapeHtml(
+                                                prospect.nom ||
+                                                "Sans nom"
+                                            )}
+
+                                        </div>
+
+                                        ${entreprise}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <div
+                                            class="prospect-contact"
+                                        >
+
+                                            <span>
+
+                                                ${escapeHtml(
+                                                    prospect.email ||
+                                                    "—"
+                                                )}
+
+                                            </span>
+
+                                            <span>
+
+                                                ${escapeHtml(
+                                                    prospect.telephone ||
+                                                    "—"
+                                                )}
+
+                                            </span>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        ${escapeHtml(
+                                            prospect.service ||
+                                            "—"
+                                        )}
+
+                                        ${notes}
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <div
+                                            class="prospect-message"
+                                        >
+
+                                            ${escapeHtml(
+                                                prospect.message ||
+                                                "—"
+                                            )}
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <span
+                                            class="
+                                                status-pill
+                                                ${statusClass}
+                                            "
+                                        >
+
+                                            ${escapeHtml(
+                                                status
+                                            )}
+
+                                        </span>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <div
+                                            class="prospect-actions"
+                                        >
+
+                                            <button
+
+                                                type="button"
+
+                                                class="
+                                                    action-button
+                                                    action-read
+                                                "
+
+                                                data-action="read"
+
+                                                data-id="${prospect.id}"
+
+                                                ${readDisabled}
+
+                                            >
+
+                                                Lu
+
+                                            </button>
+
+
+                                            <button
+
+                                                type="button"
+
+                                                class="
+                                                    action-button
+                                                    action-done
+                                                "
+
+                                                data-action="done"
+
+                                                data-id="${prospect.id}"
+
+                                                ${doneDisabled}
+
+                                            >
+
+                                                Traité
+
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            `;
+
+                        }
+
+                    )
+
+                    .join("");
+
+        }
+
+
+        /* =========================================
+           CHARGER SUPABASE
+        ========================================= */
+
+        async function loadProspects() {
+
+
+            if (!supabaseClient) {
+
+                return;
+
+            }
+
+
+            refreshProspectsButton.disabled =
+                true;
+
+
+            refreshProspectsButton.textContent =
+                "Chargement...";
+
+
+            try {
+
+
+                const {
+                    data,
+                    error
+                } =
+
+                    await supabaseClient
+
+                        .from(
+                            "prospects"
+                        )
+
+                        .select(
+                            `
+                            id,
+                            created_at,
+                            nom,
+                            entreprise,
+                            email,
+                            telephone,
+                            message,
+                            service,
+                            statut,
+                            lu,
+                            date_traitement,
+                            source,
+                            notes
+                            `
+                        )
+
+                        .order(
+
+                            "created_at",
+
+                            {
+                                ascending:
+                                    false
+                            }
+
+                        );
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                renderProspects(
+                    data || []
+                );
+
+
+            }
+            catch (error) {
+
+
+                console.error(
+
+                    "Erreur chargement prospects :",
+
+                    error
+
+                );
+
+
+                messagesModuleStatus.textContent =
+                    "Erreur";
+
+
+                prospectsTableBody.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            class="
+                                table-message
+                                table-error
+                            "
+                        >
+
+                            Impossible de charger
+                            les demandes depuis Supabase.
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+            finally {
+
+
+                refreshProspectsButton.disabled =
+                    false;
+
+
+                refreshProspectsButton.textContent =
+                    "↻ Actualiser";
+
+            }
+
+        }
+
+
+        /* =========================================
+           MARQUER LU
+        ========================================= */
+
+        async function markAsRead(id) {
+
+
+            const {
+                error
+            } =
+
+                await supabaseClient
+
+                    .from(
+                        "prospects"
+                    )
+
+                    .update({
+
+                        lu:
+                            true,
+
+                        statut:
+                            "lu"
+
+                    })
+
+                    .eq(
+                        "id",
+                        id
+                    );
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+        }
+
+
+        /* =========================================
+           MARQUER TRAITÉ
+        ========================================= */
+
+        async function markAsDone(id) {
+
+
+            const {
+                error
+            } =
+
+                await supabaseClient
+
+                    .from(
+                        "prospects"
+                    )
+
+                    .update({
+
+                        lu:
+                            true,
+
+                        statut:
+                            "traité",
+
+                        date_traitement:
+                            new Date()
+                                .toISOString()
+
+                    })
+
+                    .eq(
+                        "id",
+                        id
+                    );
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+        }
+
+
+        /* =========================================
+           CLIC ACTIONS
+        ========================================= */
+
+        prospectsTableBody.addEventListener(
+
+            "click",
+
+            async function (event) {
+
+
+                const button =
+
+                    event.target.closest(
+
+                        "button[data-action][data-id]"
+
+                    );
+
+
+                if (!button) {
+
+                    return;
+
+                }
+
+
+                const id =
+
+                    Number(
+
+                        button.getAttribute(
+                            "data-id"
+                        )
+
+                    );
+
+
+                const action =
+
+                    button.getAttribute(
+                        "data-action"
+                    );
+
+
+                if (!id) {
+
+                    return;
+
+                }
+
+
+                button.disabled =
+                    true;
+
+
+                try {
+
+
+                    if (
+                        action === "read"
+                    ) {
+
+                        await markAsRead(
+                            id
+                        );
+
+                    }
+
+
+                    if (
+                        action === "done"
+                    ) {
+
+                        await markAsDone(
+                            id
+                        );
+
+                    }
+
+
+                    await loadProspects();
+
+
+                }
+                catch (error) {
+
+
+                    console.error(
+
+                        "Erreur modification prospect :",
+
+                        error
+
+                    );
+
+
+                    alert(
+
+                        "Impossible de modifier cette demande."
+
+                    );
+
+
+                    button.disabled =
+                        false;
+
+                }
+
+            }
+
+        );
+
+
+        /* =========================================
+           SESSION ADMIN
+        ========================================= */
 
         async function verifyAdminSession() {
+
 
             if (!supabaseClient) {
 
@@ -2266,26 +2954,22 @@
 
             try {
 
+
                 const {
                     data,
                     error
                 } =
-                await supabaseClient
-                    .auth
-                    .getSession();
+
+                    await supabaseClient
+
+                        .auth
+
+                        .getSession();
 
 
                 if (error) {
 
-                    console.error(
-                        "Erreur session :",
-                        error
-                    );
-
-                    window.location.href =
-                        "index.html";
-
-                    return;
+                    throw error;
 
                 }
 
@@ -2308,47 +2992,38 @@
                     data.session.user;
 
 
-                if (user.email) {
+                adminEmail.textContent =
 
-                    adminEmail.textContent =
-                        user.email;
+                    user.email ||
 
-                }
-                else {
+                    "Administrateur KY5";
 
-                    adminEmail.textContent =
-                        "Administrateur KY5";
-
-                }
-
-
-                /*
-                ==============================================
-                BIENVENUE
-                ==============================================
-                */
 
                 welcomeTitle.textContent =
+
                     "Bienvenue dans votre espace administrateur";
 
 
-                /*
-                ==============================================
-                AFFICHER LE DASHBOARD
-                ==============================================
-                */
+                await loadProspects();
+
 
                 pageLoader.classList.add(
                     "hidden"
                 );
 
+
             }
             catch (error) {
 
+
                 console.error(
-                    "Erreur pendant la vérification :",
+
+                    "Erreur session :",
+
                     error
+
                 );
+
 
                 window.location.href =
                     "index.html";
@@ -2358,29 +3033,77 @@
         }
 
 
-        /*
-        ==========================================================
-        DÉCONNEXION
-        ==========================================================
-        */
+        /* =========================================
+           ACTUALISER
+        ========================================= */
+
+        refreshProspectsButton.addEventListener(
+
+            "click",
+
+            loadProspects
+
+        );
+
+
+        /* =========================================
+           ALLER AUX MESSAGES
+        ========================================= */
+
+        function openProspects() {
+
+
+            prospectsSection.scrollIntoView({
+
+                behavior:
+                    "smooth",
+
+                block:
+                    "start"
+
+            });
+
+
+            closeMobileSidebar();
+
+        }
+
+
+        messagesNavButton.addEventListener(
+
+            "click",
+
+            openProspects
+
+        );
+
+
+        messagesModuleCard.addEventListener(
+
+            "click",
+
+            openProspects
+
+        );
+
+
+        /* =========================================
+           DÉCONNEXION
+        ========================================= */
 
         logoutButton.addEventListener(
+
             "click",
+
             async function () {
-
-                if (!supabaseClient) {
-
-                    window.location.href =
-                        "index.html";
-
-                    return;
-
-                }
 
 
                 const confirmation =
+
                     confirm(
+
                         "Voulez-vous vraiment vous déconnecter ?"
+
                     );
 
 
@@ -2391,82 +3114,76 @@
                 }
 
 
-                logoutButton.disabled =
-                    true;
-
-
                 try {
 
-                    const {
-                        error
-                    } =
+
                     await supabaseClient
+
                         .auth
+
                         .signOut();
 
 
-                    if (error) {
-
-                        console.error(
-                            "Erreur de déconnexion :",
-                            error
-                        );
-
-                    }
-
-
-                    window.location.href =
-                        "index.html";
-
                 }
                 catch (error) {
+
 
                     console.error(
                         error
                     );
 
-                    window.location.href =
-                        "index.html";
-
                 }
 
+
+                window.location.href =
+                    "index.html";
+
             }
+
         );
 
 
-        /*
-        ==========================================================
-        MENU MOBILE
-        ==========================================================
-        */
+        /* =========================================
+           MENU MOBILE
+        ========================================= */
 
         mobileMenuButton.addEventListener(
+
             "click",
+
             function () {
+
 
                 sidebar.classList.add(
                     "open"
                 );
+
 
                 sidebarOverlay.classList.add(
                     "active"
                 );
 
             }
+
         );
 
 
         sidebarOverlay.addEventListener(
+
             "click",
+
             closeMobileSidebar
+
         );
 
 
         function closeMobileSidebar() {
 
+
             sidebar.classList.remove(
                 "open"
             );
+
 
             sidebarOverlay.classList.remove(
                 "active"
@@ -2475,60 +3192,75 @@
         }
 
 
-        /*
-        ==========================================================
-        MODULES À CRÉER
-        ==========================================================
-        */
+        /* =========================================
+           MODULES FUTURS
+        ========================================= */
 
-        const comingModules =
-            document.querySelectorAll(
+        document
+
+            .querySelectorAll(
                 ".module-coming"
+            )
+
+            .forEach(
+
+                function (element) {
+
+
+                    element.addEventListener(
+
+                        "click",
+
+                        function () {
+
+
+                            const moduleName =
+
+                                element.getAttribute(
+                                    "data-module"
+                                ) ||
+
+                                "Ce module";
+
+
+                            alert(
+
+                                moduleName +
+
+                                " sera configuré prochainement."
+
+                            );
+
+
+                            closeMobileSidebar();
+
+                        }
+
+                    );
+
+                }
+
             );
 
 
-        comingModules.forEach(
-            function (element) {
-
-                element.addEventListener(
-                    "click",
-                    function () {
-
-                        const moduleName =
-                            element.getAttribute(
-                                "data-module"
-                            ) || "Ce module";
-
-
-                        alert(
-                            moduleName +
-                            " sera configuré dans la prochaine étape."
-                        );
-
-                        closeMobileSidebar();
-
-                    }
-                );
-
-            }
-        );
-
-
-        /*
-        ==========================================================
-        SURVEILLER L'ÉTAT DE CONNEXION
-        ==========================================================
-        */
+        /* =========================================
+           SESSION CHANGÉE
+        ========================================= */
 
         if (supabaseClient) {
 
+
             supabaseClient
+
                 .auth
+
                 .onAuthStateChange(
+
                     function (
                         event,
                         session
                     ) {
+
 
                         if (
                             event ===
@@ -2553,20 +3285,20 @@
                         }
 
                     }
+
                 );
 
         }
 
 
-        /*
-        ==========================================================
-        DÉMARRAGE
-        ==========================================================
-        */
+        /* =========================================
+           DÉMARRAGE
+        ========================================= */
 
         verifyAdminSession();
 
     </script>
 
 </body>
+
 </html>
