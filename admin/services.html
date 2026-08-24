@@ -60,6 +60,10 @@
             cursor: pointer;
         }
 
+        a {
+            text-decoration: none;
+        }
+
 
         /* =====================================================
            CHARGEMENT
@@ -94,39 +98,49 @@
             width: 82px;
             height: 82px;
 
-            border-radius: 22px;
-
             display: flex;
             align-items: center;
             justify-content: center;
+
+            margin-bottom: 20px;
+
+            border-radius: 22px;
 
             background: white;
             color: var(--bleu);
 
             font-size: 26px;
             font-weight: 900;
-
-            margin-bottom: 20px;
         }
 
         .loader-spinner {
             width: 36px;
             height: 36px;
 
-            border: 3px solid rgba(255, 255, 255, 0.25);
+            margin-bottom: 15px;
+
+            border:
+                3px solid
+                rgba(255, 255, 255, 0.25);
+
             border-top-color: white;
 
             border-radius: 50%;
 
             animation: spin 0.8s linear infinite;
+        }
 
-            margin-bottom: 15px;
+        .page-loader p {
+            font-size: 11px;
+            color: #d8effc;
         }
 
         @keyframes spin {
+
             to {
                 transform: rotate(360deg);
             }
+
         }
 
 
@@ -185,18 +199,19 @@
             margin-bottom: 20px;
 
             border-bottom:
-                1px solid rgba(255, 255, 255, 0.1);
+                1px solid
+                rgba(255, 255, 255, 0.1);
         }
 
         .sidebar-logo {
             width: 52px;
             height: 52px;
 
-            border-radius: 15px;
-
             display: flex;
             align-items: center;
             justify-content: center;
+
+            border-radius: 15px;
 
             background:
                 linear-gradient(
@@ -265,8 +280,6 @@
 
             color: #cbdce8;
 
-            text-decoration: none;
-
             font-size: 13px;
 
             text-align: left;
@@ -290,6 +303,8 @@
             align-items: center;
             justify-content: center;
 
+            flex-shrink: 0;
+
             border-radius: 8px;
 
             background:
@@ -302,7 +317,8 @@
             padding-top: 20px;
 
             border-top:
-                1px solid rgba(255, 255, 255, 0.1);
+                1px solid
+                rgba(255, 255, 255, 0.1);
         }
 
         .logout-button {
@@ -402,8 +418,6 @@
 
             color: var(--bleu);
 
-            text-decoration: none;
-
             font-size: 12px;
             font-weight: 700;
         }
@@ -461,7 +475,8 @@
                 );
 
             box-shadow:
-                0 18px 45px rgba(0, 86, 179, 0.15);
+                0 18px 45px
+                rgba(0, 86, 179, 0.15);
         }
 
         .hero-small {
@@ -487,7 +502,7 @@
         }
 
         .hero p {
-            max-width: 700px;
+            max-width: 780px;
 
             color: #dff4ff;
 
@@ -557,24 +572,20 @@
 
 
         /* =====================================================
-           GRID
+           GESTION
         ===================================================== */
 
         .management-grid {
             display: grid;
 
             grid-template-columns:
-                380px 1fr;
+                minmax(420px, 0.8fr)
+                minmax(0, 1.2fr);
 
             gap: 20px;
 
             align-items: start;
         }
-
-
-        /* =====================================================
-           FORMULAIRE
-        ===================================================== */
 
         .panel {
             padding: 23px;
@@ -587,7 +598,8 @@
             background: white;
 
             box-shadow:
-                0 8px 25px rgba(21, 45, 65, 0.04);
+                0 8px 25px
+                rgba(21, 45, 65, 0.04);
         }
 
         .panel h3 {
@@ -606,6 +618,11 @@
 
             line-height: 1.5;
         }
+
+
+        /* =====================================================
+           FORMULAIRE
+        ===================================================== */
 
         .form-group {
             margin-bottom: 16px;
@@ -645,7 +662,7 @@
         }
 
         textarea.form-control {
-            min-height: 120px;
+            min-height: 105px;
 
             resize: vertical;
         }
@@ -654,7 +671,93 @@
             border-color: var(--bleu-clair);
 
             box-shadow:
-                0 0 0 3px rgba(0, 168, 255, 0.08);
+                0 0 0 3px
+                rgba(0, 168, 255, 0.08);
+        }
+
+        .media-section-title {
+            margin:
+                26px 0 15px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid #e4ebf2;
+
+            color: var(--bleu-fonce);
+
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .media-grid {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 12px;
+        }
+
+        .file-control {
+            padding: 9px;
+
+            cursor: pointer;
+        }
+
+        .field-help {
+            display: block;
+
+            margin-top: 6px;
+
+            color: var(--gris);
+
+            font-size: 9px;
+
+            line-height: 1.45;
+        }
+
+        .media-preview {
+            display: none;
+
+            margin-top: 10px;
+
+            padding: 10px;
+
+            border:
+                1px solid #e3ebf1;
+
+            border-radius: 11px;
+
+            background: #f9fbfd;
+        }
+
+        .media-preview.visible {
+            display: block;
+        }
+
+        .preview-label {
+            margin-bottom: 8px;
+
+            color: var(--gris);
+
+            font-size: 9px;
+            font-weight: 800;
+        }
+
+        .media-preview img,
+        .media-preview video {
+            display: block;
+
+            width: 100%;
+
+            max-height: 220px;
+
+            object-fit: cover;
+
+            border-radius: 9px;
+
+            background: #07111c;
         }
 
         .toggle-row {
@@ -707,7 +810,7 @@
         .save-button {
             flex: 1;
 
-            min-height: 44px;
+            min-height: 46px;
 
             border: none;
 
@@ -726,10 +829,16 @@
             font-weight: 900;
         }
 
+        .save-button:disabled {
+            opacity: 0.6;
+
+            cursor: wait;
+        }
+
         .cancel-button {
             display: none;
 
-            min-height: 44px;
+            min-height: 46px;
 
             padding:
                 0 15px;
@@ -756,7 +865,8 @@
 
             margin-top: 15px;
 
-            padding: 11px 12px;
+            padding:
+                11px 12px;
 
             border-radius: 9px;
 
@@ -837,7 +947,7 @@
             display: grid;
 
             grid-template-columns:
-                54px 1fr auto;
+                80px 1fr auto;
 
             gap: 14px;
 
@@ -859,9 +969,11 @@
             background: #f8fafc;
         }
 
-        .service-icon {
-            width: 50px;
-            height: 50px;
+        .service-visual {
+            width: 76px;
+            height: 76px;
+
+            overflow: hidden;
 
             display: flex;
             align-items: center;
@@ -871,7 +983,14 @@
 
             background: #eaf7ff;
 
-            font-size: 22px;
+            font-size: 28px;
+        }
+
+        .service-visual img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
         }
 
         .service-info h4 {
@@ -890,8 +1009,18 @@
             line-height: 1.6;
         }
 
-        .service-meta {
+        .service-ad-text {
+            margin-top: 7px !important;
+
+            color: #23597a !important;
+
+            font-style: italic;
+        }
+
+        .service-meta,
+        .service-media {
             display: flex;
+
             flex-wrap: wrap;
 
             gap: 6px;
@@ -899,7 +1028,8 @@
             margin-top: 9px;
         }
 
-        .badge {
+        .badge,
+        .media-badge {
             padding:
                 5px 7px;
 
@@ -925,15 +1055,22 @@
             color: var(--rouge);
         }
 
+        .media-badge {
+            background: #eaf7ff;
+
+            color: #0875b4;
+        }
+
         .service-actions {
             display: flex;
+
             flex-direction: column;
 
             gap: 7px;
         }
 
         .action-button {
-            min-width: 78px;
+            min-width: 82px;
 
             padding:
                 8px 10px;
@@ -959,7 +1096,8 @@
         }
 
         .empty-state {
-            padding: 40px 20px;
+            padding:
+                40px 20px;
 
             text-align: center;
 
@@ -990,16 +1128,10 @@
             display: block;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1150px) {
 
             .management-grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns:
-                    repeat(3, 1fr);
+                grid-template-columns: 1fr;
             }
 
         }
@@ -1045,8 +1177,7 @@
         @media (max-width: 650px) {
 
             .stats-grid {
-                grid-template-columns:
-                    1fr;
+                grid-template-columns: 1fr;
             }
 
             .topbar {
@@ -1058,9 +1189,18 @@
                 display: none;
             }
 
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+
             .service-item {
                 grid-template-columns:
-                    48px 1fr;
+                    65px 1fr;
+            }
+
+            .service-visual {
+                width: 62px;
+                height: 62px;
             }
 
             .service-actions {
@@ -1076,13 +1216,12 @@
 
 </head>
 
-
 <body>
 
 
     <!-- =====================================================
          CHARGEMENT
-    ====================================================== -->
+    ===================================================== -->
 
     <div
         class="page-loader"
@@ -1113,7 +1252,7 @@
 
         <!-- =================================================
              MENU
-        ================================================== -->
+        ================================================= -->
 
         <aside
             class="sidebar"
@@ -1151,11 +1290,13 @@
                     href="dashboard.html"
                     class="nav-item"
                 >
+
                     <span class="nav-icon">
                         🏠
                     </span>
 
                     Tableau de bord
+
                 </a>
 
             </nav>
@@ -1172,11 +1313,13 @@
                     class="nav-item module-coming"
                     data-module="Produits"
                 >
+
                     <span class="nav-icon">
                         📦
                     </span>
 
                     Produits
+
                 </button>
 
 
@@ -1184,11 +1327,13 @@
                     href="services.html"
                     class="nav-item active"
                 >
+
                     <span class="nav-icon">
                         🛠️
                     </span>
 
                     Services
+
                 </a>
 
 
@@ -1197,11 +1342,13 @@
                     class="nav-item module-coming"
                     data-module="Projets"
                 >
+
                     <span class="nav-icon">
                         🏗️
                     </span>
 
                     Projets
+
                 </button>
 
 
@@ -1210,11 +1357,13 @@
                     class="nav-item module-coming"
                     data-module="Actualités"
                 >
+
                     <span class="nav-icon">
                         📰
                     </span>
 
                     Actualités
+
                 </button>
 
 
@@ -1223,11 +1372,13 @@
                     class="nav-item module-coming"
                     data-module="Images"
                 >
+
                     <span class="nav-icon">
                         🖼️
                     </span>
 
                     Images
+
                 </button>
 
             </nav>
@@ -1243,11 +1394,13 @@
                     href="dashboard.html#prospectsSection"
                     class="nav-item"
                 >
+
                     <span class="nav-icon">
                         ✉️
                     </span>
 
                     Messages reçus
+
                 </a>
 
             </nav>
@@ -1260,11 +1413,13 @@
                     target="_blank"
                     class="nav-item"
                 >
+
                     <span class="nav-icon">
                         🌐
                     </span>
 
                     Voir le site
+
                 </a>
 
 
@@ -1273,11 +1428,13 @@
                     class="nav-item logout-button"
                     id="logoutButton"
                 >
+
                     <span class="nav-icon">
                         🚪
                     </span>
 
                     Se déconnecter
+
                 </button>
 
             </div>
@@ -1287,7 +1444,7 @@
 
         <!-- =================================================
              CONTENU
-        ================================================== -->
+        ================================================= -->
 
         <main class="main-content">
 
@@ -1303,6 +1460,7 @@
                     >
                         ☰
                     </button>
+
 
                     <div class="page-title">
 
@@ -1328,6 +1486,7 @@
                         ← Tableau de bord
                     </a>
 
+
                     <div class="admin-profile">
 
                         <strong>
@@ -1350,7 +1509,7 @@
 
                 <!-- =================================================
                      HERO
-                ================================================== -->
+                ================================================= -->
 
                 <section class="hero">
 
@@ -1359,13 +1518,14 @@
                     </div>
 
                     <h2>
-                        Services KY5 GLOBAL TRADE
+                        Services & médias KY5 GLOBAL TRADE
                     </h2>
 
                     <p>
-                        Ajoutez, modifiez, activez ou supprimez
-                        les services proposés par l'entreprise.
-                        Les services actifs pourront ensuite être
+                        Ajoutez un service avec sa photo,
+                        sa vidéo publicitaire, son texte promotionnel
+                        et son lien publicitaire. Les médias sont stockés
+                        dans Supabase Storage et peuvent ensuite être
                         affichés automatiquement sur le site public.
                     </p>
 
@@ -1374,9 +1534,10 @@
 
                 <!-- =================================================
                      STATISTIQUES
-                ================================================== -->
+                ================================================= -->
 
                 <section class="stats-grid">
+
 
                     <div class="stat-card">
 
@@ -1442,7 +1603,7 @@
 
                 <!-- =================================================
                      GESTION
-                ================================================== -->
+                ================================================= -->
 
                 <section class="management-grid">
 
@@ -1456,11 +1617,13 @@
                         </h3>
 
                         <p class="panel-subtitle">
-                            Remplissez les informations du service.
+                            Remplissez les informations puis ajoutez,
+                            si nécessaire, une photo et une vidéo publicitaire.
                         </p>
 
 
                         <form id="serviceForm">
+
 
                             <input
                                 type="hidden"
@@ -1478,7 +1641,7 @@
                                     type="text"
                                     class="form-control"
                                     id="serviceTitle"
-                                    placeholder="Ex. Import-Export"
+                                    placeholder="Ex. Installation panneaux solaires"
                                     required
                                 >
 
@@ -1494,7 +1657,7 @@
                                 <textarea
                                     class="form-control"
                                     id="serviceDescription"
-                                    placeholder="Décrivez ce service..."
+                                    placeholder="Décrivez le service..."
                                 ></textarea>
 
                             </div>
@@ -1510,9 +1673,133 @@
                                     type="text"
                                     class="form-control"
                                     id="serviceIcon"
-                                    placeholder="Ex. 🌍"
+                                    placeholder="Ex. ☀️"
                                     maxlength="10"
                                 >
+
+                            </div>
+
+
+                            <div class="media-section-title">
+                                🖼️ Photo & 🎬 vidéo publicitaire
+                            </div>
+
+
+                            <div class="media-grid">
+
+
+                                <div class="form-group">
+
+                                    <label for="servicePhoto">
+                                        Photo du service
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        class="form-control file-control"
+                                        id="servicePhoto"
+                                        accept="image/*"
+                                    >
+
+                                    <span class="field-help">
+                                        Choisissez une photo depuis
+                                        l'ordinateur ou le téléphone.
+                                    </span>
+
+
+                                    <div
+                                        class="media-preview"
+                                        id="photoPreview"
+                                    >
+
+                                        <div class="preview-label">
+                                            Aperçu de la photo
+                                        </div>
+
+                                        <img
+                                            id="photoPreviewImage"
+                                            alt="Aperçu de la photo"
+                                        >
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label for="serviceVideo">
+                                        Vidéo publicitaire
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        class="form-control file-control"
+                                        id="serviceVideo"
+                                        accept="video/*"
+                                    >
+
+                                    <span class="field-help">
+                                        Choisissez la vidéo créée
+                                        par le Community Manager.
+                                    </span>
+
+
+                                    <div
+                                        class="media-preview"
+                                        id="videoPreview"
+                                    >
+
+                                        <div class="preview-label">
+                                            Aperçu de la vidéo
+                                        </div>
+
+                                        <video
+                                            id="videoPreviewPlayer"
+                                            controls
+                                            playsinline
+                                        ></video>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="serviceAdText">
+                                    Texte publicitaire
+                                </label>
+
+                                <textarea
+                                    class="form-control"
+                                    id="serviceAdText"
+                                    placeholder="Ex. Profitez de notre nouvelle offre..."
+                                ></textarea>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="serviceAdLink">
+                                    Lien publicitaire
+                                </label>
+
+                                <input
+                                    type="url"
+                                    class="form-control"
+                                    id="serviceAdLink"
+                                    placeholder="https://..."
+                                >
+
+                                <span class="field-help">
+                                    Facultatif : lien WhatsApp,
+                                    page promotionnelle, vidéo YouTube,
+                                    Facebook, Instagram, etc.
+                                </span>
 
                             </div>
 
@@ -1567,6 +1854,7 @@
                                     Ajouter le service
                                 </button>
 
+
                                 <button
                                     type="button"
                                     class="cancel-button"
@@ -1606,6 +1894,7 @@
 
                             </div>
 
+
                             <button
                                 type="button"
                                 class="refresh-button"
@@ -1630,7 +1919,6 @@
 
                     </div>
 
-
                 </section>
 
 
@@ -1643,7 +1931,7 @@
 
     <!-- =====================================================
          SUPABASE
-    ====================================================== -->
+    ===================================================== -->
 
     <script src="config.js"></script>
 
@@ -1657,10 +1945,14 @@
         /*
         ==========================================================
         KY5 GLOBAL TRADE
-        GESTION DES SERVICES
+        GESTION DES SERVICES + MÉDIAS
         ==========================================================
         */
 
+
+        /* =====================================================
+           ÉLÉMENTS
+        ===================================================== */
 
         const pageLoader =
             document.getElementById(
@@ -1728,6 +2020,30 @@
             );
 
 
+        const servicePhoto =
+            document.getElementById(
+                "servicePhoto"
+            );
+
+
+        const serviceVideo =
+            document.getElementById(
+                "serviceVideo"
+            );
+
+
+        const serviceAdText =
+            document.getElementById(
+                "serviceAdText"
+            );
+
+
+        const serviceAdLink =
+            document.getElementById(
+                "serviceAdLink"
+            );
+
+
         const serviceOrder =
             document.getElementById(
                 "serviceOrder"
@@ -1737,6 +2053,30 @@
         const serviceActive =
             document.getElementById(
                 "serviceActive"
+            );
+
+
+        const photoPreview =
+            document.getElementById(
+                "photoPreview"
+            );
+
+
+        const photoPreviewImage =
+            document.getElementById(
+                "photoPreviewImage"
+            );
+
+
+        const videoPreview =
+            document.getElementById(
+                "videoPreview"
+            );
+
+
+        const videoPreviewPlayer =
+            document.getElementById(
+                "videoPreviewPlayer"
             );
 
 
@@ -1794,6 +2134,10 @@
             );
 
 
+        /* =====================================================
+           VARIABLES
+        ===================================================== */
+
         let supabaseClient =
             null;
 
@@ -1802,9 +2146,13 @@
             [];
 
 
+        const SERVICES_MEDIA_BUCKET =
+            "services-media";
+
+
         /* =====================================================
            SUPABASE
-        ====================================================== */
+        ===================================================== */
 
         try {
 
@@ -1820,7 +2168,9 @@
             }
 
 
-            if (!window.supabase) {
+            if (
+                !window.supabase
+            ) {
 
                 throw new Error(
                     "Bibliothèque Supabase introuvable."
@@ -1846,12 +2196,17 @@
                 error
             );
 
+
+            alert(
+                "Impossible de charger Supabase."
+            );
+
         }
 
 
         /* =====================================================
            HTML SÉCURISÉ
-        ====================================================== */
+        ===================================================== */
 
         function escapeHtml(value) {
 
@@ -1889,7 +2244,7 @@
 
         /* =====================================================
            MESSAGE
-        ====================================================== */
+        ===================================================== */
 
         function showMessage(
             text,
@@ -1914,7 +2269,7 @@
 
                 },
 
-                4500
+                5000
 
             );
 
@@ -1922,15 +2277,464 @@
 
 
         /* =====================================================
+           NOM DE FICHIER
+        ===================================================== */
+
+        function safeFileName(
+            fileName
+        ) {
+
+            return String(
+                fileName || "media"
+            )
+
+                .normalize(
+                    "NFD"
+                )
+
+                .replace(
+                    /[\u0300-\u036f]/g,
+                    ""
+                )
+
+                .replace(
+                    /[^a-zA-Z0-9._-]/g,
+                    "-"
+                );
+
+        }
+
+
+        /* =====================================================
+           UPLOAD PHOTO / VIDÉO
+        ===================================================== */
+
+        async function uploadServiceMedia(
+            file,
+            folder
+        ) {
+
+            if (
+                !file
+            ) {
+
+                return "";
+
+            }
+
+
+            const uniqueName =
+
+                Date.now() +
+
+                "-" +
+
+                Math.random()
+                    .toString(36)
+                    .slice(2, 10) +
+
+                "-" +
+
+                safeFileName(
+                    file.name
+                );
+
+
+            const filePath =
+
+                folder +
+
+                "/" +
+
+                uniqueName;
+
+
+            const {
+                error:
+                    uploadError
+            } =
+
+                await supabaseClient
+
+                    .storage
+
+                    .from(
+                        SERVICES_MEDIA_BUCKET
+                    )
+
+                    .upload(
+
+                        filePath,
+
+                        file,
+
+                        {
+
+                            cacheControl:
+                                "3600",
+
+                            upsert:
+                                false
+
+                        }
+
+                    );
+
+
+            if (
+                uploadError
+            ) {
+
+                throw uploadError;
+
+            }
+
+
+            const {
+                data
+            } =
+
+                supabaseClient
+
+                    .storage
+
+                    .from(
+                        SERVICES_MEDIA_BUCKET
+                    )
+
+                    .getPublicUrl(
+                        filePath
+                    );
+
+
+            if (
+                !data ||
+                !data.publicUrl
+            ) {
+
+                throw new Error(
+                    "URL publique du média introuvable."
+                );
+
+            }
+
+
+            return data.publicUrl;
+
+        }
+
+
+        /* =====================================================
+           EXTRAIRE LE CHEMIN STORAGE
+        ===================================================== */
+
+        function getStoragePathFromPublicUrl(
+            publicUrl
+        ) {
+
+            if (
+                !publicUrl
+            ) {
+
+                return null;
+
+            }
+
+
+            const marker =
+
+                "/storage/v1/object/public/" +
+
+                SERVICES_MEDIA_BUCKET +
+
+                "/";
+
+
+            const position =
+                publicUrl.indexOf(
+                    marker
+                );
+
+
+            if (
+                position === -1
+            ) {
+
+                return null;
+
+            }
+
+
+            return decodeURIComponent(
+
+                publicUrl.substring(
+
+                    position +
+
+                    marker.length
+
+                )
+
+            );
+
+        }
+
+
+        /* =====================================================
+           SUPPRIMER UN MÉDIA STORAGE
+        ===================================================== */
+
+        async function removeStorageMedia(
+            publicUrl
+        ) {
+
+            const path =
+                getStoragePathFromPublicUrl(
+                    publicUrl
+                );
+
+
+            if (
+                !path
+            ) {
+
+                return;
+
+            }
+
+
+            const {
+                error
+            } =
+
+                await supabaseClient
+
+                    .storage
+
+                    .from(
+                        SERVICES_MEDIA_BUCKET
+                    )
+
+                    .remove([
+                        path
+                    ]);
+
+
+            if (
+                error
+            ) {
+
+                console.warn(
+                    "Impossible de supprimer le média :",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           APERÇUS
+        ===================================================== */
+
+        function showPhotoPreview(
+            url
+        ) {
+
+            if (
+                !url
+            ) {
+
+                photoPreview.classList.remove(
+                    "visible"
+                );
+
+
+                photoPreviewImage.removeAttribute(
+                    "src"
+                );
+
+
+                return;
+
+            }
+
+
+            photoPreviewImage.src =
+                url;
+
+
+            photoPreview.classList.add(
+                "visible"
+            );
+
+        }
+
+
+        function showVideoPreview(
+            url
+        ) {
+
+            if (
+                !url
+            ) {
+
+                videoPreviewPlayer.pause();
+
+
+                videoPreviewPlayer.removeAttribute(
+                    "src"
+                );
+
+
+                videoPreviewPlayer.load();
+
+
+                videoPreview.classList.remove(
+                    "visible"
+                );
+
+
+                return;
+
+            }
+
+
+            videoPreviewPlayer.src =
+                url;
+
+
+            videoPreview.classList.add(
+                "visible"
+            );
+
+        }
+
+
+        servicePhoto.addEventListener(
+
+            "change",
+
+            function () {
+
+                const file =
+                    servicePhoto.files[0];
+
+
+                if (
+                    !file
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    !file.type.startsWith(
+                        "image/"
+                    )
+                ) {
+
+                    showMessage(
+                        "Le fichier sélectionné n'est pas une image.",
+                        "error"
+                    );
+
+
+                    servicePhoto.value =
+                        "";
+
+
+                    return;
+
+                }
+
+
+                const previewUrl =
+                    URL.createObjectURL(
+                        file
+                    );
+
+
+                showPhotoPreview(
+                    previewUrl
+                );
+
+            }
+
+        );
+
+
+        serviceVideo.addEventListener(
+
+            "change",
+
+            function () {
+
+                const file =
+                    serviceVideo.files[0];
+
+
+                if (
+                    !file
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    !file.type.startsWith(
+                        "video/"
+                    )
+                ) {
+
+                    showMessage(
+                        "Le fichier sélectionné n'est pas une vidéo.",
+                        "error"
+                    );
+
+
+                    serviceVideo.value =
+                        "";
+
+
+                    return;
+
+                }
+
+
+                const previewUrl =
+                    URL.createObjectURL(
+                        file
+                    );
+
+
+                showVideoPreview(
+                    previewUrl
+                );
+
+            }
+
+        );
+
+
+        /* =====================================================
            SESSION
-        ====================================================== */
+        ===================================================== */
 
         async function verifyAdminSession() {
 
-            if (!supabaseClient) {
+            if (
+                !supabaseClient
+            ) {
 
                 window.location.href =
                     "index.html";
+
 
                 return;
 
@@ -1951,7 +2755,9 @@
                         .getSession();
 
 
-                if (error) {
+                if (
+                    error
+                ) {
 
                     throw error;
 
@@ -1966,6 +2772,7 @@
 
                     window.location.href =
                         "index.html";
+
 
                     return;
 
@@ -1987,7 +2794,9 @@
                 );
 
             }
-            catch (error) {
+            catch (
+                error
+            ) {
 
                 console.error(
                     "Erreur session :",
@@ -2004,8 +2813,8 @@
 
 
         /* =====================================================
-           CHARGER SERVICES
-        ====================================================== */
+           CHARGER LES SERVICES
+        ===================================================== */
 
         async function loadServices() {
 
@@ -2035,23 +2844,31 @@
                         )
 
                         .order(
+
                             "ordre",
+
                             {
                                 ascending:
                                     true
                             }
+
                         )
 
                         .order(
+
                             "created_at",
+
                             {
                                 ascending:
                                     false
                             }
+
                         );
 
 
-                if (error) {
+                if (
+                    error
+                ) {
 
                     throw error;
 
@@ -2066,12 +2883,15 @@
                     servicesCache
                 );
 
+
                 updateStats(
                     servicesCache
                 );
 
             }
-            catch (error) {
+            catch (
+                error
+            ) {
 
                 console.error(
                     "Erreur chargement services :",
@@ -2106,7 +2926,7 @@
 
         /* =====================================================
            STATS
-        ====================================================== */
+        ===================================================== */
 
         function updateStats(
             services
@@ -2124,7 +2944,9 @@
                         service
                     ) {
 
-                        return service.actif;
+                        return Boolean(
+                            service.actif
+                        );
 
                     }
 
@@ -2150,8 +2972,8 @@
 
 
         /* =====================================================
-           AFFICHAGE
-        ====================================================== */
+           AFFICHAGE DES SERVICES
+        ===================================================== */
 
         function renderServices(
             services
@@ -2165,7 +2987,8 @@
 
                     <div class="empty-state">
 
-                        Aucun service enregistré.<br><br>
+                        Aucun service enregistré.
+                        <br><br>
 
                         Utilisez le formulaire
                         pour créer le premier service.
@@ -2173,6 +2996,7 @@
                     </div>
 
                 `;
+
 
                 return;
 
@@ -2223,6 +3047,92 @@
                                 "🛠️";
 
 
+                            const photoHtml =
+
+                                service.photo_url
+
+                                    ? `
+
+                                        <img
+                                            src="${escapeHtml(
+                                                service.photo_url
+                                            )}"
+                                            alt="${escapeHtml(
+                                                service.titre
+                                            )}"
+                                        >
+
+                                    `
+
+                                    : escapeHtml(
+                                        icon
+                                    );
+
+
+                            const adTextHtml =
+
+                                service.texte_publicitaire
+
+                                    ? `
+
+                                        <p class="service-ad-text">
+
+                                            📣 ${escapeHtml(
+                                                service.texte_publicitaire
+                                            )}
+
+                                        </p>
+
+                                    `
+
+                                    : "";
+
+
+                            const photoBadge =
+
+                                service.photo_url
+
+                                    ? `
+
+                                        <span class="media-badge">
+                                            🖼️ Photo
+                                        </span>
+
+                                    `
+
+                                    : "";
+
+
+                            const videoBadge =
+
+                                service.video_url
+
+                                    ? `
+
+                                        <span class="media-badge">
+                                            🎬 Vidéo
+                                        </span>
+
+                                    `
+
+                                    : "";
+
+
+                            const linkBadge =
+
+                                service.lien_publicitaire
+
+                                    ? `
+
+                                        <span class="media-badge">
+                                            🔗 Publicité
+                                        </span>
+
+                                    `
+
+                                    : "";
+
+
                             return `
 
                                 <div
@@ -2230,13 +3140,9 @@
                                 >
 
                                     <div
-                                        class="service-icon"
+                                        class="service-visual"
                                     >
-
-                                        ${escapeHtml(
-                                            icon
-                                        )}
-
+                                        ${photoHtml}
                                     </div>
 
 
@@ -2247,7 +3153,8 @@
                                         <h4>
 
                                             ${escapeHtml(
-                                                service.titre
+                                                service.titre ||
+                                                "Service sans nom"
                                             )}
 
                                         </h4>
@@ -2263,38 +3170,44 @@
                                         </p>
 
 
-                                        <div
-                                            class="service-meta"
-                                        >
+                                        ${adTextHtml}
+
+
+                                        <div class="service-meta">
 
                                             <span
                                                 class="${statusClass}"
                                             >
-
                                                 ${statusText}
-
                                             </span>
 
-
-                                            <span
-                                                class="badge"
-                                            >
+                                            <span class="badge">
 
                                                 Ordre :
                                                 ${escapeHtml(
-                                                    service.ordre
+                                                    service.ordre ??
+                                                    0
                                                 )}
 
                                             </span>
 
                                         </div>
 
+
+                                        <div class="service-media">
+
+                                            ${photoBadge}
+
+                                            ${videoBadge}
+
+                                            ${linkBadge}
+
+                                        </div>
+
                                     </div>
 
 
-                                    <div
-                                        class="service-actions"
-                                    >
+                                    <div class="service-actions">
 
                                         <button
                                             type="button"
@@ -2305,9 +3218,7 @@
                                             data-action="edit"
                                             data-id="${service.id}"
                                         >
-
                                             Modifier
-
                                         </button>
 
 
@@ -2320,9 +3231,7 @@
                                             data-action="delete"
                                             data-id="${service.id}"
                                         >
-
                                             Supprimer
-
                                         </button>
 
                                     </div>
@@ -2342,7 +3251,7 @@
 
         /* =====================================================
            AJOUT / MODIFICATION
-        ====================================================== */
+        ===================================================== */
 
         serviceForm.addEventListener(
 
@@ -2371,6 +3280,14 @@
                     serviceIcon.value.trim();
 
 
+                const textePublicitaire =
+                    serviceAdText.value.trim();
+
+
+                const lienPublicitaire =
+                    serviceAdLink.value.trim();
+
+
                 const ordre =
 
                     Number(
@@ -2382,12 +3299,29 @@
                     serviceActive.checked;
 
 
-                if (!titre) {
+                const photoFile =
+
+                    servicePhoto.files[0] ||
+
+                    null;
+
+
+                const videoFile =
+
+                    serviceVideo.files[0] ||
+
+                    null;
+
+
+                if (
+                    !titre
+                ) {
 
                     showMessage(
                         "Le nom du service est obligatoire.",
                         "error"
                     );
+
 
                     return;
 
@@ -2398,24 +3332,165 @@
                     true;
 
 
-                saveButton.textContent =
-
-                    id
-
-                        ? "Modification..."
-
-                        : "Ajout...";
-
-
                 try {
 
-                    let error =
-                        null;
+                    const ancienService =
+
+                        id
+
+                            ? servicesCache.find(
+
+                                function (
+                                    item
+                                ) {
+
+                                    return (
+
+                                        Number(
+                                            item.id
+                                        ) ===
+
+                                        Number(id)
+
+                                    );
+
+                                }
+
+                            )
+
+                            : null;
 
 
-                    if (id) {
+                    let photoUrl =
 
-                        const result =
+                        ancienService &&
+                        ancienService.photo_url
+
+                            ? ancienService.photo_url
+
+                            : "";
+
+
+                    let videoUrl =
+
+                        ancienService &&
+                        ancienService.video_url
+
+                            ? ancienService.video_url
+
+                            : "";
+
+
+                    const anciennePhotoUrl =
+                        photoUrl;
+
+
+                    const ancienneVideoUrl =
+                        videoUrl;
+
+
+                    /* =========================================
+                       PHOTO
+                    ========================================= */
+
+                    if (
+                        photoFile
+                    ) {
+
+                        saveButton.textContent =
+                            "Envoi de la photo...";
+
+
+                        photoUrl =
+
+                            await uploadServiceMedia(
+
+                                photoFile,
+
+                                "photos"
+
+                            );
+
+                    }
+
+
+                    /* =========================================
+                       VIDÉO
+                    ========================================= */
+
+                    if (
+                        videoFile
+                    ) {
+
+                        saveButton.textContent =
+                            "Envoi de la vidéo...";
+
+
+                        videoUrl =
+
+                            await uploadServiceMedia(
+
+                                videoFile,
+
+                                "videos"
+
+                            );
+
+                    }
+
+
+                    /* =========================================
+                       DONNÉES
+                    ========================================= */
+
+                    const serviceData = {
+
+                        titre:
+                            titre,
+
+                        description:
+                            description,
+
+                        icone:
+                            icone,
+
+                        ordre:
+                            ordre,
+
+                        actif:
+                            actif,
+
+                        photo_url:
+                            photoUrl,
+
+                        video_url:
+                            videoUrl,
+
+                        texte_publicitaire:
+                            textePublicitaire,
+
+                        lien_publicitaire:
+                            lienPublicitaire
+
+                    };
+
+
+                    let result;
+
+
+                    /* =========================================
+                       MODIFICATION
+                    ========================================= */
+
+                    if (
+                        id
+                    ) {
+
+                        saveButton.textContent =
+                            "Enregistrement...";
+
+
+                        result =
 
                             await supabaseClient
 
@@ -2423,38 +3498,29 @@
                                     "services"
                                 )
 
-                                .update({
-
-                                    titre:
-                                        titre,
-
-                                    description:
-                                        description,
-
-                                    icone:
-                                        icone,
-
-                                    ordre:
-                                        ordre,
-
-                                    actif:
-                                        actif
-
-                                })
+                                .update(
+                                    serviceData
+                                )
 
                                 .eq(
                                     "id",
                                     Number(id)
                                 );
 
-
-                        error =
-                            result.error;
-
                     }
+
+
+                    /* =========================================
+                       AJOUT
+                    ========================================= */
+
                     else {
 
-                        const result =
+                        saveButton.textContent =
+                            "Publication...";
+
+
+                        result =
 
                             await supabaseClient
 
@@ -2462,35 +3528,50 @@
                                     "services"
                                 )
 
-                                .insert({
-
-                                    titre:
-                                        titre,
-
-                                    description:
-                                        description,
-
-                                    icone:
-                                        icone,
-
-                                    ordre:
-                                        ordre,
-
-                                    actif:
-                                        actif
-
-                                });
-
-
-                        error =
-                            result.error;
+                                .insert(
+                                    serviceData
+                                );
 
                     }
 
 
-                    if (error) {
+                    if (
+                        result.error
+                    ) {
 
-                        throw error;
+                        throw result.error;
+
+                    }
+
+
+                    /* =========================================
+                       SUPPRIMER ANCIENS MÉDIAS REMPLACÉS
+                    ========================================= */
+
+                    if (
+                        id &&
+                        photoFile &&
+                        anciennePhotoUrl &&
+                        anciennePhotoUrl !== photoUrl
+                    ) {
+
+                        await removeStorageMedia(
+                            anciennePhotoUrl
+                        );
+
+                    }
+
+
+                    if (
+                        id &&
+                        videoFile &&
+                        ancienneVideoUrl &&
+                        ancienneVideoUrl !== videoUrl
+                    ) {
+
+                        await removeStorageMedia(
+                            ancienneVideoUrl
+                        );
 
                     }
 
@@ -2501,7 +3582,7 @@
 
                             ? "Service modifié avec succès."
 
-                            : "Service ajouté avec succès.",
+                            : "Service publié avec succès.",
 
                         "success"
 
@@ -2514,7 +3595,9 @@
                     await loadServices();
 
                 }
-                catch (error) {
+                catch (
+                    error
+                ) {
 
                     console.error(
                         "Erreur sauvegarde service :",
@@ -2523,8 +3606,16 @@
 
 
                     showMessage(
-                        "Impossible d'enregistrer le service.",
+
+                        "Impossible d'enregistrer le service. " +
+
+                        (
+                            error.message ||
+                            ""
+                        ),
+
                         "error"
+
                     );
 
                 }
@@ -2545,8 +3636,8 @@
 
 
         /* =====================================================
-           CLIC LISTE
-        ====================================================== */
+           ACTIONS LISTE
+        ===================================================== */
 
         servicesList.addEventListener(
 
@@ -2565,7 +3656,9 @@
                     );
 
 
-                if (!button) {
+                if (
+                    !button
+                ) {
 
                     return;
 
@@ -2618,7 +3711,7 @@
 
         /* =====================================================
            MODIFIER
-        ====================================================== */
+        ===================================================== */
 
         function startEdit(
             id
@@ -2633,10 +3726,13 @@
                     ) {
 
                         return (
+
                             Number(
                                 item.id
                             ) ===
+
                             Number(id)
+
                         );
 
                     }
@@ -2644,7 +3740,9 @@
                 );
 
 
-            if (!service) {
+            if (
+                !service
+            ) {
 
                 return;
 
@@ -2667,6 +3765,14 @@
                 service.icone || "";
 
 
+            serviceAdText.value =
+                service.texte_publicitaire || "";
+
+
+            serviceAdLink.value =
+                service.lien_publicitaire || "";
+
+
             serviceOrder.value =
                 service.ordre || 0;
 
@@ -2675,6 +3781,24 @@
                 Boolean(
                     service.actif
                 );
+
+
+            showPhotoPreview(
+                service.photo_url || ""
+            );
+
+
+            showVideoPreview(
+                service.video_url || ""
+            );
+
+
+            servicePhoto.value =
+                "";
+
+
+            serviceVideo.value =
+                "";
 
 
             formTitle.textContent =
@@ -2704,8 +3828,8 @@
 
 
         /* =====================================================
-           SUPPRIMER
-        ====================================================== */
+           SUPPRIMER SERVICE
+        ===================================================== */
 
         async function deleteService(
             id
@@ -2720,10 +3844,13 @@
                     ) {
 
                         return (
+
                             Number(
                                 item.id
                             ) ===
+
                             Number(id)
+
                         );
 
                     }
@@ -2731,7 +3858,9 @@
                 );
 
 
-            if (!service) {
+            if (
+                !service
+            ) {
 
                 return;
 
@@ -2742,16 +3871,18 @@
 
                 confirm(
 
-                    "Supprimer le service \"" +
+                    "Supprimer définitivement le service \"" +
 
                     service.titre +
 
-                    "\" ?"
+                    "\" ainsi que ses médias ?"
 
                 );
 
 
-            if (!confirmation) {
+            if (
+                !confirmation
+            ) {
 
                 return;
 
@@ -2778,15 +3909,39 @@
                         );
 
 
-                if (error) {
+                if (
+                    error
+                ) {
 
                     throw error;
 
                 }
 
 
+                if (
+                    service.photo_url
+                ) {
+
+                    await removeStorageMedia(
+                        service.photo_url
+                    );
+
+                }
+
+
+                if (
+                    service.video_url
+                ) {
+
+                    await removeStorageMedia(
+                        service.video_url
+                    );
+
+                }
+
+
                 showMessage(
-                    "Service supprimé.",
+                    "Service et médias supprimés.",
                     "success"
                 );
 
@@ -2797,7 +3952,9 @@
                 await loadServices();
 
             }
-            catch (error) {
+            catch (
+                error
+            ) {
 
                 console.error(
                     "Erreur suppression service :",
@@ -2817,7 +3974,7 @@
 
         /* =====================================================
            ANNULER MODIFICATION
-        ====================================================== */
+        ===================================================== */
 
         cancelEditButton.addEventListener(
 
@@ -2845,6 +4002,32 @@
                 true;
 
 
+            servicePhoto.value =
+                "";
+
+
+            serviceVideo.value =
+                "";
+
+
+            serviceAdText.value =
+                "";
+
+
+            serviceAdLink.value =
+                "";
+
+
+            showPhotoPreview(
+                ""
+            );
+
+
+            showVideoPreview(
+                ""
+            );
+
+
             formTitle.textContent =
                 "Ajouter un service";
 
@@ -2862,7 +4045,7 @@
 
         /* =====================================================
            ACTUALISER
-        ====================================================== */
+        ===================================================== */
 
         refreshButton.addEventListener(
 
@@ -2875,7 +4058,7 @@
 
         /* =====================================================
            DÉCONNEXION
-        ====================================================== */
+        ===================================================== */
 
         logoutButton.addEventListener(
 
@@ -2892,7 +4075,9 @@
                     );
 
 
-                if (!confirmation) {
+                if (
+                    !confirmation
+                ) {
 
                     return;
 
@@ -2908,7 +4093,9 @@
                         .signOut();
 
                 }
-                catch (error) {
+                catch (
+                    error
+                ) {
 
                     console.error(
                         error
@@ -2927,7 +4114,7 @@
 
         /* =====================================================
            MOBILE
-        ====================================================== */
+        ===================================================== */
 
         mobileMenuButton.addEventListener(
 
@@ -2974,7 +4161,7 @@
 
         /* =====================================================
            MODULES FUTURS
-        ====================================================== */
+        ===================================================== */
 
         document
 
@@ -3021,8 +4208,8 @@
 
 
         /* =====================================================
-           SESSION
-        ====================================================== */
+           SURVEILLANCE SESSION
+        ===================================================== */
 
         if (
             supabaseClient
@@ -3070,7 +4257,7 @@
 
         /* =====================================================
            DÉMARRAGE
-        ====================================================== */
+        ===================================================== */
 
         verifyAdminSession();
 
