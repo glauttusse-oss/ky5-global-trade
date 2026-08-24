@@ -1,20 +1,21 @@
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Nos Services - KY5 GLOBAL TRADE</title>
 
-    <meta name="description"
-        content="Découvrez les services de KY5 GLOBAL TRADE : importation BTP, fourniture, gestion immobilière, commissionnaire et construction clé en main.">
+    <meta
+        name="description"
+        content="Découvrez les services de KY5 GLOBAL TRADE : importation BTP, fourniture, gestion immobilière, construction, énergie et solutions techniques."
+    >
 
     <style>
 
@@ -39,6 +40,11 @@
             overflow-x: hidden;
         }
 
+        body.menu-locked,
+        body.modal-open {
+            overflow: hidden;
+        }
+
         img {
             display: block;
             max-width: 100%;
@@ -48,13 +54,19 @@
             text-decoration: none;
         }
 
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
 
         /* =====================================================
            COULEURS
         ===================================================== */
 
         :root {
-
             --header-dark: #001329;
             --header-blue: #002c5f;
             --header-blue-2: #004b89;
@@ -75,13 +87,11 @@
 
 
         /* =====================================================
-           EN-TÊTE PROFESSIONNEL
+           HEADER
         ===================================================== */
 
         header {
-
             position: sticky;
-
             top: 0;
 
             z-index: 99999;
@@ -89,7 +99,6 @@
             width: 100%;
 
             background:
-
                 linear-gradient(
                     135deg,
                     #001329 0%,
@@ -104,18 +113,9 @@
             box-shadow:
                 0 12px 35px
                 rgba(0, 18, 45, 0.42);
-
-            backdrop-filter: blur(14px);
-
-            animation:
-                headerAppear 0.8s ease;
         }
 
-
-        /* ligne lumineuse */
-
         header::before {
-
             content: "";
 
             position: absolute;
@@ -127,7 +127,6 @@
             height: 3px;
 
             background:
-
                 linear-gradient(
                     90deg,
                     transparent,
@@ -143,23 +142,26 @@
                 lightMove 5s linear infinite;
         }
 
+        header.scrolled {
+            background:
+                rgba(0, 19, 41, 0.96);
 
-        /* =====================================================
-           CONTENEUR HEADER
-        ===================================================== */
+            box-shadow:
+                0 10px 32px
+                rgba(0, 18, 45, 0.30);
+        }
 
         .header-container {
-
             width: 100%;
 
-            max-width: 1500px;
+            max-width: 1420px;
 
-            min-height: 120px;
+            min-height: 86px;
 
             margin: auto;
 
             padding:
-                15px 4%;
+                10px 4%;
 
             display: flex;
 
@@ -167,7 +169,7 @@
 
             justify-content: space-between;
 
-            gap: 45px;
+            gap: 25px;
         }
 
 
@@ -176,34 +178,26 @@
         ===================================================== */
 
         .logo {
-
             position: relative;
 
             display: flex;
 
             align-items: center;
 
-            gap: 20px;
+            gap: 16px;
 
             flex-shrink: 0;
-
-            animation:
-                logoEntrance 1s ease;
         }
 
-
-        /* cercle autour du logo */
-
         .logo::before {
-
             content: "";
 
             position: absolute;
 
-            width: 95px;
-            height: 95px;
+            width: 76px;
+            height: 76px;
 
-            left: -7px;
+            left: -4px;
 
             border-radius: 50%;
 
@@ -215,137 +209,235 @@
                 logoRotation 8s linear infinite;
         }
 
-
-        /* LOGO GRAND */
-
         .logo img {
-
             position: relative;
 
             z-index: 2;
 
-            width: 90px;
-            height: 90px;
+            width: 70px;
+            height: 70px;
 
             object-fit: contain;
 
             filter:
                 drop-shadow(
                     0 7px 15px
-                    rgba(0,0,0,0.35)
-                );
-
-            animation:
-                logoFloat 4s ease-in-out infinite;
-
-            transition:
-                transform 0.4s ease,
-                filter 0.4s ease;
-        }
-
-
-        .logo img:hover {
-
-            transform:
-                scale(1.10)
-                rotate(-3deg);
-
-            filter:
-                drop-shadow(
-                    0 0 18px
-                    rgba(103,217,255,0.65)
+                    rgba(0, 0, 0, 0.35)
                 );
         }
-
-
-        /* =====================================================
-           NOM DE LA SOCIÉTÉ
-        ===================================================== */
-
-        .logo-text {
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: center;
-        }
-
 
         .logo-text h1 {
-
             color: #ffffff;
 
-            font-size: 36px;
+            font-size: 27px;
 
             font-weight: 900;
 
-            letter-spacing: 2px;
+            letter-spacing: 2.4px;
 
             line-height: 1;
 
             white-space: nowrap;
 
             text-transform: uppercase;
-
-            text-shadow:
-                0 3px 10px
-                rgba(0,0,0,0.35);
-
-            animation:
-                companyAppear 1s ease;
         }
 
-
         .logo-text span {
+            display: block;
 
-            margin-top: 8px;
+            margin-top: 7px;
 
             color: #8edfff;
 
-            font-size: 12px;
+            font-size: 9px;
 
             font-weight: 700;
 
-            letter-spacing: 4px;
+            letter-spacing: 3.2px;
 
             text-transform: uppercase;
         }
 
 
         /* =====================================================
-           NAVIGATION
+           BOUTON MENU
         ===================================================== */
 
-        nav ul {
+        .menu-toggle,
+        .menu-close {
+            border: 0;
+            cursor: pointer;
+        }
+
+        .menu-toggle {
+            position: relative;
+
+            width: 50px;
+            height: 50px;
+
+            margin-left: auto;
 
             display: flex;
 
-            align-items: center;
-
-            justify-content: flex-end;
-
-            gap: 8px;
-
-            list-style: none;
-        }
-
-
-        nav li {
-
-            position: relative;
-        }
-
-
-        nav a {
-
-            position: relative;
-
-            display: flex;
+            flex-direction: column;
 
             align-items: center;
 
             justify-content: center;
+
+            gap: 5px;
+
+            border-radius: 15px;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.17);
+
+            transition:
+                0.3s ease;
+
+            z-index: 1000;
+        }
+
+        .menu-toggle::before {
+            content: "MENU";
+
+            position: absolute;
+
+            right: 60px;
+
+            color: #8edfff;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+        .menu-toggle span {
+            width: 20px;
+            height: 2px;
+
+            border-radius: 10px;
+
+            background: #ffffff;
+        }
+
+        .menu-toggle:hover {
+            background:
+                rgba(103, 217, 255, 0.16);
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        /* =====================================================
+           MENU LATÉRAL
+        ===================================================== */
+
+        header nav {
+            position: fixed;
+
+            top: 0;
+            right: 0;
+
+            width:
+                min(390px, 90vw);
+
+            height: 100dvh;
+
+            padding:
+                0 22px 30px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #001329 0%,
+                    #002653 100%
+                );
+
+            box-shadow:
+                -18px 0 50px
+                rgba(0, 12, 30, 0.38);
+
+            border-left:
+                1px solid
+                rgba(103, 217, 255, 0.18);
+
+            transform:
+                translateX(105%);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            pointer-events: none;
+
+            transition:
+                transform 0.38s ease,
+                opacity 0.25s ease;
+
+            z-index: 100001;
+
+            overflow-y: auto;
+        }
+
+        header.nav-open nav {
+            transform:
+                translateX(0);
+
+            opacity: 1;
+
+            visibility: visible;
+
+            pointer-events: auto;
+        }
+
+        header.nav-open::after {
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0, 8, 20, 0.55);
+
+            backdrop-filter:
+                blur(3px);
+
+            z-index: 100000;
+        }
+
+        header nav ul {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+
+            list-style: none;
+        }
+
+        header nav li {
+            width: 100%;
+        }
+
+        header nav a {
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            width: 100%;
+
+            min-height: 56px;
 
             padding:
                 14px 16px;
@@ -356,221 +448,47 @@
 
             font-weight: 700;
 
-            letter-spacing: 0.3px;
-
-            border-radius: 9px;
+            border-radius: 13px;
 
             transition:
-                0.35s ease;
+                0.3s ease;
         }
 
-
-        nav a:hover {
-
-            color: #ffffff;
-
+        header nav a:hover {
             background:
-                rgba(255,255,255,0.11);
+                rgba(255, 255, 255, 0.08);
 
             transform:
-                translateY(-3px);
+                translateX(4px);
         }
 
+        header nav a.active {
+            background:
+                rgba(255, 255, 255, 0.14);
+        }
 
-        /* ligne animée */
-
-        nav a::after {
-
+        header nav a::after {
             content: "";
 
             position: absolute;
 
-            left: 50%;
-
-            bottom: 4px;
+            left: 16px;
+            bottom: 7px;
 
             width: 0;
-
             height: 3px;
 
             border-radius: 20px;
 
             background:
-
                 linear-gradient(
                     90deg,
                     #63d7ff,
                     #ffffff
                 );
 
-            transform:
-                translateX(-50%);
-
             transition:
                 width 0.35s ease;
-        }
-
-
-        nav a:hover::after,
-        nav a.active::after {
-
-            width: 70%;
-        }
-
-
-        /* lien actif */
-
-        nav a.active {
-
-            background:
-                rgba(255,255,255,0.14);
-
-            box-shadow:
-                inset 0 0 0 1px
-                rgba(255,255,255,0.08);
-        }
-
-
-
-        /* =====================================================
-           BOUTON MENU — MÊME STYLE QUE INDEX.HTML
-        ===================================================== */
-
-        .menu-toggle,
-        .menu-close {
-            border: 0;
-            cursor: pointer;
-            font: inherit;
-        }
-
-        .menu-toggle {
-            display: flex;
-            position: relative;
-            width: 48px;
-            height: 48px;
-            margin-left: auto;
-            border-radius: 14px;
-            background: rgba(255,255,255,.08);
-            border: 1px solid rgba(255,255,255,.16);
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 5px;
-            transition: .3s ease;
-            z-index: 1000;
-        }
-
-        .menu-toggle::before {
-            content: "MENU";
-            position: absolute;
-            right: 58px;
-            color: #8edfff;
-            font-size: 9px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            opacity: .85;
-        }
-
-        .menu-toggle span {
-            width: 21px;
-            height: 2px;
-            border-radius: 10px;
-            background: #fff;
-            transition: .3s ease;
-        }
-
-        .menu-toggle:hover {
-            background: rgba(103,217,255,.16);
-            border-color: rgba(103,217,255,.5);
-            transform: translateY(-1px);
-        }
-
-        /* =====================================================
-           MENU LATÉRAL
-        ===================================================== */
-
-        header nav {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: min(390px, 90vw);
-            height: 100dvh;
-            padding: 0 22px 30px;
-            background: linear-gradient(
-                180deg,
-                #001329 0%,
-                #002653 100%
-            );
-            box-shadow: -18px 0 50px rgba(0,12,30,.38);
-            border-left: 1px solid rgba(103,217,255,.18);
-            transform: translateX(105%);
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transition:
-                transform .38s cubic-bezier(.22,.61,.36,1),
-                opacity .25s ease,
-                visibility .38s ease;
-            z-index: 100001;
-            overflow-y: auto;
-        }
-
-        header.nav-open nav {
-            transform: translateX(0);
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-        }
-
-        header nav ul {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            gap: 5px;
-            width: 100%;
-            list-style: none;
-        }
-
-        header nav li {
-            width: 100%;
-        }
-
-        header nav a {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            width: 100%;
-            min-height: 56px;
-            padding: 14px 16px;
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: 700;
-            letter-spacing: .3px;
-            border-radius: 13px;
-            transition: .35s ease;
-        }
-
-        header nav a:hover {
-            color: #ffffff;
-            background: rgba(255,255,255,.08);
-            transform: translateX(4px);
-        }
-
-        header nav a::after {
-            content: "";
-            position: absolute;
-            left: 16px;
-            bottom: 7px;
-            width: 0;
-            height: 3px;
-            border-radius: 20px;
-            background: linear-gradient(
-                90deg,
-                #63d7ff,
-                #ffffff
-            );
-            transition: width .35s ease;
         }
 
         header nav a:hover::after,
@@ -578,63 +496,58 @@
             width: 28px;
         }
 
-        header nav a.active {
-            background: rgba(255,255,255,.14);
-            box-shadow:
-                inset 0 0 0 1px
-                rgba(255,255,255,.08);
-        }
-
-        /* =====================================================
-           EN-TÊTE DU MENU
-        ===================================================== */
-
         .nav-mobile-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             min-height: 88px;
-            color: #8edfff;
-            font-size: 12px;
-            font-weight: 900;
-            letter-spacing: 4px;
-            border-bottom: 1px solid rgba(255,255,255,.10);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
             margin-bottom: 14px;
+
+            border-bottom:
+                1px solid
+                rgba(255, 255, 255, 0.10);
+
+            color: #8edfff;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+            letter-spacing: 4px;
         }
 
         .menu-close {
             width: 42px;
             height: 42px;
+
             border-radius: 12px;
-            color: #fff;
-            background: rgba(255,255,255,.08);
-            border: 1px solid rgba(255,255,255,.13);
+
+            color: #ffffff;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.13);
+
             font-size: 30px;
+
             line-height: 1;
-            transition: .3s ease;
+
+            transition:
+                0.3s ease;
         }
 
         .menu-close:hover {
             background: #075ca8;
-            transform: rotate(90deg);
-        }
 
-        header.nav-open::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: rgba(0,8,20,.55);
-            backdrop-filter: blur(3px);
-            z-index: 100000;
-        }
-
-        body.menu-locked {
-            overflow: hidden;
-        }
-
-        header.scrolled {
-            background: rgba(0,19,41,.94);
-            box-shadow: 0 10px 32px rgba(0,18,45,.30);
+            transform:
+                rotate(90deg);
         }
 
 
@@ -643,10 +556,9 @@
         ===================================================== */
 
         .hero {
-
             position: relative;
 
-            min-height: 65vh;
+            min-height: 70vh;
 
             overflow: hidden;
 
@@ -659,206 +571,132 @@
             text-align: center;
 
             padding:
-                100px 7%;
+                105px 7% 85px;
 
             background:
-
-                radial-gradient(
-                    circle at 10% 20%,
-                    rgba(103,217,255,0.20),
-                    transparent 30%
-                ),
-
-                radial-gradient(
-                    circle at 90% 80%,
-                    rgba(0,85,170,0.35),
-                    transparent 35%
-                ),
-
                 linear-gradient(
-                    135deg,
-                    #04152c,
-                    #07518f,
-                    #078bd0
+                    115deg,
+                    rgba(2, 13, 30, 0.96),
+                    rgba(4, 46, 83, 0.91),
+                    rgba(6, 115, 175, 0.84)
                 );
         }
 
-
-        /* cercles */
-
         .hero::before {
-
             content: "";
 
             position: absolute;
 
-            width: 500px;
-            height: 500px;
+            width: 620px;
+            height: 620px;
 
-            right: -180px;
-            top: -220px;
+            right: -250px;
+            top: -270px;
 
             border:
                 1px solid
-                rgba(255,255,255,0.14);
+                rgba(111, 221, 255, 0.18);
 
             border-radius: 50%;
-
-            animation:
-                rotateCircle 18s linear infinite;
         }
-
 
         .hero::after {
-
             content: "";
 
             position: absolute;
 
-            width: 350px;
-            height: 350px;
+            width: 440px;
+            height: 440px;
 
-            left: -140px;
-            bottom: -190px;
+            left: -210px;
+            bottom: -245px;
 
             border:
                 1px solid
-                rgba(255,255,255,0.12);
+                rgba(255, 255, 255, 0.10);
 
             border-radius: 50%;
-
-            animation:
-                rotateReverse 15s linear infinite;
         }
-
-
-        /* points lumineux */
-
-        .hero-circle {
-
-            position: absolute;
-
-            width: 10px;
-            height: 10px;
-
-            border-radius: 50%;
-
-            background: #67d9ff;
-
-            box-shadow:
-                0 0 20px
-                rgba(103,217,255,0.9);
-
-            animation:
-                floating 5s ease-in-out infinite;
-        }
-
-
-        .circle-one {
-
-            top: 25%;
-            left: 14%;
-        }
-
-
-        .circle-two {
-
-            right: 16%;
-            top: 65%;
-
-            animation-delay: 1s;
-        }
-
-
-        .circle-three {
-
-            right: 25%;
-            top: 32%;
-
-            animation-delay: 2s;
-        }
-
-
-        /* contenu */
 
         .hero-content {
-
             position: relative;
 
             z-index: 5;
 
-            max-width: 1000px;
-
-            animation:
-                contentAppear 1.2s ease;
+            max-width: 1080px;
         }
 
-
         .hero-small {
+            color: #9ce7ff;
 
-            color: #86e0ff;
-
-            font-size: 14px;
+            font-size: 10px;
 
             font-weight: 800;
 
-            letter-spacing: 7px;
+            letter-spacing: 5px;
 
-            margin-bottom: 22px;
+            margin-bottom: 25px;
 
             text-transform: uppercase;
         }
 
-
         .hero h1 {
-
             color: #ffffff;
 
             font-size:
-                clamp(50px, 8vw, 92px);
+                clamp(58px, 8vw, 102px);
 
-            line-height: 0.95;
+            line-height: 0.91;
 
             font-weight: 900;
 
-            letter-spacing: 2px;
+            letter-spacing: -2px;
 
-            margin-bottom: 28px;
+            margin-bottom: 25px;
         }
-
 
         .hero h1 span {
-
             color: #69d8ff;
-
-            text-shadow:
-                0 0 25px
-                rgba(103,217,255,0.25);
         }
 
-
         .hero p {
-
-            max-width: 820px;
+            max-width: 760px;
 
             margin: auto;
 
-            color: #e9f8ff;
+            color:
+                rgba(238, 249, 255, 0.80);
 
-            font-size: 19px;
+            font-size: 16px;
 
-            line-height: 1.8;
+            line-height: 1.85;
         }
 
+        .hero-actions {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+            margin-top: 34px;
+        }
 
         .hero-button {
-
             display: inline-flex;
 
-            margin-top: 35px;
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 18px;
 
             padding:
-                16px 30px;
+                14px 23px;
 
             border-radius: 50px;
 
@@ -866,25 +704,39 @@
 
             color: #075ca8;
 
-            font-weight: 800;
+            font-size: 10px;
 
-            box-shadow:
-                0 12px 30px
-                rgba(0,0,0,0.20);
+            font-weight: 900;
+
+            letter-spacing: 1.2px;
 
             transition:
-                0.35s ease;
+                0.3s ease;
         }
 
-
         .hero-button:hover {
+            background: #65d9ff;
+
+            color: #06274b;
 
             transform:
-                translateY(-5px)
-                scale(1.03);
+                translateY(-3px);
+        }
 
+        .hero-button-secondary {
             background:
-                #63d7ff;
+                rgba(255, 255, 255, 0.055);
+
+            color: #ffffff;
+
+            border:
+                1px solid
+                rgba(139, 231, 255, 0.34);
+        }
+
+        .hero-button-secondary:hover {
+            background:
+                rgba(103, 217, 255, 0.14);
 
             color: #ffffff;
         }
@@ -895,54 +747,153 @@
         ===================================================== */
 
         .services-intro {
-
             padding:
-                90px 7% 55px;
+                92px 7% 62px;
 
             text-align: center;
 
-            background:
-                #ffffff;
+            background: #ffffff;
         }
 
-
         .section-label {
-
             color: #0785d1;
 
-            font-size: 14px;
+            font-size: 10px;
 
             font-weight: 800;
 
-            letter-spacing: 4px;
+            letter-spacing: 3.5px;
 
             text-transform: uppercase;
         }
 
-
         .services-intro h2 {
+            max-width: 820px;
+
+            margin:
+                17px auto 13px;
 
             color: #092d5c;
 
             font-size:
-                clamp(34px, 5vw, 52px);
+                clamp(36px, 5vw, 58px);
 
-            margin:
-                14px 0;
+            line-height: 1.02;
+
+            letter-spacing: -1.8px;
         }
 
-
         .services-intro p {
-
-            max-width: 850px;
+            max-width: 730px;
 
             margin: auto;
 
             color: #68758a;
 
-            font-size: 17px;
+            font-size: 15px;
 
-            line-height: 1.8;
+            line-height: 1.9;
+        }
+
+
+        /* =====================================================
+           BANDEAU
+        ===================================================== */
+
+        .service-signals {
+            padding:
+                0 7%;
+
+            background: #ffffff;
+
+            border-bottom:
+                1px solid
+                rgba(8, 62, 112, 0.12);
+        }
+
+        .signal-track {
+            max-width: 1200px;
+
+            min-height: 104px;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 24px;
+        }
+
+        .signal-item {
+            display: grid;
+
+            grid-template-columns:
+                auto 1fr;
+
+            column-gap: 12px;
+
+            align-items: center;
+        }
+
+        .signal-index {
+            grid-row:
+                1 / 3;
+
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #eef8fd;
+
+            border:
+                1px solid
+                #cdebf7;
+
+            color: #0876ba;
+
+            font-size: 9px;
+
+            font-weight: 900;
+        }
+
+        .signal-item strong {
+            color: #0a2b50;
+
+            font-size: 10px;
+        }
+
+        .signal-item small {
+            margin-top: 3px;
+
+            color: #8290a0;
+
+            font-size: 8px;
+        }
+
+        .signal-line {
+            flex: 1;
+
+            max-width: 85px;
+
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #b6ddec,
+                    transparent
+                );
         }
 
 
@@ -951,44 +902,62 @@
         ===================================================== */
 
         .services {
-
             padding:
-                30px 7% 100px;
+                20px 7% 105px;
 
             background:
-
                 linear-gradient(
                     180deg,
-                    #ffffff,
-                    #f3f8fc
+                    #fbfdff,
+                    #f3f7fa
                 );
         }
 
-
-        /* =====================================================
-           TITRES DES CATÉGORIES
-        ===================================================== */
-
         .category-title {
+            position: relative;
 
             max-width: 1200px;
 
             margin:
-                70px auto 35px;
+                80px auto 32px;
+
+            padding-bottom: 19px;
 
             display: flex;
 
             align-items: center;
 
-            gap: 20px;
+            gap: 19px;
+
+            border-bottom:
+                1px solid
+                rgba(8, 62, 112, 0.12);
         }
 
+        .category-title::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: -1px;
+
+            width: 105px;
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #0878bf,
+                    #62d9ff
+                );
+        }
 
         .category-number {
+            min-width: 55px;
 
-            min-width: 68px;
-
-            height: 68px;
+            width: 55px;
+            height: 55px;
 
             display: flex;
 
@@ -996,58 +965,48 @@
 
             justify-content: center;
 
-            border-radius: 16px;
+            border-radius: 15px;
 
             background:
-
                 linear-gradient(
-                    135deg,
-                    #075ca8,
-                    #1599dc
+                    145deg,
+                    #063e72,
+                    #0b83c8
                 );
 
             color: #ffffff;
 
-            font-size: 20px;
+            font-size: 13px;
 
             font-weight: 900;
 
             box-shadow:
-                0 12px 28px
-                rgba(0,90,170,0.25);
-
-            animation:
-                numberPulse 3s ease-in-out infinite;
+                0 12px 25px
+                rgba(0, 86, 154, 0.20);
         }
 
-
         .category-title h2 {
-
             color: #092d5c;
 
             font-size:
-                clamp(28px, 4vw, 42px);
+                clamp(25px, 3vw, 37px);
 
-            line-height: 1.15;
+            letter-spacing: -0.8px;
         }
 
-
         .category-title p {
-
-            color: #718096;
+            max-width: 760px;
 
             margin-top: 7px;
 
-            font-size: 16px;
+            color: #7b8998;
+
+            font-size: 12px;
+
+            line-height: 1.65;
         }
 
-
-        /* =====================================================
-           GRILLE DES SERVICES
-        ===================================================== */
-
         .services-grid {
-
             max-width: 1200px;
 
             margin: auto;
@@ -1055,18 +1014,17 @@
             display: grid;
 
             grid-template-columns:
-                repeat(3, 1fr);
+                repeat(3, minmax(0, 1fr));
 
-            gap: 26px;
+            gap: 20px;
         }
 
 
         /* =====================================================
-           CARTE
+           CARTE SERVICE
         ===================================================== */
 
         .service-card {
-
             position: relative;
 
             overflow: hidden;
@@ -1075,36 +1033,29 @@
 
             border:
                 1px solid
-                var(--border);
+                rgba(8, 62, 112, 0.10);
 
-            border-radius: 20px;
+            border-radius: 17px;
 
             box-shadow:
                 0 12px 35px
-                rgba(0,72,140,0.09);
+                rgba(5, 55, 100, 0.075);
 
             transition:
-                transform 0.45s ease,
-                box-shadow 0.45s ease;
-
-            animation:
-                cardAppear 0.9s ease both;
+                transform 0.4s ease,
+                box-shadow 0.4s ease;
         }
-
 
         .service-card:hover {
-
             transform:
-                translateY(-10px);
+                translateY(-8px);
 
             box-shadow:
-                0 25px 55px
-                rgba(0,72,140,0.18);
+                0 24px 55px
+                rgba(5, 55, 100, 0.15);
         }
 
-
         .service-card::before {
-
             content: "";
 
             position: absolute;
@@ -1112,272 +1063,309 @@
             top: 0;
             left: 0;
 
-            width: 100%;
-            height: 4px;
-
             z-index: 5;
 
-            background:
+            width: 100%;
+            height: 2px;
 
+            background:
                 linear-gradient(
                     90deg,
-                    #075ca8,
-                    #63d7ff
+                    #0865aa,
+                    #5bd8ff
                 );
         }
 
-
-        /* =====================================================
-           IMAGE SERVICE
-        ===================================================== */
-
         .service-image {
-
             position: relative;
 
             width: 100%;
-
-            height: 235px;
+            height: 245px;
 
             overflow: hidden;
 
-            background:
-                #e9f1f8;
+            background: #dfeaf2;
         }
 
-
         .service-image img {
-
             width: 100%;
             height: 100%;
 
             object-fit: cover;
 
             transition:
-                transform 0.7s ease,
-                filter 0.5s ease;
+                transform 0.6s ease;
         }
-
 
         .service-card:hover
         .service-image img {
-
             transform:
-                scale(1.08);
-
-            filter:
-                brightness(1.06);
+                scale(1.055);
         }
 
+        .dynamic-service-image {
+            display: flex;
 
-        /* badge */
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #04152c,
+                    #07518f,
+                    #078bd0
+                );
+        }
+
+        .dynamic-service-icon {
+            font-size: 78px;
+
+            filter:
+                drop-shadow(
+                    0 15px 20px
+                    rgba(0, 0, 0, 0.25)
+                );
+        }
 
         .service-badge {
-
             position: absolute;
 
-            top: 207px;
-
-            left: 18px;
+            top: 220px;
+            left: 16px;
 
             z-index: 10;
 
             padding:
-                8px 14px;
+                7px 11px;
 
-            border-radius: 30px;
+            border-radius: 9px;
 
-            background: #ffffff;
+            background:
+                rgba(255, 255, 255, 0.95);
 
             color: #075ca8;
 
-            font-size: 12px;
+            font-size: 8px;
 
             font-weight: 800;
 
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
             box-shadow:
                 0 8px 20px
-                rgba(0,0,0,0.15);
+                rgba(0, 0, 0, 0.12);
         }
-
-
-        /* =====================================================
-           CONTENU CARTE
-        ===================================================== */
 
         .service-content {
+            min-height: 205px;
 
             padding:
-                28px;
-        }
+                25px 24px 23px;
 
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: flex-start;
+        }
 
         .service-content h3 {
+            margin-bottom: 9px;
 
-            color: #092d5c;
+            color: #082b51;
 
-            font-size: 22px;
-
-            line-height: 1.3;
-
-            margin-bottom: 12px;
+            font-size: 19px;
         }
 
-
         .service-content p {
+            max-width: 95%;
 
-            color: #69778a;
+            color: #718092;
 
-            font-size: 15px;
+            font-size: 12px;
 
             line-height: 1.75;
         }
 
+        .service-action {
+            width: 100%;
 
-        /* =====================================================
-           CONSTRUCTION CLÉ EN MAIN
-        ===================================================== */
+            min-height: 40px;
 
-        .construction-block {
-
-            max-width: 1200px;
-
-            margin:
-                85px auto 0;
+            margin-top: auto;
 
             padding:
-                60px;
-
-            position: relative;
-
-            overflow: hidden;
-
-            border-radius: 28px;
-
-            color: #ffffff;
-
-            background:
-
-                radial-gradient(
-                    circle at 10% 20%,
-                    rgba(99,215,255,0.22),
-                    transparent 30%
-                ),
-
-                linear-gradient(
-                    135deg,
-                    #021026,
-                    #06376c,
-                    #087fc9
-                );
-
-            box-shadow:
-                0 25px 60px
-                rgba(0,55,120,0.23);
-        }
-
-
-        .construction-block::before {
-
-            content: "";
-
-            position: absolute;
-
-            width: 360px;
-            height: 360px;
-
-            right: -130px;
-            top: -130px;
+                11px 14px;
 
             border:
                 1px solid
-                rgba(255,255,255,0.14);
-
-            border-radius: 50%;
-
-            animation:
-                rotateCircle 20s linear infinite;
-        }
-
-
-        .construction-content {
-
-            position: relative;
-
-            z-index: 3;
-        }
-
-
-        .construction-content h2 {
-
-            font-size:
-                clamp(32px, 5vw, 50px);
-
-            margin-bottom: 17px;
-        }
-
-
-        .construction-content p {
-
-            max-width: 820px;
-
-            color: #e6f7ff;
-
-            line-height: 1.8;
-
-            margin-bottom: 30px;
-        }
-
-
-        .construction-list {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 12px;
-
-            list-style: none;
-        }
-
-
-        .construction-list li {
-
-            padding:
-                13px 15px;
+                rgba(7, 92, 168, 0.18);
 
             border-radius: 10px;
 
-            background:
-                rgba(255,255,255,0.09);
+            cursor: pointer;
 
-            color: #ffffff;
+            background: #f4faff;
+
+            color: #075ca8;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
 
             transition:
                 0.3s ease;
         }
 
-
-        .construction-list li:hover {
+        .service-action:hover {
+            color: #ffffff;
 
             background:
-                rgba(255,255,255,0.18);
+                linear-gradient(
+                    135deg,
+                    #075ca8,
+                    #1599dc
+                );
 
             transform:
-                translateX(6px);
+                translateY(-2px);
         }
 
 
-        .construction-list li::before {
+        /* =====================================================
+           SERVICE ADMIN
+        ===================================================== */
 
+        #servicesAdminContainer {
+            display: none;
+        }
+
+        .admin-services-notice {
+            max-width: 1200px;
+
+            margin:
+                25px auto 0;
+
+            padding:
+                13px 15px;
+
+            border:
+                1px solid #d4edf9;
+
+            border-radius: 12px;
+
+            background: #edf8fe;
+
+            color: #39708e;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           CONSTRUCTION
+        ===================================================== */
+
+        .construction-block {
+            position: relative;
+
+            max-width: 1200px;
+
+            margin:
+                90px auto 0;
+
+            padding: 58px;
+
+            overflow: hidden;
+
+            border-radius: 25px;
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    125deg,
+                    #03152b,
+                    #063967,
+                    #087fc7
+                );
+
+            box-shadow:
+                0 28px 65px
+                rgba(0, 47, 100, 0.20);
+        }
+
+        .construction-content {
+            position: relative;
+
+            z-index: 3;
+        }
+
+        .construction-content h2 {
+            margin-bottom: 17px;
+
+            font-size:
+                clamp(30px, 4.5vw, 49px);
+        }
+
+        .construction-content p {
+            max-width: 720px;
+
+            margin-bottom: 30px;
+
+            color:
+                rgba(235, 249, 255, 0.75);
+
+            font-size: 13px;
+
+            line-height: 1.85;
+        }
+
+        .construction-list {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 8px;
+
+            list-style: none;
+        }
+
+        .construction-list li {
+            padding:
+                11px 12px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.08);
+
+            border-radius: 10px;
+
+            background:
+                rgba(255, 255, 255, 0.055);
+
+            font-size: 10px;
+        }
+
+        .construction-list li::before {
             content: "✓";
+
+            margin-right: 8px;
 
             color: #63d7ff;
 
             font-weight: 900;
-
-            margin-right: 8px;
         }
 
 
@@ -1386,60 +1374,49 @@
         ===================================================== */
 
         .final-cta {
-
             padding:
-                90px 7%;
+                95px 7%;
 
             text-align: center;
 
-            background:
-                linear-gradient(
-                    180deg,
-                    #ffffff,
-                    #edf7ff
-                );
+            background: #ffffff;
         }
 
-
         .final-cta h2 {
+            margin:
+                15px 0;
 
             color: #092d5c;
 
             font-size:
-                clamp(32px, 5vw, 50px);
+                clamp(36px, 5vw, 57px);
 
-            margin:
-                15px 0;
+            letter-spacing: -1.7px;
         }
 
-
         .final-cta p {
-
-            max-width: 780px;
+            max-width: 700px;
 
             margin: auto;
 
             color: #68758a;
 
-            font-size: 17px;
+            font-size: 14px;
 
-            line-height: 1.8;
+            line-height: 1.85;
         }
 
-
         .cta-button {
-
             display: inline-flex;
 
             margin-top: 30px;
 
             padding:
-                16px 32px;
+                15px 23px;
 
-            border-radius: 50px;
+            border-radius: 11px;
 
             background:
-
                 linear-gradient(
                     135deg,
                     #075ca8,
@@ -1448,26 +1425,258 @@
 
             color: #ffffff;
 
-            font-weight: 800;
+            font-size: 9px;
 
-            box-shadow:
-                0 12px 30px
-                rgba(0,125,204,0.25);
+            font-weight: 900;
+
+            letter-spacing: 1.2px;
+
+            text-transform: uppercase;
 
             transition:
-                0.35s ease;
+                0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform:
+                translateY(-3px);
         }
 
 
-        .cta-button:hover {
+        /* =====================================================
+           MODAL
+        ===================================================== */
 
-            transform:
-                translateY(-5px)
-                scale(1.04);
+        .appointment-modal {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 1000000;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(0, 13, 35, 0.75);
+
+            backdrop-filter:
+                blur(7px);
+        }
+
+        .appointment-modal.show {
+            display: flex;
+        }
+
+        .appointment-box {
+            width:
+                min(720px, 100%);
+
+            max-height: 92vh;
+
+            overflow-y: auto;
+
+            padding: 34px;
+
+            border-radius: 24px;
+
+            background: #ffffff;
 
             box-shadow:
-                0 18px 40px
-                rgba(0,80,150,0.30);
+                0 30px 80px
+                rgba(0, 0, 0, 0.35);
+        }
+
+        .appointment-head {
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 25px;
+
+            padding-bottom: 19px;
+
+            border-bottom:
+                1px solid #e5eef4;
+        }
+
+        .appointment-head h2 {
+            margin-bottom: 7px;
+
+            color: #092d5c;
+
+            font-size: 30px;
+        }
+
+        .appointment-head p {
+            color: #69778a;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+        .appointment-close {
+            width: 42px;
+            height: 42px;
+
+            flex:
+                0 0 42px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            background: #edf5fb;
+
+            color: #075ca8;
+
+            font-size: 25px;
+        }
+
+        .appointment-form {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 16px;
+        }
+
+        .appointment-field {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+        }
+
+        .appointment-field.full,
+        .appointment-submit,
+        .appointment-note,
+        .appointment-message-box {
+            grid-column:
+                1 / -1;
+        }
+
+        .appointment-field label {
+            color: #173457;
+
+            font-size: 13px;
+
+            font-weight: 800;
+        }
+
+        .appointment-field input,
+        .appointment-field select,
+        .appointment-field textarea {
+            width: 100%;
+
+            padding:
+                13px 14px;
+
+            border:
+                1px solid #d6e4f0;
+
+            border-radius: 11px;
+
+            outline: none;
+
+            background: #f9fcff;
+
+            color: #17243a;
+        }
+
+        .appointment-field textarea {
+            min-height: 115px;
+
+            resize: vertical;
+        }
+
+        .appointment-field input:focus,
+        .appointment-field select:focus,
+        .appointment-field textarea:focus {
+            border-color: #1599dc;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(21, 153, 220, 0.12);
+        }
+
+        .appointment-note {
+            color: #718096;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+        }
+
+        .appointment-submit {
+            min-height: 48px;
+
+            border: 0;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #075ca8,
+                    #1599dc
+                );
+
+            color: #ffffff;
+
+            font-size: 13px;
+
+            font-weight: 900;
+        }
+
+        .appointment-submit:disabled {
+            opacity: 0.65;
+
+            cursor: not-allowed;
+        }
+
+        .appointment-message-box {
+            display: none;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            font-size: 11px;
+        }
+
+        .appointment-message-box.success {
+            display: block;
+
+            color: #146c43;
+
+            background: #edf9f3;
+        }
+
+        .appointment-message-box.error {
+            display: block;
+
+            color: #a61b29;
+
+            background: #fff0f1;
         }
 
 
@@ -1476,16 +1685,14 @@
         ===================================================== */
 
         footer {
-
             padding:
-                50px 7% 25px;
+                60px 7% 27px;
 
             text-align: center;
 
             color: #ffffff;
 
             background:
-
                 linear-gradient(
                     135deg,
                     #020b1b,
@@ -1493,9 +1700,7 @@
                 );
         }
 
-
         .footer-logo {
-
             display: flex;
 
             align-items: center;
@@ -1507,31 +1712,21 @@
             margin-bottom: 20px;
         }
 
-
         .footer-logo img {
-
             width: 60px;
             height: 60px;
 
             object-fit: contain;
         }
 
-
         .footer-logo h3 {
-
             font-size: 22px;
-
-            font-weight: 900;
-
-            letter-spacing: 1px;
         }
 
-
         footer p {
+            color: #91a9c2;
 
-            color: #a9bfd8;
-
-            font-size: 14px;
+            font-size: 11px;
 
             line-height: 1.7;
         }
@@ -1540,22 +1735,6 @@
         /* =====================================================
            ANIMATIONS
         ===================================================== */
-
-        @keyframes headerAppear {
-
-            from {
-                opacity: 0;
-                transform:
-                    translateY(-25px);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0);
-            }
-        }
-
 
         @keyframes lightMove {
 
@@ -1568,57 +1747,8 @@
                 background-position:
                     200% 50%;
             }
+
         }
-
-
-        @keyframes logoEntrance {
-
-            from {
-                opacity: 0;
-                transform:
-                    translateX(-35px)
-                    scale(0.8);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    translateX(0)
-                    scale(1);
-            }
-        }
-
-
-        @keyframes companyAppear {
-
-            from {
-                opacity: 0;
-                transform:
-                    translateX(-25px);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    translateX(0);
-            }
-        }
-
-
-        @keyframes logoFloat {
-
-            0%,
-            100% {
-                transform:
-                    translateY(0);
-            }
-
-            50% {
-                transform:
-                    translateY(-6px);
-            }
-        }
-
 
         @keyframes logoRotation {
 
@@ -1631,121 +1761,7 @@
                 transform:
                     rotate(360deg);
             }
-        }
 
-
-        @keyframes rotateCircle {
-
-            from {
-                transform:
-                    rotate(0deg);
-            }
-
-            to {
-                transform:
-                    rotate(360deg);
-            }
-        }
-
-
-        @keyframes rotateReverse {
-
-            from {
-                transform:
-                    rotate(360deg);
-            }
-
-            to {
-                transform:
-                    rotate(0deg);
-            }
-        }
-
-
-        @keyframes floating {
-
-            0%,
-            100% {
-                transform:
-                    translateY(0);
-            }
-
-            50% {
-                transform:
-                    translateY(-25px);
-            }
-        }
-
-
-        @keyframes contentAppear {
-
-            from {
-                opacity: 0;
-                transform:
-                    translateY(35px);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0);
-            }
-        }
-
-
-        @keyframes cardAppear {
-
-            from {
-                opacity: 0;
-                transform:
-                    translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0);
-            }
-        }
-
-
-        @keyframes numberPulse {
-
-            0%,
-            100% {
-                transform:
-                    scale(1);
-            }
-
-            50% {
-                transform:
-                    scale(1.06);
-            }
-        }
-
-
-        /* =====================================================
-           ANIMATION DES CARTES
-        ===================================================== */
-
-        .service-card:nth-child(2) {
-            animation-delay: 0.10s;
-        }
-
-        .service-card:nth-child(3) {
-            animation-delay: 0.20s;
-        }
-
-        .service-card:nth-child(4) {
-            animation-delay: 0.30s;
-        }
-
-        .service-card:nth-child(5) {
-            animation-delay: 0.40s;
-        }
-
-        .service-card:nth-child(6) {
-            animation-delay: 0.50s;
         }
 
 
@@ -1755,62 +1771,20 @@
 
         @media (max-width: 1100px) {
 
-            .header-container {
-
-                padding:
-                    15px 25px;
-
-                gap: 25px;
-            }
-
-
-            .logo img {
-
-                width: 78px;
-                height: 78px;
-            }
-
-
-            .logo::before {
-
-                width: 83px;
-                height: 83px;
-            }
-
-
-            .logo-text h1 {
-
-                font-size: 28px;
-            }
-
-
-            nav ul {
-
-                gap: 3px;
-            }
-
-
-            nav a {
-
-                padding:
-                    11px 10px;
-
-                font-size: 14px;
-            }
-
-
             .services-grid {
-
                 grid-template-columns:
-                    repeat(2, 1fr);
+                    repeat(2, minmax(0, 1fr));
             }
-
 
             .construction-list {
-
                 grid-template-columns:
-                    repeat(2, 1fr);
+                    repeat(3, 1fr);
             }
+
+            .signal-line {
+                max-width: 45px;
+            }
+
         }
 
 
@@ -1820,965 +1794,172 @@
 
         @media (max-width: 750px) {
 
-            header {
-
-                position: relative;
-            }
-
-
             .header-container {
-
-                min-height: auto;
-
-                flex-direction: column;
+                min-height: 78px;
 
                 padding:
-                    18px 15px;
+                    10px 15px;
 
-                gap: 18px;
+                gap: 10px;
             }
-
 
             .logo {
-
-                gap: 15px;
-
-                justify-content: center;
+                gap: 11px;
             }
-
 
             .logo img {
-
-                width: 68px;
-                height: 68px;
+                width: 57px;
+                height: 57px;
             }
-
 
             .logo::before {
-
-                width: 74px;
-                height: 74px;
+                width: 63px;
+                height: 63px;
             }
-
 
             .logo-text h1 {
+                font-size: 19px;
 
-                font-size: 22px;
-
-                letter-spacing: 1px;
+                letter-spacing: 1.2px;
             }
-
 
             .logo-text span {
-
-                font-size: 8px;
-
-                letter-spacing: 2px;
-            }
-
-
-            nav {
-
-                width: 100%;
-            }
-
-
-            nav ul {
-
-                flex-wrap: wrap;
-
-                justify-content: center;
-
-                gap: 4px;
-            }
-
-
-            nav a {
-
-                padding:
-                    9px 8px;
-
-                font-size: 13px;
-            }
-
-
-            .hero {
-
-                min-height: 60vh;
-
-                padding:
-                    75px 20px;
-            }
-
-
-            .hero-small {
-
-                font-size: 10px;
-
-                letter-spacing: 4px;
-            }
-
-
-            .hero h1 {
-
-                font-size: 43px;
-            }
-
-
-            .hero p {
-
-                font-size: 16px;
-            }
-
-
-            .services-intro {
-
-                padding:
-                    65px 20px 40px;
-            }
-
-
-            .services {
-
-                padding:
-                    25px 18px 70px;
-            }
-
-
-            .category-title {
-
-                align-items:
-                    flex-start;
-
-                margin-top:
-                    55px;
-            }
-
-
-            .category-number {
-
-                min-width: 52px;
-
-                height: 52px;
-
-                font-size: 17px;
-            }
-
-
-            .category-title h2 {
-
-                font-size: 27px;
-            }
-
-
-            .services-grid {
-
-                grid-template-columns:
-                    1fr;
-            }
-
-
-            .service-image {
-
-                height: 235px;
-            }
-
-
-            .construction-block {
-
-                padding:
-                    40px 25px;
-
-                margin-top:
-                    55px;
-            }
-
-
-            .construction-list {
-
-                grid-template-columns:
-                    1fr;
-            }
-
-
-            .final-cta {
-
-                padding:
-                    65px 20px;
-            }
-        }
-
-
-        /* =====================================================
-           PETIT TÉLÉPHONE
-        ===================================================== */
-
-        @media (max-width: 480px) {
-
-            .logo-text h1 {
-
-                font-size: 18px;
-            }
-
-
-            .logo-text span {
-
                 font-size: 7px;
 
-                letter-spacing: 1.5px;
-            }
-
-
-            nav ul {
-
-                gap: 2px;
-            }
-
-
-            nav a {
-
-                font-size: 11px;
-
-                padding:
-                    8px 6px;
-            }
-
-
-            .hero h1 {
-
-                font-size: 37px;
-            }
-
-
-            .service-content {
-
-                padding:
-                    22px;
-            }
-        }
-
-
-        .service-action { display:inline-flex; align-items:center; justify-content:center; width:100%; margin-top:22px; padding:13px 18px; border:0; border-radius:12px; cursor:pointer; background:linear-gradient(135deg,#075ca8,#1599dc); color:#fff; font-size:14px; font-weight:800; letter-spacing:.3px; box-shadow:0 10px 24px rgba(0,90,170,.18); transition:.3s ease; }
-        .service-action:hover { transform:translateY(-3px); box-shadow:0 15px 30px rgba(0,90,170,.28); }
-        .appointment-modal { position:fixed; inset:0; z-index:100000; display:none; align-items:center; justify-content:center; padding:20px; background:rgba(0,13,35,.72); backdrop-filter:blur(7px); }
-        .appointment-modal.show { display:flex; }
-        .appointment-box { width:min(720px,100%); max-height:92vh; overflow-y:auto; padding:34px; border-radius:24px; background:#fff; box-shadow:0 30px 80px rgba(0,0,0,.35); animation:modalAppear .35s ease; }
-        .appointment-head { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; margin-bottom:25px; }
-        .appointment-head h2 { color:#092d5c; font-size:30px; margin-bottom:7px; }
-        .appointment-head p { color:#69778a; line-height:1.6; font-size:14px; }
-        .appointment-close { width:42px; height:42px; flex:0 0 42px; border:0; border-radius:50%; cursor:pointer; background:#edf5fb; color:#075ca8; font-size:25px; line-height:1; }
-        .appointment-form { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
-        .appointment-field { display:flex; flex-direction:column; gap:7px; }
-        .appointment-field.full,.appointment-submit,.appointment-note { grid-column:1/-1; }
-        .appointment-field label { color:#173457; font-size:13px; font-weight:800; }
-        .appointment-field input,.appointment-field select,.appointment-field textarea { width:100%; padding:13px 14px; border:1px solid #d6e4f0; border-radius:11px; outline:none; background:#f9fcff; color:#17243a; font:inherit; transition:.25s ease; }
-        .appointment-field textarea { min-height:115px; resize:vertical; }
-        .appointment-field input:focus,.appointment-field select:focus,.appointment-field textarea:focus { border-color:#1599dc; box-shadow:0 0 0 3px rgba(21,153,220,.12); background:#fff; }
-        .appointment-submit { margin-top:5px; padding:15px 20px; border:0; border-radius:12px; cursor:pointer; background:linear-gradient(135deg,#075ca8,#1599dc); color:#fff; font-weight:900; font-size:15px; box-shadow:0 12px 28px rgba(0,90,170,.22); transition:.3s ease; }
-        .appointment-submit:hover { transform:translateY(-2px); box-shadow:0 16px 35px rgba(0,90,170,.30); }
-        .appointment-note { color:#718096; font-size:12px; line-height:1.6; margin-top:-4px; }
-        body.modal-open { overflow:hidden; }
-        @keyframes modalAppear { from { opacity:0; transform:translateY(25px) scale(.98); } to { opacity:1; transform:translateY(0) scale(1); } }
-        @media (max-width:650px) { .appointment-box { padding:24px 18px; } .appointment-form { grid-template-columns:1fr; } .appointment-field.full,.appointment-submit,.appointment-note { grid-column:auto; } .appointment-head h2 { font-size:24px; } }
-
-    
-        @media (max-width: 750px) {
-            .menu-toggle {
-                width: 44px;
-                height: 44px;
+                letter-spacing: 1.7px;
             }
 
             .menu-toggle::before {
                 display: none;
             }
 
-            .header-container {
-                position: relative;
+            .hero {
+                min-height: 72vh;
+
+                padding:
+                    80px 20px 65px;
             }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .hero-button {
+                width:
+                    min(320px, 100%);
+            }
+
+            .service-signals {
+                padding:
+                    0 18px;
+            }
+
+            .signal-track {
+                display: grid;
+
+                grid-template-columns:
+                    1fr 1fr;
+
+                padding:
+                    24px 0;
+
+                gap:
+                    18px 12px;
+            }
+
+            .signal-line {
+                display: none;
+            }
+
+            .services {
+                padding:
+                    20px 18px 70px;
+            }
+
+            .category-title {
+                align-items: flex-start;
+
+                margin-top: 60px;
+            }
+
+            .services-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .service-image {
+                height: 240px;
+            }
+
+            .service-badge {
+                top: 215px;
+            }
+
+            .construction-block {
+                padding:
+                    38px 23px;
+            }
+
+            .construction-list {
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+            .appointment-box {
+                padding:
+                    24px 18px;
+            }
+
+            .appointment-form {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .appointment-field.full,
+            .appointment-submit,
+            .appointment-note,
+            .appointment-message-box {
+                grid-column: auto;
+            }
+
         }
+
 
         @media (max-width: 480px) {
-            .menu-toggle {
-                width: 44px;
-                height: 44px;
-            }
-        }
 
-
-        /* =====================================================
-           KY5 — PROFESSIONAL SERVICE EXPERIENCE
-           Couche visuelle finale : sobre, premium, lisible
-        ===================================================== */
-
-        :root{
-            --ky5-ink:#071b33;
-            --ky5-navy:#061d36;
-            --ky5-blue:#0b67ad;
-            --ky5-cyan:#58d6ff;
-            --ky5-soft:#f5f9fc;
-            --ky5-line:rgba(8,62,112,.12);
-            --ky5-shadow:0 24px 65px rgba(5,45,85,.10);
-        }
-
-        body{
-            background:#f6f9fc;
-            color:var(--ky5-ink);
-        }
-
-        /* Header plus institutionnel */
-        header{
-            min-height:86px;
-            background:rgba(3,19,39,.96);
-            border-bottom:1px solid rgba(103,217,255,.20);
-            box-shadow:0 10px 34px rgba(0,18,45,.28);
-        }
-
-        .header-container{
-            min-height:86px;
-            max-width:1420px;
-        }
-
-        .logo img{
-            width:70px;
-            height:70px;
-        }
-
-        .logo::before{
-            width:76px;
-            height:76px;
-        }
-
-        .logo-text h1{
-            font-size:27px;
-            letter-spacing:2.4px;
-        }
-
-        .logo-text span{
-            margin-top:7px;
-            font-size:9px;
-            letter-spacing:3.2px;
-        }
-
-        /* Le menu latéral garde l'esprit de index.html */
-        .menu-toggle{
-            width:50px;
-            height:50px;
-            border-radius:15px;
-            background:rgba(255,255,255,.07);
-            border-color:rgba(255,255,255,.17);
-        }
-
-        .menu-toggle span{
-            width:20px;
-        }
-
-        header nav a{
-            min-height:58px;
-        }
-
-        /* Hero : moins "template", plus direction d'entreprise */
-        .hero{
-            min-height:70vh;
-            padding:105px 7% 85px;
-            background:
-                linear-gradient(115deg,rgba(2,13,30,.96) 0%,rgba(4,46,83,.91) 48%,rgba(6,115,175,.84) 100%),
-                radial-gradient(circle at 75% 30%,rgba(94,218,255,.20),transparent 28%);
-        }
-
-        .hero::before{
-            width:620px;
-            height:620px;
-            right:-250px;
-            top:-270px;
-            border-color:rgba(111,221,255,.18);
-        }
-
-        .hero::after{
-            width:440px;
-            height:440px;
-            left:-210px;
-            bottom:-245px;
-            border-color:rgba(255,255,255,.10);
-        }
-
-        .hero-content{
-            max-width:1080px;
-        }
-
-        .hero-small{
-            display:inline-flex;
-            align-items:center;
-            gap:12px;
-            margin-bottom:25px;
-            font-size:10px;
-            letter-spacing:5px;
-            color:#9ce7ff;
-        }
-
-        .hero-small::before{
-            content:"";
-            width:38px;
-            height:1px;
-            background:linear-gradient(90deg,#58d6ff,transparent);
-        }
-
-        .hero h1{
-            max-width:900px;
-            margin:0 auto 25px;
-            font-size:clamp(58px,8vw,102px);
-            letter-spacing:-2px;
-            line-height:.91;
-        }
-
-        .hero p{
-            max-width:760px;
-            font-size:16px;
-            line-height:1.85;
-            color:rgba(238,249,255,.78);
-        }
-
-        .hero-actions{
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            gap:12px;
-            flex-wrap:wrap;
-            margin-top:34px;
-        }
-
-        .hero-button{
-            margin-top:0;
-            padding:14px 18px 14px 23px;
-            gap:18px;
-            border:1px solid rgba(255,255,255,.18);
-            background:#fff;
-            color:#075ca8;
-            box-shadow:0 14px 35px rgba(0,0,0,.18);
-            font-size:10px;
-            letter-spacing:1.2px;
-        }
-
-        .hero-button span{
-            font-size:17px;
-            line-height:1;
-        }
-
-        .hero-button:hover{
-            background:#65d9ff;
-            color:#06274b;
-        }
-
-        .hero-button-secondary{
-            background:rgba(255,255,255,.055);
-            color:#fff;
-            border-color:rgba(139,231,255,.34);
-            box-shadow:inset 0 0 20px rgba(103,217,255,.04);
-        }
-
-        .hero-button-secondary:hover{
-            background:rgba(103,217,255,.14);
-            color:#fff;
-        }
-
-        .hero-trustline{
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            gap:14px;
-            margin-top:35px;
-            color:rgba(255,255,255,.52);
-            font-size:8px;
-            font-weight:900;
-            letter-spacing:2.2px;
-            flex-wrap:wrap;
-        }
-
-        .hero-trustline i{
-            width:4px;
-            height:4px;
-            border-radius:50%;
-            background:#62d9ff;
-            box-shadow:0 0 10px rgba(98,217,255,.7);
-        }
-
-        /* Intro plus éditoriale */
-        .services-intro{
-            padding:92px 7% 62px;
-            background:#fff;
-            border-bottom:1px solid rgba(7,92,168,.06);
-        }
-
-        .section-label{
-            display:inline-flex;
-            align-items:center;
-            gap:10px;
-            color:#0877bd;
-            font-size:9px;
-            letter-spacing:3.5px;
-        }
-
-        .section-label::before{
-            content:"";
-            width:28px;
-            height:2px;
-            background:#22a9df;
-            border-radius:9px;
-        }
-
-        .services-intro h2{
-            max-width:820px;
-            margin:17px auto 13px;
-            font-size:clamp(36px,5vw,58px);
-            letter-spacing:-1.8px;
-            line-height:1.02;
-        }
-
-        .services-intro p{
-            max-width:730px;
-            font-size:15px;
-            line-height:1.9;
-        }
-
-        /* Bandeau de progression */
-        .service-signals{
-            overflow:hidden;
-            padding:0 7%;
-            background:#fff;
-            border-bottom:1px solid var(--ky5-line);
-        }
-
-        .signal-track{
-            max-width:1200px;
-            margin:auto;
-            min-height:104px;
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            gap:24px;
-        }
-
-        .signal-item{
-            display:grid;
-            grid-template-columns:auto 1fr;
-            column-gap:12px;
-            align-items:center;
-            min-width:0;
-        }
-
-        .signal-index{
-            grid-row:1/3;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            width:38px;
-            height:38px;
-            border-radius:12px;
-            background:#eef8fd;
-            border:1px solid #cdebf7;
-            color:#0876ba;
-            font-size:9px;
-            font-weight:900;
-            letter-spacing:1px;
-        }
-
-        .signal-item strong{
-            color:#0a2b50;
-            font-size:10px;
-            letter-spacing:.4px;
-        }
-
-        .signal-item small{
-            margin-top:3px;
-            color:#8290a0;
-            font-size:8px;
-        }
-
-        .signal-line{
-            flex:1;
-            max-width:85px;
-            height:1px;
-            background:linear-gradient(90deg,transparent,#b6ddec,transparent);
-        }
-
-        /* Zone services */
-        .services{
-            padding:20px 7% 105px;
-            background:
-                radial-gradient(circle at 10% 0%,rgba(38,165,221,.055),transparent 25%),
-                linear-gradient(180deg,#fbfdff 0%,#f3f7fa 100%);
-        }
-
-        .category-title{
-            position:relative;
-            max-width:1200px;
-            margin:80px auto 32px;
-            padding:0 0 19px;
-            gap:19px;
-            border-bottom:1px solid var(--ky5-line);
-        }
-
-        .category-title::after{
-            content:"";
-            position:absolute;
-            left:0;
-            bottom:-1px;
-            width:105px;
-            height:2px;
-            background:linear-gradient(90deg,#0878bf,#62d9ff);
-        }
-
-        .category-number{
-            min-width:55px;
-            width:55px;
-            height:55px;
-            border-radius:15px;
-            background:linear-gradient(145deg,#063e72,#0b83c8);
-            box-shadow:0 12px 25px rgba(0,86,154,.20);
-            font-size:13px;
-            letter-spacing:1px;
-        }
-
-        .category-title h2{
-            font-size:clamp(25px,3vw,37px);
-            letter-spacing:-.8px;
-            color:#092d5c;
-        }
-
-        .category-title p{
-            max-width:760px;
-            margin-top:7px;
-            color:#7b8998;
-            font-size:12px;
-            line-height:1.65;
-        }
-
-        .services-grid{
-            max-width:1200px;
-            grid-template-columns:repeat(3,minmax(0,1fr));
-            gap:20px;
-        }
-
-        /* Cartes plus sobres et plus premium */
-        .service-card{
-            border:1px solid rgba(8,62,112,.10);
-            border-radius:17px;
-            box-shadow:0 12px 35px rgba(5,55,100,.075);
-            transition:transform .42s cubic-bezier(.2,.7,.2,1),
-                       box-shadow .42s ease,
-                       border-color .42s ease;
-            animation:serviceReveal .75s ease both;
-        }
-
-        .service-card:hover{
-            transform:translateY(-8px);
-            border-color:rgba(24,162,224,.30);
-            box-shadow:0 24px 55px rgba(5,55,100,.15);
-        }
-
-        .service-card::before{
-            height:2px;
-            background:linear-gradient(90deg,#0865aa,#5bd8ff);
-        }
-
-        .service-image{
-            height:245px;
-            background:#dfeaf2;
-        }
-
-        .service-image::after{
-            content:"";
-            position:absolute;
-            inset:0;
-            z-index:2;
-            pointer-events:none;
-            background:linear-gradient(180deg,transparent 52%,rgba(1,19,39,.22) 100%);
-        }
-
-        .service-image img{
-            filter:saturate(.92) contrast(1.02);
-        }
-
-        .service-card:hover .service-image img{
-            transform:scale(1.055);
-            filter:saturate(1.04) contrast(1.04);
-        }
-
-        .service-badge{
-            top:220px;
-            left:16px;
-            padding:7px 11px;
-            border-radius:9px;
-            color:#075ca8;
-            background:rgba(255,255,255,.94);
-            border:1px solid rgba(7,92,168,.08);
-            font-size:8px;
-            letter-spacing:1px;
-            text-transform:uppercase;
-            box-shadow:0 8px 20px rgba(0,0,0,.12);
-        }
-
-        .service-content{
-            min-height:205px;
-            padding:25px 24px 23px;
-            display:flex;
-            flex-direction:column;
-            align-items:flex-start;
-        }
-
-        .service-content h3{
-            margin-bottom:9px;
-            color:#082b51;
-            font-size:19px;
-            letter-spacing:-.25px;
-        }
-
-        .service-content p{
-            color:#718092;
-            font-size:12px;
-            line-height:1.75;
-            max-width:95%;
-        }
-
-        .service-action{
-            margin-top:auto;
-            padding:11px 14px;
-            min-height:38px;
-            border:1px solid rgba(7,92,168,.18);
-            border-radius:10px;
-            background:#f4faff;
-            color:#075ca8;
-            box-shadow:none;
-            font-size:8px;
-            letter-spacing:1px;
-            text-transform:uppercase;
-            transition:.3s ease;
-        }
-
-        .service-action::after{
-            content:"  →";
-            color:#17a4df;
-        }
-
-        .service-action:hover{
-            background:linear-gradient(135deg,#075ca8,#1599dc);
-            color:#fff;
-            border-color:transparent;
-            box-shadow:0 10px 25px rgba(0,90,170,.20);
-            transform:translateY(-2px);
-        }
-
-        /* Construction : bloc de direction plutôt qu'une simple carte */
-        .construction-block{
-            margin:90px auto 0;
-            padding:58px;
-            border-radius:25px;
-            border:1px solid rgba(104,218,255,.17);
-            background:
-                radial-gradient(circle at 82% 20%,rgba(87,215,255,.18),transparent 28%),
-                linear-gradient(125deg,#03152b 0%,#063967 58%,#087fc7 100%);
-            box-shadow:0 28px 65px rgba(0,47,100,.20);
-        }
-
-        .construction-content h2{
-            font-size:clamp(30px,4.5vw,49px);
-            letter-spacing:-1.2px;
-        }
-
-        .construction-content p{
-            max-width:720px;
-            color:rgba(235,249,255,.72);
-            font-size:13px;
-            line-height:1.85;
-        }
-
-        .construction-list{
-            grid-template-columns:repeat(4,1fr);
-            gap:8px;
-        }
-
-        .construction-list li{
-            padding:11px 12px;
-            border:1px solid rgba(255,255,255,.08);
-            background:rgba(255,255,255,.055);
-            font-size:10px;
-        }
-
-        .construction-list li:hover{
-            background:rgba(255,255,255,.12);
-        }
-
-        /* CTA final : vraie sortie commerciale */
-        .final-cta{
-            position:relative;
-            overflow:hidden;
-            padding:95px 7%;
-            background:
-                radial-gradient(circle at 50% 0%,rgba(26,163,222,.09),transparent 34%),
-                #fff;
-            border-top:1px solid rgba(7,92,168,.06);
-        }
-
-        .final-cta h2{
-            font-size:clamp(36px,5vw,57px);
-            letter-spacing:-1.7px;
-        }
-
-        .final-cta p{
-            max-width:700px;
-            font-size:14px;
-            line-height:1.85;
-        }
-
-        .cta-button{
-            padding:15px 23px;
-            border-radius:11px;
-            font-size:9px;
-            letter-spacing:1.2px;
-            text-transform:uppercase;
-        }
-
-        /* Modal plus premium */
-        .appointment-modal{
-            background:rgba(1,12,27,.76);
-        }
-
-        .appointment-box{
-            border:1px solid rgba(24,162,224,.12);
-            border-radius:22px;
-            box-shadow:0 35px 100px rgba(0,0,0,.35);
-        }
-
-        .appointment-head{
-            padding-bottom:19px;
-            border-bottom:1px solid #e5eef4;
-        }
-
-        .appointment-head h2{
-            letter-spacing:-.7px;
-        }
-
-        /* Footer plus institutionnel */
-        footer{
-            padding:60px 7% 27px;
-            border-top:1px solid rgba(103,217,255,.12);
-        }
-
-        footer p{
-            font-size:11px;
-            color:#91a9c2;
-        }
-
-        /* Révélation au scroll */
-        @keyframes serviceReveal{
-            from{opacity:0;transform:translateY(22px)}
-            to{opacity:1;transform:translateY(0)}
-        }
-
-        .service-card:nth-child(2){animation-delay:.06s}
-        .service-card:nth-child(3){animation-delay:.12s}
-        .service-card:nth-child(4){animation-delay:.18s}
-        .service-card:nth-child(5){animation-delay:.24s}
-        .service-card:nth-child(6){animation-delay:.30s}
-
-        /* Accessibilité / préférence de mouvement */
-        @media (prefers-reduced-motion:reduce){
-            *,*::before,*::after{
-                animation-duration:.01ms !important;
-                animation-iteration-count:1 !important;
-                scroll-behavior:auto !important;
-                transition-duration:.01ms !important;
-            }
-        }
-
-        @media(max-width:1100px){
-            .services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-            .construction-list{grid-template-columns:repeat(3,1fr)}
-            .signal-track{gap:15px}
-            .signal-line{max-width:45px}
-        }
-
-        @media(max-width:750px){
-            header{position:sticky}
-            .header-container{
-                min-height:78px;
-                flex-direction:row;
-                padding:10px 15px;
-                gap:10px;
+            .logo-text h1 {
+                font-size: 17px;
             }
 
-            .logo{gap:11px}
-            .logo img{width:57px;height:57px}
-            .logo::before{width:63px;height:63px}
-            .logo-text h1{font-size:19px;letter-spacing:1.2px}
-            .logo-text span{font-size:7px;letter-spacing:1.7px}
-
-            .hero{
-                min-height:72vh;
-                padding:80px 20px 65px;
+            .logo-text span {
+                font-size: 6px;
             }
 
-            .hero h1{font-size:48px}
-            .hero p{font-size:14px}
-            .hero-trustline{
-                gap:8px;
-                line-height:1.7;
-                margin-top:27px;
+            .hero h1 {
+                font-size: 40px;
             }
 
-            .hero-actions{
-                width:100%;
-                flex-direction:column;
+            .signal-track {
+                grid-template-columns:
+                    1fr;
             }
 
-            .hero-button{
-                width:min(320px,100%);
-                justify-content:center;
+            .construction-list {
+                grid-template-columns:
+                    1fr;
             }
 
-            .service-signals{padding:0 18px}
-            .signal-track{
-                display:grid;
-                grid-template-columns:1fr 1fr;
-                padding:24px 0;
-                gap:18px 12px;
-            }
-
-            .signal-line{display:none}
-
-            .services{
-                padding-left:18px;
-                padding-right:18px;
-            }
-
-            .category-title{
-                margin-top:60px;
-                padding-bottom:15px;
-            }
-
-            .services-grid{grid-template-columns:1fr}
-            .service-image{height:240px}
-            .service-badge{top:215px}
-
-            .construction-block{
-                padding:38px 23px;
-                margin-top:65px;
-            }
-
-            .construction-list{grid-template-columns:1fr 1fr}
-
-            .final-cta{padding:72px 20px}
         }
 
-        @media(max-width:480px){
-            .logo-text h1{font-size:17px}
-            .logo-text span{font-size:6px}
-            .hero h1{font-size:40px}
-            .signal-track{grid-template-columns:1fr}
-            .construction-list{grid-template-columns:1fr}
-            .service-content{min-height:215px}
-        }
-
-</style>
+    </style>
 
 </head>
 
@@ -2787,13 +1968,12 @@
 
 
     <!-- =====================================================
-         EN-TÊTE
+         HEADER
     ===================================================== -->
 
     <header>
 
         <div class="header-container">
-
 
             <div class="logo">
 
@@ -2801,7 +1981,6 @@
                     src="logo sté.png"
                     alt="Logo KY5 GLOBAL TRADE"
                 >
-
 
                 <div class="logo-text">
 
@@ -2816,7 +1995,8 @@
                 </div>
 
             </div>
-            <!-- BOUTON MENU -->
+
+
             <button
                 class="menu-toggle"
                 type="button"
@@ -2829,13 +2009,17 @@
                 <span></span>
             </button>
 
-            <!-- MENU LATÉRAL -->
+
             <nav
                 id="main-navigation"
                 aria-label="Navigation principale"
             >
+
                 <div class="nav-mobile-head">
-                    <span>MENU</span>
+
+                    <span>
+                        MENU
+                    </span>
 
                     <button
                         class="menu-close"
@@ -2844,9 +2028,12 @@
                     >
                         ×
                     </button>
+
                 </div>
 
+
                 <ul>
+
                     <li>
                         <a href="index.html">
                             Accueil
@@ -2891,7 +2078,9 @@
                             Contact
                         </a>
                     </li>
+
                 </ul>
+
             </nav>
 
         </div>
@@ -2905,51 +2094,43 @@
 
     <section class="hero">
 
-        <div class="hero-circle circle-one"></div>
-
-        <div class="hero-circle circle-two"></div>
-
-        <div class="hero-circle circle-three"></div>
-
-
         <div class="hero-content">
 
             <div class="hero-small">
                 KY5 GLOBAL TRADE
             </div>
 
-
             <h1>
-                NOS <span>SERVICES</span>
+                NOS
+                <span>
+                    SERVICES
+                </span>
             </h1>
-
 
             <p>
                 Des solutions professionnelles dans le BTP,
-                l'importation, la fourniture, la construction
-                et la gestion immobilière.
+                l'importation, la fourniture, la construction,
+                l'énergie et la gestion immobilière.
             </p>
 
-
             <div class="hero-actions">
-                <a href="#services" class="hero-button">
+
+                <a
+                    href="#services"
+                    class="hero-button"
+                >
                     DÉCOUVRIR NOS SERVICES
                     <span>↓</span>
                 </a>
-                <a href="prospect.html" class="hero-button hero-button-secondary">
+
+                <a
+                    href="prospect.html"
+                    class="hero-button hero-button-secondary"
+                >
                     PARLER À KY5
                     <span>→</span>
                 </a>
-            </div>
 
-            <div class="hero-trustline">
-                <span>APPROVISIONNEMENT</span>
-                <i></i>
-                <span>CONSTRUCTION</span>
-                <i></i>
-                <span>IMMOBILIER</span>
-                <i></i>
-                <span>ACCOMPAGNEMENT</span>
             </div>
 
         </div>
@@ -2967,50 +2148,103 @@
             Notre savoir-faire
         </span>
 
-
         <h2>
             Des solutions adaptées à vos projets
         </h2>
 
-
         <p>
             KY5 GLOBAL TRADE accompagne les particuliers,
             entreprises et partenaires dans leurs besoins
-            en fourniture, construction, immobilier et
-            solutions techniques.
+            en fourniture, construction, immobilier,
+            énergie et solutions techniques.
         </p>
 
     </section>
 
+
     <!-- =====================================================
-         POSITIONNEMENT — BANDEAU DE CONFIANCE
+         BANDEAU
     ===================================================== -->
-    <section class="service-signals" aria-label="Engagements KY5 GLOBAL TRADE">
+
+    <section class="service-signals">
+
         <div class="signal-track">
+
             <div class="signal-item">
-                <span class="signal-index">01</span>
-                <strong>Besoin identifié</strong>
-                <small>Comprendre avant d'agir</small>
+
+                <span class="signal-index">
+                    01
+                </span>
+
+                <strong>
+                    Besoin identifié
+                </strong>
+
+                <small>
+                    Comprendre avant d'agir
+                </small>
+
             </div>
+
             <div class="signal-line"></div>
+
+
             <div class="signal-item">
-                <span class="signal-index">02</span>
-                <strong>Solution structurée</strong>
-                <small>Une réponse adaptée au projet</small>
+
+                <span class="signal-index">
+                    02
+                </span>
+
+                <strong>
+                    Solution structurée
+                </strong>
+
+                <small>
+                    Une réponse adaptée
+                </small>
+
             </div>
+
             <div class="signal-line"></div>
+
+
             <div class="signal-item">
-                <span class="signal-index">03</span>
-                <strong>Exécution & suivi</strong>
-                <small>Une approche orientée résultats</small>
+
+                <span class="signal-index">
+                    03
+                </span>
+
+                <strong>
+                    Exécution & suivi
+                </strong>
+
+                <small>
+                    Une approche orientée résultats
+                </small>
+
             </div>
+
             <div class="signal-line"></div>
+
+
             <div class="signal-item">
-                <span class="signal-index">04</span>
-                <strong>Relation durable</strong>
-                <small>Un partenaire dans la durée</small>
+
+                <span class="signal-index">
+                    04
+                </span>
+
+                <strong>
+                    Relation durable
+                </strong>
+
+                <small>
+                    Un partenaire dans la durée
+                </small>
+
             </div>
+
         </div>
+
     </section>
 
 
@@ -3025,6 +2259,54 @@
 
 
         <!-- =================================================
+             SERVICES AJOUTÉS DEPUIS L'ADMINISTRATION
+        ================================================= -->
+
+        <div id="servicesAdminContainer">
+
+            <div class="category-title">
+
+                <div class="category-number">
+                    KY5
+                </div>
+
+                <div>
+
+                    <h2>
+                        Services actuellement disponibles
+                    </h2>
+
+                    <p>
+                        Cette section est mise à jour
+                        automatiquement depuis l'espace
+                        administrateur KY5 GLOBAL TRADE.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="services-grid"
+                id="dynamicServicesGrid"
+            ></div>
+
+
+            <div class="admin-services-notice">
+
+                Les services affichés dans cette section
+                proviennent directement de la base KY5.
+                Lorsqu'un administrateur ajoute, modifie
+                ou masque un service, cette page est mise
+                à jour automatiquement.
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
              01 — IMPORTATION BTP
         ================================================= -->
 
@@ -3034,18 +2316,16 @@
                 01
             </div>
 
-
             <div>
 
                 <h2>
                     Importation BTP et Fourniture
                 </h2>
 
-
                 <p>
-                    Fourniture de matériaux, équipements
-                    et solutions destinés aux projets
-                    résidentiels et professionnels.
+                    Fourniture de matériaux,
+                    équipements et solutions destinés
+                    aux projets résidentiels et professionnels.
                 </p>
 
             </div>
@@ -3055,8 +2335,6 @@
 
         <div class="services-grid">
 
-
-            <!-- CARRELAGE -->
 
             <article class="service-card">
 
@@ -3085,8 +2363,12 @@
                         des espaces.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Carrelage">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Carrelage"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
@@ -3094,15 +2376,13 @@
             </article>
 
 
-            <!-- SANITAIRE -->
-
             <article class="service-card">
 
                 <div class="service-image">
 
                     <img
                         src="images BTP/SANITAIRE.JPG.jpg"
-                        alt="Sanitaire"
+                        alt="Sanitaires"
                     >
 
                 </div>
@@ -3123,16 +2403,18 @@
                         et professionnels.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Sanitaires">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Sanitaires"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
 
-
-            <!-- PLOMBERIE -->
 
             <article class="service-card">
 
@@ -3161,16 +2443,18 @@
                         et sanitaires.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Plomberie">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Plomberie"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
 
-
-            <!-- ELECTRICITE -->
 
             <article class="service-card">
 
@@ -3199,16 +2483,18 @@
                         et des projets.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Électricité">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Électricité"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
 
-
-            <!-- DECORATION -->
 
             <article class="service-card">
 
@@ -3237,16 +2523,18 @@
                         des espaces.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Décoration">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Décoration"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
 
-
-            <!-- BETONNIERE -->
 
             <article class="service-card">
 
@@ -3275,16 +2563,18 @@
                         les chantiers.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Bétonnière">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Bétonnière"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
 
-
-            <!-- GROUPE ELECTROGENE -->
 
             <article class="service-card">
 
@@ -3313,16 +2603,18 @@
                         et les chantiers.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Groupe électrogène">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Groupe électrogène"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
 
-
-            <!-- PANNEAU SOLAIRE -->
 
             <article class="service-card">
 
@@ -3351,16 +2643,18 @@
                         des projets.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Panneau solaire">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Panneau solaire"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
 
-
-            <!-- ECHAFAUDAGE -->
 
             <article class="service-card">
 
@@ -3384,62 +2678,28 @@
                     </h3>
 
                     <p>
-                        Équipements nécessaires aux
-                        travaux en hauteur et aux
-                        opérations de chantier.
+                        Équipements nécessaires
+                        aux travaux en hauteur
+                        et aux opérations de chantier.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Échafaudage">
-                        DÉPOSER UNE DEMANDE
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- MACHINE CIMENT -->
-
-            <article class="service-card">
-
-                <div class="service-image">
-
-                    <img
-                        src="images BTP/MACHINE CIMENT.JPG.jpg"
-                        alt="Machine à ciment"
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Échafaudage"
                     >
-
-                </div>
-
-                <span class="service-badge">
-                    Équipement
-                </span>
-
-                <div class="service-content">
-
-                    <h3>
-                        Machine à ciment
-                    </h3>
-
-                    <p>
-                        Machines et équipements destinés
-                        aux travaux de construction.
-                    </p>
-
-                    <button type="button" class="service-action" data-service="Machine à ciment">
-                        DÉPOSER UNE DEMANDE
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
-
 
         </div>
 
 
         <!-- =================================================
-             02 — GESTION IMMOBILIÈRE
+             02 — IMMOBILIER
         ================================================= -->
 
         <div class="category-title">
@@ -3448,18 +2708,16 @@
                 02
             </div>
 
-
             <div>
 
                 <h2>
                     Gestion Immobilière et Commissionnaire
                 </h2>
 
-
                 <p>
-                    Gestion, suivi et valorisation des biens
-                    immobiliers pour le compte des propriétaires
-                    et partenaires.
+                    Gestion, suivi et valorisation
+                    des biens immobiliers pour
+                    les propriétaires et partenaires.
                 </p>
 
             </div>
@@ -3470,15 +2728,13 @@
         <div class="services-grid">
 
 
-            <!-- GESTION MAISON -->
-
             <article class="service-card">
 
                 <div class="service-image">
 
                     <img
                         src="images BTP/GESTION MAISON ET APPARTEMENT.JPG.jpg"
-                        alt="Gestion maison et appartement"
+                        alt="Gestion des maisons et appartements"
                     >
 
                 </div>
@@ -3494,21 +2750,23 @@
                     </h3>
 
                     <p>
-                        Gestion et suivi des maisons et
-                        appartements pour le compte des
-                        propriétaires.
+                        Gestion et suivi des maisons
+                        et appartements pour le compte
+                        des propriétaires.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Gestion des maisons et appartements">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Gestion des maisons et appartements"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
 
-
-            <!-- GESTION BUREAUX -->
 
             <article class="service-card">
 
@@ -3536,8 +2794,12 @@
                         professionnels et bureaux.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Gestion des bureaux">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Gestion des bureaux"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
@@ -3545,15 +2807,13 @@
             </article>
 
 
-            <!-- RECHERCHE LOCATAIRE -->
-
             <article class="service-card">
 
                 <div class="service-image">
 
                     <img
                         src="images BTP/CHERCHER-LE-LOCATAIRE.JPG.jpg"
-                        alt="Recherche de locataire"
+                        alt="Recherche de locataires"
                     >
 
                 </div>
@@ -3569,21 +2829,23 @@
                     </h3>
 
                     <p>
-                        Recherche de locataires pour les
-                        maisons, appartements et bureaux
-                        disponibles.
+                        Recherche de locataires pour
+                        les maisons, appartements
+                        et bureaux disponibles.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Recherche de locataires">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Recherche de locataires"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
 
-
-            <!-- CONTRAT DE LOYER -->
 
             <article class="service-card">
 
@@ -3612,16 +2874,18 @@
                         dans leur gestion.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Suivi des contrats de loyer">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Suivi des contrats de loyer"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
 
-
-            <!-- SUIVI DES LOYERS -->
 
             <article class="service-card">
 
@@ -3649,16 +2913,18 @@
                         dans la gestion locative des biens.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Suivi des loyers">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Suivi des loyers"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
 
-
-            <!-- ENTRETIEN -->
 
             <article class="service-card">
 
@@ -3682,62 +2948,28 @@
                     </h3>
 
                     <p>
-                        Entretien et suivi des biens afin
-                        de préserver leur état et leur valeur.
+                        Entretien et suivi des biens
+                        afin de préserver leur état
+                        et leur valeur.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Entretien">
-                        DÉPOSER UNE DEMANDE
-                    </button>
-
-                </div>
-
-            </article>
-
-
-            <!-- AMENAGEMENT -->
-
-            <article class="service-card">
-
-                <div class="service-image">
-
-                    <img
-                        src="images BTP/AMENAGEMENT-INTERIEUR.JPG.jpg"
-                        alt="Aménagement intérieur"
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Entretien"
                     >
-
-                </div>
-
-                <span class="service-badge">
-                    Aménagement
-                </span>
-
-                <div class="service-content">
-
-                    <h3>
-                        Aménagement intérieur
-                    </h3>
-
-                    <p>
-                        Solutions d'aménagement intérieur
-                        pour les espaces résidentiels
-                        et professionnels.
-                    </p>
-
-                    <button type="button" class="service-action" data-service="Aménagement intérieur">
-                        DÉPOSER UNE DEMANDE
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
-
 
         </div>
 
 
         <!-- =================================================
-             03 — CONSTRUCTION CLÉ EN MAIN
+             CONSTRUCTION
         ================================================= -->
 
         <div class="construction-block">
@@ -3748,7 +2980,6 @@
                     03 — Construction Clé en Main
                 </h2>
 
-
                 <p>
                     Nous accompagnons nos clients de la
                     conception jusqu'à la livraison complète
@@ -3756,64 +2987,20 @@
                     adaptée aux exigences de chaque réalisation.
                 </p>
 
-
                 <ul class="construction-list">
 
-                    <li>
-                        Plans architecturaux
-                    </li>
-
-                    <li>
-                        Devis et permis
-                    </li>
-
-                    <li>
-                        Fondations
-                    </li>
-
-                    <li>
-                        Élévation
-                    </li>
-
-                    <li>
-                        Toiture
-                    </li>
-
-                    <li>
-                        Carrelage
-                    </li>
-
-                    <li>
-                        Peinture
-                    </li>
-
-                    <li>
-                        Électricité
-                    </li>
-
-                    <li>
-                        Plomberie
-                    </li>
-
-                    <li>
-                        Aménagement intérieur
-                    </li>
-
-                    <li>
-                        Maintenance
-                    </li>
-
-                    <li>
-                        Clôtures
-                    </li>
-
-                    <li>
-                        Pavage
-                    </li>
-
-                    <li>
-                        Espaces verts
-                    </li>
+                    <li>Plans architecturaux</li>
+                    <li>Devis et permis</li>
+                    <li>Fondations</li>
+                    <li>Élévation</li>
+                    <li>Toiture</li>
+                    <li>Carrelage</li>
+                    <li>Peinture</li>
+                    <li>Électricité</li>
+                    <li>Plomberie</li>
+                    <li>Aménagement intérieur</li>
+                    <li>Maintenance</li>
+                    <li>Clôtures</li>
 
                 </ul>
 
@@ -3823,7 +3010,7 @@
 
 
         <!-- =================================================
-             IMAGES CONSTRUCTION
+             BTP
         ================================================= -->
 
         <div class="category-title">
@@ -3832,13 +3019,11 @@
                 BTP
             </div>
 
-
             <div>
 
                 <h2>
                     Nos solutions de construction
                 </h2>
-
 
                 <p>
                     Quelques domaines d'intervention
@@ -3853,8 +3038,6 @@
 
         <div class="services-grid">
 
-
-            <!-- FONDATION -->
 
             <article class="service-card">
 
@@ -3879,20 +3062,21 @@
 
                     <p>
                         Travaux liés à la préparation
-                        et à la réalisation des fondations
-                        des constructions.
+                        et à la réalisation des fondations.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Fondation">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Fondation"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
 
-
-            <!-- PEINTURE -->
 
             <article class="service-card">
 
@@ -3921,16 +3105,18 @@
                         et professionnels.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Peinture">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Peinture"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
 
-
-            <!-- AMENAGEMENT -->
 
             <article class="service-card">
 
@@ -3954,18 +3140,21 @@
                     </h3>
 
                     <p>
-                        Aménagement des espaces selon
-                        les besoins du projet.
+                        Aménagement des espaces
+                        selon les besoins du projet.
                     </p>
 
-                    <button type="button" class="service-action" data-service="Aménagement intérieur">
-                        DÉPOSER UNE DEMANDE
+                    <button
+                        type="button"
+                        class="service-action"
+                        data-service="Aménagement intérieur"
+                    >
+                        Déposer une demande
                     </button>
 
                 </div>
 
             </article>
-
 
         </div>
 
@@ -3973,7 +3162,7 @@
 
 
     <!-- =====================================================
-         APPEL À L'ACTION
+         CTA
     ===================================================== -->
 
     <section class="final-cta">
@@ -3982,56 +3171,188 @@
             KY5 GLOBAL TRADE
         </span>
 
-
         <h2>
             Un projet à concrétiser ?
         </h2>
 
-
         <p>
             Que vous ayez besoin de fournitures BTP,
             de gestion immobilière ou d'un accompagnement
-            pour votre projet de construction, notre équipe
-            est à votre disposition.
+            pour votre projet, notre équipe est à votre disposition.
         </p>
-
 
         <a
             href="prospect.html"
             class="cta-button"
         >
-            DÉMARRER UNE DISCUSSION
+            Démarrer une discussion
         </a>
 
     </section>
 
 
+    <!-- =====================================================
+         MODAL DEMANDE
+    ===================================================== -->
 
-    <div class="appointment-modal" id="appointmentModal" aria-hidden="true">
-        <div class="appointment-box" role="dialog" aria-modal="true" aria-labelledby="appointmentTitle">
+    <div
+        class="appointment-modal"
+        id="appointmentModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="appointment-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="appointmentTitle"
+        >
+
             <div class="appointment-head">
-                <div><h2 id="appointmentTitle">Parlons de votre besoin</h2><p>Remplissez ce formulaire. Votre demande sera transmise à KY5 GLOBAL TRADE pour traitement par le Call Center.</p></div>
-                <button type="button" class="appointment-close" id="closeAppointment" aria-label="Fermer">&times;</button>
+
+                <div>
+
+                    <h2 id="appointmentTitle">
+                        Parlons de votre besoin
+                    </h2>
+
+                    <p>
+                        Remplissez le formulaire.
+                        Votre demande sera transmise
+                        à KY5 GLOBAL TRADE.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="appointment-close"
+                    id="closeAppointment"
+                    aria-label="Fermer"
+                >
+                    ×
+                </button>
+
             </div>
-            <form class="appointment-form" action="https://formsubmit.co/ky5.global.trade@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="Nouvelle demande depuis le site KY5 GLOBAL TRADE">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_captcha" value="true">
-                <input type="hidden" name="Service demandé" id="selectedService">
-                <div class="appointment-field"><label for="clientName">Nom et prénom *</label><input type="text" id="clientName" name="Nom et prénom" required></div>
-                <div class="appointment-field"><label for="clientPhone">Téléphone / WhatsApp *</label><input type="tel" id="clientPhone" name="Téléphone / WhatsApp" required></div>
-                <div class="appointment-field"><label for="clientEmail">Adresse e-mail *</label><input type="email" id="clientEmail" name="E-mail" required></div>
-                <div class="appointment-field"><label for="clientCity">Ville *</label><input type="text" id="clientCity" name="Ville" placeholder="Ex. Kinshasa" required></div>
-                <div class="appointment-field"><label for="clientType">Type de client *</label><select id="clientType" name="Type de client" required><option value="">Sélectionnez</option><option>Particulier</option><option>Entreprise</option><option>Partenaire</option><option>Promoteur de projet</option></select></div>
-                <div class="appointment-field"><label for="requestType">Type de demande *</label><select id="requestType" name="Type de demande" required><option value="">Sélectionnez</option><option>Demande d'information</option><option>Demande de devis / prospect</option><option>Prise de rendez-vous</option><option>Commande</option></select></div>
-                <div class="appointment-field"><label for="appointmentDate">Date souhaitée</label><input type="date" id="appointmentDate" name="Date souhaitée"></div>
-                <div class="appointment-field"><label for="appointmentTime">Heure souhaitée</label><input type="time" id="appointmentTime" name="Heure souhaitée"></div>
-                <div class="appointment-field full"><label for="clientMessage">Décrivez votre besoin *</label><textarea id="clientMessage" name="Message / besoin" placeholder="Expliquez-nous votre projet, votre besoin ou votre demande..." required></textarea></div>
-                <p class="appointment-note">Après l'envoi, les informations sont transmises à <strong>ky5.global.trade@gmail.com</strong> pour traitement par l'équipe KY5 GLOBAL TRADE.</p>
-                <button type="submit" class="appointment-submit">ENVOYER MA DEMANDE</button>
+
+
+            <form
+                class="appointment-form"
+                id="appointmentForm"
+            >
+
+                <input
+                    type="hidden"
+                    id="selectedService"
+                    name="service"
+                >
+
+
+                <div class="appointment-field">
+
+                    <label for="clientName">
+                        Nom et prénom *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="clientName"
+                        name="nom"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="appointment-field">
+
+                    <label for="clientPhone">
+                        Téléphone / WhatsApp *
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="clientPhone"
+                        name="telephone"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="appointment-field">
+
+                    <label for="clientEmail">
+                        Adresse e-mail *
+                    </label>
+
+                    <input
+                        type="email"
+                        id="clientEmail"
+                        name="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="appointment-field">
+
+                    <label for="clientCompany">
+                        Entreprise
+                    </label>
+
+                    <input
+                        type="text"
+                        id="clientCompany"
+                        name="entreprise"
+                    >
+
+                </div>
+
+
+                <div class="appointment-field full">
+
+                    <label for="clientMessage">
+                        Décrivez votre besoin *
+                    </label>
+
+                    <textarea
+                        id="clientMessage"
+                        name="message"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <p class="appointment-note">
+                    La demande sera enregistrée dans
+                    le système KY5 et transmise
+                    à l'équipe responsable.
+                </p>
+
+
+                <div
+                    class="appointment-message-box"
+                    id="appointmentMessage"
+                ></div>
+
+
+                <button
+                    type="submit"
+                    class="appointment-submit"
+                    id="appointmentSubmit"
+                >
+                    ENVOYER MA DEMANDE
+                </button>
+
             </form>
+
         </div>
+
     </div>
+
 
     <!-- =====================================================
          FOOTER
@@ -4046,19 +3367,16 @@
                 alt="Logo KY5 GLOBAL TRADE"
             >
 
-
             <h3>
                 KY5 GLOBAL TRADE
             </h3>
 
         </div>
 
-
         <p>
             Importation • Transport • Logistique • BTP •
             Gestion immobilière • Business Consulting
         </p>
-
 
         <p style="margin-top:15px;">
             © 2026 KY5 GLOBAL TRADE — Tous droits réservés.
@@ -4067,130 +3385,933 @@
     </footer>
 
 
-
-    <script>
-        const appointmentModal=document.getElementById("appointmentModal");
-        const closeAppointment=document.getElementById("closeAppointment");
-        const selectedService=document.getElementById("selectedService");
-        const requestType=document.getElementById("requestType");
-        function openAppointment(service){selectedService.value=service;appointmentModal.classList.add("show");appointmentModal.setAttribute("aria-hidden","false");document.body.classList.add("modal-open");document.getElementById("clientName").focus();}
-        function closeModal(){appointmentModal.classList.remove("show");appointmentModal.setAttribute("aria-hidden","true");document.body.classList.remove("modal-open");}
-        document.querySelectorAll(".service-action").forEach(button=>button.addEventListener("click",()=>openAppointment(button.dataset.service)));
-        closeAppointment.addEventListener("click",closeModal);
-        appointmentModal.addEventListener("click",e=>{if(e.target===appointmentModal)closeModal();});
-        document.addEventListener("keydown",e=>{if(e.key==="Escape"&&appointmentModal.classList.contains("show"))closeModal();});
-        requestType.addEventListener("change",()=>{const a=requestType.value==="Prise de rendez-vous";document.getElementById("appointmentDate").required=a;document.getElementById("appointmentTime").required=a;});
-    </script>
-
-
-
     <!-- =====================================================
-         JAVASCRIPT — MENU MOBILE
+         SUPABASE
     ===================================================== -->
 
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
     <script>
-        (() => {
 
-            const header =
-                document.querySelector('header');
+        /*
+        ==========================================================
+        KY5 GLOBAL TRADE
+        CONFIGURATION SUPABASE
+        ==========================================================
+        */
 
-            const toggle =
-                document.querySelector('.menu-toggle');
+        const KY5_SUPABASE_URL =
+            "https://wlwlvzhcvdrjplbjeqmz.supabase.co";
 
-            const close =
-                document.querySelector('.menu-close');
 
-            const nav =
-                document.querySelector('#main-navigation');
+        const KY5_SUPABASE_PUBLISHABLE_KEY =
+            "sb_publishable_QGRnOXXlqWaXf5cPM7fBJg_2eNIffoP";
 
-            if (!header || !toggle || !nav) {
-                return;
+
+        const ky5Supabase =
+            window.supabase.createClient(
+
+                KY5_SUPABASE_URL,
+
+                KY5_SUPABASE_PUBLISHABLE_KEY
+
+            );
+
+
+        /*
+        ==========================================================
+        ÉLÉMENTS
+        ==========================================================
+        */
+
+        const servicesAdminContainer =
+            document.getElementById(
+                "servicesAdminContainer"
+            );
+
+
+        const dynamicServicesGrid =
+            document.getElementById(
+                "dynamicServicesGrid"
+            );
+
+
+        const appointmentModal =
+            document.getElementById(
+                "appointmentModal"
+            );
+
+
+        const appointmentForm =
+            document.getElementById(
+                "appointmentForm"
+            );
+
+
+        const appointmentSubmit =
+            document.getElementById(
+                "appointmentSubmit"
+            );
+
+
+        const appointmentMessage =
+            document.getElementById(
+                "appointmentMessage"
+            );
+
+
+        const closeAppointment =
+            document.getElementById(
+                "closeAppointment"
+            );
+
+
+        const selectedService =
+            document.getElementById(
+                "selectedService"
+            );
+
+
+        /*
+        ==========================================================
+        TEXTE SÉCURISÉ
+        ==========================================================
+        */
+
+        function escapeHtml(value) {
+
+            return String(
+                value ?? ""
+            )
+
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /*
+        ==========================================================
+        SERVICES PUBLICS SUPABASE
+        ==========================================================
+        */
+
+        async function loadPublicServices() {
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+
+                    await ky5Supabase
+
+                        .from(
+                            "services"
+                        )
+
+                        .select(
+                            `
+                            id,
+                            titre,
+                            description,
+                            icone,
+                            ordre,
+                            actif
+                            `
+                        )
+
+                        .eq(
+                            "actif",
+                            true
+                        )
+
+                        .order(
+                            "ordre",
+                            {
+                                ascending:
+                                    true
+                            }
+                        );
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                const services =
+                    data || [];
+
+
+                if (
+                    services.length === 0
+                ) {
+
+                    servicesAdminContainer.style.display =
+                        "none";
+
+                    return;
+
+                }
+
+
+                dynamicServicesGrid.innerHTML =
+
+                    services
+
+                        .map(
+
+                            function (service) {
+
+                                const titre =
+                                    escapeHtml(
+                                        service.titre ||
+                                        "Service KY5"
+                                    );
+
+
+                                const description =
+                                    escapeHtml(
+                                        service.description ||
+                                        "Service proposé par KY5 GLOBAL TRADE."
+                                    );
+
+
+                                const icone =
+                                    escapeHtml(
+                                        service.icone ||
+                                        "🛠️"
+                                    );
+
+
+                                return `
+
+                                    <article
+                                        class="service-card"
+                                    >
+
+                                        <div
+                                            class="
+                                                service-image
+                                                dynamic-service-image
+                                            "
+                                        >
+
+                                            <div
+                                                class="dynamic-service-icon"
+                                            >
+                                                ${icone}
+                                            </div>
+
+                                        </div>
+
+
+                                        <span
+                                            class="service-badge"
+                                        >
+                                            KY5
+                                        </span>
+
+
+                                        <div
+                                            class="service-content"
+                                        >
+
+                                            <h3>
+                                                ${titre}
+                                            </h3>
+
+                                            <p>
+                                                ${description}
+                                            </p>
+
+
+                                            <button
+                                                type="button"
+                                                class="
+                                                    service-action
+                                                    dynamic-service-action
+                                                "
+                                                data-service="${titre}"
+                                            >
+                                                Déposer une demande
+                                            </button>
+
+                                        </div>
+
+                                    </article>
+
+                                `;
+
+                            }
+
+                        )
+
+                        .join("");
+
+
+                servicesAdminContainer.style.display =
+                    "block";
+
+
+                activateServiceButtons();
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Erreur chargement services Supabase :",
+                    error
+                );
+
+
+                servicesAdminContainer.style.display =
+                    "none";
+
             }
 
-            const setMenu = (open) => {
+        }
+
+
+        /*
+        ==========================================================
+        OUVRIR LE FORMULAIRE
+        ==========================================================
+        */
+
+        function openAppointment(service) {
+
+            selectedService.value =
+                service || "Service KY5";
+
+
+            appointmentModal.classList.add(
+                "show"
+            );
+
+
+            appointmentModal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            document.body.classList.add(
+                "modal-open"
+            );
+
+
+            setTimeout(
+
+                function () {
+
+                    document
+                        .getElementById(
+                            "clientName"
+                        )
+                        .focus();
+
+                },
+
+                150
+
+            );
+
+        }
+
+
+        function closeModal() {
+
+            appointmentModal.classList.remove(
+                "show"
+            );
+
+
+            appointmentModal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+
+            document.body.classList.remove(
+                "modal-open"
+            );
+
+        }
+
+
+        /*
+        ==========================================================
+        ACTIVER TOUS LES BOUTONS SERVICES
+        ==========================================================
+        */
+
+        function activateServiceButtons() {
+
+            document
+
+                .querySelectorAll(
+                    ".service-action"
+                )
+
+                .forEach(
+
+                    function (button) {
+
+                        if (
+                            button.dataset.listenerAdded ===
+                            "true"
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        button.dataset.listenerAdded =
+                            "true";
+
+
+                        button.addEventListener(
+
+                            "click",
+
+                            function () {
+
+                                openAppointment(
+                                    button.dataset.service
+                                );
+
+                            }
+
+                        );
+
+                    }
+
+                );
+
+        }
+
+
+        /*
+        ==========================================================
+        ENREGISTRER UNE DEMANDE DANS SUPABASE
+        ==========================================================
+        */
+
+        appointmentForm.addEventListener(
+
+            "submit",
+
+            async function (event) {
+
+                event.preventDefault();
+
+
+                appointmentMessage.className =
+                    "appointment-message-box";
+
+
+                appointmentMessage.textContent =
+                    "";
+
+
+                const nom =
+                    document
+                        .getElementById(
+                            "clientName"
+                        )
+                        .value
+                        .trim();
+
+
+                const telephone =
+                    document
+                        .getElementById(
+                            "clientPhone"
+                        )
+                        .value
+                        .trim();
+
+
+                const email =
+                    document
+                        .getElementById(
+                            "clientEmail"
+                        )
+                        .value
+                        .trim();
+
+
+                const entreprise =
+                    document
+                        .getElementById(
+                            "clientCompany"
+                        )
+                        .value
+                        .trim();
+
+
+                const message =
+                    document
+                        .getElementById(
+                            "clientMessage"
+                        )
+                        .value
+                        .trim();
+
+
+                const service =
+                    selectedService.value
+                        .trim();
+
+
+                appointmentSubmit.disabled =
+                    true;
+
+
+                appointmentSubmit.textContent =
+                    "ENVOI EN COURS...";
+
+
+                try {
+
+                    /*
+                    ==============================================
+                    SUPABASE
+                    ==============================================
+                    */
+
+                    const {
+                        error:
+                            supabaseError
+                    } =
+
+                        await ky5Supabase
+
+                            .from(
+                                "prospects"
+                            )
+
+                            .insert({
+
+                                nom:
+                                    nom,
+
+                                entreprise:
+                                    entreprise,
+
+                                email:
+                                    email,
+
+                                telephone:
+                                    telephone,
+
+                                service:
+                                    service,
+
+                                message:
+                                    message,
+
+                                source:
+                                    "page_services",
+
+                                statut:
+                                    "nouveau",
+
+                                lu:
+                                    false
+
+                            });
+
+
+                    if (
+                        supabaseError
+                    ) {
+
+                        throw supabaseError;
+
+                    }
+
+
+                    /*
+                    ==============================================
+                    FORMSPREE
+                    ==============================================
+                    */
+
+                    const formspreeData =
+                        new FormData();
+
+
+                    formspreeData.append(
+                        "Nom",
+                        nom
+                    );
+
+
+                    formspreeData.append(
+                        "Entreprise",
+                        entreprise
+                    );
+
+
+                    formspreeData.append(
+                        "Email",
+                        email
+                    );
+
+
+                    formspreeData.append(
+                        "Téléphone",
+                        telephone
+                    );
+
+
+                    formspreeData.append(
+                        "Service demandé",
+                        service
+                    );
+
+
+                    formspreeData.append(
+                        "Message",
+                        message
+                    );
+
+
+                    try {
+
+                        await fetch(
+
+                            "https://formspree.io/f/xjybdqao",
+
+                            {
+
+                                method:
+                                    "POST",
+
+                                body:
+                                    formspreeData,
+
+                                headers: {
+                                    Accept:
+                                        "application/json"
+                                }
+
+                            }
+
+                        );
+
+                    }
+                    catch (
+                        emailError
+                    ) {
+
+                        console.warn(
+                            "L'enregistrement Supabase a réussi mais l'e-mail n'a pas pu être confirmé.",
+                            emailError
+                        );
+
+                    }
+
+
+                    appointmentMessage.textContent =
+                        "Votre demande a été envoyée avec succès. KY5 GLOBAL TRADE vous contactera prochainement.";
+
+
+                    appointmentMessage.className =
+                        "appointment-message-box success";
+
+
+                    appointmentForm.reset();
+
+
+                    setTimeout(
+
+                        function () {
+
+                            closeModal();
+
+                        },
+
+                        2500
+
+                    );
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "Erreur demande service :",
+                        error
+                    );
+
+
+                    appointmentMessage.textContent =
+                        "Impossible d'envoyer la demande pour le moment. Veuillez réessayer.";
+
+
+                    appointmentMessage.className =
+                        "appointment-message-box error";
+
+                }
+                finally {
+
+                    appointmentSubmit.disabled =
+                        false;
+
+
+                    appointmentSubmit.textContent =
+                        "ENVOYER MA DEMANDE";
+
+                }
+
+            }
+
+        );
+
+
+        /*
+        ==========================================================
+        MODAL
+        ==========================================================
+        */
+
+        closeAppointment.addEventListener(
+
+            "click",
+
+            closeModal
+
+        );
+
+
+        appointmentModal.addEventListener(
+
+            "click",
+
+            function (event) {
+
+                if (
+                    event.target ===
+                    appointmentModal
+                ) {
+
+                    closeModal();
+
+                }
+
+            }
+
+        );
+
+
+        document.addEventListener(
+
+            "keydown",
+
+            function (event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    if (
+                        appointmentModal.classList.contains(
+                            "show"
+                        )
+                    ) {
+
+                        closeModal();
+
+                    }
+
+                }
+
+            }
+
+        );
+
+
+        /*
+        ==========================================================
+        MENU MOBILE
+        ==========================================================
+        */
+
+        const header =
+            document.querySelector(
+                "header"
+            );
+
+
+        const menuToggle =
+            document.querySelector(
+                ".menu-toggle"
+            );
+
+
+        const menuClose =
+            document.querySelector(
+                ".menu-close"
+            );
+
+
+        const navigation =
+            document.querySelector(
+                "#main-navigation"
+            );
+
+
+        function setMenu(open) {
+
+            header.classList.toggle(
+                "nav-open",
+                open
+            );
+
+
+            document.body.classList.toggle(
+                "menu-locked",
+                open
+            );
+
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                String(open)
+            );
+
+        }
+
+
+        menuToggle.addEventListener(
+
+            "click",
+
+            function () {
+
+                setMenu(
+
+                    !header.classList.contains(
+                        "nav-open"
+                    )
+
+                );
+
+            }
+
+        );
+
+
+        menuClose.addEventListener(
+
+            "click",
+
+            function () {
+
+                setMenu(
+                    false
+                );
+
+            }
+
+        );
+
+
+        navigation
+
+            .querySelectorAll(
+                "a"
+            )
+
+            .forEach(
+
+                function (link) {
+
+                    link.addEventListener(
+
+                        "click",
+
+                        function () {
+
+                            setMenu(
+                                false
+                            );
+
+                        }
+
+                    );
+
+                }
+
+            );
+
+
+        window.addEventListener(
+
+            "scroll",
+
+            function () {
 
                 header.classList.toggle(
-                    'nav-open',
-                    open
+
+                    "scrolled",
+
+                    window.scrollY > 18
+
                 );
 
-                document.body.classList.toggle(
-                    'menu-locked',
-                    open
-                );
+            },
 
-                toggle.setAttribute(
-                    'aria-expanded',
-                    String(open)
-                );
-
-                toggle.setAttribute(
-                    'aria-label',
-                    open
-                        ? 'Fermer le menu'
-                        : 'Ouvrir le menu'
-                );
-            };
-
-            toggle.addEventListener(
-                'click',
-                () => {
-                    setMenu(
-                        !header.classList.contains(
-                            'nav-open'
-                        )
-                    );
-                }
-            );
-
-            if (close) {
-                close.addEventListener(
-                    'click',
-                    () => setMenu(false)
-                );
+            {
+                passive:
+                    true
             }
 
-            nav
-                .querySelectorAll('a')
-                .forEach(link => {
-                    link.addEventListener(
-                        'click',
-                        () => setMenu(false)
-                    );
-                });
+        );
 
-            document.addEventListener(
-                'keydown',
-                event => {
-                    if (event.key === 'Escape') {
-                        setMenu(false);
-                    }
-                }
-            );
 
-            window.addEventListener(
-                'resize',
-                () => {
-                    if (window.innerWidth > 1050) {
-                        setMenu(false);
-                    }
-                }
-            );
+        /*
+        ==========================================================
+        DÉMARRAGE
+        ==========================================================
+        */
 
-            window.addEventListener(
-                'scroll',
-                () => {
-                    header.classList.toggle(
-                        'scrolled',
-                        window.scrollY > 18
-                    );
-                },
-                {
-                    passive: true
-                }
-            );
+        activateServiceButtons();
 
-        })();
+        loadPublicServices();
+
     </script>
 
 </body>
