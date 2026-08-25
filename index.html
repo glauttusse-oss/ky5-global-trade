@@ -3417,6 +3417,147 @@
         })();
     </script>
 
+
+    <!-- =====================================================
+         KY5 — STATISTIQUES DES VISITES DU SITE
+    ====================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        (() => {
+
+            const SUPABASE_URL =
+                "https://wlwlvzhcvdriplbjeqmz.supabase.co";
+
+            const SUPABASE_PUBLISHABLE_KEY =
+                "sb_publishable_QGRnOXXlqWaXf5cPM7fBJg_2eNIffoP";
+
+            if (!window.supabase) {
+                console.warn("KY5 Analytics : Supabase indisponible.");
+                return;
+            }
+
+            const analyticsClient =
+                window.supabase.createClient(
+                    SUPABASE_URL,
+                    SUPABASE_PUBLISHABLE_KEY,
+                    {
+                        auth: {
+                            persistSession: false,
+                            autoRefreshToken: false,
+                            detectSessionInUrl: false
+                        }
+                    }
+                );
+
+            function createAnonymousId(prefix) {
+                if (
+                    window.crypto &&
+                    typeof window.crypto.randomUUID === "function"
+                ) {
+                    return prefix + "-" + window.crypto.randomUUID();
+                }
+
+                return (
+                    prefix +
+                    "-" +
+                    Date.now() +
+                    "-" +
+                    Math.random().toString(36).slice(2) +
+                    "-" +
+                    Math.random().toString(36).slice(2)
+                );
+            }
+
+            function getVisitorId() {
+                const key = "ky5_visitor_id";
+
+                try {
+                    let visitorId = localStorage.getItem(key);
+
+                    if (!visitorId) {
+                        visitorId = createAnonymousId("visitor");
+                        localStorage.setItem(key, visitorId);
+                    }
+
+                    return visitorId;
+                }
+                catch (error) {
+                    return createAnonymousId("visitor-temp");
+                }
+            }
+
+            function getSessionId() {
+                const key = "ky5_session_id";
+
+                try {
+                    let sessionId = sessionStorage.getItem(key);
+
+                    if (!sessionId) {
+                        sessionId = createAnonymousId("session");
+                        sessionStorage.setItem(key, sessionId);
+                    }
+
+                    return sessionId;
+                }
+                catch (error) {
+                    return createAnonymousId("session-temp");
+                }
+            }
+
+            function getDeviceType() {
+                const width = window.innerWidth || 0;
+
+                if (width <= 767) {
+                    return "mobile";
+                }
+
+                if (width <= 1100) {
+                    return "tablette";
+                }
+
+                return "ordinateur";
+            }
+
+            async function registerPageView() {
+                try {
+                    const visitData = {
+                        visitor_id: getVisitorId(),
+                        session_id: getSessionId(),
+                        page_path: window.location.pathname || "/",
+                        page_title: document.title || "KY5 GLOBAL TRADE",
+                        referrer: document.referrer || "",
+                        device_type: getDeviceType(),
+                        event_type: "page_view"
+                    };
+
+                    const { error } =
+                        await analyticsClient
+                            .from("site_visites")
+                            .insert(visitData);
+
+                    if (error) {
+                        console.warn(
+                            "KY5 Analytics : visite non enregistrée.",
+                            error
+                        );
+                    }
+                }
+                catch (error) {
+                    console.warn(
+                        "KY5 Analytics : erreur pendant l'enregistrement.",
+                        error
+                    );
+                }
+            }
+
+            registerPageView();
+
+        })();
+    </script>
+
+
 </body>
 
 </html>
