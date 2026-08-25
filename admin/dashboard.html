@@ -1464,6 +1464,288 @@
         }
 
 
+
+        /* =====================================================
+           RÉPONSE AUX PROSPECTS
+        ===================================================== */
+
+        .action-reply {
+            background: #eef0ff;
+            color: #4056c7;
+        }
+
+        .reply-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(2, 16, 32, .72);
+            backdrop-filter: blur(5px);
+        }
+
+        .reply-modal.open {
+            display: flex;
+        }
+
+        .reply-dialog {
+            width: min(720px, 100%);
+            max-height: 92vh;
+            overflow-y: auto;
+
+            border-radius: 20px;
+            background: white;
+
+            box-shadow:
+                0 30px 90px
+                rgba(0, 0, 0, .30);
+        }
+
+        .reply-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+
+            padding: 24px 24px 18px;
+
+            border-bottom:
+                1px solid #e7edf2;
+        }
+
+        .reply-head h3 {
+            color: var(--bleu-fonce);
+            font-size: 20px;
+        }
+
+        .reply-head p {
+            margin-top: 6px;
+            color: var(--gris);
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .reply-close {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+
+            border: none;
+            border-radius: 11px;
+
+            background: #edf7fd;
+            color: var(--bleu);
+
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .reply-body {
+            padding: 22px 24px 26px;
+        }
+
+        .reply-prospect-card {
+            padding: 15px;
+
+            margin-bottom: 18px;
+
+            border:
+                1px solid #e3ebf1;
+
+            border-radius: 13px;
+
+            background: #f8fbfd;
+        }
+
+        .reply-prospect-card strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--bleu-fonce);
+            font-size: 13px;
+        }
+
+        .reply-prospect-card span {
+            display: block;
+            margin-top: 3px;
+            color: var(--gris);
+            font-size: 10px;
+        }
+
+        .original-message {
+            margin-top: 12px;
+            padding: 12px;
+
+            border-left:
+                3px solid var(--bleu-clair);
+
+            border-radius: 8px;
+
+            background: white;
+
+            color: #425a6d;
+            font-size: 11px;
+            line-height: 1.65;
+        }
+
+        .reply-form-group {
+            margin-bottom: 16px;
+        }
+
+        .reply-form-group label {
+            display: block;
+            margin-bottom: 7px;
+
+            color: #41586c;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .reply-control {
+            width: 100%;
+
+            padding: 11px 12px;
+
+            border:
+                1px solid #dbe5ed;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            background: white;
+            color: #294257;
+
+            font: inherit;
+            font-size: 12px;
+        }
+
+        textarea.reply-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .reply-control:focus {
+            border-color: var(--bleu-clair);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(0, 168, 255, .08);
+        }
+
+        .reply-note {
+            margin-top: -5px;
+            margin-bottom: 16px;
+
+            color: var(--gris);
+
+            font-size: 9px;
+            line-height: 1.6;
+        }
+
+        .reply-actions {
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .reply-cancel {
+            padding: 11px 15px;
+
+            border:
+                1px solid #dbe5ed;
+
+            border-radius: 10px;
+
+            background: white;
+            color: var(--gris);
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .reply-submit {
+            padding: 11px 17px;
+
+            border: none;
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    var(--bleu),
+                    var(--bleu-clair)
+                );
+
+            color: white;
+
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        .reply-submit:disabled {
+            opacity: .6;
+            cursor: wait;
+        }
+
+        .reply-feedback {
+            display: none;
+
+            margin-bottom: 15px;
+            padding: 11px 12px;
+
+            border-radius: 9px;
+
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .reply-feedback.success {
+            display: block;
+            background: #eaf8f0;
+            color: var(--vert);
+        }
+
+        .reply-feedback.error {
+            display: block;
+            background: #fdebed;
+            color: var(--rouge);
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        @media (max-width: 600px) {
+
+            .reply-dialog {
+                border-radius: 16px;
+            }
+
+            .reply-head,
+            .reply-body {
+                padding-left: 17px;
+                padding-right: 17px;
+            }
+
+            .reply-actions {
+                flex-direction: column-reverse;
+            }
+
+            .reply-cancel,
+            .reply-submit {
+                width: 100%;
+            }
+
+        }
+
+
         /* =====================================================
            BAS PAGE
         ===================================================== */
@@ -2686,6 +2968,174 @@
     </div>
 
 
+
+    <!-- =====================================================
+         RÉPONDRE À UN PROSPECT
+    ===================================================== -->
+
+    <div
+        class="reply-modal"
+        id="replyProspectModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="reply-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="replyModalTitle"
+        >
+
+            <div class="reply-head">
+
+                <div>
+
+                    <h3 id="replyModalTitle">
+                        Répondre au prospect
+                    </h3>
+
+                    <p>
+                        Rédigez la réponse depuis l'espace administrateur KY5.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="reply-close"
+                    id="replyCloseButton"
+                    aria-label="Fermer"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="reply-body">
+
+                <div
+                    class="reply-feedback"
+                    id="replyFeedback"
+                ></div>
+
+
+                <div class="reply-prospect-card">
+
+                    <strong id="replyProspectName">
+                        Prospect
+                    </strong>
+
+                    <span id="replyProspectEmail">
+                        —
+                    </span>
+
+                    <span id="replyProspectPhone">
+                        —
+                    </span>
+
+                    <span id="replyProspectService">
+                        —
+                    </span>
+
+                    <div
+                        class="original-message"
+                        id="replyOriginalMessage"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <form id="replyProspectForm">
+
+                    <input
+                        type="hidden"
+                        id="replyProspectId"
+                    >
+
+
+                    <div class="reply-form-group">
+
+                        <label for="replyChannel">
+                            Canal de réponse
+                        </label>
+
+                        <select
+                            class="reply-control"
+                            id="replyChannel"
+                        >
+
+                            <option value="interne">
+                                Enregistrer la réponse
+                            </option>
+
+                            <option value="whatsapp">
+                                WhatsApp
+                            </option>
+
+                            <option value="email">
+                                E-mail
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="reply-form-group">
+
+                        <label for="replyMessage">
+                            Votre réponse *
+                        </label>
+
+                        <textarea
+                            class="reply-control"
+                            id="replyMessage"
+                            placeholder="Écrivez la réponse destinée au prospect..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <p class="reply-note">
+                        La réponse sera enregistrée dans Supabase.
+                        Pour E-mail, le message sera envoyé directement au prospect.
+                        Pour WhatsApp, l'application s'ouvrira avec le message préparé.
+                    </p>
+
+
+                    <div class="reply-actions">
+
+                        <button
+                            type="button"
+                            class="reply-cancel"
+                            id="replyCancelButton"
+                        >
+                            Annuler
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="reply-submit"
+                            id="replySubmitButton"
+                        >
+                            Enregistrer la réponse
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
     <!-- =====================================================
          CONFIGURATION SUPABASE
     ===================================================== -->
@@ -2825,12 +3275,100 @@
             );
 
 
+        const replyProspectModal =
+            document.getElementById(
+                "replyProspectModal"
+            );
+
+
+        const replyProspectForm =
+            document.getElementById(
+                "replyProspectForm"
+            );
+
+
+        const replyProspectId =
+            document.getElementById(
+                "replyProspectId"
+            );
+
+
+        const replyProspectName =
+            document.getElementById(
+                "replyProspectName"
+            );
+
+
+        const replyProspectEmail =
+            document.getElementById(
+                "replyProspectEmail"
+            );
+
+
+        const replyProspectPhone =
+            document.getElementById(
+                "replyProspectPhone"
+            );
+
+
+        const replyProspectService =
+            document.getElementById(
+                "replyProspectService"
+            );
+
+
+        const replyOriginalMessage =
+            document.getElementById(
+                "replyOriginalMessage"
+            );
+
+
+        const replyChannel =
+            document.getElementById(
+                "replyChannel"
+            );
+
+
+        const replyMessage =
+            document.getElementById(
+                "replyMessage"
+            );
+
+
+        const replyCloseButton =
+            document.getElementById(
+                "replyCloseButton"
+            );
+
+
+        const replyCancelButton =
+            document.getElementById(
+                "replyCancelButton"
+            );
+
+
+        const replySubmitButton =
+            document.getElementById(
+                "replySubmitButton"
+            );
+
+
+        const replyFeedback =
+            document.getElementById(
+                "replyFeedback"
+            );
+
+
         /* =====================================================
            INITIALISATION SUPABASE
         ===================================================== */
 
         let supabaseClient =
             null;
+
+
+        let prospectsCache =
+            [];
 
 
         try {
@@ -3358,6 +3896,19 @@
                                                 type="button"
                                                 class="
                                                     action-button
+                                                    action-reply
+                                                "
+                                                data-action="reply"
+                                                data-id="${prospect.id}"
+                                            >
+                                                Répondre
+                                            </button>
+
+
+                                            <button
+                                                type="button"
+                                                class="
+                                                    action-button
                                                     action-done
                                                 "
                                                 data-action="done"
@@ -3459,8 +4010,12 @@
                 }
 
 
+                prospectsCache =
+                    data || [];
+
+
                 renderProspects(
-                    data || []
+                    prospectsCache
                 );
 
             }
@@ -3512,6 +4067,616 @@
             }
 
         }
+
+
+
+        /* =====================================================
+           RÉPONDRE À UN PROSPECT
+        ===================================================== */
+
+        function getProspectById(
+            id
+        ) {
+
+            return prospectsCache.find(
+
+                function (
+                    prospect
+                ) {
+
+                    return (
+                        Number(
+                            prospect.id
+                        ) ===
+                        Number(id)
+                    );
+
+                }
+
+            ) || null;
+
+        }
+
+
+        function openReplyModal(
+            id
+        ) {
+
+            const prospect =
+                getProspectById(
+                    id
+                );
+
+
+            if (
+                !prospect
+            ) {
+
+                alert(
+                    "Prospect introuvable."
+                );
+
+                return;
+
+            }
+
+
+            replyProspectId.value =
+                prospect.id;
+
+
+            replyProspectName.textContent =
+                prospect.nom ||
+                "Sans nom";
+
+
+            replyProspectEmail.textContent =
+                prospect.email ||
+                "Aucun e-mail";
+
+
+            replyProspectPhone.textContent =
+                prospect.telephone ||
+                "Aucun téléphone";
+
+
+            replyProspectService.textContent =
+
+                "Service : " +
+
+                (
+                    prospect.service ||
+                    "Non précisé"
+                );
+
+
+            replyOriginalMessage.textContent =
+                prospect.message ||
+                "Aucun message.";
+
+
+            replyChannel.value =
+                "interne";
+
+
+            replyMessage.value =
+                "";
+
+
+            replyFeedback.className =
+                "reply-feedback";
+
+
+            replyFeedback.textContent =
+                "";
+
+
+            replyProspectModal.classList.add(
+                "open"
+            );
+
+
+            replyProspectModal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            document.body.classList.add(
+                "modal-open"
+            );
+
+
+            setTimeout(
+
+                function () {
+
+                    replyMessage.focus();
+
+                },
+
+                50
+
+            );
+
+        }
+
+
+        function closeReplyModal() {
+
+            replyProspectModal.classList.remove(
+                "open"
+            );
+
+
+            replyProspectModal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+
+            document.body.classList.remove(
+                "modal-open"
+            );
+
+
+            replyProspectForm.reset();
+
+
+            replyProspectId.value =
+                "";
+
+
+            replyFeedback.className =
+                "reply-feedback";
+
+
+            replyFeedback.textContent =
+                "";
+
+        }
+
+
+        function normalizeWhatsAppNumber(
+            value
+        ) {
+
+            return String(
+                value || ""
+            )
+                .replace(
+                    /[^\d+]/g,
+                    ""
+                )
+                .replace(
+                    /^\+/,
+                    ""
+                );
+
+        }
+
+
+        function openExternalReply(
+            prospect,
+            channel,
+            responseText
+        ) {
+
+            if (
+                channel === "whatsapp"
+            ) {
+
+                const phone =
+                    normalizeWhatsAppNumber(
+                        prospect.telephone
+                    );
+
+
+                if (
+                    !phone
+                ) {
+
+                    alert(
+                        "Ce prospect n'a pas de numéro de téléphone valide."
+                    );
+
+                    return;
+
+                }
+
+
+                const message =
+
+                    "Bonjour " +
+
+                    (
+                        prospect.nom ||
+                        ""
+                    ) +
+
+                    ",\n\n" +
+
+                    responseText +
+
+                    "\n\nKY5 GLOBAL TRADE";
+
+
+                window.open(
+
+                    "https://wa.me/" +
+                    phone +
+                    "?text=" +
+                    encodeURIComponent(
+                        message
+                    ),
+
+                    "_blank"
+
+                );
+
+            }
+
+
+            if (
+                channel === "email"
+            ) {
+
+                if (
+                    !prospect.email
+                ) {
+
+                    alert(
+                        "Ce prospect n'a pas d'adresse e-mail."
+                    );
+
+                    return;
+
+                }
+
+
+                const subject =
+
+                    "Réponse KY5 GLOBAL TRADE - " +
+
+                    (
+                        prospect.service ||
+                        "Votre demande"
+                    );
+
+
+                const body =
+
+                    "Bonjour " +
+
+                    (
+                        prospect.nom ||
+                        ""
+                    ) +
+
+                    ",\n\n" +
+
+                    responseText +
+
+                    "\n\nCordialement,\nKY5 GLOBAL TRADE";
+
+
+                window.location.href =
+
+                    "mailto:" +
+
+                    encodeURIComponent(
+                        prospect.email
+                    ) +
+
+                    "?subject=" +
+
+                    encodeURIComponent(
+                        subject
+                    ) +
+
+                    "&body=" +
+
+                    encodeURIComponent(
+                        body
+                    );
+
+            }
+
+        }
+
+
+        replyProspectForm.addEventListener(
+
+            "submit",
+
+            async function (
+                event
+            ) {
+
+                event.preventDefault();
+
+
+                const id =
+                    Number(
+                        replyProspectId.value
+                    );
+
+
+                const prospect =
+                    getProspectById(
+                        id
+                    );
+
+
+                const responseText =
+                    replyMessage.value.trim();
+
+
+                const channel =
+                    replyChannel.value;
+
+
+                if (
+                    !prospect
+                ) {
+
+                    replyFeedback.textContent =
+                        "Prospect introuvable.";
+
+
+                    replyFeedback.className =
+                        "reply-feedback error";
+
+
+                    return;
+
+                }
+
+
+                if (
+                    !responseText
+                ) {
+
+                    replyFeedback.textContent =
+                        "Écrivez d'abord votre réponse.";
+
+
+                    replyFeedback.className =
+                        "reply-feedback error";
+
+
+                    replyMessage.focus();
+
+
+                    return;
+
+                }
+
+
+                replySubmitButton.disabled =
+                    true;
+
+
+                replySubmitButton.textContent =
+                    "Enregistrement...";
+
+
+                try {
+
+                    const {
+                        error:
+                            replyError
+                    } =
+
+                        await supabaseClient
+
+                            .from(
+                                "reponses_prospects"
+                            )
+
+                            .insert({
+
+                                prospect_id:
+                                    prospect.id,
+
+                                nom_prospect:
+                                    prospect.nom || "",
+
+                                email_prospect:
+                                    prospect.email || "",
+
+                                telephone_prospect:
+                                    prospect.telephone || "",
+
+                                message_prospect:
+                                    prospect.message || "—",
+
+                                reponse:
+                                    responseText,
+
+                                canal_reponse:
+                                    channel
+
+                            });
+
+
+                    if (
+                        replyError
+                    ) {
+
+                        throw replyError;
+
+                    }
+
+
+                    await markAsDone(
+                        prospect.id
+                    );
+
+
+                    if (
+                        channel === "email"
+                    ) {
+
+                        if (!prospect.email) {
+                            throw new Error(
+                                "Ce prospect n'a pas d'adresse e-mail."
+                            );
+                        }
+
+                        const {
+                            data: functionData,
+                            error: functionError
+                        } = await supabaseClient.functions.invoke(
+                            "Envoyer-reponse-prospect",
+                            {
+                                body: {
+                                    prospect_id: prospect.id,
+                                    nom: prospect.nom || "",
+                                    email: prospect.email,
+                                    service: prospect.service || "Votre demande",
+                                    message: responseText
+                                }
+                            }
+                        );
+
+                        if (functionError) {
+                            throw functionError;
+                        }
+
+                        if (functionData && functionData.error) {
+                            throw new Error(functionData.error);
+                        }
+                    }
+
+
+                    replyFeedback.textContent =
+                        channel === "email"
+                            ? "Réponse enregistrée et e-mail envoyé avec succès."
+                            : "Réponse enregistrée avec succès.";
+
+
+                    replyFeedback.className =
+                        "reply-feedback success";
+
+
+                    await loadProspects();
+
+
+                    if (channel === "whatsapp") {
+                        openExternalReply(
+                            prospect,
+                            channel,
+                            responseText
+                        );
+                    }
+
+
+                    setTimeout(
+
+                        closeReplyModal,
+
+                        900
+
+                    );
+
+                }
+                catch (
+                    error
+                ) {
+
+                    console.error(
+                        "Erreur enregistrement réponse :",
+                        error
+                    );
+
+
+                    replyFeedback.textContent =
+
+                        "Impossible d'enregistrer la réponse. " +
+
+                        (
+                            error.message ||
+                            ""
+                        );
+
+
+                    replyFeedback.className =
+                        "reply-feedback error";
+
+                }
+                finally {
+
+                    replySubmitButton.disabled =
+                        false;
+
+
+                    replySubmitButton.textContent =
+                        "Enregistrer la réponse";
+
+                }
+
+            }
+
+        );
+
+
+        replyCloseButton.addEventListener(
+            "click",
+            closeReplyModal
+        );
+
+
+        replyCancelButton.addEventListener(
+            "click",
+            closeReplyModal
+        );
+
+
+        replyProspectModal.addEventListener(
+
+            "click",
+
+            function (
+                event
+            ) {
+
+                if (
+                    event.target ===
+                    replyProspectModal
+                ) {
+
+                    closeReplyModal();
+
+                }
+
+            }
+
+        );
+
+
+        document.addEventListener(
+
+            "keydown",
+
+            function (
+                event
+            ) {
+
+                if (
+                    event.key === "Escape" &&
+                    replyProspectModal.classList.contains(
+                        "open"
+                    )
+                ) {
+
+                    closeReplyModal();
+
+                }
+
+            }
+
+        );
 
 
         /* =====================================================
@@ -3659,6 +4824,19 @@
                 if (
                     !id
                 ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    action === "reply"
+                ) {
+
+                    openReplyModal(
+                        id
+                    );
 
                     return;
 

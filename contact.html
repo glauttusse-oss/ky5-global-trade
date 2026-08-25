@@ -1896,7 +1896,289 @@
             }
         }
 
-    </style>
+    
+/* =====================================================
+   NAVIGATION KY5 — IDENTIQUE À LA PAGE ACCUEIL
+===================================================== */
+body.menu-locked { overflow: hidden; }
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 99999;
+    width: 100%;
+    min-height: 0;
+    padding: 0;
+    background: linear-gradient(135deg,#001329 0%,#002653 48%,#004b89 100%);
+    border-bottom: 2px solid rgba(103,217,255,.35);
+    box-shadow: 0 12px 35px rgba(0,18,45,.42);
+    backdrop-filter: blur(14px);
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg,transparent,#63d7ff,#ffffff,#63d7ff,transparent);
+    background-size: 200% 100%;
+    animation: lightMove 5s linear infinite;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1500px;
+    min-height: 120px;
+    margin: auto;
+    padding: 15px 4%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 45px;
+}
+
+.logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.logo::before {
+    content: "";
+    position: absolute;
+    width: 95px; height: 95px;
+    left: -7px;
+    border-radius: 50%;
+    border: 1px solid rgba(103,217,255,.30);
+    animation: logoRotation 8s linear infinite;
+}
+
+.logo img {
+    position: relative;
+    z-index: 2;
+    width: 90px; height: 90px;
+    object-fit: contain;
+    filter: drop-shadow(0 7px 15px rgba(0,0,0,.35));
+    animation: logoFloat 4s ease-in-out infinite;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo-text h1 {
+    color: #fff;
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 1;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.logo-text span {
+    margin-top: 8px;
+    color: #8edfff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.menu-toggle,.menu-close { border:0; cursor:pointer; font:inherit; }
+
+.menu-toggle {
+    display: none;
+    width: 48px; height: 48px;
+    margin-left: auto;
+    border-radius: 14px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.16);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    transition: .3s ease;
+    z-index: 1000;
+}
+
+.menu-toggle span {
+    width: 21px; height: 2px;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.nav-mobile-head { display:none; }
+
+header nav ul {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:flex-end;
+    gap:8px;
+    list-style:none;
+}
+
+header nav li { position:relative; width:auto; }
+
+header nav a {
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:auto;
+    min-height:0;
+    padding:14px 16px;
+    color:#fff;
+    font-size:16px;
+    font-weight:700;
+    letter-spacing:.3px;
+    border-radius:9px;
+    transition:.35s ease;
+}
+
+header nav a:hover {
+    color:#fff;
+    background:rgba(255,255,255,.11);
+    transform:translateY(-3px);
+}
+
+header nav a::after {
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:4px;
+    width:0;
+    height:3px;
+    border-radius:20px;
+    background:linear-gradient(90deg,#63d7ff,#fff);
+    transform:translateX(-50%);
+    transition:width .35s ease;
+}
+
+header nav a:hover::after,
+header nav a.active::after { width:70%; }
+
+header nav a.active {
+    color:#fff;
+    background:rgba(255,255,255,.14);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
+}
+
+header.scrolled {
+    background:rgba(0,19,41,.94);
+    box-shadow:0 10px 32px rgba(0,18,45,.30);
+    backdrop-filter:blur(18px);
+}
+
+@media (max-width:1050px) {
+    .header-container { min-height:86px; padding:12px 24px; gap:20px; }
+    .menu-toggle { display:flex; }
+
+    header nav {
+        position:fixed;
+        top:0; right:0;
+        width:min(390px,88vw);
+        height:100vh;
+        padding:0 22px 30px;
+        background:linear-gradient(180deg,#001329,#002653 55%,#003f76);
+        border-left:1px solid rgba(103,217,255,.20);
+        box-shadow:-20px 0 55px rgba(0,0,0,.30);
+        transform:translateX(105%);
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transition:transform .38s cubic-bezier(.22,.61,.36,1),opacity .25s ease,visibility .38s ease;
+        z-index:100001;
+        overflow-y:auto;
+    }
+
+    header.nav-open nav {
+        transform:translateX(0);
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+    }
+
+    .nav-mobile-head {
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        min-height:88px;
+        color:#8edfff;
+        font-size:12px;
+        font-weight:900;
+        letter-spacing:4px;
+        border-bottom:1px solid rgba(255,255,255,.10);
+        margin-bottom:14px;
+    }
+
+    .menu-close {
+        width:42px; height:42px;
+        border-radius:12px;
+        color:#fff;
+        background:rgba(255,255,255,.08);
+        border:1px solid rgba(255,255,255,.13);
+        font-size:30px;
+        line-height:1;
+    }
+
+    header nav ul {
+        flex-direction:column;
+        align-items:stretch;
+        gap:5px;
+        width:100%;
+    }
+
+    header nav li { width:100%; }
+
+    header nav a {
+        width:100%;
+        min-height:52px;
+        justify-content:flex-start;
+        padding:14px 16px;
+        border-radius:13px;
+        font-size:15px;
+    }
+
+    header nav a:hover {
+        transform:translateX(4px);
+        background:rgba(255,255,255,.08);
+    }
+
+    header nav a::after {
+        left:16px;
+        bottom:7px;
+        transform:none;
+    }
+
+    header nav a:hover::after,
+    header nav a.active::after { width:28px; }
+
+    header.nav-open::after {
+        content:"";
+        position:fixed;
+        inset:0;
+        background:rgba(0,8,20,.55);
+        backdrop-filter:blur(3px);
+        z-index:100000;
+    }
+}
+
+@media (max-width:520px) {
+    .header-container { padding:10px 16px; }
+    .logo img { width:56px; height:56px; }
+    .logo::before { width:62px; height:62px; }
+    .logo-text h1 { font-size:17px; letter-spacing:.7px; }
+    .logo-text span { font-size:7px; letter-spacing:1.5px; }
+    .menu-toggle { width:44px; height:44px; }
+}
+
+</style>
 </head>
 
 
@@ -1907,55 +2189,113 @@
          NAVIGATION PROFESSIONNELLE
     ========================================= -->
 
-    <header id="site-header">
+    <header>
 
-        <div class="header-inner">
+        <div class="header-container">
 
-            <a class="brand" href="index.html" aria-label="KY5 GLOBAL TRADE - Accueil">
-                <div class="brand-mark">
-                    <img src="logo sté.png" alt="Logo KY5 GLOBAL TRADE">
+
+            <div class="logo">
+
+                <img
+                    src="logo sté.png"
+                    alt="Logo KY5 GLOBAL TRADE"
+                >
+
+
+                <div class="logo-text">
+
+                    <h1>
+                        KY5 GLOBAL TRADE
+                    </h1>
+
+                    <span>
+                        connecter le monde, bâtir l'avenir
+                    </span>
+
                 </div>
-                <div class="brand-text">
-                    <strong>KY5 GLOBAL TRADE</strong>
-                    <span>GLOBAL TRADE • BTP • IMMOBILIER</span>
-                </div>
-            </a>
 
-            <button class="menu-toggle" type="button"
-                    aria-label="Ouvrir le menu"
-                    aria-expanded="false"
-                    aria-controls="main-navigation">
-                <span></span><span></span><span></span>
-                <small>MENU</small>
+            </div>
+
+
+            <!-- BOUTON MENU -->
+
+            <button
+                class="menu-toggle"
+                type="button"
+                aria-label="Ouvrir le menu"
+                aria-expanded="false"
+                aria-controls="main-navigation"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
             </button>
 
-            <nav id="main-navigation" aria-label="Navigation principale">
-                <div class="nav-head">
-                    <div>
-                        <span>NAVIGATION</span>
-                        <strong>KY5 GLOBAL TRADE</strong>
-                    </div>
-                    <button class="menu-close" type="button" aria-label="Fermer le menu">×</button>
+
+            <!-- MENU LATÉRAL -->
+
+            <nav
+                id="main-navigation"
+                aria-label="Navigation principale"
+            >
+
+                <div class="nav-mobile-head">
+
+                    <span>
+                        MENU
+                    </span>
+
+                    <button
+                        class="menu-close"
+                        type="button"
+                        aria-label="Fermer le menu"
+                    >
+                        ×
+                    </button>
+
                 </div>
+
 
                 <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="apropos.html">À propos</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="prospect.html">Prospect</a></li>
-                    <li><a href="produits.html">Produits</a></li>
-                    <li><a href="projet.html">Projets</a></li>
-                    <li><a href="activites.html">Nos activités</a></li>
-                    <li><a href="contact.html" class="active">Contact</a></li>
+
+                    <li>
+                        <a href="index.html">
+                            Accueil
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="services.html">
+                            Services
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="prospect.html">
+                            Prospect
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="activites.html">
+                            Nos activités
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="contact.html" class="active">
+                            Contact
+                        </a>
+                    </li>
+
                 </ul>
 
-                <div class="nav-footer">
-                    <span>Kinshasa • RDC</span>
-                    <span>Brazzaville • République du Congo</span>
-                </div>
             </nav>
 
         </div>
+
     </header>
 
     <!-- =========================================
@@ -2241,36 +2581,47 @@
 
 
 
+
+
+
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const header = document.getElementById("site-header");
-    const toggle = document.querySelector(".menu-toggle");
-    const close = document.querySelector(".menu-close");
-    const navLinks = document.querySelectorAll("#main-navigation a");
+(() => {
+    const header = document.querySelector('header');
+    const toggle = document.querySelector('.menu-toggle');
+    const close = document.querySelector('.menu-close');
+    const nav = document.querySelector('#main-navigation');
 
-    function openMenu() {
-        header.classList.add("nav-open");
-        toggle.setAttribute("aria-expanded", "true");
-        document.body.classList.add("menu-locked");
-    }
+    if (!header || !toggle || !nav) return;
 
-    function closeMenu() {
-        header.classList.remove("nav-open");
-        toggle.setAttribute("aria-expanded", "false");
-        document.body.classList.remove("menu-locked");
-    }
+    const setMenu = (open) => {
+        header.classList.toggle('nav-open', open);
+        document.body.classList.toggle('menu-locked', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    };
 
-    toggle.addEventListener("click", openMenu);
-    close.addEventListener("click", closeMenu);
-
-    navLinks.forEach(link => {
-        link.addEventListener("click", closeMenu);
+    toggle.addEventListener('click', () => {
+        setMenu(!header.classList.contains('nav-open'));
     });
 
-    document.addEventListener("keydown", event => {
-        if (event.key === "Escape") closeMenu();
+    if (close) close.addEventListener('click', () => setMenu(false));
+
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setMenu(false));
     });
-});
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') setMenu(false);
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 1050) setMenu(false);
+    });
+
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 18);
+    }, { passive:true });
+})();
 </script>
 
 </body>
