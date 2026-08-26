@@ -162,6 +162,81 @@ footer p{color:#a9bfd8;font-size:14px;line-height:1.7}
   .projects{padding:30px 14px 75px}.project{border-radius:24px}.project-visual,.project-visual img{min-height:330px}
   .project-copy{padding:38px 24px}.project-copy h3{font-size:38px}
 }
+
+/* =========================================================
+   NAVIGATION STABLE SUR TOUS LES ÉCRANS
+   Le menu reste toujours sous forme de bouton ☰,
+   quelle que soit la largeur de l'écran.
+   ========================================================= */
+.menu-toggle{
+  display:flex !important;
+}
+
+nav{
+  position:fixed !important;
+  top:0 !important;
+  right:-100% !important;
+  width:min(88vw,430px) !important;
+  height:100vh !important;
+  padding:25px 28px 40px !important;
+  background:linear-gradient(160deg,#03172f,#062f5c) !important;
+  box-shadow:-20px 0 55px rgba(0,0,0,.35) !important;
+  transition:right .4s ease !important;
+  z-index:100001 !important;
+  overflow-y:auto !important;
+}
+
+header.nav-open nav{
+  right:0 !important;
+}
+
+header.nav-open:after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:rgba(0,10,25,.58);
+  z-index:100000;
+}
+
+.nav-mobile-head{
+  display:flex !important;
+  align-items:center;
+  justify-content:space-between;
+  color:#fff;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:5px;
+  padding-bottom:22px;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.menu-close{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:50px;
+  height:50px;
+  border-radius:15px;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font-size:30px;
+}
+
+nav ul{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+  justify-content:flex-start !important;
+  gap:8px !important;
+  padding-top:26px !important;
+}
+
+nav a{
+  justify-content:flex-start !important;
+  padding:17px 18px !important;
+  font-size:17px !important;
+}
+
 </style>
 </head>
 <body>
@@ -323,9 +398,6 @@ footer p{color:#a9bfd8;font-size:14px;line-height:1.7}
     if (e.key === "Escape") setMenu(false);
   });
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 1180) setMenu(false);
-  });
 })();
 </script>
 </body>

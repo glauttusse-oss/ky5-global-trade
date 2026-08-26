@@ -1888,7 +1888,68 @@
 
         }
 
-    </style>
+    
+/* =========================================================
+   NAVIGATION STABLE SUR PETIT ET GRAND ÉCRAN
+   Même principe que la page "Nos Réalisations"
+   ========================================================= */
+.desktop-nav{
+    display:none !important;
+}
+
+.mobile-menu-button{
+    display:flex !important;
+}
+
+.mobile-nav{
+    display:none;
+    position:absolute;
+    top:100%;
+    right:18px;
+    width:min(88vw,430px);
+    padding:18px;
+    border:1px solid rgba(99,221,255,.20);
+    border-radius:0 0 18px 18px;
+    background:linear-gradient(160deg,#03172f,#062f5c);
+    box-shadow:0 22px 45px rgba(0,0,0,.30);
+    z-index:10001;
+}
+
+.mobile-nav.open{
+    display:block !important;
+}
+
+.mobile-nav ul{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:8px !important;
+}
+
+.mobile-nav a{
+    display:block;
+    padding:15px 16px;
+    border-radius:11px;
+    color:#fff;
+    background:rgba(255,255,255,.06);
+    font-size:15px;
+    font-weight:800;
+}
+
+.mobile-nav a:hover,
+.mobile-nav a.active{
+    color:#8fe8ff;
+    background:rgba(99,221,255,.13);
+}
+
+@media (max-width:600px){
+    .mobile-nav{
+        left:12px;
+        right:12px;
+        width:auto;
+    }
+}
+
+</style>
 
 </head>
 
