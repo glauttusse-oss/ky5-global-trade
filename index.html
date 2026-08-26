@@ -2423,7 +2423,350 @@
 
         }
 
-    </style>
+    
+        /* =====================================================
+           NAVIGATION — CORRECTION FINALE PAR TYPE D'APPAREIL
+           - Ordinateur avec souris : menu horizontal, même si
+             la fenêtre est réduite.
+           - Téléphone / tablette tactile : bouton ☰.
+        ===================================================== */
+
+        /* Ordinateur / souris */
+        @media (hover: hover) and (pointer: fine) {
+
+            .header-container {
+                min-height: 96px;
+                padding: 12px 2.2%;
+                gap: 16px;
+            }
+
+            .logo {
+                gap: 12px;
+            }
+
+            .logo img {
+                width: 72px;
+                height: 72px;
+            }
+
+            .logo::before {
+                width: 78px;
+                height: 78px;
+                left: -4px;
+            }
+
+            .logo-text h1 {
+                font-size: clamp(20px, 2.1vw, 32px);
+                letter-spacing: 1px;
+            }
+
+            .logo-text span {
+                margin-top: 6px;
+                font-size: clamp(7px, .8vw, 10px);
+                letter-spacing: 1.8px;
+            }
+
+            .menu-toggle {
+                display: none !important;
+            }
+
+            header nav {
+                position: static !important;
+                top: auto !important;
+                right: auto !important;
+                width: auto !important;
+                height: auto !important;
+                padding: 0 !important;
+
+                background: transparent !important;
+                border-left: 0 !important;
+                box-shadow: none !important;
+
+                transform: none !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+
+                overflow: visible !important;
+            }
+
+            .nav-mobile-head {
+                display: none !important;
+            }
+
+            header nav ul {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: flex-end !important;
+                flex-wrap: nowrap !important;
+                gap: clamp(1px, .45vw, 8px) !important;
+                width: auto !important;
+            }
+
+            header nav li {
+                width: auto !important;
+                flex: 0 0 auto !important;
+            }
+
+            header nav a {
+                width: auto !important;
+                min-height: auto !important;
+
+                justify-content: center !important;
+
+                padding:
+                    clamp(9px, .9vw, 14px)
+                    clamp(7px, 1vw, 16px) !important;
+
+                border-radius: 9px !important;
+
+                font-size: clamp(11px, 1.05vw, 16px) !important;
+
+                white-space: nowrap !important;
+            }
+
+            header nav a:hover {
+                transform: translateY(-3px) !important;
+            }
+
+            header nav a::after {
+                left: 50% !important;
+                bottom: 4px !important;
+                transform: translateX(-50%) !important;
+            }
+
+            header nav a:hover::after,
+            header nav a.active::after {
+                width: 70% !important;
+            }
+
+            header.nav-open::after {
+                display: none !important;
+            }
+
+            .about-hero {
+                min-height: calc(100vh - 96px);
+            }
+        }
+
+        /* Téléphone / tablette tactile */
+        @media (hover: none), (pointer: coarse) {
+
+            .menu-toggle {
+                display: flex !important;
+            }
+
+            header nav {
+                position: fixed !important;
+
+                top: 0 !important;
+                right: 0 !important;
+
+                width: min(390px, 88vw) !important;
+                height: 100vh !important;
+
+                padding: 0 22px 30px !important;
+
+                background:
+                    linear-gradient(
+                        180deg,
+                        #001329,
+                        #002653 55%,
+                        #003f76
+                    ) !important;
+
+                border-left:
+                    1px solid
+                    rgba(103,217,255,.20) !important;
+
+                box-shadow:
+                    -20px 0 55px
+                    rgba(0,0,0,.30) !important;
+
+                transform: translateX(105%) !important;
+
+                opacity: 0 !important;
+
+                visibility: hidden !important;
+
+                pointer-events: none !important;
+
+                z-index: 100001 !important;
+
+                overflow-y: auto !important;
+            }
+
+            header.nav-open nav {
+                transform: translateX(0) !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+            }
+
+            .nav-mobile-head {
+                display: flex !important;
+            }
+
+            header nav ul {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 5px !important;
+                width: 100% !important;
+            }
+
+            header nav li {
+                width: 100% !important;
+            }
+
+            header nav a {
+                width: 100% !important;
+                min-height: 52px !important;
+                justify-content: flex-start !important;
+                padding: 14px 16px !important;
+                border-radius: 13px !important;
+                font-size: 15px !important;
+            }
+
+            header nav a:hover {
+                transform: translateX(4px) !important;
+            }
+
+            header nav a::after {
+                left: 16px !important;
+                bottom: 7px !important;
+                transform: none !important;
+            }
+
+            header nav a:hover::after,
+            header nav a.active::after {
+                width: 28px !important;
+            }
+        }
+
+
+        /* =====================================================
+           NAVIGATION EN BOUTON POUR TOUS LES APPAREILS
+           Ordinateur + tablette + téléphone
+        ===================================================== */
+
+        .header-container {
+            min-height: 90px !important;
+            padding: 10px 4% !important;
+        }
+
+        .menu-toggle {
+            display: flex !important;
+            position: relative !important;
+            z-index: 100003 !important;
+        }
+
+        header nav {
+            position: fixed !important;
+            top: 0 !important;
+            right: 0 !important;
+
+            width: min(390px, 88vw) !important;
+            height: 100vh !important;
+
+            padding: 0 22px 30px !important;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #001329,
+                    #002653 55%,
+                    #003f76
+                ) !important;
+
+            border-left:
+                1px solid
+                rgba(103,217,255,.20) !important;
+
+            box-shadow:
+                -20px 0 55px
+                rgba(0,0,0,.30) !important;
+
+            transform: translateX(105%) !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+
+            z-index: 100001 !important;
+            overflow-y: auto !important;
+        }
+
+        header.nav-open nav {
+            transform: translateX(0) !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+        }
+
+        .nav-mobile-head {
+            display: flex !important;
+        }
+
+        header nav ul {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            justify-content: flex-start !important;
+            flex-wrap: nowrap !important;
+            gap: 5px !important;
+            width: 100% !important;
+        }
+
+        header nav li {
+            width: 100% !important;
+            flex: 0 0 auto !important;
+        }
+
+        header nav a {
+            width: 100% !important;
+            min-height: 52px !important;
+
+            justify-content: flex-start !important;
+
+            padding: 14px 16px !important;
+
+            border-radius: 13px !important;
+
+            font-size: 15px !important;
+
+            white-space: normal !important;
+        }
+
+        header nav a:hover {
+            transform: translateX(4px) !important;
+        }
+
+        header nav a::after {
+            left: 16px !important;
+            bottom: 7px !important;
+            transform: none !important;
+        }
+
+        header nav a:hover::after,
+        header nav a.active::after {
+            width: 28px !important;
+        }
+
+        header.nav-open::after {
+            content: "" !important;
+            position: fixed !important;
+            inset: 0 !important;
+            background: rgba(0, 10, 25, .58) !important;
+            backdrop-filter: blur(3px) !important;
+            z-index: 100000 !important;
+        }
+
+        .about-hero {
+            min-height: calc(100vh - 90px) !important;
+        }
+
+</style>
 
 </head>
 
@@ -3294,7 +3637,7 @@
 
             const setMenu = (open) => {
 
-                header.classList.toggle(
+header.classList.toggle(
                     'nav-open',
                     open
                 );
@@ -3406,13 +3749,7 @@
                 'resize',
                 () => {
 
-                    if (
-                        window.innerWidth > 900
-                    ) {
-
-                        setMenu(false);
-
-                    }
+                    setMenu(false);
 
                 }
             );
