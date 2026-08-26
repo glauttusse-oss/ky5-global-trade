@@ -729,6 +729,67 @@
 
 
         /* =====================================================
+           ACCÈS PRIORITAIRES — PREMIER PLAN DE L'ACCUEIL
+        ===================================================== */
+
+        .hero-priority-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .hero-priority-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 210px;
+            padding: 15px 24px;
+            border-radius: 50px;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: .8px;
+            border: 1px solid rgba(255,255,255,.30);
+            background: rgba(0,19,41,.34);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 12px 28px rgba(0,0,0,.18);
+            transition: .35s ease;
+        }
+
+        .hero-priority-action:hover {
+            transform: translateY(-4px);
+            background: #ffffff;
+            color: #075ca8;
+            border-color: #ffffff;
+        }
+
+        .hero-priority-action.offer {
+            background: linear-gradient(135deg,#075ca8,#18a2e0);
+            border-color: rgba(103,217,255,.55);
+        }
+
+        .hero-priority-action.offer:hover {
+            background: #ffffff;
+            color: #075ca8;
+        }
+
+        @media (max-width: 520px) {
+            .hero-priority-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-priority-action {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+
+
+        /* =====================================================
            TITRES DE SECTION
         ===================================================== */
 
@@ -2944,6 +3005,23 @@
                 >
                     DÉCOUVRIR NOTRE ENTREPRISE
                 </a>
+
+
+                <div class="hero-priority-actions">
+                    <a
+                        href="prospect.html?type=visite"
+                        class="hero-priority-action"
+                    >
+                        📍 NOUS RENDRE VISITE
+                    </a>
+
+                    <a
+                        href="prospect.html?type=devis"
+                        class="hero-priority-action offer"
+                    >
+                        DEMANDER UNE OFFRE →
+                    </a>
+                </div>
 
 
             </div>

@@ -2178,6 +2178,160 @@ header.scrolled {
     .menu-toggle { width:44px; height:44px; }
 }
 
+
+
+/* =====================================================
+   CORRECTION FINALE — BOUTON DE NAVIGATION SUR ORDINATEUR
+   Le menu latéral est utilisé sur ordinateur, tablette et téléphone.
+===================================================== */
+
+.menu-toggle {
+    display: flex !important;
+    position: relative !important;
+    z-index: 100003 !important;
+}
+
+header nav {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+
+    width: min(400px, 91vw) !important;
+    height: 100dvh !important;
+
+    padding: 0 24px 30px !important;
+
+    background:
+        linear-gradient(
+            180deg,
+            #001329 0%,
+            #002653 55%,
+            #003f76 100%
+        ) !important;
+
+    border-left:
+        1px solid
+        rgba(103,217,255,.20) !important;
+
+    box-shadow:
+        -22px 0 60px
+        rgba(0,12,30,.42) !important;
+
+    transform: translateX(105%) !important;
+
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+
+    transition:
+        transform .4s cubic-bezier(.22,.61,.36,1),
+        opacity .25s ease,
+        visibility .4s ease !important;
+
+    z-index: 100001 !important;
+    overflow-y: auto !important;
+}
+
+header.nav-open nav {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+.nav-head,
+.nav-mobile-head {
+    display: flex !important;
+}
+
+header nav ul {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    flex-wrap: nowrap !important;
+
+    width: 100% !important;
+    gap: 6px !important;
+
+    list-style: none !important;
+}
+
+header nav li {
+    width: 100% !important;
+}
+
+header nav a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    width: 100% !important;
+    min-height: 57px !important;
+
+    padding: 14px 16px !important;
+
+    border-radius: 13px !important;
+
+    color: #ffffff !important;
+
+    font-size: 16px !important;
+    font-weight: 750 !important;
+
+    white-space: normal !important;
+}
+
+header nav a:hover {
+    transform: translateX(4px) !important;
+    background: rgba(255,255,255,.08) !important;
+}
+
+header nav a.active {
+    color: #8edfff !important;
+    background: rgba(103,217,255,.13) !important;
+}
+
+header nav a::after {
+    left: 16px !important;
+    bottom: 7px !important;
+    transform: none !important;
+}
+
+header nav a:hover::after,
+header nav a.active::after {
+    width: 32px !important;
+}
+
+header.nav-open::after {
+    content: "" !important;
+    position: fixed !important;
+    inset: 0 !important;
+
+    background:
+        rgba(0,8,20,.58) !important;
+
+    backdrop-filter:
+        blur(3px) !important;
+
+    z-index: 100000 !important;
+}
+
+body.menu-locked {
+    overflow: hidden !important;
+}
+
+@media (max-width: 900px) {
+    .menu-toggle {
+        display: flex !important;
+    }
+}
+
+@media (max-width: 520px) {
+    .menu-toggle {
+        display: flex !important;
+    }
+}
+
 </style>
 </head>
 

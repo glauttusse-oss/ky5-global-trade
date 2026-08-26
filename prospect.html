@@ -3408,6 +3408,63 @@
 
 
 
+
+    <!-- =====================================================
+         OUVERTURE DIRECTE DEPUIS LES BOUTONS DE L'ACCUEIL
+         prospect.html?type=visite  -> Prise de rendez-vous
+         prospect.html?type=devis   -> Demande de devis
+    ===================================================== -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const params = new URLSearchParams(window.location.search);
+            const type = (params.get("type") || "").toLowerCase().trim();
+
+            const demandeSelect = document.getElementById("demande");
+            const formSection = document.querySelector(".form-section");
+            const messageField = document.getElementById("message");
+
+            if (!demandeSelect || !formSection) {
+                return;
+            }
+
+            if (type === "visite") {
+                demandeSelect.value = "Prise de rendez-vous";
+
+                if (messageField && !messageField.value.trim()) {
+                    messageField.placeholder =
+                        "Indiquez le motif de votre visite ou du rendez-vous souhaité...";
+                }
+            }
+            else if (type === "devis" || type === "offre") {
+                demandeSelect.value = "Demande de devis";
+
+                if (messageField && !messageField.value.trim()) {
+                    messageField.placeholder =
+                        "Décrivez le service, le produit ou le projet pour lequel vous souhaitez recevoir une offre...";
+                }
+            }
+            else {
+                return;
+            }
+
+            setTimeout(function () {
+                formSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+                setTimeout(function () {
+                    demandeSelect.focus({
+                        preventScroll: true
+                    });
+                }, 650);
+            }, 120);
+        });
+    </script>
+
+
     <!-- =====================================================
          MENU MOBILE
     ===================================================== -->
