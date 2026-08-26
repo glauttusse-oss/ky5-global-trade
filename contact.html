@@ -2332,6 +2332,34 @@ body.menu-locked {
     }
 }
 
+
+/* =====================================================
+   CORRECTION — TITRE MENU À L’EXTÉRIEUR DU BOUTON
+===================================================== */
+.menu-control {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    z-index: 100003;
+}
+
+.menu-label {
+    color: #8edfff;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-shadow: 0 0 12px rgba(103,217,255,.35);
+}
+
+@media (max-width: 520px) {
+    .menu-control { gap: 9px; }
+    .menu-label { font-size: 10px; letter-spacing: 2px; }
+}
+
 </style>
 </head>
 
@@ -2371,21 +2399,22 @@ body.menu-locked {
             </div>
 
 
-            <!-- BOUTON MENU -->
+            <!-- TITRE MENU + BOUTON DE NAVIGATION -->
+            <div class="menu-control">
+                <span class="menu-label">MENU</span>
 
-            <button
-                class="menu-toggle"
-                type="button"
-                aria-label="Ouvrir le menu"
-                aria-expanded="false"
-                aria-controls="main-navigation"
-            >
-
-                <span></span>
-                <span></span>
-                <span></span>
-
-            </button>
+                <button
+                    class="menu-toggle"
+                    type="button"
+                    aria-label="Ouvrir le menu"
+                    aria-expanded="false"
+                    aria-controls="main-navigation"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
 
 
             <!-- MENU LATÉRAL -->
@@ -2395,11 +2424,7 @@ body.menu-locked {
                 aria-label="Navigation principale"
             >
 
-                <div class="nav-mobile-head">
-
-                    <span>
-                        MENU
-                    </span>
+                <div class="nav-mobile-head" style="justify-content:flex-end;">
 
                     <button
                         class="menu-close"
@@ -2422,19 +2447,19 @@ body.menu-locked {
 
                     <li>
                         <a href="services.html">
-                            Services
+                            Services &amp; Nos activités
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="realisations.html">
+                            Nos Réalisations
                         </a>
                     </li>
 
                     <li>
                         <a href="prospect.html">
                             Prospect
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="activites.html">
-                            Nos activités
                         </a>
                     </li>
 

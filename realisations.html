@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nos Réalisations | KY5 GLOBAL TRADE</title>
+<meta name="description" content="Découvrez les solutions numériques et applications développées par KY5 GLOBAL TRADE.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --dark:#001329;--dark2:#002c5f;--blue:#075ca8;--blue2:#18a2e0;
+  --cyan:#67d9ff;--white:#fff;--text:#14213d;--muted:#68788a;--bg:#f4f8fc
+}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+body.menu-locked{overflow:hidden}
+img{display:block;max-width:100%}
+a{text-decoration:none}
+button{font:inherit}
+
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:99999;width:100%;
+  background:linear-gradient(135deg,#001329 0%,#002653 48%,#004b89 100%);
+  border-bottom:2px solid rgba(103,217,255,.35);
+  box-shadow:0 12px 35px rgba(0,18,45,.42)
+}
+header:before{
+  content:"";position:absolute;top:0;left:0;width:100%;height:3px;
+  background:linear-gradient(90deg,transparent,#63d7ff,#fff,#63d7ff,transparent);
+  background-size:200% 100%;animation:lightMove 5s linear infinite
+}
+.header-container{
+  width:100%;max-width:1500px;min-height:120px;margin:auto;padding:15px 4%;
+  display:flex;align-items:center;justify-content:space-between;gap:35px
+}
+.logo{display:flex;align-items:center;gap:20px;flex-shrink:0}
+.logo img{width:90px;height:90px;object-fit:contain;filter:drop-shadow(0 7px 15px rgba(0,0,0,.35))}
+.logo-text{display:flex;flex-direction:column}
+.logo-text h1{color:#fff;font-size:34px;font-weight:900;letter-spacing:2px;line-height:1;white-space:nowrap}
+.logo-text span{margin-top:8px;color:#8edfff;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase}
+
+/* DESKTOP NAV */
+nav ul{display:flex;align-items:center;justify-content:flex-end;gap:7px;list-style:none;flex-wrap:nowrap}
+nav a{
+  position:relative;display:flex;align-items:center;justify-content:center;padding:14px 14px;
+  color:#fff;font-size:15px;font-weight:800;border-radius:9px;white-space:nowrap;transition:.3s ease
+}
+nav a:hover,nav a.active{background:rgba(255,255,255,.14);transform:translateY(-2px)}
+nav a:after{
+  content:"";position:absolute;left:50%;bottom:4px;width:0;height:3px;border-radius:20px;
+  background:linear-gradient(90deg,#63d7ff,#fff);transform:translateX(-50%);transition:.3s
+}
+nav a:hover:after,nav a.active:after{width:70%}
+.menu-toggle,.menu-close{border:0;cursor:pointer}
+.menu-toggle{display:none;width:54px;height:54px;margin-left:auto;border-radius:15px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.menu-toggle span{width:25px;height:3px;border-radius:10px;background:#fff}
+.nav-mobile-head{display:none}
+
+/* HERO */
+.hero{
+  position:relative;min-height:620px;padding:105px 7% 90px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  background:
+    radial-gradient(circle at 12% 18%,rgba(103,217,255,.22),transparent 28%),
+    radial-gradient(circle at 88% 78%,rgba(24,162,224,.22),transparent 30%),
+    linear-gradient(135deg,#03152e,#064b87 52%,#078bd0);
+}
+.hero:before,.hero:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.13);border-radius:50%}
+.hero:before{width:520px;height:520px;right:-190px;top:-250px}
+.hero:after{width:380px;height:380px;left:-180px;bottom:-210px}
+.hero-inner{position:relative;z-index:2;max-width:1050px}
+.kicker{color:#8de5ff;font-size:13px;font-weight:900;letter-spacing:7px;text-transform:uppercase;margin-bottom:22px}
+.hero h1{color:#fff;font-size:clamp(48px,7vw,84px);line-height:.98;font-weight:900;letter-spacing:-2px}
+.hero h1 span{display:block;color:#69d8ff;margin-top:10px}
+.hero p{max-width:820px;margin:27px auto 0;color:#e8f7ff;font-size:18px;line-height:1.8}
+.hero-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:34px}
+.hero-btn{display:inline-flex;align-items:center;justify-content:center;padding:15px 25px;border-radius:999px;font-size:12px;font-weight:900;letter-spacing:1px;transition:.3s}
+.hero-btn.primary{background:#fff;color:#075ca8}
+.hero-btn.secondary{color:#fff;border:1px solid rgba(255,255,255,.35);background:rgba(0,19,41,.28)}
+.hero-btn:hover{transform:translateY(-4px)}
+
+/* INTRO */
+.intro{padding:85px 7% 45px;background:#fff;text-align:center}
+.intro-inner{max-width:900px;margin:auto}
+.eyebrow{color:#0b73bd;font-size:12px;font-weight:900;letter-spacing:4px;text-transform:uppercase}
+.intro h2{margin:13px 0 17px;color:#07264c;font-size:clamp(34px,5vw,54px);line-height:1.05}
+.intro p{color:var(--muted);font-size:16px;line-height:1.8}
+
+/* PROJECTS */
+.projects{padding:45px 5.5% 110px;background:linear-gradient(180deg,#fff,#edf5fb)}
+.projects-grid{max-width:1380px;margin:auto;display:flex;flex-direction:column;gap:48px}
+.project{
+  display:grid;grid-template-columns:1fr .78fr;min-height:590px;overflow:hidden;border-radius:34px;
+  background:#061a34;border:1px solid rgba(7,92,168,.15);box-shadow:0 28px 70px rgba(0,35,75,.15);
+  transition:.5s ease
+}
+.project:nth-child(even){grid-template-columns:.78fr 1fr}
+.project:nth-child(even) .project-visual{grid-column:2;grid-row:1}
+.project:nth-child(even) .project-copy{grid-column:1;grid-row:1}
+.project:hover{transform:translateY(-9px);box-shadow:0 38px 90px rgba(0,35,75,.22)}
+.project-visual{position:relative;min-height:590px;background:linear-gradient(145deg,#eaf5ff,#fff);overflow:hidden}
+.project-visual img{width:100%;height:100%;min-height:590px;object-fit:cover;transition:1s ease}
+.project:hover .project-visual img{transform:scale(1.035)}
+.project-badge{
+  position:absolute;top:25px;left:25px;z-index:2;padding:10px 14px;border-radius:999px;
+  color:#fff;background:rgba(1,22,48,.78);border:1px solid rgba(103,217,255,.35);
+  backdrop-filter:blur(10px);font-size:10px;font-weight:900;letter-spacing:2px
+}
+.project-copy{
+  position:relative;padding:58px 52px;display:flex;flex-direction:column;justify-content:center;color:#fff;
+  background:radial-gradient(circle at 90% 10%,rgba(103,217,255,.15),transparent 30%),linear-gradient(145deg,#04162d,#062d58 52%,#075ca8)
+}
+.project-number{display:flex;align-items:center;justify-content:center;width:58px;height:58px;margin-bottom:24px;border-radius:18px;border:1px solid rgba(103,217,255,.4);background:rgba(255,255,255,.08);font-size:12px;font-weight:900;letter-spacing:2px}
+.project-copy h3{font-size:clamp(34px,4vw,52px);line-height:1.02;margin-bottom:10px}
+.project-subtitle{color:#8fe5ff;font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px}
+.project-copy p{color:#e5f5ff;font-size:16px;line-height:1.8;margin-bottom:25px}
+.features{display:grid;gap:10px;margin-bottom:27px}
+.feature{display:flex;align-items:center;gap:11px;color:#eefaff;font-size:13px;font-weight:700}
+.feature:before{content:"✓";display:flex;align-items:center;justify-content:center;width:25px;height:25px;flex:0 0 25px;border-radius:50%;background:rgba(103,217,255,.15);color:#8ee8ff;border:1px solid rgba(103,217,255,.3)}
+.status{align-self:flex-start;padding:11px 16px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(103,217,255,.3);color:#fff;font-size:10px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase}
+
+/* CTA + FOOTER */
+.cta{padding:85px 7%;text-align:center;color:#fff;background:linear-gradient(135deg,#061b3a,#086db8)}
+.cta h2{font-size:clamp(32px,5vw,50px);margin-bottom:17px}
+.cta p{max-width:740px;margin:0 auto 28px;color:#e4f5ff;line-height:1.8}
+.cta a{display:inline-flex;padding:15px 30px;border-radius:999px;background:#fff;color:#075ba5;font-weight:900}
+footer{padding:50px 7% 25px;text-align:center;color:#fff;background:linear-gradient(135deg,#020b1b,#031d3d)}
+.footer-logo{display:flex;align-items:center;justify-content:center;gap:15px;margin-bottom:20px}
+.footer-logo img{width:60px;height:60px;object-fit:contain}
+.footer-logo h3{font-size:22px;font-weight:900;letter-spacing:1px}
+footer p{color:#a9bfd8;font-size:14px;line-height:1.7}
+
+@keyframes lightMove{from{background-position:0 50%}to{background-position:200% 50%}}
+
+@media(max-width:1180px){
+  .header-container{min-height:90px;padding:10px 4%}
+  .logo img{width:68px;height:68px}.logo-text h1{font-size:25px}.logo-text span{font-size:9px;letter-spacing:2px}
+  .menu-toggle{display:flex}
+  nav{
+    position:fixed;top:0;right:-100%;width:min(88vw,430px);height:100vh;padding:25px 28px 40px;
+    background:linear-gradient(160deg,#03172f,#062f5c);box-shadow:-20px 0 55px rgba(0,0,0,.35);
+    transition:right .4s ease;z-index:100001;overflow-y:auto
+  }
+  header.nav-open nav{right:0}
+  header.nav-open:after{content:"";position:fixed;inset:0;background:rgba(0,10,25,.58);z-index:100000}
+  .nav-mobile-head{display:flex;align-items:center;justify-content:space-between;color:#fff;font-size:13px;font-weight:900;letter-spacing:5px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .menu-close{display:flex;align-items:center;justify-content:center;width:50px;height:50px;border-radius:15px;background:rgba(255,255,255,.08);color:#fff;font-size:30px}
+  nav ul{display:flex;flex-direction:column;align-items:stretch;gap:8px;padding-top:26px}
+  nav a{justify-content:flex-start;padding:17px 18px;font-size:17px}
+}
+@media(max-width:900px){
+  .project,.project:nth-child(even){grid-template-columns:1fr}
+  .project-visual,.project:nth-child(even) .project-visual{grid-column:1;grid-row:1;min-height:430px}
+  .project-copy,.project:nth-child(even) .project-copy{grid-column:1;grid-row:2}
+  .project-visual img{min-height:430px}
+}
+@media(max-width:560px){
+  .logo-text h1{font-size:18px;letter-spacing:1px}.logo-text span{display:none}.logo{gap:10px}.logo img{width:58px;height:58px}
+  .menu-toggle{width:49px;height:49px}
+  .hero{min-height:570px;padding:80px 18px 70px}.hero h1{font-size:46px}.hero p{font-size:15px}
+  .projects{padding:30px 14px 75px}.project{border-radius:24px}.project-visual,.project-visual img{min-height:330px}
+  .project-copy{padding:38px 24px}.project-copy h3{font-size:38px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-container">
+    <div class="logo">
+      <img src="logo sté.png" alt="Logo KY5 GLOBAL TRADE">
+      <div class="logo-text">
+        <h1>KY5 GLOBAL TRADE</h1>
+        <span>connecter le monde, bâtir l'avenir</span>
+      </div>
+    </div>
+
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-navigation">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav id="main-navigation" aria-label="Navigation principale">
+      <div class="nav-mobile-head">
+        <span>MENU</span>
+        <button class="menu-close" type="button" aria-label="Fermer le menu">×</button>
+      </div>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="services.html">Services & Nos activités</a></li>
+        <li><a href="realisations.html" class="active">Nos Réalisations</a></li>
+        <li><a href="prospect.html">Prospect</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="kicker">KY5 GLOBAL TRADE • INNOVATION</div>
+      <h1>NOS <span>RÉALISATIONS</span></h1>
+      <p>Découvrez les solutions numériques conçues par KY5 GLOBAL TRADE pour connecter les personnes, simplifier les services et créer de nouvelles opportunités en Afrique et à l'international.</p>
+      <div class="hero-actions">
+        <a class="hero-btn primary" href="#applications">Découvrir nos applications</a>
+        <a class="hero-btn secondary" href="prospect.html">Demander une offre</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro" id="applications">
+    <div class="intro-inner">
+      <div class="eyebrow">Solutions KY5</div>
+      <h2>Des applications pensées pour des besoins réels</h2>
+      <p>Cette rubrique présente les produits et plateformes développés ou préparés par KY5 GLOBAL TRADE. Chaque solution possède une identité propre tout en restant rattachée à l'écosystème KY5.</p>
+    </div>
+  </section>
+
+  <section class="projects">
+    <div class="projects-grid">
+
+      <article class="project">
+        <div class="project-visual">
+          <span class="project-badge">APPLICATION 01</span>
+          <img src="ky5-auto.jpg" alt="Présentation de l'application KY5 AUTO">
+        </div>
+        <div class="project-copy">
+          <div class="project-number">01</div>
+          <h3>KY5 AUTO</h3>
+          <div class="project-subtitle">Votre solution automobile locale et internationale</div>
+          <p>Une marketplace automobile de confiance conçue pour faciliter l'achat, la vente, la recherche et l'importation de véhicules avec un accompagnement professionnel.</p>
+          <div class="features">
+            <div class="feature">Achat et vente de véhicules</div>
+            <div class="feature">Véhicules locaux et importés</div>
+            <div class="feature">Recherche de véhicules sur commande</div>
+            <div class="feature">Inspection, vérification et suivi logistique</div>
+          </div>
+          <span class="status">Lancement prochain</span>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-visual">
+          <span class="project-badge">APPLICATION 02</span>
+          <img src="ky5-express.jpg" alt="Présentation de l'application KY5 EXPRESS">
+        </div>
+        <div class="project-copy">
+          <div class="project-number">02</div>
+          <h3>KY5 EXPRESS</h3>
+          <div class="project-subtitle">Votre solution de livraison rapide et fiable</div>
+          <p>Une application de livraison pensée pour simplifier l'envoi de colis, documents et courses avec rapidité, sécurité, suivi et professionnalisme.</p>
+          <div class="features">
+            <div class="feature">Livraison express en ville</div>
+            <div class="feature">Ramassage à domicile ou en boutique</div>
+            <div class="feature">Suivi des livraisons en temps réel</div>
+            <div class="feature">Solutions adaptées aux particuliers et entreprises</div>
+          </div>
+          <span class="status">Lancement prochain</span>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="project-visual">
+          <span class="project-badge">APPLICATION 03</span>
+          <img src="ky5-pay.jpg" alt="Présentation de l'application KY5 PAY">
+        </div>
+        <div class="project-copy">
+          <div class="project-number">03</div>
+          <h3>KY5 PAY</h3>
+          <div class="project-subtitle">Fintech • Paiement • Transfert • Wallet</div>
+          <p>Une solution financière numérique destinée à faciliter les paiements, les transferts et la gestion de l'argent à partir d'une expérience simple, moderne et traçable.</p>
+          <div class="features">
+            <div class="feature">Paiements et transferts numériques</div>
+            <div class="feature">Portefeuille électronique</div>
+            <div class="feature">Paiement par QR Code</div>
+            <div class="feature">Suivi des transactions</div>
+          </div>
+          <span class="status">Lancement prochain</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Vous avez un projet à développer ?</h2>
+    <p>KY5 GLOBAL TRADE accompagne également les entreprises et porteurs de projets dans la conception de solutions numériques adaptées à leurs activités.</p>
+    <a href="prospect.html">Demander une offre</a>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-logo">
+    <img src="logo sté.png" alt="Logo KY5 GLOBAL TRADE">
+    <h3>KY5 GLOBAL TRADE</h3>
+  </div>
+  <p>connecter le monde, bâtir l'avenir</p>
+  <p style="margin-top:15px;">© 2026 KY5 GLOBAL TRADE — Tous droits réservés.</p>
+</footer>
+
+<script>
+(() => {
+  const header = document.querySelector("header");
+  const toggle = document.querySelector(".menu-toggle");
+  const close = document.querySelector(".menu-close");
+  const nav = document.querySelector("#main-navigation");
+
+  if (!header || !toggle || !nav) return;
+
+  const setMenu = (open) => {
+    header.classList.toggle("nav-open", open);
+    document.body.classList.toggle("menu-locked", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+  };
+
+  toggle.addEventListener("click", () => setMenu(!header.classList.contains("nav-open")));
+  if (close) close.addEventListener("click", () => setMenu(false));
+
+  nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setMenu(false)));
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") setMenu(false);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 1180) setMenu(false);
+  });
+})();
+</script>
+</body>
+</html>
