@@ -3145,7 +3145,7 @@
                         const { error: uploadError } =
                             await supabaseClient
                                 .storage
-                                .from("prospect-images")
+                                .from("PROSPECT-IMAGES")
                                 .upload(storagePath, photoFile, {
                                     cacheControl: "3600",
                                     upsert: false
@@ -3161,7 +3161,7 @@
                             const { data: publicUrlData } =
                                 supabaseClient
                                     .storage
-                                    .from("prospect-images")
+                                    .from("PROSPECT-IMAGES")
                                     .getPublicUrl(storagePath);
 
                             photoUrl =
