@@ -1396,6 +1396,13 @@ body{
 .analytics-grid .panel:nth-child(6) .panel-head{border-left:4px solid #f08a58!important}
 </style>
 
+
+<style id="ky5-prospect-photo-admin">
+.prospect-photo-thumb{width:54px;height:54px;object-fit:cover;border-radius:7px;border:1px solid #c1e3f0;display:block;cursor:pointer;background:#eef8fc}
+.prospect-photo-link{display:inline-flex;align-items:center;gap:5px;margin-top:5px;color:#075ca8!important;font-weight:700;text-decoration:none}
+.prospect-photo-large{display:block;max-width:100%;max-height:420px;margin:6px auto 0;border-radius:10px;border:1px solid #c1e3f0;object-fit:contain;background:#f4f9fc}
+</style>
+
 </head>
 
 <body>
@@ -1645,6 +1652,7 @@ body{
       <div class="detail-box"><span>Service</span><strong id="modalService">—</strong></div>
       <div class="detail-box full"><span>Message</span><p id="modalMessage">—</p></div>
       <div class="detail-box full"><span>Notes</span><p id="modalNotes">—</p></div>
+      <div class="detail-box full" id="modalPhotoBox" style="display:none"><span>Photo de l’article souhaité</span><div id="modalPhoto"></div></div>
     </div>
   </div>
 </div>
@@ -1706,6 +1714,8 @@ body{
         const modalService = document.getElementById("modalService");
         const modalMessage = document.getElementById("modalMessage");
         const modalNotes = document.getElementById("modalNotes");
+        const modalPhotoBox = document.getElementById("modalPhotoBox");
+        const modalPhoto = document.getElementById("modalPhoto");
 
         let supabaseClient = null;
         let prospectsCache = [];
@@ -1750,6 +1760,18 @@ body{
                 .replace(/>/g, "&gt;")
                 .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#039;");
+        }
+
+        function getProspectPhotoUrl(prospect) {
+            const notes = String(prospect?.notes || "");
+            const match = notes.match(/\[Photo article:\s*(https?:\/\/[^\]\s]+)\]/i);
+            return match ? match[1] : "";
+        }
+
+        function getProspectCleanNotes(prospect) {
+            return String(prospect?.notes || "")
+                .replace(/\s*\[Photo article:\s*https?:\/\/[^\]\s]+\]\s*/ig, " ")
+                .trim();
         }
 
         function formatDate(value) {
@@ -2390,6 +2412,11 @@ body{
                                     <div class="prospect-message">
                                         ${escapeHtml(prospect.message || "—")}
                                     </div>
+                                    ${
+                                        getProspectPhotoUrl(prospect)
+                                            ? `<a class="prospect-photo-link" href="${escapeHtml(getProspectPhotoUrl(prospect))}" target="_blank" rel="noopener"><img class="prospect-photo-thumb" src="${escapeHtml(getProspectPhotoUrl(prospect))}" alt="Photo de l’article"><span>Voir la photo</span></a>`
+                                            : ""
+                                    }
                                 </td>
 
                                 <td>
@@ -2572,8 +2599,18 @@ body{
             modalMessage.textContent =
                 prospect.message || "—";
 
-            modalNotes.textContent =
-                prospect.notes || "—";
+            const cleanNotes = getProspectCleanNotes(prospect);
+            const photoUrl = getProspectPhotoUrl(prospect);
+
+            modalNotes.textContent = cleanNotes || "—";
+
+            if (photoUrl) {
+                modalPhotoBox.style.display = "block";
+                modalPhoto.innerHTML = `<a href="${escapeHtml(photoUrl)}" target="_blank" rel="noopener"><img class="prospect-photo-large" src="${escapeHtml(photoUrl)}" alt="Photo de l’article souhaité"></a>`;
+            } else {
+                modalPhotoBox.style.display = "none";
+                modalPhoto.innerHTML = "";
+            }
 
             prospectModal.classList.add("open");
             prospectModal.setAttribute("aria-hidden", "false");
