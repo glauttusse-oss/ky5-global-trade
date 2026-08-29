@@ -2433,7 +2433,6 @@
                 class="prospect-form"
                 action="https://formspree.io/f/xjybdqao"
                 method="POST"
-                enctype="multipart/form-data"
             >
 
 
@@ -3345,6 +3344,25 @@
                         new FormData(
                             prospectForm
                         );
+
+
+                    /* =============================================
+                       IMPORTANT : NE PAS ENVOYER LE FICHIER IMAGE
+                       DIRECTEMENT À FORMSPREE
+                       La photo est stockée dans Supabase Storage.
+                       Formspree reçoit uniquement son lien public.
+                    ============================================= */
+
+                    formData.delete(
+                        "Photo de l’article souhaité"
+                    );
+
+                    if (photoUrl) {
+                        formData.append(
+                            "Lien de la photo de l’article",
+                            photoUrl
+                        );
+                    }
 
 
 
