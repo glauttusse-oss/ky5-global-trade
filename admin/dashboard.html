@@ -1398,8 +1398,7 @@ body{
 
 
 <style id="ky5-prospect-photo-admin">
-.prospect-photo-thumb{width:54px;height:54px;object-fit:cover;border-radius:7px;border:1px solid #c1e3f0;display:block;cursor:pointer;background:#eef8fc}
-.prospect-photo-link{display:inline-flex;align-items:center;gap:5px;margin-top:5px;color:#075ca8!important;font-weight:700;text-decoration:none}
+.prospect-photo-thumb{width:76px;height:76px;object-fit:cover;border-radius:9px;border:1px solid #c1e3f0;display:block;margin-top:7px;background:#eef8fc;box-shadow:0 4px 12px rgba(7,92,168,.10)}
 .prospect-photo-large{display:block;max-width:100%;max-height:420px;margin:6px auto 0;border-radius:10px;border:1px solid #c1e3f0;object-fit:contain;background:#f4f9fc}
 </style>
 
@@ -2414,7 +2413,7 @@ body{
                                     </div>
                                     ${
                                         getProspectPhotoUrl(prospect)
-                                            ? `<a class="prospect-photo-link" href="${escapeHtml(getProspectPhotoUrl(prospect))}" target="_blank" rel="noopener"><img class="prospect-photo-thumb" src="${escapeHtml(getProspectPhotoUrl(prospect))}" alt="Photo de l’article"><span>Voir la photo</span></a>`
+                                            ? `<img class="prospect-photo-thumb" src="${escapeHtml(getProspectPhotoUrl(prospect))}" alt="Photo de l’article souhaité" loading="lazy">`
                                             : ""
                                     }
                                 </td>
@@ -2606,7 +2605,7 @@ body{
 
             if (photoUrl) {
                 modalPhotoBox.style.display = "block";
-                modalPhoto.innerHTML = `<a href="${escapeHtml(photoUrl)}" target="_blank" rel="noopener"><img class="prospect-photo-large" src="${escapeHtml(photoUrl)}" alt="Photo de l’article souhaité"></a>`;
+                modalPhoto.innerHTML = `<img class="prospect-photo-large" src="${escapeHtml(photoUrl)}" alt="Photo de l’article souhaité">`;
             } else {
                 modalPhotoBox.style.display = "none";
                 modalPhoto.innerHTML = "";
