@@ -1402,6 +1402,112 @@ body{
 .prospect-photo-large{display:block;max-width:100%;max-height:420px;margin:6px auto 0;border-radius:10px;border:1px solid #c1e3f0;object-fit:contain;background:#f4f9fc}
 </style>
 
+
+<style id="ky5-font-size-upgrade">
+/* =========================================================
+   KY5 — AGRANDISSEMENT GLOBAL DES ÉCRITURES
+   Modification visuelle uniquement : aucune logique JS touchée.
+========================================================= */
+
+/* En-tête */
+.brand-copy strong{font-size:12px!important}
+.brand-copy span{font-size:8px!important}
+.header-center h1{font-size:22px!important}
+.header-center p{font-size:11px!important}
+.head-btn{font-size:10px!important}
+.admin-profile strong{font-size:10px!important}
+.admin-profile span{font-size:8px!important}
+
+/* Colonne de gauche */
+.filters-title{font-size:14px!important}
+.filter label{font-size:11px!important}
+.filter select{font-size:11px!important}
+.filter small{font-size:10px!important}
+.nav-item{font-size:11px!important}
+.nav-icon{font-size:13px!important}
+
+/* KPI */
+.kpi-label{font-size:10px!important}
+.kpi-value{font-size:28px!important}
+.kpi-note{font-size:10px!important}
+.kpi-icon{font-size:14px!important}
+
+/* Titres et sous-titres des panneaux */
+.panel-head h3{font-size:12px!important}
+.panel-head p{font-size:10px!important}
+.period-select{font-size:10px!important}
+
+/* Pages populaires */
+.page-name strong{font-size:11px!important}
+.page-name span{font-size:9px!important}
+.page-count{font-size:10px!important}
+
+/* Appareils */
+.device-row span,
+.device-row b{font-size:10px!important}
+
+/* Donut / légende */
+.donut:after{font-size:10px!important}
+.legend-row{font-size:10px!important}
+
+/* Barres et statistiques */
+.bar-row span,
+.bar-row b{font-size:10px!important}
+
+/* Modules */
+.module strong{font-size:11px!important}
+.module p{font-size:9px!important}
+.module-foot{font-size:9px!important}
+.module-status{font-size:9px!important}
+
+/* Résumé et tableau prospects */
+.summary-badge{font-size:9px!important}
+.prospects-table th{font-size:9px!important}
+.prospects-table td{font-size:10px!important}
+.status-select{font-size:9px!important}
+.mini-btn{font-size:9px!important}
+.table-message,
+.empty{font-size:10px!important}
+
+/* Activité */
+.activity-item strong{font-size:10px!important}
+.activity-item span,
+.activity-time{font-size:9px!important}
+.activity-icon{font-size:13px!important}
+
+/* Insights */
+.insight strong{font-size:10px!important}
+.insight span{font-size:9px!important}
+.insight-icon{font-size:13px!important}
+
+/* Loader + modal */
+.page-loader p{font-size:12px!important}
+.modal-head h3{font-size:16px!important}
+.modal-head p{font-size:10px!important}
+.detail-box span{font-size:9px!important}
+.detail-box strong,
+.detail-box p{font-size:11px!important}
+
+/* Mobile : conserver une bonne lisibilité sans casser la mise en page */
+@media(max-width:900px){
+  .header-center h1{font-size:18px!important}
+  .header-center p{font-size:9px!important}
+  .head-btn{font-size:9px!important}
+  .brand-copy strong{font-size:10px!important}
+  .brand-copy span{font-size:7px!important}
+}
+
+@media(max-width:760px){
+  .header-center h1{font-size:16px!important}
+  .header-center p{font-size:9px!important}
+  .kpi-label{font-size:9px!important}
+  .kpi-value{font-size:25px!important}
+  .kpi-note{font-size:9px!important}
+  .panel-head h3{font-size:11px!important}
+  .panel-head p{font-size:9px!important}
+}
+</style>
+
 </head>
 
 <body>
@@ -1727,20 +1833,25 @@ body{
         ===================================================== */
 
         try {
-            if (
-                typeof SUPABASE_URL === "undefined" ||
-                typeof SUPABASE_PUBLISHABLE_KEY === "undefined"
-            ) {
-                throw new Error("Configuration Supabase introuvable.");
-            }
-
             if (!window.supabase) {
                 throw new Error("Bibliothèque Supabase introuvable.");
             }
 
+            /*
+             * Le dashboard utilise explicitement le même projet Supabase
+             * que le site public et le système Analytics.
+             * Ainsi, même si config.js est absent ou contient une ancienne URL,
+             * les statistiques de site_visites sont lues au bon endroit.
+             */
+            const DASHBOARD_SUPABASE_URL =
+                "https://wlwlvzhcvdrjplbjeqmz.supabase.co";
+
+            const DASHBOARD_SUPABASE_PUBLISHABLE_KEY =
+                "sb_publishable_QGRnOXXlqWaXf5cPM7fBJg_2eNIffoP";
+
             supabaseClient = window.supabase.createClient(
-                SUPABASE_URL,
-                SUPABASE_PUBLISHABLE_KEY
+                DASHBOARD_SUPABASE_URL,
+                DASHBOARD_SUPABASE_PUBLISHABLE_KEY
             );
         }
         catch (error) {
@@ -1974,6 +2085,15 @@ body{
             catch (error) {
                 console.error("Erreur chargement visites :", error);
                 visitsCache = [];
+
+                if (visitorsToday) visitorsToday.textContent = "!";
+                if (visitorsMonth) visitorsMonth.textContent = "!";
+                if (pageViewsMonth) pageViewsMonth.textContent = "!";
+
+                if (topPages) {
+                    topPages.innerHTML =
+                        '<div class="empty table-error">Impossible de lire les statistiques de visites. Vérifiez la table site_visites et les règles RLS Supabase.</div>';
+                }
             }
         }
 
