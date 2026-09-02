@@ -1538,6 +1538,90 @@ body{
 }
 </style>
 
+
+<style id="ky5-prospect-search">
+/* =========================================================
+   KY5 — RECHERCHE RAPIDE DES PROSPECTS PAR NOM
+========================================================= */
+.prospect-search-wrap{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:9px;
+  padding:8px 10px;
+  background:#f7fbfd;
+  border:1px solid #d2e9f3;
+  border-radius:8px;
+}
+.prospect-search-icon{
+  flex:0 0 auto;
+  color:#075ca8;
+  font-size:14px;
+}
+.prospect-search-input{
+  flex:1;
+  min-width:0;
+  height:34px;
+  padding:0 10px;
+  border:1px solid #bdddea;
+  border-radius:7px;
+  background:#fff;
+  color:#17324d;
+  font:inherit;
+  font-size:11px;
+  outline:none;
+}
+.prospect-search-input::placeholder{color:#8aa1af}
+.prospect-search-input:focus{
+  border-color:#18a2e0;
+  box-shadow:0 0 0 3px rgba(24,162,224,.10);
+}
+.prospect-search-clear{
+  flex:0 0 auto;
+  height:34px;
+  padding:0 11px;
+  border:1px solid #c7e4ef;
+  border-radius:7px;
+  background:#eaf7fd;
+  color:#075ca8;
+  font-size:10px;
+  font-weight:700;
+}
+.prospect-search-clear:hover{background:#dff3fb}
+/* Boutons de filtre des prospects */
+.summary .summary-badge{
+  appearance:none;
+  -webkit-appearance:none;
+  cursor:pointer;
+  font:inherit;
+  transition:background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+.summary .summary-badge:hover{
+  border-color:#8fcfe9!important;
+  background:#edf8fd!important;
+  transform:translateY(-1px);
+}
+.summary .summary-badge:focus-visible{
+  outline:2px solid #18a2e0;
+  outline-offset:2px;
+}
+.summary .summary-badge.is-active{
+  background:#075ca8!important;
+  border-color:#075ca8!important;
+  color:#fff!important;
+  box-shadow:0 4px 12px rgba(7,92,168,.18);
+}
+.summary .summary-badge.is-active strong{
+  color:#fff!important;
+}
+
+@media(max-width:760px){
+  .prospect-search-wrap{padding:7px;gap:6px}
+  .prospect-search-input{font-size:10px}
+  .prospect-search-clear{padding:0 8px;font-size:9px}
+}
+</style>
+
 </head>
 
 <body>
@@ -1740,12 +1824,25 @@ body{
             <button type="button" class="head-btn" id="refreshProspectsButton">↻ Actualiser</button>
           </div>
           <div class="panel-body">
-            <div class="summary">
-              <span class="summary-badge">Total <strong id="prospectsTotal">0</strong></span>
-              <span class="summary-badge">Nouveaux <strong id="prospectsNew">0</strong></span>
-              <span class="summary-badge">Lus <strong id="prospectsRead">0</strong></span>
-              <span class="summary-badge">En traitement <strong id="prospectsProgress">0</strong></span>
-              <span class="summary-badge">Traités <strong id="prospectsDone">0</strong></span>
+            <div class="prospect-search-wrap" role="search">
+              <span class="prospect-search-icon" aria-hidden="true">⌕</span>
+              <input
+                type="search"
+                id="prospectSearchInput"
+                class="prospect-search-input"
+                placeholder="Rechercher un prospect par nom..."
+                autocomplete="off"
+                aria-label="Rechercher un prospect par nom"
+              >
+              <button type="button" class="prospect-search-clear" id="clearProspectSearchButton">Effacer</button>
+            </div>
+
+            <div class="summary" id="prospectStatusFilters" aria-label="Filtrer les prospects par statut">
+              <button type="button" class="summary-badge is-active" data-prospect-filter="all" aria-pressed="true">Total <strong id="prospectsTotal">0</strong></button>
+              <button type="button" class="summary-badge" data-prospect-filter="nouveau" aria-pressed="false">Nouveaux <strong id="prospectsNew">0</strong></button>
+              <button type="button" class="summary-badge" data-prospect-filter="lu" aria-pressed="false">Lus <strong id="prospectsRead">0</strong></button>
+              <button type="button" class="summary-badge" data-prospect-filter="en traitement" aria-pressed="false">En traitement <strong id="prospectsProgress">0</strong></button>
+              <button type="button" class="summary-badge" data-prospect-filter="traité" aria-pressed="false">Traités <strong id="prospectsDone">0</strong></button>
             </div>
 
             <div class="table-wrap">
@@ -1830,6 +1927,9 @@ body{
         const prospectsProgress = document.getElementById("prospectsProgress");
         const prospectsDone = document.getElementById("prospectsDone");
         const prospectsTableBody = document.getElementById("prospectsTableBody");
+        const prospectSearchInput = document.getElementById("prospectSearchInput");
+        const clearProspectSearchButton = document.getElementById("clearProspectSearchButton");
+        const prospectFilterButtons = document.querySelectorAll("[data-prospect-filter]");
 
         const servicesModuleStatus = document.getElementById("servicesModuleStatus");
         const mediaModuleStatus = document.getElementById("mediaModuleStatus");
@@ -1856,6 +1956,7 @@ body{
 
         let supabaseClient = null;
         let prospectsCache = [];
+        let prospectStatusFilter = "all";
         let visitsCache = [];
         let servicesCache = [];
         let visitsChart = null;
@@ -2794,7 +2895,43 @@ body{
                     : `${counts.total} demande(s)`;
         }
 
+        function normalizeProspectSearchText(value) {
+            return String(value || "")
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .toLowerCase()
+                .trim();
+        }
+
+        function updateProspectFilterButtons() {
+            prospectFilterButtons.forEach(button => {
+                const isActive =
+                    button.getAttribute("data-prospect-filter") === prospectStatusFilter;
+
+                button.classList.toggle("is-active", isActive);
+                button.setAttribute("aria-pressed", isActive ? "true" : "false");
+            });
+        }
+
         function renderProspects() {
+            const searchTerm = normalizeProspectSearchText(
+                prospectSearchInput ? prospectSearchInput.value : ""
+            );
+
+            const visibleProspects = prospectsCache.filter(prospect => {
+                const matchesSearch =
+                    !searchTerm ||
+                    normalizeProspectSearchText(prospect.nom).includes(searchTerm);
+
+                const matchesStatus =
+                    prospectStatusFilter === "all" ||
+                    normalizeStatus(prospect) === prospectStatusFilter;
+
+                return matchesSearch && matchesStatus;
+            });
+
+            updateProspectFilterButtons();
+
             if (!prospectsCache.length) {
                 prospectsTableBody.innerHTML = `
                     <tr>
@@ -2806,8 +2943,30 @@ body{
                 return;
             }
 
+            if (!visibleProspects.length) {
+                let emptyMessage = "Aucun prospect dans cette catégorie.";
+
+                if (searchTerm && prospectStatusFilter === "all") {
+                    emptyMessage =
+                        `Aucun prospect ne correspond à « ${escapeHtml(prospectSearchInput.value.trim())} ».`;
+                }
+                else if (searchTerm) {
+                    emptyMessage =
+                        `Aucun prospect ne correspond à « ${escapeHtml(prospectSearchInput.value.trim())} » dans ce statut.`;
+                }
+
+                prospectsTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="table-message">
+                            ${emptyMessage}
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
             prospectsTableBody.innerHTML =
-                prospectsCache
+                visibleProspects
                     .map(prospect => {
                         const status = normalizeStatus(prospect);
 
@@ -2947,6 +3106,7 @@ body{
                         update.date_traitement;
                 }
 
+                renderProspects();
                 renderProspectKpis();
                 renderActivity();
             }
@@ -3173,6 +3333,32 @@ body{
                 renderActivity();
             }
         );
+
+        prospectSearchInput.addEventListener(
+            "input",
+            renderProspects
+        );
+
+        clearProspectSearchButton.addEventListener(
+            "click",
+            function () {
+                prospectSearchInput.value = "";
+                renderProspects();
+                prospectSearchInput.focus();
+            }
+        );
+
+        prospectFilterButtons.forEach(button => {
+            button.addEventListener(
+                "click",
+                function () {
+                    prospectStatusFilter =
+                        button.getAttribute("data-prospect-filter") || "all";
+
+                    renderProspects();
+                }
+            );
+        });
 
         /* =====================================================
            TABLE PROSPECTS
