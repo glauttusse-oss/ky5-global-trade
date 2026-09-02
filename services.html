@@ -4983,6 +4983,134 @@
 
     </script>
 
+
+    <!-- =====================================================
+         KY5 — SUIVI DES VISITEURS
+         Enregistre chaque page vue dans site_visites.
+         Le même visiteur garde le même visitor_id sur tout le site.
+    ====================================================== -->
+    <script>
+        (() => {
+            function createTrackingId(prefix) {
+                if (
+                    window.crypto &&
+                    typeof window.crypto.randomUUID === "function"
+                ) {
+                    return prefix + "-" + window.crypto.randomUUID();
+                }
+
+                return (
+                    prefix +
+                    "-" +
+                    Date.now() +
+                    "-" +
+                    Math.random().toString(36).slice(2) +
+                    "-" +
+                    Math.random().toString(36).slice(2)
+                );
+            }
+
+            function getVisitorId() {
+                const key = "ky5_visitor_id";
+
+                try {
+                    let visitorId = localStorage.getItem(key);
+
+                    if (!visitorId) {
+                        visitorId = createTrackingId("visitor");
+                        localStorage.setItem(key, visitorId);
+                    }
+
+                    return visitorId;
+                }
+                catch (error) {
+                    return createTrackingId("visitor-temp");
+                }
+            }
+
+            function getSessionId() {
+                const key = "ky5_session_id";
+
+                try {
+                    let sessionId = sessionStorage.getItem(key);
+
+                    if (!sessionId) {
+                        sessionId = createTrackingId("session");
+                        sessionStorage.setItem(key, sessionId);
+                    }
+
+                    return sessionId;
+                }
+                catch (error) {
+                    return createTrackingId("session-temp");
+                }
+            }
+
+            function getDeviceType() {
+                const width = window.innerWidth || 0;
+
+                if (width <= 767) {
+                    return "mobile";
+                }
+
+                if (width <= 1100) {
+                    return "tablette";
+                }
+
+                return "ordinateur";
+            }
+
+            async function registerPageView() {
+                if (
+                    typeof ky5Supabase === "undefined" ||
+                    !ky5Supabase
+                ) {
+                    console.warn(
+                        "KY5 Analytics : client Supabase indisponible."
+                    );
+                    return;
+                }
+
+                const visitData = {
+                    visitor_id: getVisitorId(),
+                    session_id: getSessionId(),
+                    page_path: window.location.pathname || "/services.html",
+                    page_title: document.title || "Services - KY5 GLOBAL TRADE",
+                    referrer: document.referrer || "",
+                    device_type: getDeviceType(),
+                    event_type: "page_view"
+                };
+
+                try {
+                    const { error } =
+                        await ky5Supabase
+                            .from("site_visites")
+                            .insert(visitData);
+
+                    if (error) {
+                        console.error(
+                            "KY5 Analytics : visite Services non enregistrée.",
+                            error
+                        );
+                    }
+                    else {
+                        console.info(
+                            "KY5 Analytics : visite Services enregistrée."
+                        );
+                    }
+                }
+                catch (error) {
+                    console.error(
+                        "KY5 Analytics : erreur d'enregistrement.",
+                        error
+                    );
+                }
+            }
+
+            registerPageView();
+        })();
+    </script>
+
 </body>
 
 </html>
