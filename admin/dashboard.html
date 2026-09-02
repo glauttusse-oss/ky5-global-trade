@@ -1508,6 +1508,36 @@ body{
 }
 </style>
 
+
+<style id="ky5-statistics-functional-fix">
+/* =========================================================
+   KY5 — STATISTIQUES : CORRECTION FONCTIONNELLE
+========================================================= */
+.legend-row:nth-child(1) span:before{background:#d978a5!important}
+.legend-row:nth-child(2) span:before{background:#8b7cf6!important}
+.legend-row:nth-child(3) span:before{background:#e7b24a!important}
+.legend-row:nth-child(4) span:before{background:#48b991!important}
+
+#prospectDonut{
+  background:conic-gradient(
+    #d978a5 0 25%,
+    #8b7cf6 25% 50%,
+    #e7b24a 50% 75%,
+    #48b991 75% 100%
+  )!important;
+}
+
+.chart-wrap{
+  position:relative;
+  min-height:0;
+}
+
+#visitsChart{
+  width:100%!important;
+  height:100%!important;
+}
+</style>
+
 </head>
 
 <body>
@@ -1644,7 +1674,7 @@ body{
         </article>
 
         <article class="panel">
-          <div class="panel-head"><div><h3>Évolution des visites</h3><p>Pages vues par jour</p></div></div>
+          <div class="panel-head"><div><h3>Évolution des visites</h3><p>Visiteurs uniques et pages vues par jour</p></div></div>
           <div class="panel-body"><div class="chart-wrap"><canvas id="visitsChart"></canvas></div></div>
         </article>
 
@@ -1654,6 +1684,7 @@ body{
             <div class="donut" id="prospectDonut"></div>
             <div class="legend">
               <div class="legend-row"><span>Nouveaux</span><b id="legendNew">0</b></div>
+              <div class="legend-row"><span>Lus</span><b id="legendRead">0</b></div>
               <div class="legend-row"><span>En traitement</span><b id="legendProgress">0</b></div>
               <div class="legend-row"><span>Traités</span><b id="legendDone">0</b></div>
             </div>
@@ -1696,7 +1727,7 @@ body{
         </article>
 
         <article class="panel">
-          <div class="panel-head"><div><h3>Appareils des visiteurs</h3><p>Répartition sur 30 jours</p></div></div>
+          <div class="panel-head"><div><h3>Appareils des visiteurs</h3><p id="devicePeriodLabel">Répartition sur 30 jours</p></div></div>
           <div class="panel-body"><div class="device-list" id="deviceList"><div class="empty">Chargement...</div></div></div>
         </article>
 
@@ -1809,6 +1840,7 @@ body{
         const topPages = document.getElementById("topPages");
         const activityList = document.getElementById("activityList");
         const deviceList = document.getElementById("deviceList");
+        const devicePeriodLabel = document.getElementById("devicePeriodLabel");
 
         const prospectModal = document.getElementById("prospectModal");
         const modalCloseButton = document.getElementById("modalCloseButton");
@@ -1944,11 +1976,30 @@ body{
             return "nouveau";
         }
 
+        function pageViewVisits(visits) {
+            return (visits || []).filter(visit => {
+                const eventType =
+                    String(visit?.event_type || "")
+                        .trim()
+                        .toLowerCase();
+
+                return !eventType || eventType === "page_view";
+            });
+        }
+
+        function visitorKey(visit) {
+            return (
+                visit?.visitor_id ||
+                visit?.session_id ||
+                (visit?.id != null ? `visit-${visit.id}` : "")
+            );
+        }
+
         function uniqueVisitors(visits) {
             return new Set(
-                visits
-                    .filter(v => v.visitor_id)
-                    .map(v => v.visitor_id)
+                (visits || [])
+                    .map(visitorKey)
+                    .filter(Boolean)
             ).size;
         }
 
@@ -2113,7 +2164,7 @@ body{
                 uniqueVisitors(monthVisits);
 
             pageViewsMonth.textContent =
-                monthVisits.length;
+                pageViewVisits(monthVisits).length;
         }
 
         function visitsForPeriod(days) {
@@ -2128,9 +2179,11 @@ body{
 
         function renderVisitsChart(days) {
             const filtered = visitsForPeriod(days);
+            const pageViews = pageViewVisits(filtered);
 
             const labels = [];
-            const values = [];
+            const pageViewValues = [];
+            const visitorValues = [];
 
             for (let i = days - 1; i >= 0; i--) {
                 const date = new Date();
@@ -2140,78 +2193,231 @@ body{
                 const next = new Date(date);
                 next.setDate(next.getDate() + 1);
 
-                const count =
-                    filtered.filter(v => {
-                        const time = new Date(v.created_at);
+                const visitsOfDay =
+                    filtered.filter(visit => {
+                        const time = new Date(visit.created_at);
                         return time >= date && time < next;
-                    }).length;
+                    });
+
+                const pageViewsOfDay =
+                    pageViews.filter(visit => {
+                        const time = new Date(visit.created_at);
+                        return time >= date && time < next;
+                    });
 
                 labels.push(formatShortDate(date));
-                values.push(count);
+                pageViewValues.push(pageViewsOfDay.length);
+                visitorValues.push(uniqueVisitors(visitsOfDay));
             }
 
-            const ctx = document.getElementById("visitsChart");
+            const canvas =
+                document.getElementById("visitsChart");
 
-            if (!ctx || typeof Chart === "undefined") {
+            if (!canvas) {
+                return;
+            }
+
+            if (typeof Chart === "undefined") {
+                const wrap = canvas.closest(".chart-wrap");
+
+                if (wrap) {
+                    wrap.innerHTML =
+                        '<div class="empty table-error">Le moteur du graphique Chart.js n\'a pas pu être chargé.</div>';
+                }
+
                 return;
             }
 
             if (visitsChart) {
                 visitsChart.destroy();
+                visitsChart = null;
             }
 
-            visitsChart = new Chart(ctx, {
+            const maxValue =
+                Math.max(
+                    ...pageViewValues,
+                    ...visitorValues,
+                    0
+                );
+
+            const ky5ViewCountLabels = {
+                id: "ky5ViewCountLabels",
+
+                afterDatasetsDraw(chart) {
+                    const { ctx } = chart;
+
+                    chart.data.datasets.forEach((dataset, datasetIndex) => {
+                        /*
+                         * On affiche directement les nombres uniquement
+                         * sur la série "Pages vues".
+                         */
+                        if (dataset.label !== "Pages vues") {
+                            return;
+                        }
+
+                        const meta = chart.getDatasetMeta(datasetIndex);
+
+                        ctx.save();
+                        ctx.font = "900 10px Arial";
+                        ctx.textAlign = "center";
+                        ctx.textBaseline = "bottom";
+                        ctx.fillStyle = "#075ca8";
+
+                        meta.data.forEach((point, index) => {
+                            const value =
+                                Number(dataset.data[index]) || 0;
+
+                            /*
+                             * Sur 30/90 jours, ne pas surcharger le graphique
+                             * avec les zéros. Les nombres réels restent visibles.
+                             */
+                            if (value === 0 && days > 7) {
+                                return;
+                            }
+
+                            ctx.fillText(
+                                String(value),
+                                point.x,
+                                Math.max(12, point.y - 8)
+                            );
+                        });
+
+                        ctx.restore();
+                    });
+                }
+            };
+
+            visitsChart = new Chart(canvas, {
                 type: "line",
+
+                plugins: [
+                    ky5ViewCountLabels
+                ],
+
                 data: {
                     labels,
-                    datasets: [{
-                        label: "Pages vues",
-                        data: values,
-                        borderWidth: 2,
-                        borderColor: "#67d9ff",
-                        backgroundColor: "rgba(24,162,224,.12)",
-                        pointBackgroundColor: "#ffffff",
-                        pointBorderColor: "#18a2e0",
-                        tension: .35,
-                        fill: true
-                    }]
+
+                    datasets: [
+                        {
+                            label: "Visiteurs uniques",
+                            data: visitorValues,
+                            borderWidth: 3,
+                            borderColor: "#075ca8",
+                            backgroundColor: "rgba(7,92,168,.08)",
+                            pointBackgroundColor: "#ffffff",
+                            pointBorderColor: "#075ca8",
+                            pointRadius: days <= 7 ? 4 : days <= 30 ? 2.5 : 1,
+                            pointHoverRadius: 5,
+                            tension: .32,
+                            fill: false
+                        },
+                        {
+                            label: "Pages vues",
+                            data: pageViewValues,
+                            borderWidth: 2,
+                            borderColor: "#18a2e0",
+                            backgroundColor: "rgba(24,162,224,.12)",
+                            pointBackgroundColor: "#ffffff",
+                            pointBorderColor: "#18a2e0",
+                            pointRadius: days <= 7 ? 3 : days <= 30 ? 2 : 0,
+                            pointHoverRadius: 5,
+                            tension: .32,
+                            fill: true
+                        }
+                    ]
                 },
+
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    animation: {
+                        duration: 450
+                    },
+
+                    layout: {
+                        padding: {
+                            top: 18,
+                            right: 6,
+                            bottom: 0,
+                            left: 4
+                        }
+                    },
+
                     interaction: {
                         intersect: false,
                         mode: "index"
                     },
+
                     plugins: {
                         legend: {
-                            display: false
+                            display: true,
+                            position: "top",
+                            align: "end",
+                            labels: {
+                                usePointStyle: true,
+                                boxWidth: 8,
+                                boxHeight: 8,
+                                color: "#496779",
+                                font: {
+                                    size: 9,
+                                    weight: "bold"
+                                }
+                            }
                         },
+
                         tooltip: {
-                            displayColors: false
+                            displayColors: true,
+                            callbacks: {
+                                title(items) {
+                                    return items?.[0]?.label || "";
+                                },
+                                label(context) {
+                                    const value =
+                                        Number(context.parsed.y) || 0;
+
+                                    return `${context.dataset.label} : ${value}`;
+                                }
+                            }
                         }
                     },
+
                     scales: {
                         x: {
                             grid: {
                                 display: false
                             },
+
                             ticks: {
                                 color: "#6f91a7",
-                                maxTicksLimit: days <= 7 ? 7 : 10,
+                                autoSkip: true,
+                                maxTicksLimit:
+                                    days <= 7
+                                        ? 7
+                                        : days <= 30
+                                            ? 10
+                                            : 12,
+                                maxRotation: 0,
                                 font: {
                                     size: 9
                                 }
                             }
                         },
+
                         y: {
                             beginAtZero: true,
+                            suggestedMax:
+                                maxValue > 0
+                                    ? Math.max(2, maxValue + 1)
+                                    : 2,
+
                             grid: {
-                                color: "rgba(103,217,255,.07)"
+                                color: "rgba(7,92,168,.08)"
                             },
+
                             ticks: {
                                 color: "#6f91a7",
                                 precision: 0,
+                                stepSize: 1,
                                 font: {
                                     size: 9
                                 }
@@ -2223,7 +2429,11 @@ body{
         }
 
         function renderTopPages(days) {
-            const filtered = visitsForPeriod(days);
+            const filtered =
+                pageViewVisits(
+                    visitsForPeriod(days)
+                );
+
             const map = new Map();
 
             filtered.forEach(visit => {
@@ -2268,8 +2478,28 @@ body{
                     .join("");
         }
 
-        function renderDevices() {
-            const filtered = visitsForPeriod(30);
+        function renderDevices(days) {
+            const filtered =
+                visitsForPeriod(days);
+
+            const uniqueByVisitor =
+                new Map();
+
+            filtered.forEach(visit => {
+                const key = visitorKey(visit);
+
+                if (!key) {
+                    return;
+                }
+
+                /*
+                 * Un visiteur ne doit compter qu'une seule fois
+                 * dans la répartition des appareils.
+                 */
+                if (!uniqueByVisitor.has(key)) {
+                    uniqueByVisitor.set(key, visit);
+                }
+            });
 
             const counts = {
                 mobile: 0,
@@ -2278,7 +2508,7 @@ body{
                 autre: 0
             };
 
-            filtered.forEach(visit => {
+            [...uniqueByVisitor.values()].forEach(visit => {
                 const raw =
                     String(visit.device_type || "")
                         .trim()
@@ -2287,7 +2517,10 @@ body{
                 if (raw.includes("mobile")) {
                     counts.mobile += 1;
                 }
-                else if (raw.includes("tablet") || raw.includes("tablette")) {
+                else if (
+                    raw.includes("tablet") ||
+                    raw.includes("tablette")
+                ) {
                     counts.tablette += 1;
                 }
                 else if (
@@ -2304,7 +2537,11 @@ body{
 
             const total =
                 Object.values(counts)
-                    .reduce((sum, value) => sum + value, 0);
+                    .reduce(
+                        (sum, value) =>
+                            sum + value,
+                        0
+                    );
 
             const labels = [
                 ["📱 Mobile", counts.mobile],
@@ -2313,9 +2550,14 @@ body{
                 ["• Autre", counts.autre]
             ];
 
+            if (devicePeriodLabel) {
+                devicePeriodLabel.textContent =
+                    `Visiteurs uniques sur ${days} jours`;
+            }
+
             if (!total) {
                 deviceList.innerHTML =
-                    '<div class="empty">Aucune donnée d\'appareil enregistrée.</div>';
+                    '<div class="empty">Aucune donnée d\'appareil enregistrée pour cette période.</div>';
                 return;
             }
 
@@ -2324,14 +2566,18 @@ body{
                     .filter(item => item[1] > 0)
                     .map(item => {
                         const percent =
-                            Math.round((item[1] / total) * 100);
+                            Math.round(
+                                (item[1] / total) * 100
+                            );
 
                         return `
                             <div class="device-row">
                                 <span>${item[0]}</span>
+
                                 <div class="device-bar">
                                     <i style="width:${percent}%"></i>
                                 </div>
+
                                 <b>${percent}%</b>
                             </div>
                         `;
@@ -2469,6 +2715,78 @@ body{
             newProspects.textContent = counts.nouveau;
             progressProspects.textContent = counts.progress;
             doneProspects.textContent = counts.traite;
+
+            const legendNew =
+                document.getElementById("legendNew");
+
+            const legendRead =
+                document.getElementById("legendRead");
+
+            const legendProgress =
+                document.getElementById("legendProgress");
+
+            const legendDone =
+                document.getElementById("legendDone");
+
+            if (legendNew) {
+                legendNew.textContent = counts.nouveau;
+            }
+
+            if (legendRead) {
+                legendRead.textContent = counts.lu;
+            }
+
+            if (legendProgress) {
+                legendProgress.textContent = counts.progress;
+            }
+
+            if (legendDone) {
+                legendDone.textContent = counts.traite;
+            }
+
+            const totalForDonut =
+                counts.nouveau +
+                counts.lu +
+                counts.progress +
+                counts.traite;
+
+            const donut =
+                document.getElementById(
+                    "prospectDonut"
+                );
+
+            if (donut) {
+                if (!totalForDonut) {
+                    donut.style.background =
+                        "conic-gradient(#dceaf1 0 100%)";
+                }
+                else {
+                    const a =
+                        (counts.nouveau / totalForDonut) *
+                        100;
+
+                    const b =
+                        a +
+                        (counts.lu / totalForDonut) *
+                        100;
+
+                    const c =
+                        b +
+                        (counts.progress / totalForDonut) *
+                        100;
+
+                    donut.style.setProperty(
+                        "background",
+                        `conic-gradient(
+                            #d978a5 0 ${a}%,
+                            #8b7cf6 ${a}% ${b}%,
+                            #e7b24a ${b}% ${c}%,
+                            #48b991 ${c}% 100%
+                        )`,
+                        "important"
+                    );
+                }
+            }
 
             prospectsModuleStatus.textContent =
                 counts.nouveau > 0
@@ -2826,7 +3144,7 @@ body{
 
             renderVisitsChart(days);
             renderTopPages(days);
-            renderDevices();
+            renderDevices(days);
             renderProspectKpis();
             renderServicesKpis();
 
@@ -3110,16 +3428,16 @@ document.addEventListener("DOMContentLoaded", function () {
   function setText(id,v){const el=document.getElementById(id);if(el)el.textContent=v}
   function setWidth(id,v,max){const el=document.getElementById(id);if(el)el.style.width=(max?Math.min(100,(v/max)*100):0)+"%"}
   function sync(){
-    const today=num("visitorsToday"),month=num("visitorsMonth"),n=num("newProspects"),p=num("progressProspects"),d=num("doneProspects"),s=num("activeServices"),m=num("publishedMedia");
-    [["filterToday",today],["filterMonth",month],["filterNew",n],["filterProgress",p],["filterDone",d],["filterServices",s],["filterMedia",m],["legendNew",n],["legendProgress",p],["legendDone",d],["servicesBarValue",s],["mediaBarValue",m],["newBarValue",n],["progressBarValue",p],["doneBarValue",d]].forEach(([id,v])=>setText(id,v));
-    const total=n+p+d||1, a=n/total*100, b=(n+p)/total*100;
+    const today=num("visitorsToday"),month=num("visitorsMonth"),n=num("newProspects"),r=num("prospectsRead"),p=num("progressProspects"),d=num("doneProspects"),s=num("activeServices"),m=num("publishedMedia");
+    [["filterToday",today],["filterMonth",month],["filterNew",n],["filterProgress",p],["filterDone",d],["filterServices",s],["filterMedia",m],["legendNew",n],["legendRead",r],["legendProgress",p],["legendDone",d],["servicesBarValue",s],["mediaBarValue",m],["newBarValue",n],["progressBarValue",p],["doneBarValue",d]].forEach(([id,v])=>setText(id,v));
+    const total=n+r+p+d||1, a=n/total*100, b=(n+r)/total*100, c=(n+r+p)/total*100;
     const donut=document.getElementById("prospectDonut");
-    if(donut)donut.style.background=`conic-gradient(#d978a5 0 ${a}%,#e7b24a ${a}% ${b}%,#48b991 ${b}% 100%)`;
+    if(donut)donut.style.setProperty("background",`conic-gradient(#d978a5 0 ${a}%,#8b7cf6 ${a}% ${b}%,#e7b24a ${b}% ${c}%,#48b991 ${c}% 100%)`,"important");
     const max=Math.max(s,m,n,p,d,1);
     setWidth("servicesBar",s,max);setWidth("mediaBar",m,max);setWidth("newBar",n,max);setWidth("progressBar",p,max);setWidth("doneBar",d,max);
   }
   document.addEventListener("DOMContentLoaded",function(){
-    ["visitorsToday","visitorsMonth","newProspects","progressProspects","doneProspects","activeServices","publishedMedia"].forEach(id=>{
+    ["visitorsToday","visitorsMonth","newProspects","prospectsRead","progressProspects","doneProspects","activeServices","publishedMedia"].forEach(id=>{
       const el=document.getElementById(id); if(el)new MutationObserver(sync).observe(el,{childList:true,subtree:true,characterData:true});
     });
     sync();
