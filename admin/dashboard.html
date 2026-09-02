@@ -1823,7 +1823,6 @@ body{
         const modalPhoto = document.getElementById("modalPhoto");
 
         let supabaseClient = null;
-        let analyticsClient = null;
         let prospectsCache = [];
         let visitsCache = [];
         let servicesCache = [];
@@ -1846,36 +1845,13 @@ body{
             }
 
             /*
-             * CLIENT PRINCIPAL :
-             * conserve exactement la configuration de config.js.
-             * Il gère la session administrateur, les prospects et les services.
+             * CLIENT UNIQUE DU DASHBOARD :
+             * session admin + prospects + services + statistiques.
+             * Il utilise le projet défini dans config.js.
              */
             supabaseClient = window.supabase.createClient(
                 SUPABASE_URL,
                 SUPABASE_PUBLISHABLE_KEY
-            );
-
-            /*
-             * CLIENT ANALYTICS SÉPARÉ :
-             * les visites du site étaient enregistrées dans ce projet.
-             * On ne remplace donc PAS le client principal.
-             */
-            const ANALYTICS_SUPABASE_URL =
-                "https://wlwlvzhcvdriplbjeqmz.supabase.co";
-
-            const ANALYTICS_SUPABASE_PUBLISHABLE_KEY =
-                "sb_publishable_QGRnOXXlqWaXf5cPM7fBJg_2eNIffoP";
-
-            analyticsClient = window.supabase.createClient(
-                ANALYTICS_SUPABASE_URL,
-                ANALYTICS_SUPABASE_PUBLISHABLE_KEY,
-                {
-                    auth: {
-                        persistSession: false,
-                        autoRefreshToken: false,
-                        detectSessionInUrl: false
-                    }
-                }
             );
         }
         catch (error) {
@@ -2091,12 +2067,12 @@ body{
                 since.setDate(since.getDate() - 120);
                 since.setHours(0, 0, 0, 0);
 
-                if (!analyticsClient) {
-                    throw new Error("Client Analytics indisponible.");
+                if (!supabaseClient) {
+                    throw new Error("Client Supabase indisponible.");
                 }
 
                 const { data, error } =
-                    await analyticsClient
+                    await supabaseClient
                         .from("site_visites")
                         .select(
                             "id, created_at, visitor_id, session_id, page_path, page_title, referrer, device_type, event_type"
