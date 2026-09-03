@@ -1622,6 +1622,128 @@ body{
 }
 </style>
 
+
+<style id="ky5-prospect-scroll-actions-final">
+/* =========================================================
+   KY5 — CORRECTION FINALE DU TABLEAU PROSPECTS
+   - La recherche et les filtres restent visibles
+   - La barre horizontale reste accessible
+   - La colonne Actions reste visible à droite
+========================================================= */
+
+/* Le bloc avait trop peu de hauteur depuis l'ajout recherche + filtres */
+#prospectsSection{
+  height:390px!important;
+}
+
+/* Organisation verticale propre du contenu du panneau */
+#prospectsSection > .panel-body{
+  height:calc(100% - 42px)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:0!important;
+  overflow:hidden!important;
+}
+
+#prospectsSection .prospect-search-wrap,
+#prospectsSection .summary{
+  flex:0 0 auto!important;
+}
+
+/* Zone du tableau : le défilement horizontal doit toujours être disponible */
+#prospectsSection .table-wrap{
+  flex:1 1 auto!important;
+  height:auto!important;
+  min-height:210px!important;
+  max-width:100%!important;
+  overflow-x:scroll!important;
+  overflow-y:auto!important;
+  scrollbar-gutter:stable!important;
+  overscroll-behavior:contain;
+  scrollbar-width:auto;
+  scrollbar-color:#075ca8 #e6f0f5;
+  padding-bottom:2px;
+}
+
+/* Barre bien visible dans Chrome / Edge */
+#prospectsSection .table-wrap::-webkit-scrollbar{
+  width:12px;
+  height:12px;
+}
+#prospectsSection .table-wrap::-webkit-scrollbar-track{
+  background:#e6f0f5;
+  border-radius:999px;
+}
+#prospectsSection .table-wrap::-webkit-scrollbar-thumb{
+  background:#075ca8;
+  border:2px solid #e6f0f5;
+  border-radius:999px;
+}
+#prospectsSection .table-wrap::-webkit-scrollbar-thumb:hover{
+  background:#064d8d;
+}
+
+/* Largeur suffisante pour conserver toutes les colonnes */
+#prospectsSection .prospects-table{
+  min-width:1120px!important;
+}
+
+/* Actions visibles même quand le tableau est positionné à gauche */
+#prospectsSection .prospects-table th:last-child,
+#prospectsSection .prospects-table td:last-child{
+  position:sticky!important;
+  right:0!important;
+  min-width:170px!important;
+  width:170px!important;
+  background:#ffffff!important;
+  box-shadow:-8px 0 14px rgba(7,92,168,.10);
+}
+
+#prospectsSection .prospects-table th:last-child{
+  z-index:8!important;
+  background:#edf7fb!important;
+}
+
+#prospectsSection .prospects-table td:last-child{
+  z-index:4!important;
+}
+
+/* Les boutons d'action restent propres et faciles à utiliser */
+#prospectsSection .quick-actions{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:5px!important;
+}
+
+#prospectsSection .quick-actions .mini-btn{
+  white-space:nowrap!important;
+}
+
+/* Sur les écrans plus petits, donner encore un peu plus de hauteur */
+@media(max-width:1250px){
+  #prospectsSection{
+    height:410px!important;
+  }
+  #prospectsSection .table-wrap{
+    min-height:225px!important;
+  }
+}
+
+@media(max-width:760px){
+  #prospectsSection{
+    height:430px!important;
+  }
+  #prospectsSection .prospects-table{
+    min-width:1050px!important;
+  }
+  #prospectsSection .prospects-table th:last-child,
+  #prospectsSection .prospects-table td:last-child{
+    min-width:150px!important;
+    width:150px!important;
+  }
+}
+</style>
+
 </head>
 
 <body>
