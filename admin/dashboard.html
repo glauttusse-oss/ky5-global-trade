@@ -1,3757 +1,778 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex,nofollow">
-<title>KY5 Analytics Dashboard | KY5 GLOBAL TRADE</title>
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#02080e;
-  --bg2:#03101a;
-  --panel:#04151f;
-  --panel2:#061c29;
-  --line:#0b3f59;
-  --line2:#12698d;
-  --blue:#075ca8;
-  --cyan:#19a9e1;
-  --sky:#65d9ff;
-  --white:#ffffff;
-  --text:#dff7ff;
-  --muted:#7292a4;
-  --dim:#4f7183;
-  --danger:#ff6677;
-}
-html{scroll-behavior:smooth}
-body{
-  min-height:100vh;
-  font-family:Arial,Helvetica,sans-serif;
-  background:
-    radial-gradient(circle at 70% -20%,rgba(25,169,225,.12),transparent 28%),
-    linear-gradient(180deg,#01060b,#020a12 55%,#01060b);
-  color:var(--text);
-}
-button,select{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}
-
-/* LOADER */
-.page-loader{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:#02080e}
-.page-loader.hidden{display:none}
-.loader-wrap{text-align:center}
-.loader-logo{width:68px;height:68px;margin:0 auto 14px;border-radius:10px;background:#fff;color:var(--blue);display:grid;place-items:center;font-weight:900;font-size:20px;box-shadow:0 0 30px rgba(25,169,225,.15)}
-.loader-spinner{width:28px;height:28px;margin:0 auto;border:3px solid #153449;border-top-color:var(--sky);border-radius:50%;animation:spin .7s linear infinite}
-.page-loader p{font-size:9px;color:#6f93a6;margin-top:10px}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* EXACT DASHBOARD FRAME */
-.dashboard-frame{
-  min-height:100vh;
-  padding:7px;
-  background:#01070c;
-}
-.dashboard-border{
-  min-height:calc(100vh - 14px);
-  border:1px solid #0c3c55;
-  background:#020a11;
-  display:grid;
-  grid-template-columns:150px minmax(0,1fr);
-  grid-template-rows:62px auto;
-  box-shadow:0 0 30px rgba(25,169,225,.06);
-}
-
-/* TOP HEADER */
-.top-header{
-  grid-column:1/-1;
-  display:grid;
-  grid-template-columns:150px 1fr 220px;
-  border-bottom:1px solid #0c3c55;
-  background:#020d15;
-}
-.brand-area{
-  display:flex;align-items:center;gap:7px;padding:7px 8px;
-  border-right:1px solid #0c3c55;
-}
-.brand-logo{
-  width:44px;height:44px;border:1px solid #1a88b7;
-  background:#fff;color:#075ca8;display:grid;place-items:center;
-  font-size:14px;font-weight:900;
-}
-.brand-copy strong{display:block;font-size:8px;color:#fff}
-.brand-copy span{display:block;margin-top:3px;font-size:4px;color:#5fcdf3;letter-spacing:1px}
-.header-center{position:relative;padding:9px 13px}
-.header-center h1{font-size:18px;letter-spacing:.3px;color:#fff}
-.header-center p{margin-top:3px;font-size:6px;color:#65899d}
-.heartbeat{position:absolute;right:18px;top:12px;color:#1fb1ea;font-size:23px;letter-spacing:-7px}
-.header-actions{border-left:1px solid #0c3c55;display:flex;align-items:center;justify-content:flex-end;gap:5px;padding:7px}
-.head-btn{
-  padding:6px 7px;border:1px solid #0f4b68;border-radius:3px;
-  background:#051725;color:#9ce7ff;font-size:5px;font-weight:800
-}
-.admin-profile{min-width:93px}
-.admin-profile strong{display:block;font-size:6px;color:#fff}
-.admin-profile span{display:block;margin-top:2px;font-size:4px;color:#64879a;max-width:105px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.mobile-menu-button{display:none}
-
-/* LEFT FILTERS */
-.filters-column{
-  grid-column:1;grid-row:2;
-  border-right:1px solid #0c3c55;
-  background:#02101a;
-  padding:6px;
-  overflow:auto;
-}
-.filters-title{
-  border:1px solid #0d4562;
-  background:#061a27;
-  color:#79dcff;
-  padding:7px 6px;
-  font-size:8px;font-weight:900;
-  margin-bottom:5px;
-}
-.filter{
-  border:1px solid #0a344a;
-  background:#04131d;
-  padding:6px;
-  margin-bottom:5px;
-}
-.filter label{
-  display:flex;align-items:center;gap:5px;
-  font-size:5px;color:#a9def1;font-weight:800;margin-bottom:5px
-}
-.filter select{
-  width:100%;height:22px;border:1px solid #12506f;background:#01090f;color:#bcecff;
-  font-size:5px;padding:0 4px
-}
-.filter small{display:block;color:#53788b;font-size:4px;line-height:1.45;margin-top:5px}
-.filter small strong{color:#fff}
-.nav-list{margin-top:7px;padding-top:5px;border-top:1px solid #0a344a}
-.nav-item{
-  width:100%;border:1px solid transparent;background:transparent;
-  color:#7699ac;padding:6px 4px;margin-bottom:2px;
-  display:flex;gap:5px;align-items:center;text-align:left;font-size:5px
-}
-.nav-item:hover,.nav-item.active{border-color:#0d4562;background:#061924;color:#fff}
-.nav-icon{width:16px;text-align:center;color:#61d4fb}
-.logout-button{color:#ff9ca8}
-
-/* CONTENT */
-.dashboard-content{
-  grid-column:2;grid-row:2;
-  padding:5px;
-  min-width:0;
-  overflow:hidden;
-}
-
-/* TOP KPI - 5 like reference */
-.kpi-row{
-  display:grid;
-  grid-template-columns:repeat(5,minmax(0,1fr));
-  gap:5px;
-  margin-bottom:5px;
-}
-.kpi{
-  height:66px;
-  border:1px solid #0c3c55;
-  background:linear-gradient(180deg,#061b28,#03111b);
-  padding:6px;
-  position:relative;
-}
-.kpi:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,#075ca8,#65d9ff)}
-.kpi-label{font-size:5px;color:#7799aa;text-transform:uppercase;font-weight:800}
-.kpi-value{margin-top:6px;font-size:18px;font-weight:900;color:#fff}
-.kpi-note{margin-top:2px;font-size:4px;color:#507487}
-.kpi-icon{
-  position:absolute;right:6px;top:7px;width:23px;height:23px;border-radius:50%;
-  border:1px solid #176080;color:#65d9ff;display:grid;place-items:center;font-size:8px
-}
-
-/* MAIN 3 x 2 ANALYTIC GRID */
-.analytics-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr .9fr;
-  grid-template-rows:178px 178px;
-  gap:5px;
-  margin-bottom:5px;
-}
-.panel{
-  min-width:0;
-  overflow:hidden;
-  border:1px solid #0c3c55;
-  background:#03111a;
-}
-.panel-head{
-  height:28px;padding:5px 7px;
-  border-bottom:1px solid #093149;
-  display:flex;justify-content:space-between;align-items:flex-start;gap:5px
-}
-.panel-head h3{font-size:6px;color:#c6efff;text-transform:uppercase;letter-spacing:.35px}
-.panel-head p{font-size:4px;color:#55788d;margin-top:2px}
-.panel-body{height:calc(100% - 28px);padding:5px}
-.chart-wrap{height:100%}
-.period-select{height:18px;background:#01090f;color:#aeeaff;border:1px solid #0f4a68;font-size:4px;padding:0 3px}
-
-/* TOP PAGES */
-.top-pages{height:100%;overflow:auto}
-.page-row{display:grid;grid-template-columns:1fr 26px;gap:4px;padding:5px 1px;border-bottom:1px solid #072a3e}
-.page-name strong{display:block;font-size:5px;color:#e5f8ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.page-name span{display:block;margin-top:2px;font-size:4px;color:#53758a}
-.page-count{text-align:center;color:#66d9ff;font-size:5px}
-
-/* DEVICES */
-.device-list{height:100%;overflow:auto}
-.device-row{display:grid;grid-template-columns:48px 1fr 22px;gap:4px;align-items:center;padding:5px 1px}
-.device-row span,.device-row b{font-size:4.5px;color:#7798aa}.device-row b{text-align:right}
-.device-bar{height:5px;background:#061d2b}.device-bar i{display:block;height:100%;background:linear-gradient(90deg,#075ca8,#65d9ff)}
-
-/* DONUT */
-.donut-wrap{height:100%;display:grid;grid-template-columns:105px 1fr;align-items:center}
-.donut{
-  width:90px;height:90px;margin:auto;border-radius:50%;
-  background:conic-gradient(#65d9ff 0 33%,#0875c6 33% 66%,#163c52 66% 100%);
-  position:relative
-}
-.donut:after{
-  content:"PROSPECTS";position:absolute;inset:20px;border-radius:50%;
-  background:#03111a;color:#79dfff;display:grid;place-items:center;font-size:5px
-}
-.legend{display:grid;gap:7px}
-.legend-row{display:flex;justify-content:space-between;gap:5px;font-size:5px;color:#86a7b8}
-.legend-row span:before{content:"";display:inline-block;width:6px;height:6px;margin-right:5px;background:#65d9ff}
-.legend-row:nth-child(2) span:before{background:#0875c6}
-.legend-row:nth-child(3) span:before{background:#163c52}
-
-/* BARS / MANAGEMENT */
-.bar-list{display:grid;gap:7px;padding-top:4px}
-.bar-row{display:grid;grid-template-columns:65px 1fr 24px;gap:5px;align-items:center}
-.bar-row span,.bar-row b{font-size:5px;color:#7a9aac}.bar-row b{text-align:right}
-.bar-track{height:10px;background:#061d2b;border:1px solid #082d42}
-.bar-track i{display:block;height:100%;background:linear-gradient(90deg,#075ca8,#1faee7,#65d9ff)}
-.module-grid{height:100%;display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.module{
-  border:1px solid #092f46;background:#041520;padding:6px;display:flex;flex-direction:column;justify-content:space-between
-}
-.module strong{font-size:6px;color:#fff}
-.module p{font-size:4px;line-height:1.4;color:#5f8195;margin-top:3px}
-.module-foot{display:flex;justify-content:space-between;align-items:center;font-size:4px;color:#64d7ff}
-.module-status{border:1px solid #0b4260;padding:2px 4px}
-
-/* PROSPECT TABLE + ACTIVITY */
-.bottom-grid{
-  display:grid;
-  grid-template-columns:2.2fr .8fr;
-  gap:5px;
-}
-.prospects-panel,.activity-panel{height:220px}
-.summary{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:4px}
-.summary-badge{font-size:4px;color:#7ca0b2;border:1px solid #0a3852;background:#04151f;padding:3px 4px}
-.summary-badge strong{color:#fff}
-.table-wrap{height:155px;overflow:auto}
-.prospects-table{width:100%;min-width:790px;border-collapse:collapse}
-.prospects-table th{position:sticky;top:0;background:#061b28;color:#6b91a6;text-align:left;text-transform:uppercase;font-size:4px;padding:4px;border-bottom:1px solid #0c3c55}
-.prospects-table td{font-size:4.5px;color:#9cb7c6;padding:4px;border-bottom:1px solid #07283b;vertical-align:top}
-.prospect-name{color:#fff;font-weight:800}.prospect-contact{display:grid;gap:2px}.prospect-message{max-width:180px}
-.status-select{background:#03111a;color:#b8edff;border:1px solid #0c405c;font-size:4px;padding:2px}
-.quick-actions{display:flex;gap:2px;flex-wrap:wrap}.mini-btn{border:1px solid #0c405c!important;background:#061b28!important;color:#69d9ff!important;font-size:4px!important;padding:2px 3px!important}
-.table-message,.empty{text-align:center;color:#5e8296;font-size:5px;padding:10px}.table-error{color:#ff7583!important}
-.activity-list{height:100%;overflow:auto}
-.activity-item{display:grid;grid-template-columns:21px 1fr auto;gap:4px;align-items:center;padding:5px 1px;border-bottom:1px solid #07283b}
-.activity-icon{width:21px;height:21px;border:1px solid #0c405c;display:grid;place-items:center;color:#67daff;font-size:8px}
-.activity-item strong{display:block;font-size:5px}.activity-item span,.activity-time{font-size:4px;color:#5c7e92}.activity-item span{display:block;margin-top:2px}
-
-/* KEY INSIGHTS LIKE REFERENCE */
-.insights{
-  display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:5px
-}
-.insight{
-  height:40px;border:1px solid #0c3c55;background:#03111a;
-  padding:5px;display:flex;align-items:center;gap:5px
-}
-.insight-icon{width:24px;height:24px;border-radius:50%;border:1px solid #0e526f;display:grid;place-items:center;color:#65d9ff;font-size:8px}
-.insight strong{display:block;font-size:5px}.insight span{display:block;margin-top:2px;font-size:4px;color:#5c7f93}
-
-/* MODAL */
-.modal{position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;padding:14px}
-.modal.open{display:flex}.modal-dialog{width:min(620px,100%);max-height:90vh;overflow:auto;background:#04151f;border:1px solid #0d4a68;padding:12px}
-.modal-head{display:flex;justify-content:space-between;border-bottom:1px solid #0a3852;padding-bottom:7px;margin-bottom:7px}.modal-head h3{font-size:10px}.modal-head p{font-size:5px;color:#66879a}
-.modal-close{width:26px;height:26px;border:1px solid #0c405c;background:#061b28;color:#68d9ff}
-.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}.detail-box{border:1px solid #0a3852;background:#03111a;padding:6px}.detail-box.full{grid-column:1/-1}.detail-box span{display:block;font-size:4px;color:#5c7e92;text-transform:uppercase;margin-bottom:3px}.detail-box strong,.detail-box p{font-size:6px;line-height:1.45}
-.sidebar-overlay{display:none}
-
-@media(max-width:1100px){
-  .kpi-row{grid-template-columns:repeat(3,1fr)}
-  .analytics-grid{grid-template-columns:1fr 1fr;grid-template-rows:180px 180px 180px}
-}
-@media(max-width:760px){
-  .dashboard-border{display:block}
-  .top-header{display:flex;height:58px}.brand-area{width:125px}.brand-copy{display:none}.header-center{flex:1}.header-center h1{font-size:12px}.heartbeat{display:none}.header-actions{border-left:0}
-  .filters-column{position:fixed;z-index:1000;top:65px;bottom:7px;left:7px;width:150px;transform:translateX(-110%);transition:.2s}.filters-column.open{transform:translateX(0)}
-  .mobile-menu-button{display:inline-block}
-  .dashboard-content{padding:5px}.kpi-row{grid-template-columns:repeat(2,1fr)}.analytics-grid{grid-template-columns:1fr;grid-template-rows:190px 180px 180px 180px 180px 180px}.bottom-grid{grid-template-columns:1fr}.activity-panel{height:180px}.insights{grid-template-columns:1fr 1fr}
-  .sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:900}.sidebar-overlay.active{display:block}
-}
-</style>
-
-<style id="ky5-legibility-fix">
-/* =========================================================
-   KY5 — CORRECTION LISIBILITÉ + ORDRE
-   Objectif : même logique que la référence, mais lisible.
-========================================================= */
-
-:root{
-  --font-xs: 8px;
-  --font-sm: 10px;
-  --font-md: 12px;
-  --font-lg: 15px;
-  --font-xl: 22px;
-}
-
-/* Header */
-.header-center h1{font-size:22px!important}
-.header-center p{font-size:9px!important;margin-top:4px!important}
-.brand-copy strong{font-size:11px!important}
-.brand-copy span{font-size:7px!important}
-.head-btn{font-size:9px!important;padding:8px 10px!important}
-.admin-profile strong{font-size:9px!important}
-.admin-profile span{font-size:7px!important}
-
-/* Colonne de gauche */
-.filters-column{padding:8px!important}
-.filters-title{font-size:12px!important;padding:9px 8px!important}
-.filter{padding:8px!important;margin-bottom:7px!important}
-.filter label{font-size:9px!important;margin-bottom:7px!important}
-.filter select{height:30px!important;font-size:9px!important;padding:0 7px!important}
-.filter small{font-size:8px!important;line-height:1.55!important}
-.nav-item{font-size:9px!important;padding:8px 6px!important;min-height:34px!important}
-.nav-icon{width:20px!important;font-size:11px!important}
-
-/* KPI : moins minuscules, mieux alignés */
-.kpi-row{
-  grid-template-columns:repeat(5,minmax(0,1fr))!important;
-  gap:7px!important;
-  margin-bottom:7px!important;
-}
-.kpi{
-  height:92px!important;
-  padding:11px!important;
-  border-radius:6px!important;
-}
-.kpi-label{font-size:8px!important;letter-spacing:.25px!important}
-.kpi-value{font-size:26px!important;margin-top:11px!important}
-.kpi-note{font-size:8px!important;margin-top:3px!important}
-.kpi-icon{
-  width:30px!important;height:30px!important;
-  right:9px!important;top:10px!important;
-  font-size:12px!important
-}
-
-/* Grille analytique : ordre clair 3 colonnes x 2 lignes */
-.analytics-grid{
-  grid-template-columns:1fr 1.15fr .9fr!important;
-  grid-template-rows:235px 235px!important;
-  gap:7px!important;
-  margin-bottom:7px!important;
-}
-
-/* Panneaux */
-.panel{
-  border-radius:6px!important;
-}
-.panel-head{
-  height:42px!important;
-  padding:8px 10px!important;
-}
-.panel-head h3{
-  font-size:10px!important;
-  letter-spacing:.35px!important;
-}
-.panel-head p{
-  font-size:8px!important;
-  margin-top:3px!important;
-}
-.panel-body{
-  height:calc(100% - 42px)!important;
-  padding:8px!important;
-}
-.period-select{
-  height:28px!important;
-  font-size:8px!important;
-  padding:0 6px!important
-}
-
-/* Pages populaires */
-.page-row{padding:8px 2px!important}
-.page-name strong{font-size:9px!important}
-.page-name span{font-size:7px!important}
-.page-count{font-size:8px!important}
-
-/* Appareils */
-.device-row{
-  grid-template-columns:72px 1fr 34px!important;
-  gap:7px!important;
-  padding:8px 1px!important
-}
-.device-row span,.device-row b{font-size:8px!important}
-.device-bar{height:8px!important}
-
-/* Donut */
-.donut-wrap{grid-template-columns:130px 1fr!important}
-.donut{width:112px!important;height:112px!important}
-.donut:after{inset:27px!important;font-size:8px!important}
-.legend{gap:11px!important}
-.legend-row{font-size:9px!important}
-
-/* Barres */
-.bar-list{gap:11px!important;padding-top:6px!important}
-.bar-row{
-  grid-template-columns:95px 1fr 34px!important;
-  gap:8px!important
-}
-.bar-row span,.bar-row b{font-size:8px!important}
-.bar-track{height:14px!important}
-
-/* Gestion du site */
-.module-grid{gap:7px!important}
-.module{padding:9px!important}
-.module strong{font-size:9px!important}
-.module p{font-size:7px!important;line-height:1.45!important}
-.module-foot{font-size:7px!important}
-.module-status{padding:3px 5px!important}
-
-/* Bas du dashboard : prospects large + activité propre */
-.bottom-grid{
-  grid-template-columns:minmax(0,2.35fr) minmax(290px,.65fr)!important;
-  gap:7px!important;
-}
-.prospects-panel,.activity-panel{height:300px!important}
-.summary{gap:5px!important;margin-bottom:7px!important}
-.summary-badge{font-size:7px!important;padding:5px 7px!important}
-.table-wrap{height:220px!important}
-.prospects-table{min-width:900px!important}
-.prospects-table th{
-  font-size:7px!important;
-  padding:7px!important
-}
-.prospects-table td{
-  font-size:7px!important;
-  padding:7px!important
-}
-.status-select{
-  font-size:7px!important;
-  padding:4px 5px!important
-}
-.mini-btn{
-  font-size:7px!important;
-  padding:4px 6px!important
-}
-.prospect-message{max-width:220px!important}
-
-/* Activité */
-.activity-item{
-  grid-template-columns:30px 1fr auto!important;
-  gap:7px!important;
-  padding:8px 1px!important
-}
-.activity-icon{
-  width:30px!important;height:30px!important;
-  font-size:11px!important
-}
-.activity-item strong{font-size:8px!important}
-.activity-item span,.activity-time{font-size:7px!important}
-
-/* Insights */
-.insights{
-  grid-template-columns:repeat(5,1fr)!important;
-  gap:7px!important;
-  margin-top:7px!important
-}
-.insight{
-  height:58px!important;
-  padding:8px!important
-}
-.insight-icon{
-  width:32px!important;height:32px!important;
-  font-size:11px!important
-}
-.insight strong{font-size:8px!important}
-.insight span{font-size:7px!important;line-height:1.35!important}
-
-/* Loader + modal */
-.page-loader p{font-size:11px!important}
-.modal-head h3{font-size:14px!important}
-.modal-head p{font-size:8px!important}
-.detail-box span{font-size:7px!important}
-.detail-box strong,.detail-box p{font-size:9px!important}
-
-/* Responsive sans chaos */
-@media(max-width:1250px){
-  .kpi-row{grid-template-columns:repeat(5,minmax(0,1fr))!important}
-  .analytics-grid{
-    grid-template-columns:1fr 1fr!important;
-    grid-template-rows:250px 250px 250px!important;
-  }
-  .bottom-grid{grid-template-columns:1fr!important}
-  .activity-panel{height:230px!important}
-}
-@media(max-width:900px){
-  .kpi-row{grid-template-columns:repeat(2,1fr)!important}
-  .analytics-grid{grid-template-columns:1fr!important;grid-template-rows:260px 240px 240px 240px 240px 240px!important}
-  .insights{grid-template-columns:1fr 1fr!important}
-}
-</style>
-
-
-<style id="ky5-accent-balance">
-/* =========================================================
-   KY5 — VARIATION DE COULEURS
-   La base reste bleu KY5 / bleu ciel / blanc,
-   avec quelques accents secondaires pour éviter un rendu
-   trop sombre et trop monotone.
-========================================================= */
-
-:root{
-  --accent-amber:#f2b84b;
-  --accent-orange:#f57c4b;
-  --accent-violet:#8b7cf6;
-  --accent-green:#3fcf9d;
-  --accent-pink:#e66fa8;
-  --accent-red:#ef6b73;
-  --soft-blue:#8fd9f7;
-  --soft-surface:#0a2031;
-}
-
-/* Fond général légèrement plus lumineux */
-body{
-  background:
-    radial-gradient(circle at 72% -10%, rgba(24,162,224,.13), transparent 30%),
-    radial-gradient(circle at 100% 20%, rgba(139,124,246,.06), transparent 24%),
-    linear-gradient(180deg,#020a12 0%,#03111c 55%,#020a12 100%) !important;
-}
-
-/* Header et colonne de gauche un peu moins massifs */
-.top-header{
-  background:linear-gradient(90deg,#03111c,#061b2a,#041522) !important;
-}
-.filters-column{
-  background:linear-gradient(180deg,#03131f,#041823) !important;
-}
-.filter{
-  background:#061824 !important;
-}
-.panel{
-  background:linear-gradient(180deg,#061a28,#04141f) !important;
-}
-
-/* KPI : petites touches de couleurs secondaires */
-.kpi:nth-child(1){border-top:2px solid var(--sky) !important}
-.kpi:nth-child(2){border-top:2px solid var(--accent-violet) !important}
-.kpi:nth-child(3){border-top:2px solid var(--accent-amber) !important}
-.kpi:nth-child(4){border-top:2px solid var(--accent-pink) !important}
-.kpi:nth-child(5){border-top:2px solid var(--accent-green) !important}
-
-.kpi:nth-child(1) .kpi-icon{color:var(--sky)!important;border-color:rgba(101,217,255,.45)!important;background:rgba(101,217,255,.07)!important}
-.kpi:nth-child(2) .kpi-icon{color:#b3a9ff!important;border-color:rgba(139,124,246,.45)!important;background:rgba(139,124,246,.07)!important}
-.kpi:nth-child(3) .kpi-icon{color:#ffd27b!important;border-color:rgba(242,184,75,.45)!important;background:rgba(242,184,75,.07)!important}
-.kpi:nth-child(4) .kpi-icon{color:#f59ac4!important;border-color:rgba(230,111,168,.45)!important;background:rgba(230,111,168,.07)!important}
-.kpi:nth-child(5) .kpi-icon{color:#78e8bf!important;border-color:rgba(63,207,157,.45)!important;background:rgba(63,207,157,.07)!important}
-
-/* Supprimer l'effet "tout bleu" sur les soulignements KPI */
-.kpi:nth-child(1)::after{background:linear-gradient(90deg,#075ca8,#65d9ff)!important}
-.kpi:nth-child(2)::after{background:linear-gradient(90deg,#075ca8,#8b7cf6)!important}
-.kpi:nth-child(3)::after{background:linear-gradient(90deg,#075ca8,#f2b84b)!important}
-.kpi:nth-child(4)::after{background:linear-gradient(90deg,#075ca8,#e66fa8)!important}
-.kpi:nth-child(5)::after{background:linear-gradient(90deg,#075ca8,#3fcf9d)!important}
-
-/* Titres de panneaux : conserver bleu comme base, mais quelques accents */
-.analytics-grid .panel:nth-child(1) .panel-head{border-left:3px solid var(--sky)}
-.analytics-grid .panel:nth-child(2) .panel-head{border-left:3px solid var(--accent-violet)}
-.analytics-grid .panel:nth-child(3) .panel-head{border-left:3px solid var(--accent-pink)}
-.analytics-grid .panel:nth-child(4) .panel-head{border-left:3px solid var(--accent-amber)}
-.analytics-grid .panel:nth-child(5) .panel-head{border-left:3px solid var(--accent-green)}
-.analytics-grid .panel:nth-child(6) .panel-head{border-left:3px solid var(--accent-orange)}
-
-/* Donut prospects avec couleurs différenciées */
-.donut{
-  background:conic-gradient(
-    var(--accent-pink) 0 33%,
-    var(--accent-amber) 33% 66%,
-    var(--accent-green) 66% 100%
-  ) !important;
-}
-.legend-row:nth-child(1) span:before{background:var(--accent-pink)!important}
-.legend-row:nth-child(2) span:before{background:var(--accent-amber)!important}
-.legend-row:nth-child(3) span:before{background:var(--accent-green)!important}
-
-/* Barres de progression : variations */
-.bar-row:nth-child(1) .bar-track i{background:linear-gradient(90deg,#075ca8,#65d9ff)!important}
-.bar-row:nth-child(2) .bar-track i{background:linear-gradient(90deg,#075ca8,#8b7cf6)!important}
-.bar-row:nth-child(3) .bar-track i{background:linear-gradient(90deg,#075ca8,#e66fa8)!important}
-.bar-row:nth-child(4) .bar-track i{background:linear-gradient(90deg,#075ca8,#f2b84b)!important}
-.bar-row:nth-child(5) .bar-track i{background:linear-gradient(90deg,#075ca8,#3fcf9d)!important}
-
-/* Modules : petites cartes différenciées */
-.module:nth-child(1){border-top:2px solid var(--sky)!important}
-.module:nth-child(2){border-top:2px solid var(--accent-violet)!important}
-.module:nth-child(3){border-top:2px solid var(--accent-pink)!important}
-.module:nth-child(4){border-top:2px solid var(--accent-green)!important}
-
-/* Résumé prospects */
-.summary-badge:nth-child(1){color:#9ecbe0!important}
-.summary-badge:nth-child(2){color:#f1a5c6!important;border-color:rgba(230,111,168,.24)!important}
-.summary-badge:nth-child(3){color:#9ecbe0!important}
-.summary-badge:nth-child(4){color:#ffd076!important;border-color:rgba(242,184,75,.24)!important}
-.summary-badge:nth-child(5){color:#7fe0bc!important;border-color:rgba(63,207,157,.24)!important}
-
-/* Insights du bas */
-.insight:nth-child(1){border-top:2px solid var(--sky)!important}
-.insight:nth-child(2){border-top:2px solid var(--accent-amber)!important}
-.insight:nth-child(3){border-top:2px solid var(--accent-pink)!important}
-.insight:nth-child(4){border-top:2px solid var(--accent-green)!important}
-.insight:nth-child(5){border-top:2px solid var(--accent-violet)!important}
-
-.insight:nth-child(2) .insight-icon{color:#ffd27b!important;border-color:rgba(242,184,75,.45)!important}
-.insight:nth-child(3) .insight-icon{color:#f59ac4!important;border-color:rgba(230,111,168,.45)!important}
-.insight:nth-child(4) .insight-icon{color:#78e8bf!important;border-color:rgba(63,207,157,.45)!important}
-.insight:nth-child(5) .insight-icon{color:#b3a9ff!important;border-color:rgba(139,124,246,.45)!important}
-
-/* Table : rendre les lignes légèrement plus aérées et moins sombres */
-.prospects-table tbody tr:nth-child(even){
-  background:rgba(255,255,255,.012) !important;
-}
-.prospects-table tbody tr:hover{
-  background:rgba(24,162,224,.045) !important;
-}
-
-/* Boutons : toujours KY5, mais plus visibles */
-.head-btn{
-  background:linear-gradient(180deg,#082238,#061725)!important;
-}
-.head-btn:hover{
-  background:linear-gradient(180deg,#0b3150,#082239)!important;
-  border-color:#1876a3!important;
-}
-
-/* Quelques surfaces plus claires */
-.module,
-.insight,
-.filter{
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.012);
-}
-</style>
-
-
-<style id="ky5-overlap-position-fix">
-/* =========================================================
-   KY5 — CORRECTION SUPERPOSITIONS + POSITIONNEMENT LOGO
-========================================================= */
-
-/* Cadre principal : colonne gauche assez large pour ne plus écraser KY5 */
-.dashboard-border{
-  grid-template-columns:190px minmax(0,1fr)!important;
-  grid-template-rows:74px auto!important;
-}
-
-/* En-tête : 3 zones fixes et propres, sans chevauchement */
-.top-header{
-  grid-template-columns:190px minmax(0,1fr) 300px!important;
-  min-height:74px!important;
-  height:74px!important;
-  align-items:stretch!important;
-  overflow:hidden!important;
-}
-
-/* KY5 correctement placé dans son bloc */
-.brand-area{
-  width:100%!important;
-  height:74px!important;
-  padding:10px 12px!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:flex-start!important;
-  gap:10px!important;
-  overflow:hidden!important;
-}
-.brand-logo{
-  width:50px!important;
-  height:50px!important;
-  min-width:50px!important;
-  flex:0 0 50px!important;
-  border-radius:9px!important;
-  font-size:16px!important;
-  margin:0!important;
-}
-.brand-copy{
-  min-width:0!important;
-  overflow:hidden!important;
-}
-.brand-copy strong{
-  font-size:11px!important;
-  line-height:1.25!important;
-  white-space:normal!important;
-  max-width:108px!important;
-}
-.brand-copy span{
-  font-size:7px!important;
-  margin-top:4px!important;
-  letter-spacing:.8px!important;
-}
-
-/* Titre central : aucune superposition avec la zone de droite */
-.header-center{
-  min-width:0!important;
-  height:74px!important;
-  padding:11px 16px!important;
-  display:flex!important;
-  flex-direction:column!important;
-  justify-content:center!important;
-  overflow:hidden!important;
-}
-.header-center h1{
-  font-size:19px!important;
-  line-height:1.1!important;
-  white-space:nowrap!important;
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-  padding-right:0!important;
-}
-.header-center p{
-  font-size:9px!important;
-  line-height:1.35!important;
-  white-space:nowrap!important;
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-  max-width:100%!important;
-}
-
-/* Le symbole décoratif était une source de chevauchement */
-.heartbeat{
-  display:none!important;
-}
-
-/* Actions à droite dans leur propre zone */
-.header-actions{
-  width:300px!important;
-  min-width:300px!important;
-  height:74px!important;
-  padding:9px 10px!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:flex-end!important;
-  gap:7px!important;
-  overflow:hidden!important;
-}
-.head-btn{
-  flex:0 0 auto!important;
-  white-space:nowrap!important;
-  font-size:8px!important;
-  padding:8px 9px!important;
-}
-.admin-profile{
-  min-width:110px!important;
-  max-width:125px!important;
-  overflow:hidden!important;
-}
-.admin-profile strong{
-  font-size:8px!important;
-  white-space:nowrap!important;
-}
-.admin-profile span{
-  font-size:7px!important;
-  max-width:120px!important;
-}
-
-/* Colonne des filtres alignée avec le bloc KY5 */
-.filters-column{
-  grid-column:1!important;
-  grid-row:2!important;
-  width:auto!important;
-  min-width:0!important;
-  padding:8px!important;
-}
-
-/* Contenu : empêcher les enfants de sortir de leur grille */
-.dashboard-content,
-.kpi-row,
-.analytics-grid,
-.bottom-grid,
-.insights,
-.panel,
-.panel-head,
-.panel-body{
-  min-width:0!important;
-}
-
-.panel-head > div{
-  min-width:0!important;
-}
-.panel-head h3,
-.panel-head p{
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-}
-.panel-head h3{
-  white-space:nowrap!important;
-}
-.panel-head p{
-  white-space:nowrap!important;
-}
-
-/* Sélecteur période : ne pousse plus le titre */
-.period-select{
-  flex:0 0 auto!important;
-  max-width:120px!important;
-}
-
-/* KPI : aucun texte sous les icônes */
-.kpi{
-  overflow:hidden!important;
-}
-.kpi-label,
-.kpi-note{
-  max-width:calc(100% - 42px)!important;
-  white-space:nowrap!important;
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-}
-
-/* Modules : textes contenus dans leurs cartes */
-.module{
-  min-width:0!important;
-  overflow:hidden!important;
-}
-.module strong,
-.module p{
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-}
-.module strong{
-  white-space:nowrap!important;
-}
-
-/* Tableau : horizontal uniquement à l'intérieur, pas sur toute la page */
-.table-wrap{
-  max-width:100%!important;
-  overflow-x:auto!important;
-  overflow-y:auto!important;
-}
-
-/* Responsive */
-@media(max-width:1250px){
-  .dashboard-border{
-    grid-template-columns:175px minmax(0,1fr)!important;
-  }
-  .top-header{
-    grid-template-columns:175px minmax(0,1fr) 250px!important;
-  }
-  .header-actions{
-    width:250px!important;
-    min-width:250px!important;
-  }
-  .brand-copy strong{
-    font-size:10px!important;
-    max-width:95px!important;
-  }
-  .header-center h1{
-    font-size:17px!important;
-  }
-  .admin-profile{
-    display:none!important;
-  }
-}
-
-@media(max-width:900px){
-  .top-header{
-    display:grid!important;
-    grid-template-columns:140px minmax(0,1fr) 115px!important;
-    height:66px!important;
-    min-height:66px!important;
-  }
-  .brand-area{
-    height:66px!important;
-    padding:8px!important;
-  }
-  .brand-logo{
-    width:43px!important;
-    height:43px!important;
-    min-width:43px!important;
-    flex-basis:43px!important;
-  }
-  .brand-copy strong{
-    font-size:8px!important;
-    max-width:75px!important;
-  }
-  .brand-copy span{
-    font-size:6px!important;
-  }
-  .header-center{
-    height:66px!important;
-    padding:9px 10px!important;
-  }
-  .header-center h1{
-    font-size:14px!important;
-  }
-  .header-center p{
-    font-size:7px!important;
-  }
-  .header-actions{
-    width:115px!important;
-    min-width:115px!important;
-    height:66px!important;
-    padding:6px!important;
-  }
-  .header-actions a{
-    display:none!important;
-  }
-  .head-btn{
-    font-size:7px!important;
-    padding:7px!important;
-  }
-}
-
-@media(max-width:760px){
-  .dashboard-border{
-    display:block!important;
-  }
-  .top-header{
-    display:grid!important;
-    grid-template-columns:100px minmax(0,1fr) 90px!important;
-  }
-  .brand-area{
-    width:100px!important;
-  }
-  .brand-copy{
-    display:none!important;
-  }
-  .brand-logo{
-    margin:auto!important;
-  }
-  .filters-column{
-    width:190px!important;
-    top:81px!important;
-  }
-  .header-actions{
-    width:90px!important;
-    min-width:90px!important;
-  }
-}
-</style>
-
-
-<style id="ky5-voir-site-fix">
-/* Voir le site doit rester accessible sur toutes les tailles */
-.header-actions a.head-btn{
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-}
-
-/* Sur mobile, si l'en-tête devient trop serré, le lien reste accessible dans la colonne gauche */
-@media(max-width:900px){
-  .header-actions a.head-btn{
-    display:none!important;
-  }
-}
-</style>
-
-
-<style id="ky5-public-site-harmony">
-/* =========================================================
-   KY5 — HARMONISATION AVEC LE SITE PUBLIC
-   Base : bleu KY5 + bleu ciel + blanc
-   Accents secondaires très légers uniquement pour différencier.
-========================================================= */
-
-:root{
-  --public-bg:#f4f9fc;
-  --public-surface:#ffffff;
-  --public-surface-2:#eef7fc;
-  --public-border:#cfe7f3;
-  --public-navy:#061b33;
-  --public-blue:#075ca8;
-  --public-cyan:#18a2e0;
-  --public-sky:#67d9ff;
-  --public-text:#17324d;
-  --public-muted:#6f8798;
-
-  --soft-violet:#8b7cf6;
-  --soft-amber:#e7b24a;
-  --soft-green:#48b991;
-  --soft-rose:#d978a5;
-}
-
-/* Fond principal beaucoup plus proche du site public */
-body{
-  background:
-    radial-gradient(circle at 92% 0%, rgba(24,162,224,.10), transparent 24%),
-    linear-gradient(180deg,#f7fbfe 0%,#eef7fb 52%,#f7fbfe 100%) !important;
-  color:var(--public-text)!important;
-}
-
-.dashboard-frame{
-  background:#eaf5fb!important;
-}
-
-.dashboard-border{
-  background:#f8fcfe!important;
-  border-color:#b9dceb!important;
-  box-shadow:0 16px 40px rgba(7,92,168,.08)!important;
-}
-
-/* En-tête KY5 : reste bleu pour garder le caractère admin */
-.top-header{
-  background:
-    linear-gradient(90deg,#061b33 0%,#08385f 62%,#075ca8 100%)!important;
-  border-bottom-color:#0d6ea6!important;
-}
-
-.brand-area{
-  border-right-color:rgba(255,255,255,.12)!important;
-}
-
-.brand-logo{
-  border-color:#bfe8f8!important;
-  box-shadow:0 8px 20px rgba(0,0,0,.12)!important;
-}
-
-.brand-copy strong,
-.header-center h1,
-.admin-profile strong{
-  color:#fff!important;
-}
-
-.brand-copy span,
-.header-center p,
-.admin-profile span{
-  color:#bce7f8!important;
-}
-
-.header-actions{
-  border-left-color:rgba(255,255,255,.12)!important;
-}
-
-.head-btn{
-  background:rgba(255,255,255,.10)!important;
-  border-color:rgba(255,255,255,.20)!important;
-  color:#fff!important;
-}
-
-.head-btn:hover{
-  background:rgba(255,255,255,.18)!important;
-  border-color:rgba(255,255,255,.30)!important;
-}
-
-/* Colonne de gauche : bleu KY5, mais moins noire */
-.filters-column{
-  background:
-    linear-gradient(180deg,#082946 0%,#061f36 100%)!important;
-  border-right-color:#0d5d89!important;
-}
-
-.filters-title{
-  background:rgba(255,255,255,.08)!important;
-  border-color:rgba(255,255,255,.12)!important;
-  color:#dff6ff!important;
-}
-
-.filter{
-  background:rgba(255,255,255,.055)!important;
-  border-color:rgba(255,255,255,.10)!important;
-}
-
-.filter label{
-  color:#d9f2fc!important;
-}
-
-.filter select{
-  background:#ffffff!important;
-  border-color:#b9dceb!important;
-  color:#17324d!important;
-}
-
-.filter small{
-  color:#a8c9d9!important;
-}
-
-.filter small strong{
-  color:#fff!important;
-}
-
-.nav-list{
-  border-top-color:rgba(255,255,255,.10)!important;
-}
-
-.nav-item{
-  color:#c1dbe7!important;
-}
-
-.nav-item:hover,
-.nav-item.active{
-  background:rgba(255,255,255,.10)!important;
-  border-color:rgba(103,217,255,.20)!important;
-  color:#fff!important;
-}
-
-.logout-button{
-  color:#ffd1d7!important;
-}
-
-/* Contenu principal : cartes blanches comme le site public */
-.dashboard-content{
-  background:
-    radial-gradient(circle at 85% 5%, rgba(24,162,224,.06), transparent 22%),
-    #f4f9fc!important;
-}
-
-/* KPI clairs, lisibles, proches du site public */
-.kpi{
-  background:linear-gradient(180deg,#ffffff 0%,#f8fcfe 100%)!important;
-  border-color:#c8e3ef!important;
-  box-shadow:0 8px 18px rgba(7,92,168,.06)!important;
-}
-
-.kpi:hover{
-  border-color:#7fc9e8!important;
-  box-shadow:0 12px 24px rgba(7,92,168,.11)!important;
-}
-
-.kpi-label{
-  color:#68879a!important;
-}
-
-.kpi-value{
-  color:#061b33!important;
-}
-
-.kpi-note{
-  color:#7895a6!important;
-}
-
-.kpi-icon{
-  background:#eaf7fd!important;
-  border-color:#b9e5f7!important;
-  color:#075ca8!important;
-}
-
-/* Nuances : petites touches, sans casser l'identité KY5 */
-.kpi:nth-child(1){border-top:3px solid var(--public-cyan)!important}
-.kpi:nth-child(2){border-top:3px solid var(--soft-violet)!important}
-.kpi:nth-child(3){border-top:3px solid var(--soft-amber)!important}
-.kpi:nth-child(4){border-top:3px solid var(--soft-rose)!important}
-.kpi:nth-child(5){border-top:3px solid var(--soft-green)!important}
-
-.kpi:nth-child(1)::after{background:linear-gradient(90deg,#075ca8,#67d9ff)!important}
-.kpi:nth-child(2)::after{background:linear-gradient(90deg,#075ca8,#8b7cf6)!important}
-.kpi:nth-child(3)::after{background:linear-gradient(90deg,#075ca8,#e7b24a)!important}
-.kpi:nth-child(4)::after{background:linear-gradient(90deg,#075ca8,#d978a5)!important}
-.kpi:nth-child(5)::after{background:linear-gradient(90deg,#075ca8,#48b991)!important}
-
-/* Panneaux analytiques blancs */
-.panel{
-  background:#ffffff!important;
-  border-color:#c8e3ef!important;
-  box-shadow:0 8px 18px rgba(7,92,168,.055)!important;
-}
-
-.panel-head{
-  background:linear-gradient(180deg,#fafdff,#f3f9fc)!important;
-  border-bottom-color:#dbeef6!important;
-}
-
-.panel-head h3{
-  color:#0a2949!important;
-}
-
-.panel-head p{
-  color:#718da0!important;
-}
-
-.panel-body{
-  background:#ffffff!important;
-}
-
-.period-select{
-  background:#ffffff!important;
-  border-color:#bcddeb!important;
-  color:#17324d!important;
-}
-
-/* Pages populaires */
-.page-row{
-  border-bottom-color:#e7f2f7!important;
-}
-
-.page-name strong{
-  color:#17324d!important;
-}
-
-.page-name span{
-  color:#7893a3!important;
-}
-
-.page-count{
-  color:#075ca8!important;
-  background:#eaf7fd!important;
-  border-radius:999px!important;
-}
-
-/* Appareils */
-.device-row span,
-.device-row b{
-  color:#6e8a9b!important;
-}
-
-.device-bar{
-  background:#e8f3f8!important;
-}
-
-.device-bar i{
-  background:linear-gradient(90deg,#075ca8,#18a2e0,#67d9ff)!important;
-}
-
-/* Donut : couleurs secondaires, mais avec bleu KY5 comme liaison */
-.donut{
-  background:conic-gradient(
-    #d978a5 0 33%,
-    #e7b24a 33% 66%,
-    #48b991 66% 100%
-  )!important;
-}
-
-.donut:after{
-  background:#ffffff!important;
-  color:#075ca8!important;
-  border:1px solid #d9edf5!important;
-}
-
-.legend-row{
-  color:#617f92!important;
-}
-
-/* Barres */
-.bar-row span,
-.bar-row b{
-  color:#668396!important;
-}
-
-.bar-track{
-  background:#eaf3f7!important;
-  border-color:#d7eaf2!important;
-}
-
-.bar-row:nth-child(1) .bar-track i{background:linear-gradient(90deg,#075ca8,#67d9ff)!important}
-.bar-row:nth-child(2) .bar-track i{background:linear-gradient(90deg,#075ca8,#8b7cf6)!important}
-.bar-row:nth-child(3) .bar-track i{background:linear-gradient(90deg,#075ca8,#d978a5)!important}
-.bar-row:nth-child(4) .bar-track i{background:linear-gradient(90deg,#075ca8,#e7b24a)!important}
-.bar-row:nth-child(5) .bar-track i{background:linear-gradient(90deg,#075ca8,#48b991)!important}
-
-/* Modules */
-.module{
-  background:#f9fcfe!important;
-  border-color:#d3e9f2!important;
-}
-
-.module strong{
-  color:#0a2949!important;
-}
-
-.module p{
-  color:#718c9d!important;
-}
-
-.module-foot{
-  color:#075ca8!important;
-}
-
-.module-status{
-  background:#eaf7fd!important;
-  border-color:#c5e6f3!important;
-  color:#075ca8!important;
-}
-
-/* Tableau prospects */
-.summary-badge{
-  background:#f6fbfd!important;
-  border-color:#d6eaf3!important;
-  color:#607d8e!important;
-}
-
-.prospects-table th{
-  background:#edf7fb!important;
-  color:#5b7c90!important;
-  border-bottom-color:#cfe6f0!important;
-}
-
-.prospects-table td{
-  color:#496779!important;
-  border-bottom-color:#e6f0f5!important;
-}
-
-.prospects-table tbody tr:nth-child(even){
-  background:#fbfdfe!important;
-}
-
-.prospects-table tbody tr:hover{
-  background:#edf8fd!important;
-}
-
-.prospect-name{
-  color:#0a2949!important;
-}
-
-.status-select{
-  background:#ffffff!important;
-  border-color:#c2deea!important;
-  color:#17324d!important;
-}
-
-.mini-btn{
-  background:#eaf7fd!important;
-  border-color:#c1e3f0!important;
-  color:#075ca8!important;
-}
-
-/* Activité */
-.activity-item{
-  border-bottom-color:#e5f0f5!important;
-}
-
-.activity-icon{
-  background:#eef8fc!important;
-  border-color:#c7e5f1!important;
-  color:#075ca8!important;
-}
-
-.activity-item strong{
-  color:#17324d!important;
-}
-
-.activity-item span,
-.activity-time{
-  color:#7893a3!important;
-}
-
-/* Insights bas */
-.insight{
-  background:#ffffff!important;
-  border-color:#cfe5ef!important;
-  box-shadow:0 5px 12px rgba(7,92,168,.045)!important;
-}
-
-.insight strong{
-  color:#17324d!important;
-}
-
-.insight span{
-  color:#7893a3!important;
-}
-
-.insight-icon{
-  background:#edf8fc!important;
-}
-
-/* Modal */
-.modal-dialog{
-  background:#ffffff!important;
-  border-color:#b9dceb!important;
-}
-
-.modal-head{
-  border-bottom-color:#dbeaf1!important;
-}
-
-.modal-head h3{
-  color:#0a2949!important;
-}
-
-.modal-head p{
-  color:#7893a3!important;
-}
-
-.modal-close{
-  background:#eaf7fd!important;
-  border-color:#c1e3f0!important;
-  color:#075ca8!important;
-}
-
-.detail-box{
-  background:#f8fcfe!important;
-  border-color:#d6e9f1!important;
-}
-
-.detail-box span{
-  color:#708b9b!important;
-}
-
-.detail-box strong,
-.detail-box p{
-  color:#17324d!important;
-}
-
-/* Conserver une vraie sensation de tableau admin */
-.analytics-grid .panel:nth-child(1) .panel-head{border-left:4px solid #18a2e0!important}
-.analytics-grid .panel:nth-child(2) .panel-head{border-left:4px solid #8b7cf6!important}
-.analytics-grid .panel:nth-child(3) .panel-head{border-left:4px solid #d978a5!important}
-.analytics-grid .panel:nth-child(4) .panel-head{border-left:4px solid #e7b24a!important}
-.analytics-grid .panel:nth-child(5) .panel-head{border-left:4px solid #48b991!important}
-.analytics-grid .panel:nth-child(6) .panel-head{border-left:4px solid #f08a58!important}
-</style>
-
-
-<style id="ky5-prospect-photo-admin">
-.prospect-photo-thumb{width:76px;height:76px;object-fit:cover;border-radius:9px;border:1px solid #c1e3f0;display:block;margin-top:7px;background:#eef8fc;box-shadow:0 4px 12px rgba(7,92,168,.10)}
-.prospect-photo-large{display:block;max-width:100%;max-height:420px;margin:6px auto 0;border-radius:10px;border:1px solid #c1e3f0;object-fit:contain;background:#f4f9fc}
-</style>
-
-
-<style id="ky5-font-size-upgrade">
-/* =========================================================
-   KY5 — AGRANDISSEMENT GLOBAL DES ÉCRITURES
-   Modification visuelle uniquement : aucune logique JS touchée.
-========================================================= */
-
-/* En-tête */
-.brand-copy strong{font-size:12px!important}
-.brand-copy span{font-size:8px!important}
-.header-center h1{font-size:22px!important}
-.header-center p{font-size:11px!important}
-.head-btn{font-size:10px!important}
-.admin-profile strong{font-size:10px!important}
-.admin-profile span{font-size:8px!important}
-
-/* Colonne de gauche */
-.filters-title{font-size:14px!important}
-.filter label{font-size:11px!important}
-.filter select{font-size:11px!important}
-.filter small{font-size:10px!important}
-.nav-item{font-size:11px!important}
-.nav-icon{font-size:13px!important}
-
-/* KPI */
-.kpi-label{font-size:10px!important}
-.kpi-value{font-size:28px!important}
-.kpi-note{font-size:10px!important}
-.kpi-icon{font-size:14px!important}
-
-/* Titres et sous-titres des panneaux */
-.panel-head h3{font-size:12px!important}
-.panel-head p{font-size:10px!important}
-.period-select{font-size:10px!important}
-
-/* Pages populaires */
-.page-name strong{font-size:11px!important}
-.page-name span{font-size:9px!important}
-.page-count{font-size:10px!important}
-
-/* Appareils */
-.device-row span,
-.device-row b{font-size:10px!important}
-
-/* Donut / légende */
-.donut:after{font-size:10px!important}
-.legend-row{font-size:10px!important}
-
-/* Barres et statistiques */
-.bar-row span,
-.bar-row b{font-size:10px!important}
-
-/* Modules */
-.module strong{font-size:11px!important}
-.module p{font-size:9px!important}
-.module-foot{font-size:9px!important}
-.module-status{font-size:9px!important}
-
-/* Résumé et tableau prospects */
-.summary-badge{font-size:9px!important}
-.prospects-table th{font-size:9px!important}
-.prospects-table td{font-size:10px!important}
-.status-select{font-size:9px!important}
-.mini-btn{font-size:9px!important}
-.table-message,
-.empty{font-size:10px!important}
-
-/* Activité */
-.activity-item strong{font-size:10px!important}
-.activity-item span,
-.activity-time{font-size:9px!important}
-.activity-icon{font-size:13px!important}
-
-/* Insights */
-.insight strong{font-size:10px!important}
-.insight span{font-size:9px!important}
-.insight-icon{font-size:13px!important}
-
-/* Loader + modal */
-.page-loader p{font-size:12px!important}
-.modal-head h3{font-size:16px!important}
-.modal-head p{font-size:10px!important}
-.detail-box span{font-size:9px!important}
-.detail-box strong,
-.detail-box p{font-size:11px!important}
-
-/* Mobile : conserver une bonne lisibilité sans casser la mise en page */
-@media(max-width:900px){
-  .header-center h1{font-size:18px!important}
-  .header-center p{font-size:9px!important}
-  .head-btn{font-size:9px!important}
-  .brand-copy strong{font-size:10px!important}
-  .brand-copy span{font-size:7px!important}
-}
-
-@media(max-width:760px){
-  .header-center h1{font-size:16px!important}
-  .header-center p{font-size:9px!important}
-  .kpi-label{font-size:9px!important}
-  .kpi-value{font-size:25px!important}
-  .kpi-note{font-size:9px!important}
-  .panel-head h3{font-size:11px!important}
-  .panel-head p{font-size:9px!important}
-}
-</style>
-
-
-<style id="ky5-statistics-functional-fix">
-/* =========================================================
-   KY5 — STATISTIQUES : CORRECTION FONCTIONNELLE
-========================================================= */
-.legend-row:nth-child(1) span:before{background:#d978a5!important}
-.legend-row:nth-child(2) span:before{background:#8b7cf6!important}
-.legend-row:nth-child(3) span:before{background:#e7b24a!important}
-.legend-row:nth-child(4) span:before{background:#48b991!important}
-
-#prospectDonut{
-  background:conic-gradient(
-    #d978a5 0 25%,
-    #8b7cf6 25% 50%,
-    #e7b24a 50% 75%,
-    #48b991 75% 100%
-  )!important;
-}
-
-.chart-wrap{
-  position:relative;
-  min-height:0;
-}
-
-#visitsChart{
-  width:100%!important;
-  height:100%!important;
-}
-</style>
-
-
-<style id="ky5-prospect-search">
-/* =========================================================
-   KY5 — RECHERCHE RAPIDE DES PROSPECTS PAR NOM
-========================================================= */
-.prospect-search-wrap{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  margin-bottom:9px;
-  padding:8px 10px;
-  background:#f7fbfd;
-  border:1px solid #d2e9f3;
-  border-radius:8px;
-}
-.prospect-search-icon{
-  flex:0 0 auto;
-  color:#075ca8;
-  font-size:14px;
-}
-.prospect-search-input{
-  flex:1;
-  min-width:0;
-  height:34px;
-  padding:0 10px;
-  border:1px solid #bdddea;
-  border-radius:7px;
-  background:#fff;
-  color:#17324d;
-  font:inherit;
-  font-size:11px;
-  outline:none;
-}
-.prospect-search-input::placeholder{color:#8aa1af}
-.prospect-search-input:focus{
-  border-color:#18a2e0;
-  box-shadow:0 0 0 3px rgba(24,162,224,.10);
-}
-.prospect-search-clear{
-  flex:0 0 auto;
-  height:34px;
-  padding:0 11px;
-  border:1px solid #c7e4ef;
-  border-radius:7px;
-  background:#eaf7fd;
-  color:#075ca8;
-  font-size:10px;
-  font-weight:700;
-}
-.prospect-search-clear:hover{background:#dff3fb}
-/* Boutons de filtre des prospects */
-.summary .summary-badge{
-  appearance:none;
-  -webkit-appearance:none;
-  cursor:pointer;
-  font:inherit;
-  transition:background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease;
-}
-.summary .summary-badge:hover{
-  border-color:#8fcfe9!important;
-  background:#edf8fd!important;
-  transform:translateY(-1px);
-}
-.summary .summary-badge:focus-visible{
-  outline:2px solid #18a2e0;
-  outline-offset:2px;
-}
-.summary .summary-badge.is-active{
-  background:#075ca8!important;
-  border-color:#075ca8!important;
-  color:#fff!important;
-  box-shadow:0 4px 12px rgba(7,92,168,.18);
-}
-.summary .summary-badge.is-active strong{
-  color:#fff!important;
-}
-
-@media(max-width:760px){
-  .prospect-search-wrap{padding:7px;gap:6px}
-  .prospect-search-input{font-size:10px}
-  .prospect-search-clear{padding:0 8px;font-size:9px}
-}
-</style>
-
-
-<style id="ky5-prospect-scroll-actions-final">
-/* =========================================================
-   KY5 — CORRECTION FINALE DU TABLEAU PROSPECTS
-   - La recherche et les filtres restent visibles
-   - La barre horizontale reste accessible
-   - La colonne Actions reste visible à droite
-========================================================= */
-
-/* Le bloc avait trop peu de hauteur depuis l'ajout recherche + filtres */
-#prospectsSection{
-  height:390px!important;
-}
-
-/* Organisation verticale propre du contenu du panneau */
-#prospectsSection > .panel-body{
-  height:calc(100% - 42px)!important;
-  display:flex!important;
-  flex-direction:column!important;
-  min-height:0!important;
-  overflow:hidden!important;
-}
-
-#prospectsSection .prospect-search-wrap,
-#prospectsSection .summary{
-  flex:0 0 auto!important;
-}
-
-/* Zone du tableau : le défilement horizontal doit toujours être disponible */
-#prospectsSection .table-wrap{
-  flex:1 1 auto!important;
-  height:auto!important;
-  min-height:210px!important;
-  max-width:100%!important;
-  overflow-x:scroll!important;
-  overflow-y:auto!important;
-  scrollbar-gutter:stable!important;
-  overscroll-behavior:contain;
-  scrollbar-width:auto;
-  scrollbar-color:#075ca8 #e6f0f5;
-  padding-bottom:2px;
-}
-
-/* Barre bien visible dans Chrome / Edge */
-#prospectsSection .table-wrap::-webkit-scrollbar{
-  width:12px;
-  height:12px;
-}
-#prospectsSection .table-wrap::-webkit-scrollbar-track{
-  background:#e6f0f5;
-  border-radius:999px;
-}
-#prospectsSection .table-wrap::-webkit-scrollbar-thumb{
-  background:#075ca8;
-  border:2px solid #e6f0f5;
-  border-radius:999px;
-}
-#prospectsSection .table-wrap::-webkit-scrollbar-thumb:hover{
-  background:#064d8d;
-}
-
-/* Largeur suffisante pour conserver toutes les colonnes */
-#prospectsSection .prospects-table{
-  min-width:1120px!important;
-}
-
-/* Actions visibles même quand le tableau est positionné à gauche */
-#prospectsSection .prospects-table th:last-child,
-#prospectsSection .prospects-table td:last-child{
-  position:sticky!important;
-  right:0!important;
-  min-width:170px!important;
-  width:170px!important;
-  background:#ffffff!important;
-  box-shadow:-8px 0 14px rgba(7,92,168,.10);
-}
-
-#prospectsSection .prospects-table th:last-child{
-  z-index:8!important;
-  background:#edf7fb!important;
-}
-
-#prospectsSection .prospects-table td:last-child{
-  z-index:4!important;
-}
-
-/* Les boutons d'action restent propres et faciles à utiliser */
-#prospectsSection .quick-actions{
-  display:flex!important;
-  flex-wrap:wrap!important;
-  gap:5px!important;
-}
-
-#prospectsSection .quick-actions .mini-btn{
-  white-space:nowrap!important;
-}
-
-/* Sur les écrans plus petits, donner encore un peu plus de hauteur */
-@media(max-width:1250px){
-  #prospectsSection{
-    height:410px!important;
-  }
-  #prospectsSection .table-wrap{
-    min-height:225px!important;
-  }
-}
-
-@media(max-width:760px){
-  #prospectsSection{
-    height:430px!important;
-  }
-  #prospectsSection .prospects-table{
-    min-width:1050px!important;
-  }
-  #prospectsSection .prospects-table th:last-child,
-  #prospectsSection .prospects-table td:last-child{
-    min-width:150px!important;
-    width:150px!important;
-  }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+
+    <title>Administration en maintenance | KY5 GLOBAL TRADE</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #061b33;
+            --blue: #075ca8;
+            --cyan: #18a2e0;
+            --sky: #67d9ff;
+            --white: #ffffff;
+            --text: #dff7ff;
+            --muted: #92adbd;
+            --line: rgba(103, 217, 255, 0.18);
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 12% 15%,
+                    rgba(24, 162, 224, .16),
+                    transparent 27%
+                ),
+                radial-gradient(
+                    circle at 88% 80%,
+                    rgba(103, 217, 255, .10),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    145deg,
+                    #01060b 0%,
+                    #03111c 48%,
+                    #062b4e 100%
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 28px;
+        }
+
+        .grid {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .13;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,.055) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.055) 1px,
+                    transparent 1px
+                );
+
+            background-size: 46px 46px;
+        }
+
+        .halo {
+            position: fixed;
+            border-radius: 50%;
+            border: 1px solid rgba(103,217,255,.11);
+            pointer-events: none;
+        }
+
+        .halo.one {
+            width: 390px;
+            height: 390px;
+            top: -165px;
+            right: -125px;
+            animation: rotate 20s linear infinite;
+        }
+
+        .halo.two {
+            width: 270px;
+            height: 270px;
+            left: -95px;
+            bottom: -120px;
+            animation: rotateReverse 17s linear infinite;
+        }
+
+        .page {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+
+            border-radius: 30px;
+
+            border:
+                1px solid
+                rgba(103,217,255,.20);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.085),
+                    rgba(255,255,255,.035)
+                );
+
+            box-shadow:
+                0 34px 90px
+                rgba(0,0,0,.44);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            padding:
+                44px 48px 36px;
+
+            animation:
+                appear .8s ease both;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
 
+            width: 100%;
+            height: 3px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--sky),
+                    #ffffff,
+                    var(--cyan),
+                    transparent
+                );
+
+            background-size: 220% 100%;
+            animation: sweep 5s linear infinite;
+        }
+
+        .admin-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            padding-bottom: 28px;
+            margin-bottom: 38px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.08);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .brand-logo {
+            width: 58px;
+            height: 58px;
+
+            display: grid;
+            place-items: center;
+
+            flex: 0 0 auto;
+
+            border-radius: 14px;
+
+            color: var(--blue);
+            background: #ffffff;
+
+            font-size: 17px;
+            font-weight: 900;
+
+            border:
+                1px solid
+                rgba(103,217,255,.50);
+
+            box-shadow:
+                0 10px 26px
+                rgba(0,0,0,.20);
+        }
+
+        .brand-copy strong {
+            display: block;
+            color: #ffffff;
+
+            font-size:
+                clamp(15px, 2vw, 20px);
+
+            font-weight: 900;
+            letter-spacing: .7px;
+        }
+
+        .brand-copy span {
+            display: block;
+            margin-top: 5px;
+
+            color: #8edfff;
+
+            font-size: 8px;
+            font-weight: 900;
+            letter-spacing: 2.6px;
+
+            text-transform: uppercase;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 10px 14px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(255,255,255,.055);
+
+            border:
+                1px solid
+                rgba(103,217,255,.16);
+
+            color: #bdeeff;
+
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 1.2px;
+
+            text-transform: uppercase;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: var(--sky);
+
+            box-shadow:
+                0 0 14px
+                rgba(103,217,255,.95);
+
+            animation:
+                pulse 1.6s ease-in-out infinite;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .icon-shell {
+            position: relative;
+
+            width: 142px;
+            height: 142px;
+
+            margin:
+                0 auto 31px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(103,217,255,.15),
+                    rgba(255,255,255,.045)
+                );
+
+            border:
+                1px solid
+                rgba(103,217,255,.28);
+
+            box-shadow:
+                0 0 0 13px
+                rgba(103,217,255,.03),
+                0 22px 48px
+                rgba(0,0,0,.20);
+        }
+
+        .icon-shell::before {
+            content: "";
+
+            position: absolute;
+            inset: -14px;
+
+            border-radius: 50%;
+
+            border:
+                1px dashed
+                rgba(103,217,255,.20);
+
+            animation:
+                rotate 14s linear infinite;
+        }
+
+        .icon-shell svg {
+            width: 76px;
+            height: 76px;
+
+            stroke: #ffffff;
+
+            filter:
+                drop-shadow(
+                    0 0 14px
+                    rgba(103,217,255,.32)
+                );
+        }
+
+        .eyebrow {
+            margin-bottom: 15px;
+
+            color: #8ee3ff;
+
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 3.4px;
+
+            text-transform: uppercase;
+        }
+
+        h1 {
+            max-width: 760px;
+            margin:
+                0 auto 19px;
+
+            color: #ffffff;
+
+            font-size:
+                clamp(34px, 6vw, 61px);
+
+            line-height: 1.02;
+            letter-spacing: -1.7px;
+
+            font-weight: 900;
+        }
+
+        h1 span {
+            display: block;
+            color: var(--sky);
+            margin-top: 7px;
+        }
+
+        .message {
+            max-width: 700px;
+            margin: auto;
+
+            color: #d5e8f4;
+
+            font-size:
+                clamp(14px, 2vw, 17px);
+
+            line-height: 1.8;
+        }
+
+        .message strong {
+            color: #ffffff;
+        }
+
+        .status-card {
+            max-width: 650px;
+
+            margin:
+                31px auto 0;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 12px;
+        }
+
+        .status-item {
+            min-width: 0;
+
+            padding:
+                17px 18px;
+
+            border-radius: 16px;
+
+            text-align: left;
+
+            border:
+                1px solid
+                rgba(255,255,255,.075);
+
+            background:
+                rgba(255,255,255,.042);
+        }
+
+        .status-item small {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #7fdcff;
+
+            font-size: 8px;
+            font-weight: 900;
+            letter-spacing: 1.9px;
+
+            text-transform: uppercase;
+        }
+
+        .status-item strong {
+            color: #ffffff;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .notice {
+            max-width: 650px;
+
+            margin:
+                13px auto 0;
+
+            padding:
+                13px 15px;
+
+            border-radius: 14px;
+
+            color: #9fb8c7;
+
+            font-size: 10px;
+            line-height: 1.55;
+
+            background:
+                rgba(0,0,0,.12);
+
+            border:
+                1px solid
+                rgba(255,255,255,.055);
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 22px;
+
+            text-align: center;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,.08);
+
+            color: #7896a9;
+
+            font-size: 10px;
+            letter-spacing: .4px;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform:
+                    translateY(25px)
+                    scale(.985);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+        @keyframes sweep {
+            from {
+                background-position: 220% 0;
+            }
+
+            to {
+                background-position: -220% 0;
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotateReverse {
+            from {
+                transform: rotate(360deg);
+            }
+
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: .4;
+                transform: scale(1.35);
+            }
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 17px;
+            }
+
+            .card {
+                padding:
+                    30px 20px 26px;
+
+                border-radius: 23px;
+            }
+
+            .admin-header {
+                align-items: flex-start;
+                margin-bottom: 31px;
+            }
+
+            .badge {
+                display: none;
+            }
+
+            .brand-logo {
+                width: 51px;
+                height: 51px;
+
+                font-size: 15px;
+            }
+
+            .brand-copy strong {
+                font-size: 15px;
+            }
+
+            .icon-shell {
+                width: 122px;
+                height: 122px;
+            }
+
+            .icon-shell svg {
+                width: 64px;
+                height: 64px;
+            }
+
+            .status-card {
+                grid-template-columns: 1fr;
+            }
+
+            .status-item {
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
-<div class="page-loader" id="pageLoader">
-  <div class="loader-wrap">
-    <div class="loader-logo">KY5</div>
-    <div class="loader-spinner"></div>
-    <p>Chargement du tableau de bord...</p>
-  </div>
-</div>
 
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="grid" aria-hidden="true"></div>
+    <div class="halo one" aria-hidden="true"></div>
+    <div class="halo two" aria-hidden="true"></div>
 
-<div class="dashboard-frame">
-  <div class="dashboard-border">
+    <main class="page">
 
-    <header class="top-header">
-      <div class="brand-area">
-        <div class="brand-logo">KY5</div>
-        <div class="brand-copy">
-          <strong>KY5 GLOBAL TRADE</strong>
-          <span>ANALYTICS</span>
-        </div>
-      </div>
+        <section
+            class="card"
+            aria-labelledby="maintenance-title"
+        >
 
-      <div class="header-center">
-        <button type="button" class="head-btn mobile-menu-button" id="mobileMenuButton">☰</button>
-        <h1 id="welcomeTitle">KY5 ANALYTICS DASHBOARD</h1>
-        <p>Vue complète de l'audience, des prospects et de la performance du site</p>
-        
-      </div>
+            <header class="admin-header">
 
-      <div class="header-actions">
-        <a href="../index.html" target="_blank" class="head-btn">🌐 Voir le site</a>
-        <button type="button" class="head-btn" id="refreshDashboardButton">↻ Actualiser</button>
-        <div class="admin-profile">
-          <strong>Administrateur</strong>
-          <span id="adminEmail">Chargement...</span>
-        </div>
-      </div>
-    </header>
+                <div class="brand">
 
-    <aside class="filters-column" id="sidebar">
-      <div class="filters-title">⚙ FILTRES</div>
+                    <div
+                        class="brand-logo"
+                        aria-hidden="true"
+                    >
+                        KY5
+                    </div>
 
-      <div class="filter">
-        <label>◷ Période</label>
-        <select id="periodSelect">
-          <option value="7">7 jours</option>
-          <option value="30" selected>30 jours</option>
-          <option value="90">90 jours</option>
-        </select>
-        <small><strong id="statsPeriodLabel">30 derniers jours</strong><br>Trafic enregistré</small>
-      </div>
+                    <div class="brand-copy">
 
-      <div class="filter">
-        <label>👤 Audience</label>
-        <small>Aujourd'hui : <strong id="filterToday">—</strong><br>Ce mois : <strong id="filterMonth">—</strong></small>
-      </div>
+                        <strong>
+                            KY5 GLOBAL TRADE
+                        </strong>
 
-      <div class="filter">
-        <label>✉ Prospects</label>
-        <small>Nouveaux : <strong id="filterNew">—</strong><br>En traitement : <strong id="filterProgress">—</strong><br>Traités : <strong id="filterDone">—</strong></small>
-      </div>
+                        <span>
+                            Administration
+                        </span>
 
-      <div class="filter">
-        <label>◆ Publications</label>
-        <small>Services : <strong id="filterServices">—</strong><br>Médias : <strong id="filterMedia">—</strong></small>
-      </div>
+                    </div>
 
-      <nav class="nav-list">
-        <a class="nav-item" href="../index.html" target="_blank"><span class="nav-icon">🌐</span>Voir le site</a>
-        <a class="nav-item active" href="dashboard.html"><span class="nav-icon">▦</span>Tableau de bord</a>
-        <button class="nav-item" data-scroll="statisticsSection"><span class="nav-icon">⌁</span>Statistiques</button>
-        <button class="nav-item" data-scroll="prospectsSection"><span class="nav-icon">✉</span>Prospects</button>
-        <a class="nav-item" href="services.html"><span class="nav-icon">◆</span>Services</a>
-        <a class="nav-item" href="services.html"><span class="nav-icon">▶</span>Médias & publicités</a>
-        <button class="nav-item coming" data-module="Informations du site"><span class="nav-icon">⌂</span>Informations du site</button>
-        <button class="nav-item logout-button" id="logoutButton"><span class="nav-icon">↪</span>Se déconnecter</button>
-      </nav>
-    </aside>
+                </div>
 
-    <main class="dashboard-content">
 
-      <section class="kpi-row">
-        <article class="kpi" data-scroll="statisticsSection">
-          <div class="kpi-label">Visiteurs aujourd'hui</div>
-          <div class="kpi-value" id="visitorsToday">0</div>
-          <div class="kpi-note">Visiteurs uniques</div>
-          <div class="kpi-icon">👤</div>
-        </article>
+                <div class="badge">
 
-        <article class="kpi" data-scroll="statisticsSection">
-          <div class="kpi-label">Visiteurs ce mois</div>
-          <div class="kpi-value" id="visitorsMonth">0</div>
-          <div class="kpi-note">Audience mensuelle</div>
-          <div class="kpi-icon">◫</div>
-        </article>
+                    <span
+                        class="badge-dot"
+                        aria-hidden="true"
+                    ></span>
 
-        <article class="kpi" data-scroll="statisticsSection">
-          <div class="kpi-label">Pages vues</div>
-          <div class="kpi-value" id="pageViewsMonth">0</div>
-          <div class="kpi-note">Consultations ce mois</div>
-          <div class="kpi-icon">◉</div>
-        </article>
+                    Maintenance système
 
-        <article class="kpi" data-scroll="prospectsSection">
-          <div class="kpi-label">Nouveaux prospects</div>
-          <div class="kpi-value" id="newProspects">0</div>
-          <div class="kpi-note">Demandes à consulter</div>
-          <div class="kpi-icon">✉</div>
-        </article>
+                </div>
 
-        <article class="kpi" onclick="location.href='services.html'">
-          <div class="kpi-label">Services actifs</div>
-          <div class="kpi-value" id="activeServices">0</div>
-          <div class="kpi-note">Publiés sur le site</div>
-          <div class="kpi-icon">◆</div>
-        </article>
-      </section>
+            </header>
 
-      <!-- required hidden original counters still drive the engine -->
-      <span id="progressProspects" style="display:none">0</span>
-      <span id="doneProspects" style="display:none">0</span>
-      <span id="publishedMedia" style="display:none">0</span>
-      <span id="visitorsMonthMirror" style="display:none">0</span>
-      <span id="pageViewsMonthMirror" style="display:none">0</span>
 
-      <section class="analytics-grid" id="statisticsSection">
+            <div class="content">
 
-        <article class="panel">
-          <div class="panel-head"><div><h3>Pages les plus consultées</h3><p>Classement de la période</p></div></div>
-          <div class="panel-body"><div class="top-pages" id="topPages"><div class="empty">Chargement...</div></div></div>
-        </article>
+                <div
+                    class="icon-shell"
+                    aria-hidden="true"
+                >
 
-        <article class="panel">
-          <div class="panel-head"><div><h3>Évolution des visites</h3><p>Visiteurs uniques et pages vues par jour</p></div></div>
-          <div class="panel-body"><div class="chart-wrap"><canvas id="visitsChart"></canvas></div></div>
-        </article>
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
 
-        <article class="panel">
-          <div class="panel-head"><div><h3>Prospects par statut</h3><p>Répartition des demandes</p></div></div>
-          <div class="panel-body donut-wrap">
-            <div class="donut" id="prospectDonut"></div>
-            <div class="legend">
-              <div class="legend-row"><span>Nouveaux</span><b id="legendNew">0</b></div>
-              <div class="legend-row"><span>Lus</span><b id="legendRead">0</b></div>
-              <div class="legend-row"><span>En traitement</span><b id="legendProgress">0</b></div>
-              <div class="legend-row"><span>Traités</span><b id="legendDone">0</b></div>
-            </div>
-          </div>
-        </article>
+                        <path
+                            d="M12 3a5.5 5.5 0 0 0-5.2 7.3L3.4 13.7a2 2 0 0 0 2.9 2.9l3.4-3.4A5.5 5.5 0 0 0 17 8l-3.2 3.2-2.6-.8-.8-2.6L13.6 4.6A5.5 5.5 0 0 0 12 3Z"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
 
-        <article class="panel">
-          <div class="panel-head"><div><h3>Publication du contenu</h3><p>Services et médias</p></div></div>
-          <div class="panel-body">
-            <div class="bar-list">
-              <div class="bar-row"><span>Services actifs</span><div class="bar-track"><i id="servicesBar" style="width:0%"></i></div><b id="servicesBarValue">0</b></div>
-              <div class="bar-row"><span>Médias publiés</span><div class="bar-track"><i id="mediaBar" style="width:0%"></i></div><b id="mediaBarValue">0</b></div>
-              <div class="bar-row"><span>Nouveaux prospects</span><div class="bar-track"><i id="newBar" style="width:0%"></i></div><b id="newBarValue">0</b></div>
-              <div class="bar-row"><span>En traitement</span><div class="bar-track"><i id="progressBar" style="width:0%"></i></div><b id="progressBarValue">0</b></div>
-              <div class="bar-row"><span>Traités</span><div class="bar-track"><i id="doneBar" style="width:0%"></i></div><b id="doneBarValue">0</b></div>
-            </div>
-          </div>
-        </article>
+                        <path
+                            d="M14.7 14.6l5.1 5.1"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                        />
 
-        <article class="panel">
-          <div class="panel-head"><div><h3>Gestion du site</h3><p>Accès directs</p></div></div>
-          <div class="panel-body module-grid">
-            <a href="services.html" class="module">
-              <div><strong>◆ SERVICES</strong><p>Ajouter, modifier et publier.</p></div>
-              <div class="module-foot"><span class="module-status" id="servicesModuleStatus">Chargement...</span><span>→</span></div>
-            </a>
-            <a href="services.html" class="module">
-              <div><strong>▶ MÉDIAS</strong><p>Photos, vidéos et publicités.</p></div>
-              <div class="module-foot"><span class="module-status" id="mediaModuleStatus">Chargement...</span><span>→</span></div>
-            </a>
-            <div class="module" data-scroll="prospectsSection">
-              <div><strong>✉ PROSPECTS</strong><p>Lire et traiter les demandes.</p></div>
-              <div class="module-foot"><span class="module-status" id="prospectsModuleStatus">Chargement...</span><span>→</span></div>
-            </div>
-            <div class="module" data-scroll="statisticsSection">
-              <div><strong>⌁ STATISTIQUES</strong><p>Analyser l'audience du site.</p></div>
-              <div class="module-foot"><span class="module-status">Analyse active</span><span>→</span></div>
-            </div>
-          </div>
-        </article>
+                    </svg>
 
-        <article class="panel">
-          <div class="panel-head"><div><h3>Appareils des visiteurs</h3><p id="devicePeriodLabel">Répartition sur 30 jours</p></div></div>
-          <div class="panel-body"><div class="device-list" id="deviceList"><div class="empty">Chargement...</div></div></div>
-        </article>
+                </div>
 
-      </section>
 
-      <section class="bottom-grid">
-        <article class="panel prospects-panel" id="prospectsSection">
-          <div class="panel-head">
-            <div><h3>Dernières demandes prospects</h3><p>Suivi et traitement des demandes</p></div>
-            <button type="button" class="head-btn" id="refreshProspectsButton">↻ Actualiser</button>
-          </div>
-          <div class="panel-body">
-            <div class="prospect-search-wrap" role="search">
-              <span class="prospect-search-icon" aria-hidden="true">⌕</span>
-              <input
-                type="search"
-                id="prospectSearchInput"
-                class="prospect-search-input"
-                placeholder="Rechercher un prospect par nom..."
-                autocomplete="off"
-                aria-label="Rechercher un prospect par nom"
-              >
-              <button type="button" class="prospect-search-clear" id="clearProspectSearchButton">Effacer</button>
+                <div class="eyebrow">
+                    Espace administrateur
+                </div>
+
+
+                <h1 id="maintenance-title">
+
+                    Administration temporairement
+                    <span>
+                        indisponible
+                    </span>
+
+                </h1>
+
+
+                <p class="message">
+
+                    L'accès au tableau de bord
+                    <strong>KY5 Analytics</strong>
+                    est momentanément suspendu dans le cadre
+                    d'une opération de
+                    <strong>maintenance administrative et technique</strong>.
+
+                    <br><br>
+
+                    Les données et les services d'administration
+                    seront de nouveau accessibles après la
+                    finalisation des opérations nécessaires.
+
+                </p>
+
+
+                <div class="status-card">
+
+                    <div class="status-item">
+
+                        <small>
+                            État du service
+                        </small>
+
+                        <strong>
+                            Accès administrateur suspendu
+                        </strong>
+
+                    </div>
+
+
+                    <div class="status-item">
+
+                        <small>
+                            Rétablissement
+                        </small>
+
+                        <strong>
+                            Après finalisation de la maintenance
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="notice">
+
+                    Aucun formulaire de connexion,
+                    aucune donnée prospect et aucun module analytique
+                    ne sont chargés sur cette page de maintenance.
+
+                </div>
+
             </div>
 
-            <div class="summary" id="prospectStatusFilters" aria-label="Filtrer les prospects par statut">
-              <button type="button" class="summary-badge is-active" data-prospect-filter="all" aria-pressed="true">Total <strong id="prospectsTotal">0</strong></button>
-              <button type="button" class="summary-badge" data-prospect-filter="nouveau" aria-pressed="false">Nouveaux <strong id="prospectsNew">0</strong></button>
-              <button type="button" class="summary-badge" data-prospect-filter="lu" aria-pressed="false">Lus <strong id="prospectsRead">0</strong></button>
-              <button type="button" class="summary-badge" data-prospect-filter="en traitement" aria-pressed="false">En traitement <strong id="prospectsProgress">0</strong></button>
-              <button type="button" class="summary-badge" data-prospect-filter="traité" aria-pressed="false">Traités <strong id="prospectsDone">0</strong></button>
-            </div>
 
-            <div class="table-wrap">
-              <table class="prospects-table">
-                <thead><tr><th>Date</th><th>Prospect</th><th>Contact</th><th>Service</th><th>Message</th><th>Statut</th><th>Actions</th></tr></thead>
-                <tbody id="prospectsTableBody"><tr><td colspan="7" class="table-message">Chargement...</td></tr></tbody>
-              </table>
-            </div>
-          </div>
-        </article>
+            <footer class="footer">
 
-        <article class="panel activity-panel">
-          <div class="panel-head"><div><h3>Activité récente</h3><p>Dernières opérations</p></div></div>
-          <div class="panel-body"><div class="activity-list" id="activityList"><div class="empty">Chargement...</div></div></div>
-        </article>
-      </section>
+                © 2026 KY5 GLOBAL TRADE
+                — Espace d'administration sécurisé
 
-      <section class="insights">
-        <div class="insight"><div class="insight-icon">👤</div><div><strong>Audience</strong><span>Visiteurs suivis automatiquement.</span></div></div>
-        <div class="insight"><div class="insight-icon">◉</div><div><strong>Pages vues</strong><span>Consultations enregistrées.</span></div></div>
-        <div class="insight"><div class="insight-icon">✉</div><div><strong>Prospects</strong><span>Demandes centralisées.</span></div></div>
-        <div class="insight"><div class="insight-icon">◆</div><div><strong>Services</strong><span>Contenus actifs pilotables.</span></div></div>
-        <div class="insight"><div class="insight-icon">▶</div><div><strong>Médias</strong><span>Photos et vidéos suivies.</span></div></div>
-      </section>
+            </footer>
+
+        </section>
 
     </main>
-  </div>
-</div>
-
-<div class="modal" id="prospectModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-head">
-      <div><h3 id="modalProspectName">Prospect</h3><p>Détails complets de la demande</p></div>
-      <button type="button" class="modal-close" id="modalCloseButton">×</button>
-    </div>
-    <div class="detail-grid">
-      <div class="detail-box"><span>E-mail</span><strong id="modalEmail">—</strong></div>
-      <div class="detail-box"><span>Téléphone</span><strong id="modalPhone">—</strong></div>
-      <div class="detail-box"><span>Entreprise</span><strong id="modalCompany">—</strong></div>
-      <div class="detail-box"><span>Service</span><strong id="modalService">—</strong></div>
-      <div class="detail-box full"><span>Message</span><p id="modalMessage">—</p></div>
-      <div class="detail-box full"><span>Notes</span><p id="modalNotes">—</p></div>
-      <div class="detail-box full" id="modalPhotoBox" style="display:none"><span>Photo de l’article souhaité</span><div id="modalPhoto"></div></div>
-    </div>
-  </div>
-</div>
-
-<script src="config.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-
-    <script>
-        /*
-        ==========================================================
-        KY5 GLOBAL TRADE
-        CENTRE DE CONTRÔLE ADMINISTRATEUR
-        ==========================================================
-        */
-
-        const pageLoader = document.getElementById("pageLoader");
-        const logoutButton = document.getElementById("logoutButton");
-        const adminEmail = document.getElementById("adminEmail");
-        const welcomeTitle = document.getElementById("welcomeTitle");
-        const sidebar = document.getElementById("sidebar");
-        const sidebarOverlay = document.getElementById("sidebarOverlay");
-        const mobileMenuButton = document.getElementById("mobileMenuButton");
-        const refreshDashboardButton = document.getElementById("refreshDashboardButton");
-        const refreshProspectsButton = document.getElementById("refreshProspectsButton");
-
-        const visitorsToday = document.getElementById("visitorsToday");
-        const visitorsMonth = document.getElementById("visitorsMonth");
-        const pageViewsMonth = document.getElementById("pageViewsMonth");
-        const newProspects = document.getElementById("newProspects");
-        const progressProspects = document.getElementById("progressProspects");
-        const doneProspects = document.getElementById("doneProspects");
-        const activeServices = document.getElementById("activeServices");
-        const publishedMedia = document.getElementById("publishedMedia");
-
-        const prospectsTotal = document.getElementById("prospectsTotal");
-        const prospectsNew = document.getElementById("prospectsNew");
-        const prospectsRead = document.getElementById("prospectsRead");
-        const prospectsProgress = document.getElementById("prospectsProgress");
-        const prospectsDone = document.getElementById("prospectsDone");
-        const prospectsTableBody = document.getElementById("prospectsTableBody");
-        const prospectSearchInput = document.getElementById("prospectSearchInput");
-        const clearProspectSearchButton = document.getElementById("clearProspectSearchButton");
-        const prospectFilterButtons = document.querySelectorAll("[data-prospect-filter]");
-
-        const servicesModuleStatus = document.getElementById("servicesModuleStatus");
-        const mediaModuleStatus = document.getElementById("mediaModuleStatus");
-        const prospectsModuleStatus = document.getElementById("prospectsModuleStatus");
-
-        const periodSelect = document.getElementById("periodSelect");
-        const statsPeriodLabel = document.getElementById("statsPeriodLabel");
-        const topPages = document.getElementById("topPages");
-        const activityList = document.getElementById("activityList");
-        const deviceList = document.getElementById("deviceList");
-        const devicePeriodLabel = document.getElementById("devicePeriodLabel");
-
-        const prospectModal = document.getElementById("prospectModal");
-        const modalCloseButton = document.getElementById("modalCloseButton");
-        const modalProspectName = document.getElementById("modalProspectName");
-        const modalEmail = document.getElementById("modalEmail");
-        const modalPhone = document.getElementById("modalPhone");
-        const modalCompany = document.getElementById("modalCompany");
-        const modalService = document.getElementById("modalService");
-        const modalMessage = document.getElementById("modalMessage");
-        const modalNotes = document.getElementById("modalNotes");
-        const modalPhotoBox = document.getElementById("modalPhotoBox");
-        const modalPhoto = document.getElementById("modalPhoto");
-
-        let supabaseClient = null;
-        let prospectsCache = [];
-        let prospectStatusFilter = "all";
-        let visitsCache = [];
-        let servicesCache = [];
-        let visitsChart = null;
-
-        /* =====================================================
-           SUPABASE
-        ===================================================== */
-
-        try {
-            if (
-                typeof SUPABASE_URL === "undefined" ||
-                typeof SUPABASE_PUBLISHABLE_KEY === "undefined"
-            ) {
-                throw new Error("Configuration Supabase introuvable.");
-            }
-
-            if (!window.supabase) {
-                throw new Error("Bibliothèque Supabase introuvable.");
-            }
-
-            /*
-             * CLIENT UNIQUE DU DASHBOARD :
-             * session admin + prospects + services + statistiques.
-             * Il utilise le projet défini dans config.js.
-             */
-            supabaseClient = window.supabase.createClient(
-                SUPABASE_URL,
-                SUPABASE_PUBLISHABLE_KEY
-            );
-        }
-        catch (error) {
-            console.error("Erreur configuration Supabase :", error);
-            alert("Impossible de charger la configuration Supabase.");
-        }
-
-        /* =====================================================
-           OUTILS
-        ===================================================== */
-
-        function escapeHtml(value) {
-            return String(value ?? "")
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
-
-        function getProspectPhotoUrl(prospect) {
-            const notes = String(prospect?.notes || "");
-            const match = notes.match(/\[Photo article:\s*(https?:\/\/[^\]\s]+)\]/i);
-            return match ? match[1] : "";
-        }
-
-        function getProspectCleanNotes(prospect) {
-            return String(prospect?.notes || "")
-                .replace(/\s*\[Photo article:\s*https?:\/\/[^\]\s]+\]\s*/ig, " ")
-                .trim();
-        }
-
-        function formatDate(value) {
-            if (!value) return "—";
-
-            const date = new Date(value);
-
-            if (Number.isNaN(date.getTime())) {
-                return "—";
-            }
-
-            return date.toLocaleString("fr-FR", {
-                dateStyle: "short",
-                timeStyle: "short"
-            });
-        }
-
-        function formatShortDate(date) {
-            return date.toLocaleDateString("fr-FR", {
-                day: "2-digit",
-                month: "2-digit"
-            });
-        }
-
-        function startOfToday() {
-            const date = new Date();
-            date.setHours(0, 0, 0, 0);
-            return date;
-        }
-
-        function startOfMonth() {
-            const now = new Date();
-            return new Date(now.getFullYear(), now.getMonth(), 1);
-        }
-
-        function normalizeStatus(prospect) {
-            const raw = String(prospect.statut || "").trim().toLowerCase();
-
-            if (
-                raw === "traité" ||
-                raw === "traite" ||
-                raw === "treated"
-            ) {
-                return "traité";
-            }
-
-            if (
-                raw === "en traitement" ||
-                raw === "en_traitement" ||
-                raw === "encours" ||
-                raw === "en cours"
-            ) {
-                return "en traitement";
-            }
-
-            if (raw === "lu" || prospect.lu) {
-                return "lu";
-            }
-
-            return "nouveau";
-        }
-
-        function pageViewVisits(visits) {
-            return (visits || []).filter(visit => {
-                const eventType =
-                    String(visit?.event_type || "")
-                        .trim()
-                        .toLowerCase();
-
-                return !eventType || eventType === "page_view";
-            });
-        }
-
-        function visitorKey(visit) {
-            return (
-                visit?.visitor_id ||
-                visit?.session_id ||
-                (visit?.id != null ? `visit-${visit.id}` : "")
-            );
-        }
-
-        function uniqueVisitors(visits) {
-            return new Set(
-                (visits || [])
-                    .map(visitorKey)
-                    .filter(Boolean)
-            ).size;
-        }
-
-        function pageLabel(path, title) {
-            if (title) {
-                return title.replace(" | KY5 GLOBAL TRADE", "");
-            }
-
-            if (!path || path === "/") {
-                return "Accueil";
-            }
-
-            return path
-                .split("/")
-                .filter(Boolean)
-                .pop()
-                ?.replace(".html", "")
-                ?.replace(/-/g, " ") || "Page";
-        }
-
-        function relativeTime(value) {
-            const date = new Date(value);
-            const diff = Date.now() - date.getTime();
-
-            if (!Number.isFinite(diff)) return "";
-
-            const minutes = Math.floor(diff / 60000);
-
-            if (minutes < 1) return "à l'instant";
-            if (minutes < 60) return `il y a ${minutes} min`;
-
-            const hours = Math.floor(minutes / 60);
-
-            if (hours < 24) return `il y a ${hours} h`;
-
-            const days = Math.floor(hours / 24);
-
-            return `il y a ${days} j`;
-        }
-
-        /* =====================================================
-           SESSION
-        ===================================================== */
-
-        async function verifyAdminSession() {
-            if (!supabaseClient) {
-                window.location.href = "index.html";
-                return;
-            }
-
-            try {
-                const { data, error } =
-                    await supabaseClient.auth.getSession();
-
-                if (error) {
-                    throw error;
-                }
-
-                if (
-                    !data ||
-                    !data.session ||
-                    !data.session.user
-                ) {
-                    window.location.href = "index.html";
-                    return;
-                }
-
-                adminEmail.textContent =
-                    data.session.user.email ||
-                    "Administrateur KY5";
-
-                welcomeTitle.textContent =
-                    "Bienvenue dans votre centre de contrôle";
-
-                await loadAllDashboardData();
-
-                pageLoader.classList.add("hidden");
-            }
-            catch (error) {
-                console.error("Erreur session :", error);
-                window.location.href = "index.html";
-            }
-        }
-
-        /* =====================================================
-           CHARGEMENT GLOBAL
-        ===================================================== */
-
-        async function loadAllDashboardData() {
-            refreshDashboardButton.disabled = true;
-            refreshDashboardButton.textContent = "Chargement...";
-
-            try {
-                await Promise.all([
-                    loadProspects(),
-                    loadServices(),
-                    loadVisits()
-                ]);
-
-                renderAllStatistics();
-                renderActivity();
-            }
-            finally {
-                refreshDashboardButton.disabled = false;
-                refreshDashboardButton.textContent = "↻ Actualiser";
-            }
-        }
-
-        /* =====================================================
-           VISITES
-        ===================================================== */
-
-        async function loadVisits() {
-            try {
-                const since = new Date();
-                since.setDate(since.getDate() - 120);
-                since.setHours(0, 0, 0, 0);
-
-                if (!supabaseClient) {
-                    throw new Error("Client Supabase indisponible.");
-                }
-
-                const { data, error } =
-                    await supabaseClient
-                        .from("site_visites")
-                        .select(
-                            "id, created_at, visitor_id, session_id, page_path, page_title, referrer, device_type, event_type"
-                        )
-                        .gte("created_at", since.toISOString())
-                        .order("created_at", { ascending: true });
-
-                if (error) {
-                    throw error;
-                }
-
-                visitsCache = data || [];
-            }
-            catch (error) {
-                console.error("Erreur chargement visites :", error);
-                visitsCache = [];
-            }
-        }
-
-        function renderVisitorKpis() {
-            const today = startOfToday();
-            const month = startOfMonth();
-
-            const todayVisits =
-                visitsCache.filter(
-                    v => new Date(v.created_at) >= today
-                );
-
-            const monthVisits =
-                visitsCache.filter(
-                    v => new Date(v.created_at) >= month
-                );
-
-            visitorsToday.textContent =
-                uniqueVisitors(todayVisits);
-
-            visitorsMonth.textContent =
-                uniqueVisitors(monthVisits);
-
-            pageViewsMonth.textContent =
-                pageViewVisits(monthVisits).length;
-        }
-
-        function visitsForPeriod(days) {
-            const since = new Date();
-            since.setDate(since.getDate() - (days - 1));
-            since.setHours(0, 0, 0, 0);
-
-            return visitsCache.filter(
-                v => new Date(v.created_at) >= since
-            );
-        }
-
-        function renderVisitsChart(days) {
-            const filtered = visitsForPeriod(days);
-            const pageViews = pageViewVisits(filtered);
-
-            const labels = [];
-            const pageViewValues = [];
-            const visitorValues = [];
-
-            for (let i = days - 1; i >= 0; i--) {
-                const date = new Date();
-                date.setDate(date.getDate() - i);
-                date.setHours(0, 0, 0, 0);
-
-                const next = new Date(date);
-                next.setDate(next.getDate() + 1);
-
-                const visitsOfDay =
-                    filtered.filter(visit => {
-                        const time = new Date(visit.created_at);
-                        return time >= date && time < next;
-                    });
-
-                const pageViewsOfDay =
-                    pageViews.filter(visit => {
-                        const time = new Date(visit.created_at);
-                        return time >= date && time < next;
-                    });
-
-                labels.push(formatShortDate(date));
-                pageViewValues.push(pageViewsOfDay.length);
-                visitorValues.push(uniqueVisitors(visitsOfDay));
-            }
-
-            const canvas =
-                document.getElementById("visitsChart");
-
-            if (!canvas) {
-                return;
-            }
-
-            if (typeof Chart === "undefined") {
-                const wrap = canvas.closest(".chart-wrap");
-
-                if (wrap) {
-                    wrap.innerHTML =
-                        '<div class="empty table-error">Le moteur du graphique Chart.js n\'a pas pu être chargé.</div>';
-                }
-
-                return;
-            }
-
-            if (visitsChart) {
-                visitsChart.destroy();
-                visitsChart = null;
-            }
-
-            const maxValue =
-                Math.max(
-                    ...pageViewValues,
-                    ...visitorValues,
-                    0
-                );
-
-            const ky5ViewCountLabels = {
-                id: "ky5ViewCountLabels",
-
-                afterDatasetsDraw(chart) {
-                    const { ctx } = chart;
-
-                    chart.data.datasets.forEach((dataset, datasetIndex) => {
-                        /*
-                         * On affiche directement les nombres uniquement
-                         * sur la série "Pages vues".
-                         */
-                        if (dataset.label !== "Pages vues") {
-                            return;
-                        }
-
-                        const meta = chart.getDatasetMeta(datasetIndex);
-
-                        ctx.save();
-                        ctx.font = "900 10px Arial";
-                        ctx.textAlign = "center";
-                        ctx.textBaseline = "bottom";
-                        ctx.fillStyle = "#075ca8";
-
-                        meta.data.forEach((point, index) => {
-                            const value =
-                                Number(dataset.data[index]) || 0;
-
-                            /*
-                             * Sur 30/90 jours, ne pas surcharger le graphique
-                             * avec les zéros. Les nombres réels restent visibles.
-                             */
-                            if (value === 0 && days > 7) {
-                                return;
-                            }
-
-                            ctx.fillText(
-                                String(value),
-                                point.x,
-                                Math.max(12, point.y - 8)
-                            );
-                        });
-
-                        ctx.restore();
-                    });
-                }
-            };
-
-            visitsChart = new Chart(canvas, {
-                type: "line",
-
-                plugins: [
-                    ky5ViewCountLabels
-                ],
-
-                data: {
-                    labels,
-
-                    datasets: [
-                        {
-                            label: "Visiteurs uniques",
-                            data: visitorValues,
-                            borderWidth: 3,
-                            borderColor: "#075ca8",
-                            backgroundColor: "rgba(7,92,168,.08)",
-                            pointBackgroundColor: "#ffffff",
-                            pointBorderColor: "#075ca8",
-                            pointRadius: days <= 7 ? 4 : days <= 30 ? 2.5 : 1,
-                            pointHoverRadius: 5,
-                            tension: .32,
-                            fill: false
-                        },
-                        {
-                            label: "Pages vues",
-                            data: pageViewValues,
-                            borderWidth: 2,
-                            borderColor: "#18a2e0",
-                            backgroundColor: "rgba(24,162,224,.12)",
-                            pointBackgroundColor: "#ffffff",
-                            pointBorderColor: "#18a2e0",
-                            pointRadius: days <= 7 ? 3 : days <= 30 ? 2 : 0,
-                            pointHoverRadius: 5,
-                            tension: .32,
-                            fill: true
-                        }
-                    ]
-                },
-
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: {
-                        duration: 450
-                    },
-
-                    layout: {
-                        padding: {
-                            top: 18,
-                            right: 6,
-                            bottom: 0,
-                            left: 4
-                        }
-                    },
-
-                    interaction: {
-                        intersect: false,
-                        mode: "index"
-                    },
-
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: "top",
-                            align: "end",
-                            labels: {
-                                usePointStyle: true,
-                                boxWidth: 8,
-                                boxHeight: 8,
-                                color: "#496779",
-                                font: {
-                                    size: 9,
-                                    weight: "bold"
-                                }
-                            }
-                        },
-
-                        tooltip: {
-                            displayColors: true,
-                            callbacks: {
-                                title(items) {
-                                    return items?.[0]?.label || "";
-                                },
-                                label(context) {
-                                    const value =
-                                        Number(context.parsed.y) || 0;
-
-                                    return `${context.dataset.label} : ${value}`;
-                                }
-                            }
-                        }
-                    },
-
-                    scales: {
-                        x: {
-                            grid: {
-                                display: false
-                            },
-
-                            ticks: {
-                                color: "#6f91a7",
-                                autoSkip: true,
-                                maxTicksLimit:
-                                    days <= 7
-                                        ? 7
-                                        : days <= 30
-                                            ? 10
-                                            : 12,
-                                maxRotation: 0,
-                                font: {
-                                    size: 9
-                                }
-                            }
-                        },
-
-                        y: {
-                            beginAtZero: true,
-                            suggestedMax:
-                                maxValue > 0
-                                    ? Math.max(2, maxValue + 1)
-                                    : 2,
-
-                            grid: {
-                                color: "rgba(7,92,168,.08)"
-                            },
-
-                            ticks: {
-                                color: "#6f91a7",
-                                precision: 0,
-                                stepSize: 1,
-                                font: {
-                                    size: 9
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        function renderTopPages(days) {
-            const filtered =
-                pageViewVisits(
-                    visitsForPeriod(days)
-                );
-
-            const map = new Map();
-
-            filtered.forEach(visit => {
-                const key = visit.page_path || "/";
-                const current = map.get(key) || {
-                    path: key,
-                    title: visit.page_title || "",
-                    count: 0
-                };
-
-                current.count += 1;
-
-                if (!current.title && visit.page_title) {
-                    current.title = visit.page_title;
-                }
-
-                map.set(key, current);
-            });
-
-            const rows =
-                [...map.values()]
-                    .sort((a, b) => b.count - a.count)
-                    .slice(0, 7);
-
-            if (!rows.length) {
-                topPages.innerHTML =
-                    '<div class="empty">Aucune visite enregistrée pour cette période.</div>';
-                return;
-            }
-
-            topPages.innerHTML =
-                rows
-                    .map(row => `
-                        <div class="page-row">
-                            <div class="page-name">
-                                <strong>${escapeHtml(pageLabel(row.path, row.title))}</strong>
-                                <span>${escapeHtml(row.path)}</span>
-                            </div>
-                            <div class="page-count">${row.count}</div>
-                        </div>
-                    `)
-                    .join("");
-        }
-
-        function renderDevices(days) {
-            const filtered =
-                visitsForPeriod(days);
-
-            const uniqueByVisitor =
-                new Map();
-
-            filtered.forEach(visit => {
-                const key = visitorKey(visit);
-
-                if (!key) {
-                    return;
-                }
-
-                /*
-                 * Un visiteur ne doit compter qu'une seule fois
-                 * dans la répartition des appareils.
-                 */
-                if (!uniqueByVisitor.has(key)) {
-                    uniqueByVisitor.set(key, visit);
-                }
-            });
-
-            const counts = {
-                mobile: 0,
-                tablette: 0,
-                ordinateur: 0,
-                autre: 0
-            };
-
-            [...uniqueByVisitor.values()].forEach(visit => {
-                const raw =
-                    String(visit.device_type || "")
-                        .trim()
-                        .toLowerCase();
-
-                if (raw.includes("mobile")) {
-                    counts.mobile += 1;
-                }
-                else if (
-                    raw.includes("tablet") ||
-                    raw.includes("tablette")
-                ) {
-                    counts.tablette += 1;
-                }
-                else if (
-                    raw.includes("desktop") ||
-                    raw.includes("ordinateur") ||
-                    raw.includes("computer")
-                ) {
-                    counts.ordinateur += 1;
-                }
-                else {
-                    counts.autre += 1;
-                }
-            });
-
-            const total =
-                Object.values(counts)
-                    .reduce(
-                        (sum, value) =>
-                            sum + value,
-                        0
-                    );
-
-            const labels = [
-                ["📱 Mobile", counts.mobile],
-                ["💻 Ordinateur", counts.ordinateur],
-                ["📟 Tablette", counts.tablette],
-                ["• Autre", counts.autre]
-            ];
-
-            if (devicePeriodLabel) {
-                devicePeriodLabel.textContent =
-                    `Visiteurs uniques sur ${days} jours`;
-            }
-
-            if (!total) {
-                deviceList.innerHTML =
-                    '<div class="empty">Aucune donnée d\'appareil enregistrée pour cette période.</div>';
-                return;
-            }
-
-            deviceList.innerHTML =
-                labels
-                    .filter(item => item[1] > 0)
-                    .map(item => {
-                        const percent =
-                            Math.round(
-                                (item[1] / total) * 100
-                            );
-
-                        return `
-                            <div class="device-row">
-                                <span>${item[0]}</span>
-
-                                <div class="device-bar">
-                                    <i style="width:${percent}%"></i>
-                                </div>
-
-                                <b>${percent}%</b>
-                            </div>
-                        `;
-                    })
-                    .join("");
-        }
-
-        /* =====================================================
-           SERVICES / MÉDIAS
-        ===================================================== */
-
-        async function loadServices() {
-            try {
-                const { data, error } =
-                    await supabaseClient
-                        .from("services")
-                        .select("*")
-                        .order("ordre", { ascending: true });
-
-                if (error) {
-                    throw error;
-                }
-
-                servicesCache = data || [];
-                renderServicesKpis();
-            }
-            catch (error) {
-                console.error("Erreur chargement services :", error);
-                servicesCache = [];
-                renderServicesKpis();
-            }
-        }
-
-        function renderServicesKpis() {
-            const activeCount =
-                servicesCache.filter(
-                    service => Boolean(service.actif)
-                ).length;
-
-            const photoCount =
-                servicesCache.filter(
-                    service => Boolean(service.photo_url)
-                ).length;
-
-            const videoCount =
-                servicesCache.filter(
-                    service =>
-                        Boolean(service.video_url) ||
-                        Boolean(service.video_lien)
-                ).length;
-
-            activeServices.textContent = activeCount;
-            publishedMedia.textContent = photoCount + videoCount;
-
-            servicesModuleStatus.textContent =
-                `${activeCount} actif(s)`;
-
-            mediaModuleStatus.textContent =
-                `${photoCount} photo(s) • ${videoCount} vidéo(s)`;
-        }
-
-        /* =====================================================
-           PROSPECTS
-        ===================================================== */
-
-        async function loadProspects() {
-            refreshProspectsButton.disabled = true;
-
-            try {
-                const { data, error } =
-                    await supabaseClient
-                        .from("prospects")
-                        .select("*")
-                        .order("created_at", { ascending: false });
-
-                if (error) {
-                    throw error;
-                }
-
-                prospectsCache = data || [];
-
-                renderProspects();
-                renderProspectKpis();
-            }
-            catch (error) {
-                console.error("Erreur chargement prospects :", error);
-
-                prospectsCache = [];
-
-                prospectsTableBody.innerHTML = `
-                    <tr>
-                        <td colspan="7" class="table-message table-error">
-                            Impossible de charger les prospects depuis Supabase.
-                        </td>
-                    </tr>
-                `;
-
-                renderProspectKpis();
-            }
-            finally {
-                refreshProspectsButton.disabled = false;
-            }
-        }
-
-        function prospectCounts() {
-            const counts = {
-                total: prospectsCache.length,
-                nouveau: 0,
-                lu: 0,
-                progress: 0,
-                traite: 0
-            };
-
-            prospectsCache.forEach(prospect => {
-                const status = normalizeStatus(prospect);
-
-                if (status === "nouveau") counts.nouveau += 1;
-                if (status === "lu") counts.lu += 1;
-                if (status === "en traitement") counts.progress += 1;
-                if (status === "traité") counts.traite += 1;
-            });
-
-            return counts;
-        }
-
-        function renderProspectKpis() {
-            const counts = prospectCounts();
-
-            prospectsTotal.textContent = counts.total;
-            prospectsNew.textContent = counts.nouveau;
-            prospectsRead.textContent = counts.lu;
-            prospectsProgress.textContent = counts.progress;
-            prospectsDone.textContent = counts.traite;
-
-            newProspects.textContent = counts.nouveau;
-            progressProspects.textContent = counts.progress;
-            doneProspects.textContent = counts.traite;
-
-            const legendNew =
-                document.getElementById("legendNew");
-
-            const legendRead =
-                document.getElementById("legendRead");
-
-            const legendProgress =
-                document.getElementById("legendProgress");
-
-            const legendDone =
-                document.getElementById("legendDone");
-
-            if (legendNew) {
-                legendNew.textContent = counts.nouveau;
-            }
-
-            if (legendRead) {
-                legendRead.textContent = counts.lu;
-            }
-
-            if (legendProgress) {
-                legendProgress.textContent = counts.progress;
-            }
-
-            if (legendDone) {
-                legendDone.textContent = counts.traite;
-            }
-
-            const totalForDonut =
-                counts.nouveau +
-                counts.lu +
-                counts.progress +
-                counts.traite;
-
-            const donut =
-                document.getElementById(
-                    "prospectDonut"
-                );
-
-            if (donut) {
-                if (!totalForDonut) {
-                    donut.style.background =
-                        "conic-gradient(#dceaf1 0 100%)";
-                }
-                else {
-                    const a =
-                        (counts.nouveau / totalForDonut) *
-                        100;
-
-                    const b =
-                        a +
-                        (counts.lu / totalForDonut) *
-                        100;
-
-                    const c =
-                        b +
-                        (counts.progress / totalForDonut) *
-                        100;
-
-                    donut.style.setProperty(
-                        "background",
-                        `conic-gradient(
-                            #d978a5 0 ${a}%,
-                            #8b7cf6 ${a}% ${b}%,
-                            #e7b24a ${b}% ${c}%,
-                            #48b991 ${c}% 100%
-                        )`,
-                        "important"
-                    );
-                }
-            }
-
-            prospectsModuleStatus.textContent =
-                counts.nouveau > 0
-                    ? `${counts.nouveau} nouveau(x)`
-                    : `${counts.total} demande(s)`;
-        }
-
-        function normalizeProspectSearchText(value) {
-            return String(value || "")
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "")
-                .toLowerCase()
-                .trim();
-        }
-
-        function updateProspectFilterButtons() {
-            prospectFilterButtons.forEach(button => {
-                const isActive =
-                    button.getAttribute("data-prospect-filter") === prospectStatusFilter;
-
-                button.classList.toggle("is-active", isActive);
-                button.setAttribute("aria-pressed", isActive ? "true" : "false");
-            });
-        }
-
-        function renderProspects() {
-            const searchTerm = normalizeProspectSearchText(
-                prospectSearchInput ? prospectSearchInput.value : ""
-            );
-
-            const visibleProspects = prospectsCache.filter(prospect => {
-                const matchesSearch =
-                    !searchTerm ||
-                    normalizeProspectSearchText(prospect.nom).includes(searchTerm);
-
-                const matchesStatus =
-                    prospectStatusFilter === "all" ||
-                    normalizeStatus(prospect) === prospectStatusFilter;
-
-                return matchesSearch && matchesStatus;
-            });
-
-            updateProspectFilterButtons();
-
-            if (!prospectsCache.length) {
-                prospectsTableBody.innerHTML = `
-                    <tr>
-                        <td colspan="7" class="table-message">
-                            Aucune demande reçue.
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-
-            if (!visibleProspects.length) {
-                let emptyMessage = "Aucun prospect dans cette catégorie.";
-
-                if (searchTerm && prospectStatusFilter === "all") {
-                    emptyMessage =
-                        `Aucun prospect ne correspond à « ${escapeHtml(prospectSearchInput.value.trim())} ».`;
-                }
-                else if (searchTerm) {
-                    emptyMessage =
-                        `Aucun prospect ne correspond à « ${escapeHtml(prospectSearchInput.value.trim())} » dans ce statut.`;
-                }
-
-                prospectsTableBody.innerHTML = `
-                    <tr>
-                        <td colspan="7" class="table-message">
-                            ${emptyMessage}
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-
-            prospectsTableBody.innerHTML =
-                visibleProspects
-                    .map(prospect => {
-                        const status = normalizeStatus(prospect);
-
-                        const unreadClass =
-                            status === "nouveau"
-                                ? "unread"
-                                : "";
-
-                        return `
-                            <tr class="${unreadClass}">
-                                <td>${escapeHtml(formatDate(prospect.created_at))}</td>
-
-                                <td>
-                                    <div class="prospect-name">
-                                        ${escapeHtml(prospect.nom || "Sans nom")}
-                                    </div>
-                                    ${
-                                        prospect.entreprise
-                                            ? `<div>${escapeHtml(prospect.entreprise)}</div>`
-                                            : ""
-                                    }
-                                </td>
-
-                                <td>
-                                    <div class="prospect-contact">
-                                        <span>${escapeHtml(prospect.email || "—")}</span>
-                                        <span>${escapeHtml(prospect.telephone || "—")}</span>
-                                    </div>
-                                </td>
-
-                                <td>${escapeHtml(prospect.service || "—")}</td>
-
-                                <td>
-                                    <div class="prospect-message">
-                                        ${escapeHtml(prospect.message || "—")}
-                                    </div>
-                                    ${
-                                        getProspectPhotoUrl(prospect)
-                                            ? `<img class="prospect-photo-thumb" src="${escapeHtml(getProspectPhotoUrl(prospect))}" alt="Photo de l’article souhaité" loading="lazy">`
-                                            : ""
-                                    }
-                                </td>
-
-                                <td>
-                                    <select
-                                        class="status-select"
-                                        data-prospect-status="${prospect.id}"
-                                    >
-                                        <option value="nouveau" ${status === "nouveau" ? "selected" : ""}>Nouveau</option>
-                                        <option value="lu" ${status === "lu" ? "selected" : ""}>Lu</option>
-                                        <option value="en traitement" ${status === "en traitement" ? "selected" : ""}>En traitement</option>
-                                        <option value="traité" ${status === "traité" ? "selected" : ""}>Traité</option>
-                                    </select>
-                                </td>
-
-                                <td>
-                                    <div class="quick-actions">
-                                        <button
-                                            type="button"
-                                            class="mini-btn view"
-                                            data-view-prospect="${prospect.id}"
-                                        >
-                                            Voir
-                                        </button>
-
-                                        ${
-                                            prospect.telephone
-                                                ? `
-                                                    <button
-                                                        type="button"
-                                                        class="mini-btn whatsapp"
-                                                        data-whatsapp-prospect="${prospect.id}"
-                                                    >
-                                                        WhatsApp
-                                                    </button>
-                                                `
-                                                : ""
-                                        }
-
-                                        ${
-                                            prospect.email
-                                                ? `
-                                                    <button
-                                                        type="button"
-                                                        class="mini-btn email"
-                                                        data-email-prospect="${prospect.id}"
-                                                    >
-                                                        E-mail
-                                                    </button>
-                                                `
-                                                : ""
-                                        }
-                                    </div>
-                                </td>
-                            </tr>
-                        `;
-                    })
-                    .join("");
-        }
-
-        async function updateProspectStatus(id, status) {
-            const prospect =
-                prospectsCache.find(
-                    item => Number(item.id) === Number(id)
-                );
-
-            if (!prospect) {
-                return;
-            }
-
-            const update = {
-                statut: status,
-                lu: status !== "nouveau"
-            };
-
-            if (status === "traité") {
-                update.date_traitement =
-                    new Date().toISOString();
-            }
-
-            try {
-                const { error } =
-                    await supabaseClient
-                        .from("prospects")
-                        .update(update)
-                        .eq("id", id);
-
-                if (error) {
-                    throw error;
-                }
-
-                prospect.statut = status;
-                prospect.lu = update.lu;
-
-                if (update.date_traitement) {
-                    prospect.date_traitement =
-                        update.date_traitement;
-                }
-
-                renderProspects();
-                renderProspectKpis();
-                renderActivity();
-            }
-            catch (error) {
-                console.error("Erreur statut prospect :", error);
-                alert("Impossible de modifier le statut du prospect.");
-                renderProspects();
-            }
-        }
-
-        function getProspect(id) {
-            return prospectsCache.find(
-                item => Number(item.id) === Number(id)
-            );
-        }
-
-        function normalizePhone(value) {
-            return String(value || "")
-                .replace(/[^\d+]/g, "")
-                .replace(/^\+/, "");
-        }
-
-        function openWhatsApp(prospect) {
-            const phone = normalizePhone(prospect.telephone);
-
-            if (!phone) {
-                alert("Ce prospect n'a pas de numéro de téléphone valide.");
-                return;
-            }
-
-            const message =
-                `Bonjour ${prospect.nom || ""},\n\n` +
-                `Nous revenons vers vous concernant votre demande auprès de KY5 GLOBAL TRADE.\n\n` +
-                `Cordialement,\nKY5 GLOBAL TRADE`;
-
-            window.open(
-                `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
-                "_blank"
-            );
-        }
-
-        function openEmail(prospect) {
-            if (!prospect.email) {
-                alert("Ce prospect n'a pas d'adresse e-mail.");
-                return;
-            }
-
-            const subject =
-                `KY5 GLOBAL TRADE - ${prospect.service || "Votre demande"}`;
-
-            const body =
-                `Bonjour ${prospect.nom || ""},\n\n` +
-                `Nous revenons vers vous concernant votre demande.\n\n` +
-                `Cordialement,\nKY5 GLOBAL TRADE`;
-
-            window.location.href =
-                `mailto:${encodeURIComponent(prospect.email)}` +
-                `?subject=${encodeURIComponent(subject)}` +
-                `&body=${encodeURIComponent(body)}`;
-        }
-
-        /* =====================================================
-           MODAL
-        ===================================================== */
-
-        function openProspectModal(prospect) {
-            modalProspectName.textContent =
-                prospect.nom || "Prospect";
-
-            modalEmail.textContent =
-                prospect.email || "—";
-
-            modalPhone.textContent =
-                prospect.telephone || "—";
-
-            modalCompany.textContent =
-                prospect.entreprise || "—";
-
-            modalService.textContent =
-                prospect.service || "—";
-
-            modalMessage.textContent =
-                prospect.message || "—";
-
-            const cleanNotes = getProspectCleanNotes(prospect);
-            const photoUrl = getProspectPhotoUrl(prospect);
-
-            modalNotes.textContent = cleanNotes || "—";
-
-            if (photoUrl) {
-                modalPhotoBox.style.display = "block";
-                modalPhoto.innerHTML = `<img class="prospect-photo-large" src="${escapeHtml(photoUrl)}" alt="Photo de l’article souhaité">`;
-            } else {
-                modalPhotoBox.style.display = "none";
-                modalPhoto.innerHTML = "";
-            }
-
-            prospectModal.classList.add("open");
-            prospectModal.setAttribute("aria-hidden", "false");
-            document.body.style.overflow = "hidden";
-
-            if (normalizeStatus(prospect) === "nouveau") {
-                updateProspectStatus(prospect.id, "lu");
-                prospect.statut = "lu";
-                prospect.lu = true;
-                renderProspects();
-            }
-        }
-
-        function closeProspectModal() {
-            prospectModal.classList.remove("open");
-            prospectModal.setAttribute("aria-hidden", "true");
-            document.body.style.overflow = "";
-        }
-
-        modalCloseButton.addEventListener(
-            "click",
-            closeProspectModal
-        );
-
-        prospectModal.addEventListener(
-            "click",
-            event => {
-                if (event.target === prospectModal) {
-                    closeProspectModal();
-                }
-            }
-        );
-
-        /* =====================================================
-           ACTIVITÉ
-        ===================================================== */
-
-        function renderActivity() {
-            const activities = [];
-
-            prospectsCache.slice(0, 5).forEach(prospect => {
-                activities.push({
-                    icon: "✉️",
-                    title: `Prospect : ${prospect.nom || "Sans nom"}`,
-                    detail: prospect.service || "Nouvelle demande",
-                    time: prospect.created_at,
-                    sort: new Date(prospect.created_at).getTime() || 0
-                });
-            });
-
-            servicesCache.slice(0, 4).forEach(service => {
-                if (!service.created_at) return;
-
-                activities.push({
-                    icon: service.photo_url ? "🖼️" : "🛠️",
-                    title: service.titre || "Service",
-                    detail: service.actif ? "Service actif" : "Service masqué",
-                    time: service.created_at,
-                    sort: new Date(service.created_at).getTime() || 0
-                });
-            });
-
-            activities.sort((a, b) => b.sort - a.sort);
-
-            const latest = activities.slice(0, 6);
-
-            if (!latest.length) {
-                activityList.innerHTML =
-                    '<div class="empty">Aucune activité récente.</div>';
-                return;
-            }
-
-            activityList.innerHTML =
-                latest
-                    .map(item => `
-                        <div class="activity-item">
-                            <div class="activity-icon">${item.icon}</div>
-                            <div>
-                                <strong>${escapeHtml(item.title)}</strong>
-                                <span>${escapeHtml(item.detail)}</span>
-                            </div>
-                            <div class="activity-time">
-                                ${escapeHtml(relativeTime(item.time))}
-                            </div>
-                        </div>
-                    `)
-                    .join("");
-        }
-
-        /* =====================================================
-           RENDU GLOBAL
-        ===================================================== */
-
-        function renderAllStatistics() {
-            renderVisitorKpis();
-
-            const days =
-                Number(periodSelect.value) || 30;
-
-            renderVisitsChart(days);
-            renderTopPages(days);
-            renderDevices(days);
-            renderProspectKpis();
-            renderServicesKpis();
-
-            statsPeriodLabel.textContent =
-                days === 7
-                    ? "7 derniers jours"
-                    : days === 90
-                        ? "90 derniers jours"
-                        : "30 derniers jours";
-        }
-
-        periodSelect.addEventListener(
-            "change",
-            renderAllStatistics
-        );
-
-        refreshDashboardButton.addEventListener(
-            "click",
-            loadAllDashboardData
-        );
-
-        refreshProspectsButton.addEventListener(
-            "click",
-            async function () {
-                await loadProspects();
-                renderActivity();
-            }
-        );
-
-        prospectSearchInput.addEventListener(
-            "input",
-            renderProspects
-        );
-
-        clearProspectSearchButton.addEventListener(
-            "click",
-            function () {
-                prospectSearchInput.value = "";
-                renderProspects();
-                prospectSearchInput.focus();
-            }
-        );
-
-        prospectFilterButtons.forEach(button => {
-            button.addEventListener(
-                "click",
-                function () {
-                    prospectStatusFilter =
-                        button.getAttribute("data-prospect-filter") || "all";
-
-                    renderProspects();
-                }
-            );
-        });
-
-        /* =====================================================
-           TABLE PROSPECTS
-        ===================================================== */
-
-        prospectsTableBody.addEventListener(
-            "change",
-            function (event) {
-                const select =
-                    event.target.closest(
-                        "select[data-prospect-status]"
-                    );
-
-                if (!select) {
-                    return;
-                }
-
-                updateProspectStatus(
-                    Number(
-                        select.getAttribute(
-                            "data-prospect-status"
-                        )
-                    ),
-                    select.value
-                );
-            }
-        );
-
-        prospectsTableBody.addEventListener(
-            "click",
-            function (event) {
-                const viewButton =
-                    event.target.closest(
-                        "[data-view-prospect]"
-                    );
-
-                if (viewButton) {
-                    const prospect =
-                        getProspect(
-                            Number(
-                                viewButton.getAttribute(
-                                    "data-view-prospect"
-                                )
-                            )
-                        );
-
-                    if (prospect) {
-                        openProspectModal(prospect);
-                    }
-
-                    return;
-                }
-
-                const whatsappButton =
-                    event.target.closest(
-                        "[data-whatsapp-prospect]"
-                    );
-
-                if (whatsappButton) {
-                    const prospect =
-                        getProspect(
-                            Number(
-                                whatsappButton.getAttribute(
-                                    "data-whatsapp-prospect"
-                                )
-                            )
-                        );
-
-                    if (prospect) {
-                        openWhatsApp(prospect);
-                    }
-
-                    return;
-                }
-
-                const emailButton =
-                    event.target.closest(
-                        "[data-email-prospect]"
-                    );
-
-                if (emailButton) {
-                    const prospect =
-                        getProspect(
-                            Number(
-                                emailButton.getAttribute(
-                                    "data-email-prospect"
-                                )
-                            )
-                        );
-
-                    if (prospect) {
-                        openEmail(prospect);
-                    }
-                }
-            }
-        );
-
-        /* =====================================================
-           NAVIGATION
-        ===================================================== */
-
-        document
-            .querySelectorAll("[data-scroll]")
-            .forEach(element => {
-                element.addEventListener(
-                    "click",
-                    function () {
-                        const targetId =
-                            element.getAttribute(
-                                "data-scroll"
-                            );
-
-                        const target =
-                            document.getElementById(
-                                targetId
-                            );
-
-                        if (target) {
-                            target.scrollIntoView({
-                                behavior: "smooth",
-                                block: "start"
-                            });
-                        }
-
-                        closeMobileSidebar();
-                    }
-                );
-            });
-
-        document
-            .querySelectorAll(".coming")
-            .forEach(element => {
-                element.addEventListener(
-                    "click",
-                    function () {
-                        const moduleName =
-                            element.getAttribute(
-                                "data-module"
-                            ) || "Ce module";
-
-                        alert(
-                            moduleName +
-                            " sera configuré dans la prochaine étape."
-                        );
-                    }
-                );
-            });
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        mobileMenuButton.addEventListener(
-            "click",
-            function () {
-                sidebar.classList.add("open");
-                sidebarOverlay.classList.add("active");
-            }
-        );
-
-        sidebarOverlay.addEventListener(
-            "click",
-            closeMobileSidebar
-        );
-
-        function closeMobileSidebar() {
-            sidebar.classList.remove("open");
-            sidebarOverlay.classList.remove("active");
-        }
-
-        /* =====================================================
-           DÉCONNEXION
-        ===================================================== */
-
-        logoutButton.addEventListener(
-            "click",
-            async function () {
-                const confirmation =
-                    confirm(
-                        "Voulez-vous vraiment vous déconnecter ?"
-                    );
-
-                if (!confirmation) {
-                    return;
-                }
-
-                try {
-                    await supabaseClient.auth.signOut();
-                }
-                catch (error) {
-                    console.error(error);
-                }
-
-                window.location.href = "index.html";
-            }
-        );
-
-        if (supabaseClient) {
-            supabaseClient.auth.onAuthStateChange(
-                function (event, session) {
-                    if (event === "SIGNED_OUT") {
-                        window.location.href = "index.html";
-                    }
-
-                    if (
-                        !session &&
-                        event !== "INITIAL_SESSION"
-                    ) {
-                        window.location.href = "index.html";
-                    }
-                }
-            );
-        }
-
-        document.addEventListener(
-            "keydown",
-            event => {
-                if (event.key === "Escape") {
-                    closeProspectModal();
-                    closeMobileSidebar();
-                }
-            }
-        );
-
-        /* =====================================================
-           DÉMARRAGE
-        ===================================================== */
-
-        verifyAdminSession();
-    </script>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const mirror = function () {
-        const vm = document.getElementById("visitorsMonth");
-        const pvm = document.getElementById("pageViewsMonth");
-        const vmm = document.getElementById("visitorsMonthMirror");
-        const pvmm = document.getElementById("pageViewsMonthMirror");
-
-        if (vm && vmm) vmm.textContent = vm.textContent;
-        if (pvm && pvmm) pvmm.textContent = pvm.textContent;
-    };
-
-    setInterval(mirror, 700);
-});
-</script>
-
-
-<script>
-(function(){
-  function num(id){return Number((document.getElementById(id)?.textContent||"0").replace(/[^\d.-]/g,""))||0}
-  function setText(id,v){const el=document.getElementById(id);if(el)el.textContent=v}
-  function setWidth(id,v,max){const el=document.getElementById(id);if(el)el.style.width=(max?Math.min(100,(v/max)*100):0)+"%"}
-  function sync(){
-    const today=num("visitorsToday"),month=num("visitorsMonth"),n=num("newProspects"),r=num("prospectsRead"),p=num("progressProspects"),d=num("doneProspects"),s=num("activeServices"),m=num("publishedMedia");
-    [["filterToday",today],["filterMonth",month],["filterNew",n],["filterProgress",p],["filterDone",d],["filterServices",s],["filterMedia",m],["legendNew",n],["legendRead",r],["legendProgress",p],["legendDone",d],["servicesBarValue",s],["mediaBarValue",m],["newBarValue",n],["progressBarValue",p],["doneBarValue",d]].forEach(([id,v])=>setText(id,v));
-    const total=n+r+p+d||1, a=n/total*100, b=(n+r)/total*100, c=(n+r+p)/total*100;
-    const donut=document.getElementById("prospectDonut");
-    if(donut)donut.style.setProperty("background",`conic-gradient(#d978a5 0 ${a}%,#8b7cf6 ${a}% ${b}%,#e7b24a ${b}% ${c}%,#48b991 ${c}% 100%)`,"important");
-    const max=Math.max(s,m,n,p,d,1);
-    setWidth("servicesBar",s,max);setWidth("mediaBar",m,max);setWidth("newBar",n,max);setWidth("progressBar",p,max);setWidth("doneBar",d,max);
-  }
-  document.addEventListener("DOMContentLoaded",function(){
-    ["visitorsToday","visitorsMonth","newProspects","prospectsRead","progressProspects","doneProspects","activeServices","publishedMedia"].forEach(id=>{
-      const el=document.getElementById(id); if(el)new MutationObserver(sync).observe(el,{childList:true,subtree:true,characterData:true});
-    });
-    sync();
-  });
-})();
-</script>
 
 </body>
 </html>
