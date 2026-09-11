@@ -2047,6 +2047,78 @@
 
 </style>
 
+
+<style id="ky5-location-structured">
+/* =========================================================
+   KY5 — LOCALISATION STRUCTURÉE DES PROSPECTS
+========================================================= */
+
+.location-section-title{
+    margin-top:4px;
+    padding:18px 20px;
+    border-radius:16px;
+    border:1px solid rgba(7,92,168,.12);
+    background:
+        radial-gradient(circle at 90% 10%, rgba(99,221,255,.12), transparent 28%),
+        linear-gradient(135deg,#f1f9fd,#f8fcff);
+}
+
+.location-section-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:#075ca8;
+    font-size:9px;
+    font-weight:950;
+    letter-spacing:1.8px;
+}
+
+.location-section-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#18a2e0;
+    box-shadow:0 0 12px rgba(24,162,224,.55);
+    animation:locationPulse 1.8s ease-in-out infinite;
+}
+
+.location-section-title p{
+    margin-top:8px;
+    color:#6f8397;
+    font-size:11px;
+    line-height:1.6;
+}
+
+.location-other-field[hidden]{
+    display:none!important;
+}
+
+.location-other-field{
+    animation:locationFieldReveal .25s ease both;
+}
+
+#paysSelect,
+#villeSelect{
+    cursor:pointer;
+}
+
+#paysSelect:disabled,
+#villeSelect:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+}
+
+@keyframes locationPulse{
+    0%,100%{transform:scale(.85);opacity:.70}
+    50%{transform:scale(1.25);opacity:1}
+}
+
+@keyframes locationFieldReveal{
+    from{opacity:0;transform:translateY(-5px)}
+    to{opacity:1;transform:translateY(0)}
+}
+</style>
+
 </head>
 
 
@@ -2409,35 +2481,138 @@
 
                     </div>
 
+                    <!-- LOCALISATION STRUCTURÉE -->
+
+                    <div class="field field-full location-section-title">
+                        <div class="location-section-badge">
+                            <span class="location-section-dot"></span>
+                            LOCALISATION DU PROSPECT
+                        </div>
+
+                        <p>
+                            Sélectionnez d’abord le pays puis la ville.
+                            Cette information permettra à KY5 de classer automatiquement
+                            la demande dans l’administration.
+                        </p>
+                    </div>
+
+
+                    <!-- PAYS -->
+
+                    <div class="field">
+
+                        <label for="paysSelect">
+                            Pays
+                            <span class="required">*</span>
+                        </label>
+
+                        <select
+                            id="paysSelect"
+                            required
+                        >
+                            <option value="">
+                                Sélectionnez le pays
+                            </option>
+
+                            <option value="République démocratique du Congo">
+                                République démocratique du Congo (RDC)
+                            </option>
+
+                            <option value="République du Congo">
+                                République du Congo (Congo-Brazzaville)
+                            </option>
+
+                            <option value="__other__">
+                                Autre pays
+                            </option>
+                        </select>
+
+                        <input
+                            type="hidden"
+                            id="pays"
+                            name="Pays"
+                            value=""
+                        >
+
+                    </div>
+
+
+                    <!-- AUTRE PAYS -->
+
+                    <div
+                        class="field location-other-field"
+                        id="paysAutreWrap"
+                        hidden
+                    >
+
+                        <label for="paysAutre">
+                            Précisez le pays
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="paysAutre"
+                            placeholder="Ex. France, Angola, Belgique..."
+                            autocomplete="country-name"
+                        >
+
+                    </div>
 
 
                     <!-- VILLE -->
 
                     <div class="field">
 
-
-                        <label for="ville">
-
+                        <label for="villeSelect">
                             Ville
-
-                            <span class="required">
-                                *
-                            </span>
-
+                            <span class="required">*</span>
                         </label>
 
+                        <select
+                            id="villeSelect"
+                            required
+                            disabled
+                        >
+                            <option value="">
+                                Sélectionnez d’abord le pays
+                            </option>
+                        </select>
+
+                        <input
+                            type="hidden"
+                            id="ville"
+                            name="Ville"
+                            value=""
+                        >
+
+                    </div>
+
+
+                    <!-- AUTRE VILLE -->
+
+                    <div
+                        class="field location-other-field"
+                        id="villeAutreWrap"
+                        hidden
+                    >
+
+                        <label for="villeAutre">
+                            Précisez la ville
+                            <span class="required">*</span>
+                        </label>
 
                         <input
                             type="text"
-                            id="ville"
-                            name="Ville"
-                            placeholder="Ex. Kinshasa ou Brazzaville"
+                            id="villeAutre"
+                            placeholder="Saisissez votre ville"
                             autocomplete="address-level2"
-                            required
                         >
 
-
                     </div>
+
+
+
 
 
 
@@ -2947,6 +3122,237 @@
 
 
 
+    
+    <!-- =====================================================
+         LOCALISATION STRUCTURÉE : PAYS + VILLE
+    ===================================================== -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const paysSelect = document.getElementById("paysSelect");
+            const paysHidden = document.getElementById("pays");
+            const paysAutreWrap = document.getElementById("paysAutreWrap");
+            const paysAutre = document.getElementById("paysAutre");
+
+            const villeSelect = document.getElementById("villeSelect");
+            const villeHidden = document.getElementById("ville");
+            const villeAutreWrap = document.getElementById("villeAutreWrap");
+            const villeAutre = document.getElementById("villeAutre");
+
+            if (
+                !paysSelect ||
+                !paysHidden ||
+                !villeSelect ||
+                !villeHidden
+            ) {
+                return;
+            }
+
+            const cityCatalog = {
+
+                "République démocratique du Congo": [
+                    "Kinshasa",
+                    "Lubumbashi",
+                    "Goma",
+                    "Bukavu",
+                    "Matadi",
+                    "Kisangani",
+                    "Kolwezi",
+                    "Mbuji-Mayi",
+                    "Kananga",
+                    "Boma",
+                    "Likasi"
+                ],
+
+                "République du Congo": [
+                    "Brazzaville",
+                    "Pointe-Noire",
+                    "Dolisie",
+                    "Nkayi",
+                    "Ouesso"
+                ]
+
+            };
+
+
+            function setOtherCountryVisibility(show) {
+
+                paysAutreWrap.hidden = !show;
+                paysAutre.required = show;
+
+                if (!show) {
+                    paysAutre.value = "";
+                }
+
+            }
+
+
+            function setOtherCityVisibility(show) {
+
+                villeAutreWrap.hidden = !show;
+                villeAutre.required = show;
+
+                if (!show) {
+                    villeAutre.value = "";
+                }
+
+            }
+
+
+            function syncCountryValue() {
+
+                if (paysSelect.value === "__other__") {
+                    paysHidden.value = paysAutre.value.trim();
+                }
+                else {
+                    paysHidden.value = paysSelect.value;
+                }
+
+            }
+
+
+            function syncCityValue() {
+
+                if (villeSelect.value === "__other__") {
+                    villeHidden.value = villeAutre.value.trim();
+                }
+                else {
+                    villeHidden.value = villeSelect.value;
+                }
+
+            }
+
+
+            function rebuildCities() {
+
+                const selectedCountry = paysSelect.value;
+
+                villeSelect.innerHTML = "";
+                villeHidden.value = "";
+
+                setOtherCityVisibility(false);
+
+                if (!selectedCountry) {
+
+                    villeSelect.disabled = true;
+
+                    const option = document.createElement("option");
+                    option.value = "";
+                    option.textContent = "Sélectionnez d’abord le pays";
+
+                    villeSelect.appendChild(option);
+
+                    return;
+                }
+
+
+                villeSelect.disabled = false;
+
+                const firstOption = document.createElement("option");
+                firstOption.value = "";
+                firstOption.textContent = "Sélectionnez la ville";
+
+                villeSelect.appendChild(firstOption);
+
+
+                if (selectedCountry === "__other__") {
+
+                    const customOption = document.createElement("option");
+
+                    customOption.value = "__other__";
+                    customOption.textContent = "Saisir la ville";
+
+                    villeSelect.appendChild(customOption);
+                    villeSelect.value = "__other__";
+
+                    setOtherCityVisibility(true);
+                    syncCityValue();
+
+                    return;
+                }
+
+
+                const cities =
+                    cityCatalog[selectedCountry] || [];
+
+
+                cities.forEach(function (city) {
+
+                    const option =
+                        document.createElement("option");
+
+                    option.value = city;
+                    option.textContent = city;
+
+                    villeSelect.appendChild(option);
+
+                });
+
+
+                const otherCityOption =
+                    document.createElement("option");
+
+                otherCityOption.value = "__other__";
+                otherCityOption.textContent = "Autre ville";
+
+                villeSelect.appendChild(otherCityOption);
+
+            }
+
+
+            paysSelect.addEventListener("change", function () {
+
+                const isOther =
+                    paysSelect.value === "__other__";
+
+                setOtherCountryVisibility(isOther);
+
+                syncCountryValue();
+                rebuildCities();
+
+                if (isOther) {
+                    paysAutre.focus();
+                }
+
+            });
+
+
+            paysAutre.addEventListener("input", function () {
+                syncCountryValue();
+            });
+
+
+            villeSelect.addEventListener("change", function () {
+
+                const isOther =
+                    villeSelect.value === "__other__";
+
+                setOtherCityVisibility(isOther);
+                syncCityValue();
+
+                if (isOther) {
+                    villeAutre.focus();
+                }
+
+            });
+
+
+            villeAutre.addEventListener("input", function () {
+                syncCityValue();
+            });
+
+
+            /* Valeurs initiales */
+            setOtherCountryVisibility(false);
+            setOtherCityVisibility(false);
+            syncCountryValue();
+            rebuildCities();
+
+        });
+    </script>
+
+
     <!-- =====================================================
          SUPABASE
     ===================================================== -->
@@ -3236,6 +3642,13 @@
                         .trim();
 
 
+                const pays =
+                    document
+                        .getElementById("pays")
+                        .value
+                        .trim();
+
+
                 const ville =
                     document
                         .getElementById("ville")
@@ -3377,8 +3790,18 @@
                 const notes = [
 
 
+                    pays
+                        ? `Pays : ${pays}`
+                        : "",
+
+
                     ville
                         ? `Ville : ${ville}`
+                        : "",
+
+
+                    (ville || pays)
+                        ? `Localisation : ${[ville, pays].filter(Boolean).join(" / ")}`
                         : "",
 
 
