@@ -2029,6 +2029,189 @@
 
 </style>
 
+
+<style id="ky5-services-activities-photo">
+/* =========================================================
+   KY5 GLOBAL TRADE — SERVICES & NOS ACTIVITÉS
+   Photo du dossier : activés.jpg
+========================================================= */
+
+.hero{
+    position:relative!important;
+    isolation:isolate!important;
+    background:#03172f!important;
+}
+
+/* Image réelle */
+.hero .hero-activities-background{
+    position:absolute!important;
+    inset:0!important;
+    z-index:0!important;
+    overflow:hidden!important;
+    pointer-events:none!important;
+}
+
+.hero .hero-activities-background img{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    display:block!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+    filter:
+        saturate(1.08)
+        contrast(1.05)
+        brightness(.98)!important;
+    transform:scale(1.01)!important;
+}
+
+/* Voile volontairement léger pour laisser la photo très visible */
+.hero .hero-activities-background::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:2;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,10,24,.10) 0%,
+            rgba(0,23,45,.20) 48%,
+            rgba(0,12,28,.50) 100%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,16,38,.20) 0%,
+            rgba(0,18,40,.02) 50%,
+            rgba(0,16,38,.20) 100%
+        );
+}
+
+/* Les anciens cercles restent mais deviennent discrets */
+.hero::before,
+.hero::after{
+    z-index:1!important;
+    opacity:.22!important;
+    pointer-events:none!important;
+}
+
+/* Contenu devant l'image */
+.hero .hero-content{
+    position:relative!important;
+    z-index:5!important;
+    width:min(94%,1080px)!important;
+    padding:35px 38px!important;
+    border-radius:28px!important;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,19,41,.36),
+            rgba(0,47,84,.14)
+        )!important;
+
+    border:
+        1px solid rgba(139,231,255,.16)!important;
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.06)!important;
+
+    backdrop-filter:blur(3px)!important;
+    -webkit-backdrop-filter:blur(3px)!important;
+}
+
+.hero .hero-small{
+    color:#a8ecff!important;
+    text-shadow:
+        0 2px 12px rgba(0,0,0,.72),
+        0 0 14px rgba(103,217,255,.22)!important;
+}
+
+.hero h1{
+    color:#fff!important;
+    text-shadow:
+        0 7px 26px rgba(0,0,0,.82),
+        0 0 22px rgba(24,162,224,.18)!important;
+}
+
+.hero h1 span{
+    color:#78e2ff!important;
+    text-shadow:
+        0 6px 22px rgba(0,0,0,.72),
+        0 0 26px rgba(103,217,255,.34)!important;
+}
+
+.hero p{
+    color:#ffffff!important;
+    text-shadow:
+        0 3px 14px rgba(0,0,0,.82)!important;
+}
+
+/* Boutons */
+.hero .hero-actions{
+    position:relative!important;
+    z-index:6!important;
+}
+
+.hero .hero-button{
+    box-shadow:
+        0 13px 30px rgba(0,0,0,.24)!important;
+}
+
+.hero .hero-button-secondary{
+    background:
+        rgba(0,19,41,.54)!important;
+    border-color:
+        rgba(139,231,255,.42)!important;
+    backdrop-filter:
+        blur(6px)!important;
+}
+
+/* Mobile */
+@media(max-width:750px){
+    .hero .hero-content{
+        width:min(94%,700px)!important;
+        padding:26px 18px!important;
+        border-radius:22px!important;
+    }
+
+    .hero .hero-activities-background img{
+        object-position:center 42%!important;
+    }
+}
+</style>
+
+
+<script id="ky5-activity-image-fallback">
+function ky5ActivityImageFallback(img){
+    const base = img.getAttribute("data-activity-image-base");
+    if(!base) return;
+
+    const candidates = [
+        base + ".JPG",
+        base + ".jpeg",
+        base + ".JPEG",
+        base + ".png",
+        base + ".PNG",
+        base + ".webp",
+        base + ".WEBP"
+    ];
+
+    const index = Number(img.dataset.fallbackIndex || "0");
+
+    if(index < candidates.length){
+        img.dataset.fallbackIndex = String(index + 1);
+        img.src = candidates[index];
+        return;
+    }
+
+    img.onerror = null;
+    img.style.display = "none";
+}
+</script>
+
 </head>
 
 
@@ -2146,6 +2329,15 @@
     ===================================================== -->
 
     <section class="hero">
+
+        <div class="hero-activities-background" aria-hidden="true">
+            <img
+                src="./activés.jpg"
+                data-activity-image-base="./activés"
+                alt=""
+                onerror="ky5ActivityImageFallback(this)"
+            >
+        </div>
 
         <div class="hero-content">
 

@@ -3365,7 +3365,7 @@ body::after{
 <style id="ky5-prospect-location-v5">
 /* =========================================================
    KY5 — PROSPECTS V5
-   PAYS + VILLE + INTERNATIONAL
+   PAYS + VILLE
 ========================================================= */
 
 #prospectsView .location-card.rdc{
@@ -3382,12 +3382,7 @@ body::after{
   border-color:rgba(143,124,247,.24)!important;
 }
 
-#prospectsView .location-card.international{
-  background:
-    radial-gradient(circle at 92% 8%,rgba(240,184,78,.16),transparent 30%),
-    linear-gradient(145deg,#3b2f1e,#584124)!important;
-  border-color:rgba(240,184,78,.22)!important;
-}
+
 
 #prospectsView .location-card-icon{
   font-size:11px!important;
@@ -3437,11 +3432,7 @@ body::after{
   color:#d7d1ff!important;
 }
 
-#prospectsView .location-badge.international{
-  background:rgba(240,184,78,.09)!important;
-  border-color:rgba(240,184,78,.17)!important;
-  color:#ffe2a9!important;
-}
+
 
 @media(max-width:1100px){
   #prospectsView .prospect-commandbar{
@@ -3990,14 +3981,8 @@ body::after{
   border-color:rgba(251,222,65,.32)!important;
 }
 
-/* International */
-#prospectsView .location-card.international{
-  background:
-    radial-gradient(circle at 90% 10%,rgba(240,184,78,.22),transparent 26%),
-    radial-gradient(circle at 70% 95%,rgba(143,124,247,.18),transparent 28%),
-    linear-gradient(145deg,#56391d,#745028 58%,#4b3320)!important;
-  border-color:rgba(240,184,78,.34)!important;
-}
+
+
 
 /* Drapeaux */
 #prospectsView .location-card-icon.location-flag{
@@ -4088,12 +4073,7 @@ body::after{
     0 0 30px rgba(18,136,82,.30)!important;
 }
 
-#prospectsView .location-card.international.is-active{
-  box-shadow:
-    0 0 0 3px rgba(240,184,78,.08),
-    0 18px 40px rgba(0,0,0,.26),
-    0 0 30px rgba(240,184,78,.20)!important;
-}
+
 
 /* Petits onglets de filtre */
 #prospectsView .location-tab{
@@ -4194,6 +4174,123 @@ body::after{
 
   #prospectsView .location-card-copy strong{
     font-size:24px!important;
+  }
+}
+</style>
+
+
+<style id="ky5-location-v9">
+/* V9 — seulement Tous / RDC / Congo-Brazzaville visibles */
+#prospectsView .location-cards{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+
+@media(max-width:760px){
+  #prospectsView .location-cards{
+    grid-template-columns:1fr!important;
+  }
+}
+</style>
+
+
+<script id="ky5-flag-fallback-v10">
+function ky5FlagFallback(img){
+    const base = img.getAttribute("data-flag-base");
+    if(!base) return;
+
+    const candidates = [
+        base + ".jpg",
+        base + ".jpeg",
+        base + ".webp",
+        base + ".PNG",
+        base + ".JPG",
+        base + ".JPEG",
+        base + ".WEBP",
+        base
+    ];
+
+    const currentIndex = Number(img.dataset.fallbackIndex || "0");
+
+    if(currentIndex < candidates.length){
+        img.dataset.fallbackIndex = String(currentIndex + 1);
+        img.src = candidates[currentIndex];
+        return;
+    }
+
+    img.onerror = null;
+    img.style.display = "none";
+}
+</script>
+
+
+<style id="ky5-real-flags-v10">
+/* =========================================================
+   KY5 — V10
+   VRAIES PHOTOS DES DRAPEAUX RDC / CONGO-BRAZZAVILLE
+========================================================= */
+
+#prospectsView .location-cards{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+
+/* Le drapeau remplit proprement son cadre */
+#prospectsView .flag-photo-wrap{
+  overflow:hidden!important;
+  padding:0!important;
+  background:rgba(255,255,255,.10)!important;
+  border:1px solid rgba(255,255,255,.20)!important;
+}
+
+#prospectsView .location-flag-img{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  border-radius:inherit!important;
+}
+
+/* Petits drapeaux dans les onglets */
+#prospectsView .tab-flag-photo{
+  width:24px!important;
+  height:17px!important;
+  flex:0 0 24px!important;
+  display:inline-flex!important;
+  overflow:hidden!important;
+  border-radius:4px!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:0 3px 8px rgba(0,0,0,.16)!important;
+  background:rgba(255,255,255,.08)!important;
+}
+
+#prospectsView .tab-flag-photo img{
+  width:100%!important;
+  height:100%!important;
+  display:block!important;
+  object-fit:cover!important;
+}
+
+/* RDC : sélection très visible */
+#prospectsView .location-card.rdc.is-active{
+  border-color:#ffd84a!important;
+  box-shadow:
+    0 0 0 3px rgba(255,216,74,.13),
+    0 18px 40px rgba(0,0,0,.28),
+    0 0 32px rgba(8,119,201,.34)!important;
+}
+
+/* Congo-Brazzaville : sélection très visible */
+#prospectsView .location-card.congo.is-active{
+  border-color:#f6d94b!important;
+  box-shadow:
+    0 0 0 3px rgba(246,217,75,.11),
+    0 18px 40px rgba(0,0,0,.28),
+    0 0 32px rgba(18,136,82,.32)!important;
+}
+
+@media(max-width:760px){
+  #prospectsView .location-cards{
+    grid-template-columns:1fr!important;
   }
 }
 </style>
@@ -4451,18 +4548,29 @@ body::after{
             <span class="location-card-check" aria-hidden="true">✓</span>
           </button>
           <button type="button" class="location-card rdc" data-location-filter="rdc">
-            <span class="location-card-icon location-flag" aria-label="Drapeau de la République démocratique du Congo">🇨🇩</span>
+            <span class="location-card-icon location-flag flag-photo-wrap">
+              <img
+                src="../Drapeau RDC.jpg"
+                data-flag-base="../Drapeau RDC"
+                class="location-flag-img"
+                alt="Drapeau de la République démocratique du Congo"
+                onerror="ky5FlagFallback(this)"
+              >
+            </span>
             <span class="location-card-copy"><small>RDC</small><strong id="locationRdcCount">0</strong></span>
             <span class="location-card-check" aria-hidden="true">✓</span>
           </button>
           <button type="button" class="location-card congo" data-location-filter="congo">
-            <span class="location-card-icon location-flag" aria-label="Drapeau de la République du Congo">🇨🇬</span>
+            <span class="location-card-icon location-flag flag-photo-wrap">
+              <img
+                src="../Drapeau Congo.jpg"
+                data-flag-base="../Drapeau Congo"
+                class="location-flag-img"
+                alt="Drapeau de la République du Congo"
+                onerror="ky5FlagFallback(this)"
+              >
+            </span>
             <span class="location-card-copy"><small>Congo-Brazzaville</small><strong id="locationCongoCount">0</strong></span>
-            <span class="location-card-check" aria-hidden="true">✓</span>
-          </button>
-          <button type="button" class="location-card international" data-location-filter="international">
-            <span class="location-card-icon location-flag" aria-label="International">🌍</span>
-            <span class="location-card-copy"><small>International / à classer</small><strong id="locationInternationalCount">0</strong></span>
             <span class="location-card-check" aria-hidden="true">✓</span>
           </button>
         </div>
@@ -4477,9 +4585,13 @@ body::after{
             <div class="prospect-commandbar">
               <div class="prospect-location-tabs" aria-label="Filtrer par pays">
                 <button type="button" class="location-tab is-active" data-location-filter="all"><span class="tab-flag">◎</span>Tous</button>
-                <button type="button" class="location-tab" data-location-filter="rdc"><span class="tab-flag">🇨🇩</span>RDC</button>
-                <button type="button" class="location-tab" data-location-filter="congo"><span class="tab-flag">🇨🇬</span>Congo-Brazzaville</button>
-                <button type="button" class="location-tab" data-location-filter="international"><span class="tab-flag">🌍</span>International</button>
+                <button type="button" class="location-tab" data-location-filter="rdc"><span class="tab-flag tab-flag-photo">
+                  <img src="../Drapeau RDC.jpg" data-flag-base="../Drapeau RDC" alt="" onerror="ky5FlagFallback(this)">
+                </span>RDC</button>
+                <button type="button" class="location-tab" data-location-filter="congo"><span class="tab-flag tab-flag-photo">
+                  <img src="../Drapeau Congo.jpg" data-flag-base="../Drapeau Congo" alt="" onerror="ky5FlagFallback(this)">
+                </span>Congo-Brazzaville</button>
+                
               </div>
 
               <label class="prospect-city-control">
@@ -5668,7 +5780,7 @@ body::after{
                 return "congo";
             }
 
-            return "international";
+            return "other";
         }
 
         function prospectLocationCounts() {
@@ -5676,7 +5788,7 @@ body::after{
                 all: prospectsCache.length,
                 rdc: 0,
                 congo: 0,
-                international: 0
+
             };
 
             prospectsCache.forEach(prospect => {
@@ -5695,7 +5807,7 @@ body::after{
                 ["locationAllCount", counts.all],
                 ["locationRdcCount", counts.rdc],
                 ["locationCongoCount", counts.congo],
-                ["locationInternationalCount", counts.international],
+
                 ["navProspectBadge", statusCounts.nouveau],
                 ["prospectEntryCount", statusCounts.nouveau]
             ];

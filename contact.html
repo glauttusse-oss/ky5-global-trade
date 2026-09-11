@@ -2370,6 +2370,162 @@ body.menu-locked {
 }
 
 </style>
+
+<style id="ky5-contact-photo-final">
+/* =========================================================
+   KY5 GLOBAL TRADE — CONTACT
+   Image du dossier : contacts.jpg
+========================================================= */
+
+.contact-hero{
+    position:relative!important;
+    isolation:isolate!important;
+    background:#03172f!important;
+}
+
+.contact-hero .contact-hero-background{
+    position:absolute!important;
+    inset:0!important;
+    z-index:0!important;
+    overflow:hidden!important;
+    pointer-events:none!important;
+}
+
+.contact-hero .contact-hero-background img{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    display:block!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+    filter:
+        saturate(1.04)
+        contrast(1.08)
+        brightness(.72)!important;
+    transform:scale(1.006)!important;
+}
+
+/* Voile sombre professionnel */
+.contact-hero .contact-hero-background::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:2;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,8,20,.18) 0%,
+            rgba(0,20,42,.30) 48%,
+            rgba(0,10,26,.58) 100%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0,13,32,.28) 0%,
+            rgba(0,18,38,.06) 50%,
+            rgba(0,13,32,.28) 100%
+        );
+}
+
+/* Décorations existantes plus discrètes */
+.contact-hero::before,
+.contact-hero::after{
+    z-index:1!important;
+    opacity:.20!important;
+    pointer-events:none!important;
+}
+
+/* Contenu au-dessus */
+.contact-hero .hero-content{
+    position:relative!important;
+    z-index:5!important;
+    width:min(94%,900px)!important;
+    padding:34px 36px!important;
+    border-radius:28px!important;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,19,41,.34),
+            rgba(0,47,84,.12)
+        )!important;
+    border:
+        1px solid rgba(139,231,255,.16)!important;
+    box-shadow:
+        0 18px 55px rgba(0,0,0,.20),
+        inset 0 1px 0 rgba(255,255,255,.06)!important;
+    backdrop-filter:blur(3px)!important;
+    -webkit-backdrop-filter:blur(3px)!important;
+}
+
+.contact-hero .hero-small{
+    color:#a9ecff!important;
+    text-shadow:0 2px 12px rgba(0,0,0,.72)!important;
+}
+
+.contact-hero h1{
+    color:#fff!important;
+    text-shadow:
+        0 7px 26px rgba(0,0,0,.84),
+        0 0 22px rgba(24,162,224,.18)!important;
+}
+
+.contact-hero h1 span{
+    color:#78e2ff!important;
+    text-shadow:
+        0 6px 22px rgba(0,0,0,.72),
+        0 0 26px rgba(103,217,255,.34)!important;
+}
+
+.contact-hero p{
+    color:#fff!important;
+    text-shadow:
+        0 3px 14px rgba(0,0,0,.82)!important;
+}
+
+@media(max-width:900px){
+    .contact-hero .hero-content{
+        width:min(94%,760px)!important;
+        padding:28px 20px!important;
+        border-radius:22px!important;
+    }
+
+    .contact-hero .contact-hero-background img{
+        object-position:center 42%!important;
+    }
+}
+</style>
+
+
+<script id="ky5-contact-image-fallback">
+function ky5ContactImageFallback(img){
+    const candidates = [
+        "./contacts.JPG",
+        "./contacts.jpeg",
+        "./contacts.JPEG",
+        "./contacts.png",
+        "./contacts.PNG",
+        "./contacts.webp",
+        "./contacts.WEBP",
+        "./Contacts.jpg",
+        "./CONTACTS.jpg",
+        "./contact.jpg",
+        "./Contact.jpg"
+    ];
+
+    const index = Number(img.dataset.fallbackIndex || "0");
+
+    if(index < candidates.length){
+        img.dataset.fallbackIndex = String(index + 1);
+        img.src = candidates[index];
+        return;
+    }
+
+    img.onerror = null;
+    img.style.display = "none";
+}
+</script>
+
 </head>
 
 
@@ -2491,6 +2647,14 @@ body.menu-locked {
     ========================================= -->
 
     <section class="contact-hero">
+
+        <div class="contact-hero-background" aria-hidden="true">
+            <img
+                src="./contacts.jpg"
+                alt=""
+                onerror="ky5ContactImageFallback(this)"
+            >
+        </div>
 
         <div class="hero-content">
 

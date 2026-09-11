@@ -813,6 +813,218 @@ nav a{
   font-size:17px !important;
 }
 </style>
+
+<style id="ky5-realisations-photo">
+/* =========================================================
+   KY5 GLOBAL TRADE — NOS RÉALISATIONS
+   Photo du dossier : realisations.jpg
+========================================================= */
+
+.hero{
+  position:relative!important;
+  isolation:isolate!important;
+  background:#03172f!important;
+}
+
+.hero .hero-realisations-background{
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+}
+
+.hero .hero-realisations-background img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  display:block!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  filter:
+    saturate(1.10)
+    contrast(1.06)
+    brightness(1.02)!important;
+  transform:scale(1.005)!important;
+}
+
+/* Voile léger : on garde la photo très visible */
+.hero .hero-realisations-background::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,10,24,.05) 0%,
+      rgba(0,24,48,.16) 48%,
+      rgba(0,12,30,.42) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0,16,38,.16) 0%,
+      rgba(0,18,40,.00) 50%,
+      rgba(0,16,38,.16) 100%
+    );
+}
+
+/* Cercles décoratifs plus discrets */
+.hero:before,
+.hero:after{
+  z-index:1!important;
+  opacity:.20!important;
+  pointer-events:none!important;
+}
+
+/* Contenu au-dessus de la photo */
+.hero .hero-inner{
+  position:relative!important;
+  z-index:5!important;
+  width:min(94%,1050px)!important;
+  padding:34px 38px!important;
+  border-radius:28px!important;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,19,41,.34),
+      rgba(0,47,84,.12)
+    )!important;
+  border:1px solid rgba(139,231,255,.16)!important;
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.06)!important;
+  backdrop-filter:blur(3px)!important;
+  -webkit-backdrop-filter:blur(3px)!important;
+}
+
+.hero .kicker{
+  color:#a8ecff!important;
+  text-shadow:
+    0 2px 12px rgba(0,0,0,.76),
+    0 0 14px rgba(103,217,255,.22)!important;
+}
+
+.hero h1{
+  color:#fff!important;
+  text-shadow:
+    0 7px 26px rgba(0,0,0,.84),
+    0 0 22px rgba(24,162,224,.18)!important;
+}
+
+.hero h1 span{
+  color:#78e2ff!important;
+  text-shadow:
+    0 6px 22px rgba(0,0,0,.72),
+    0 0 26px rgba(103,217,255,.34)!important;
+}
+
+.hero p{
+  color:#fff!important;
+  text-shadow:
+    0 3px 14px rgba(0,0,0,.82)!important;
+}
+
+.hero .hero-actions{
+  position:relative!important;
+  z-index:6!important;
+}
+
+.hero .hero-btn{
+  box-shadow:0 13px 30px rgba(0,0,0,.22)!important;
+}
+
+.hero .hero-btn.secondary{
+  background:rgba(0,19,41,.52)!important;
+  border-color:rgba(139,231,255,.42)!important;
+  backdrop-filter:blur(6px)!important;
+}
+
+@media(max-width:560px){
+  .hero .hero-inner{
+    width:min(94%,700px)!important;
+    padding:26px 18px!important;
+    border-radius:22px!important;
+  }
+
+  .hero .hero-realisations-background img{
+    object-position:center 42%!important;
+  }
+}
+</style>
+
+
+<script id="ky5-realisations-image-fallback">
+function ky5RealisationsImageFallback(img){
+  const candidates = [
+    "./realisations.JPG",
+    "./realisations.jpeg",
+    "./realisations.JPEG",
+    "./realisations.png",
+    "./realisations.PNG",
+    "./realisations.webp",
+    "./realisations.WEBP",
+    "./réalisations.jpg",
+    "./réalisations.JPG",
+    "./réalisations.jpeg",
+    "./réalisations.PNG",
+    "./Réalisations.jpg",
+    "./Realisations.jpg"
+  ];
+
+  const index = Number(img.dataset.fallbackIndex || "0");
+
+  if(index < candidates.length){
+    img.dataset.fallbackIndex = String(index + 1);
+    img.src = candidates[index];
+    return;
+  }
+
+  img.onerror = null;
+  img.style.display = "none";
+}
+</script>
+
+
+<style id="ky5-realisations-photo-darker-v2">
+/* Réalisations — photo moins claire, plus élégante */
+.hero .hero-realisations-background img{
+  filter:
+    saturate(1.02)
+    contrast(1.08)
+    brightness(.72)!important;
+}
+
+/* Voile sombre renforcé, sans cacher l'image */
+.hero .hero-realisations-background::after{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,8,20,.20) 0%,
+      rgba(0,20,42,.34) 48%,
+      rgba(0,10,26,.62) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0,13,32,.30) 0%,
+      rgba(0,18,38,.10) 50%,
+      rgba(0,13,32,.30) 100%
+    )!important;
+}
+
+/* Le panneau du texte devient un peu plus transparent */
+.hero .hero-inner{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,19,41,.28),
+      rgba(0,47,84,.10)
+    )!important;
+}
+</style>
+
 </head>
 
 <body>
@@ -868,6 +1080,15 @@ nav a{
 <main>
 
   <section class="hero">
+
+    <div class="hero-realisations-background" aria-hidden="true">
+      <img
+        src="./realisations.jpg"
+        data-realisations-image="1"
+        alt=""
+        onerror="ky5RealisationsImageFallback(this)"
+      >
+    </div>
 
     <div class="hero-inner">
 
