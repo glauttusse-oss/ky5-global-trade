@@ -2292,6 +2292,139 @@ function ky5ProspectImageFallback(img){
 }
 </script>
 
+
+<style id="ky5-mobile-overflow-fix">
+/* =========================================================
+   KY5 GLOBAL TRADE — CORRECTION DÉBORDEMENT HORIZONTAL MOBILE
+   Objectif :
+   - garder la version ordinateur inchangée ;
+   - empêcher la page de glisser à gauche/droite sur téléphone ;
+   - conserver uniquement le défilement vertical.
+========================================================= */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    position: relative;
+}
+
+.site-header,
+.header-inner,
+.hero,
+.form-section,
+footer {
+    width: 100%;
+    max-width: 100%;
+}
+
+.header-inner {
+    min-width: 0;
+}
+
+.brand {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.brand-identity {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.brand-name,
+.brand-slogan {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mobile-menu-button {
+    flex: 0 0 auto;
+}
+
+.form-card,
+.prospect-form,
+.form-grid,
+.field {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.field input,
+.field select,
+.field textarea {
+    min-width: 0;
+    max-width: 100%;
+}
+
+@media (max-width: 760px) {
+    .header-inner {
+        padding-left: 12px;
+        padding-right: 12px;
+        gap: 10px;
+    }
+
+    .brand {
+        gap: 10px;
+        max-width: calc(100% - 62px);
+    }
+
+    .hero,
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .hero {
+        overflow-x: hidden;
+    }
+}
+
+@media (max-width: 420px) {
+    .header-inner {
+        padding-left: 10px;
+        padding-right: 10px;
+        gap: 8px;
+    }
+
+    .brand {
+        gap: 8px;
+        max-width: calc(100% - 56px);
+    }
+
+    .brand-logo {
+        width: 46px;
+        height: 46px;
+        flex-basis: 46px;
+    }
+
+    .brand-name {
+        font-size: 14px;
+        letter-spacing: .5px;
+    }
+
+    .brand-slogan {
+        font-size: 5.5px;
+        letter-spacing: .65px;
+    }
+
+    .mobile-menu-button {
+        width: 46px;
+        height: 46px;
+    }
+
+    .hero .hero-content {
+        width: 100% !important;
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+}
+</style>
+
 </head>
 
 

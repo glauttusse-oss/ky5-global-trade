@@ -1025,6 +1025,119 @@ function ky5RealisationsImageFallback(img){
 }
 </style>
 
+
+<style id="ky5-mobile-overflow-fix">
+/* =========================================================
+   KY5 GLOBAL TRADE — CORRECTION DÉBORDEMENT HORIZONTAL MOBILE
+   La version ordinateur reste inchangée.
+   Cette correction empêche uniquement le glissement latéral
+   et les espaces vides sur téléphone/tablette.
+========================================================= */
+
+@media (max-width: 900px) {
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+  }
+
+  body {
+    position: relative;
+  }
+
+  header,
+  .header-container,
+  main,
+  .hero,
+  .intro,
+  .projects,
+  .projects-grid,
+  .project,
+  .project-visual,
+  .project-copy,
+  .cta,
+  footer {
+    max-width: 100%;
+  }
+
+  .header-container {
+    min-width: 0;
+  }
+
+  .logo {
+    min-width: 0;
+    max-width: calc(100% - 60px);
+  }
+
+  .logo-text {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .logo-text h1,
+  .logo-text span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Le menu reste hors champ sans agrandir la largeur de la page */
+  nav {
+    right: 0 !important;
+    transform: translateX(110%) !important;
+    transition: transform .4s ease !important;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  header.nav-open nav {
+    right: 0 !important;
+    transform: translateX(0) !important;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .hero,
+  .projects,
+  .project {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 560px) {
+
+  .header-container {
+    padding-left: 14px;
+    padding-right: 14px;
+    gap: 10px;
+  }
+
+  .logo {
+    gap: 9px;
+    max-width: calc(100% - 58px);
+  }
+
+  .hero-inner {
+    max-width: 100%;
+  }
+
+  .project-copy,
+  .project-visual {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .project-copy h3,
+  .project-copy p,
+  .project-subtitle,
+  .feature {
+    overflow-wrap: anywhere;
+  }
+}
+</style>
+
 </head>
 
 <body>

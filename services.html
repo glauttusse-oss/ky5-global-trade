@@ -2212,6 +2212,198 @@ function ky5ActivityImageFallback(img){
 }
 </script>
 
+
+<style id="ky5-mobile-overflow-fix">
+/* =========================================================
+   KY5 GLOBAL TRADE — CORRECTION DÉBORDEMENT HORIZONTAL MOBILE
+   La version ordinateur reste inchangée.
+   Objectif : empêcher la page de glisser à gauche/droite
+   et supprimer les espaces vides sur téléphone/tablette.
+========================================================= */
+
+@media (max-width: 900px) {
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden !important;
+    }
+
+    body {
+        position: relative;
+    }
+
+    header,
+    .header-container,
+    .hero,
+    .services-intro,
+    .service-signals,
+    .services,
+    .ky5a-wrap,
+    .ky5a-section,
+    .ky5a-gallery-section,
+    .ky5a-solutions,
+    .final-cta,
+    footer {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .header-container,
+    .hero-content,
+    .signal-track,
+    .services-grid,
+    .category-title,
+    .construction-block,
+    .appointment-box,
+    .ky5a-activities,
+    .ky5a-gallery-grid,
+    .ky5a-solution-grid,
+    .ky5a-markets,
+    .ky5a-clients {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .logo {
+        min-width: 0;
+        max-width: calc(100% - 60px);
+        flex-shrink: 1;
+    }
+
+    .logo-text {
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .logo-text h1,
+    .logo-text span {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .menu-toggle {
+        flex: 0 0 auto;
+    }
+
+    /*
+       Le menu fermé reste visuellement hors écran,
+       mais ne doit jamais agrandir la largeur de la page.
+    */
+    header nav {
+        right: 0 !important;
+        transform: translateX(110%) !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
+    header.nav-open nav {
+        transform: translateX(0) !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+
+    .service-card,
+    .service-content,
+    .service-image,
+    .construction-block,
+    .appointment-box,
+    .ky5a-activity,
+    .ky5a-gallery-card,
+    .ky5a-solution,
+    .ky5a-market-box,
+    .ky5a-client {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    img,
+    video,
+    iframe,
+    input,
+    select,
+    textarea,
+    button {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 750px) {
+
+    .header-container {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .logo {
+        gap: 9px;
+        max-width: calc(100% - 58px);
+    }
+
+    .hero,
+    .services,
+    .services-intro,
+    .service-signals,
+    .final-cta {
+        overflow-x: hidden;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .category-title,
+    .service-content,
+    .construction-content,
+    .ky5a-activity,
+    .ky5a-market-box,
+    .ky5a-client {
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .header-container {
+        gap: 8px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .logo {
+        gap: 8px;
+        max-width: calc(100% - 54px);
+    }
+
+    .logo img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .logo::before {
+        width: 56px;
+        height: 56px;
+    }
+
+    .logo-text h1 {
+        font-size: 15px;
+        letter-spacing: .8px;
+    }
+
+    .logo-text span {
+        font-size: 5.5px;
+        letter-spacing: .9px;
+    }
+
+    .menu-toggle {
+        width: 46px;
+        height: 46px;
+    }
+}
+</style>
+
 </head>
 
 

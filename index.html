@@ -2948,6 +2948,74 @@
 }
 </style>
 
+
+
+<!-- =========================================================
+     KY5 — CORRECTION DU DÉBORDEMENT HORIZONTAL SUR MOBILE
+     Empêche la page de glisser à gauche/droite sans modifier
+     la mise en page ordinateur.
+========================================================= -->
+<style id="ky5-mobile-horizontal-overflow-fix">
+    /* Le viewport mobile peut faire défiler l'élément racine <html>,
+       même si overflow-x est déjà appliqué au body. */
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden !important;
+    }
+
+    /* Les navigateurs modernes gèrent encore mieux le débordement
+       avec clip, tout en gardant hidden comme solution de secours. */
+    @supports (overflow: clip) {
+        html,
+        body {
+            overflow-x: clip !important;
+        }
+    }
+
+    @media (max-width: 900px) {
+        body {
+            position: relative;
+            overscroll-behavior-x: none;
+            touch-action: pan-y pinch-zoom;
+        }
+
+        header,
+        .header-container,
+        main,
+        section,
+        footer {
+            max-width: 100%;
+        }
+
+        /* Le menu était physiquement déplacé à 105% hors de l'écran.
+           Sur certains navigateurs mobiles, ce transform agrandit la
+           zone horizontale défilable. On le garde dans le viewport et
+           on le masque avec clip-path lorsqu'il est fermé. */
+        header nav {
+            right: 0 !important;
+            transform: none !important;
+            clip-path: inset(0 0 0 100%) !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            transition:
+                clip-path .38s cubic-bezier(.22,.61,.36,1),
+                opacity .25s ease,
+                visibility .38s ease !important;
+        }
+
+        header.nav-open nav {
+            transform: none !important;
+            clip-path: inset(0 0 0 0) !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+        }
+    }
+</style>
+
 </head>
 
 
