@@ -5042,9 +5042,7 @@ function ky5FlagFallback(img){
                 const { data, error } =
                     await supabaseClient
                         .from("site_visites")
-                        .select(
-                            "id, created_at, visitor_id, session_id, page_path, page_title, referrer, device_type, event_type"
-                        )
+                        .select("*")
                         .gte("created_at", since.toISOString())
                         .order("created_at", { ascending: true });
 
@@ -5053,10 +5051,22 @@ function ky5FlagFallback(img){
                 }
 
                 visitsCache = data || [];
+
+                console.info(
+                    "KY5 Analytics Admin :",
+                    visitsCache.length,
+                    "visite(s) chargée(s) depuis site_visites."
+                );
+
+                renderVisitorKpis();
             }
             catch (error) {
                 console.error("Erreur chargement visites :", error);
                 visitsCache = [];
+
+                if (visitorsToday) visitorsToday.textContent = "ERR";
+                if (visitorsMonth) visitorsMonth.textContent = "ERR";
+                if (pageViewsMonth) pageViewsMonth.textContent = "ERR";
             }
         }
 
