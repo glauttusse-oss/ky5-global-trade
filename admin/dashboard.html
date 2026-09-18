@@ -5039,18 +5039,41 @@ function ky5FlagFallback(img){
                     throw new Error("Client Supabase indisponible.");
                 }
 
-                const { data, error } =
-                    await supabaseClient
-                        .from("site_visites")
-                        .select("*")
-                        .gte("created_at", since.toISOString())
-                        .order("created_at", { ascending: true });
+                const batchSize = 1000;
+                let from = 0;
+                let allVisits = [];
 
-                if (error) {
-                    throw error;
+                while (true) {
+                    const { data, error } =
+                        await supabaseClient
+                            .from("site_visites")
+                            .select("*")
+                            .gte("created_at", since.toISOString())
+                            .order("created_at", { ascending: true })
+                            .range(from, from + batchSize - 1);
+
+                    if (error) {
+                        throw error;
+                    }
+
+                    const batch = data || [];
+                    allVisits = allVisits.concat(batch);
+
+                    if (batch.length < batchSize) {
+                        break;
+                    }
+
+                    from += batchSize;
+
+                    if (from >= 200000) {
+                        console.warn(
+                            "KY5 Analytics : limite de sécurité atteinte pendant le chargement des visites."
+                        );
+                        break;
+                    }
                 }
 
-                visitsCache = data || [];
+                visitsCache = allVisits;
 
                 console.info(
                     "KY5 Analytics Admin :",
