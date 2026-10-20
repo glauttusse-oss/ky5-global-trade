@@ -2438,6 +2438,63 @@ function ky5ActivityImageFallback(img){
     </noscript>
     <!-- End Meta Pixel Code -->
 
+
+    <style>
+        /* Présentation des services et vidéos — styles limités à cette section. */
+        #dynamicServicesGrid { display: block; }
+        #dynamicServicesGrid .ky5-services-list,
+        #dynamicServicesGrid .ky5-video-grid {
+            display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px; align-items: stretch;
+        }
+        #dynamicServicesGrid .service-card {
+            min-width: 0; display: flex; flex-direction: column;
+            border: 1px solid #dce8f3; border-radius: 18px;
+            background: #fff; overflow: hidden;
+            box-shadow: 0 8px 24px rgba(8,43,81,.06);
+        }
+        #dynamicServicesGrid .service-card::before { display: none; }
+        #dynamicServicesGrid .service-image {
+            position: relative; width: 100%; height: auto; aspect-ratio: 16 / 9;
+            flex-shrink: 0; overflow: hidden; background: #06182d;
+        }
+        #dynamicServicesGrid .dynamic-service-video {
+            display: block; width: 100%; height: 100%; object-fit: contain;
+        }
+        #dynamicServicesGrid .service-badge {
+            position: static; align-self: flex-start; margin: 20px 24px 0;
+            padding: 6px 10px; color: #075ca8; background: #edf6fc;
+            box-shadow: none; border-radius: 6px;
+        }
+        #dynamicServicesGrid .service-content {
+            flex: 1; min-height: 0; padding: 14px 24px 24px; gap: 12px;
+        }
+        #dynamicServicesGrid .service-content h3 { margin: 0; line-height: 1.35; }
+        #dynamicServicesGrid .service-content p { max-width: 100%; margin: 0; }
+        #dynamicServicesGrid .service-action { margin-top: auto; min-height: 46px; }
+        #dynamicServicesGrid .dynamic-service-ad,
+        #dynamicServicesGrid .dynamic-service-link { margin: 0; }
+        #dynamicServicesGrid .ky5-video-section { margin-top: 60px; }
+        #dynamicServicesGrid .ky5-video-section:first-child { margin-top: 0; }
+        #dynamicServicesGrid .ky5-video-intro { margin-bottom: 28px; max-width: 720px; }
+        #dynamicServicesGrid .ky5-video-intro h2 {
+            color: #082b51; font-size: clamp(28px,4vw,40px); margin: 12px 0;
+            letter-spacing: -1px; line-height: 1.15;
+        }
+        #dynamicServicesGrid .ky5-video-intro p { color: #69778a; line-height: 1.75; }
+        #dynamicServicesGrid .section-label { font-size: 11px; letter-spacing: 2px; }
+        #dynamicServicesGrid .service-content a:focus-visible,
+        #dynamicServicesGrid button:focus-visible,
+        #dynamicServicesGrid video:focus-visible { outline: 3px solid #075ca8; outline-offset: 3px; }
+        @media(max-width: 640px) {
+            #dynamicServicesGrid .ky5-services-list,
+            #dynamicServicesGrid .ky5-video-grid { grid-template-columns: minmax(0,1fr); gap: 22px; }
+            #dynamicServicesGrid .service-content { padding: 14px 20px 22px; }
+            #dynamicServicesGrid .service-badge { margin-left: 20px; }
+            #dynamicServicesGrid .ky5-video-section { margin-top: 40px; }
+        }
+    </style>
+
 </head>
 
 
@@ -3598,13 +3655,11 @@ function ky5ActivityImageFallback(img){
                 <div>
 
                     <h2>
-                        Services actuellement disponibles
+                        Découvrez nos services
                     </h2>
 
                     <p>
-                        Cette section est mise à jour
-                        automatiquement depuis l'espace
-                        administrateur KY5 GLOBAL TRADE.
+                        Des solutions et des activités à découvrir pour vos projets.
                     </p>
 
                 </div>
@@ -3613,20 +3668,12 @@ function ky5ActivityImageFallback(img){
 
 
             <div
-                class="services-grid"
+                class="dynamic-service-sections"
                 id="dynamicServicesGrid"
             ></div>
 
 
-            <div class="admin-services-notice">
 
-                Les services affichés dans cette section
-                proviennent directement de la base KY5.
-                Lorsqu'un administrateur ajoute, modifie
-                ou masque un service, cette page est mise
-                à jour automatiquement.
-
-            </div>
 
         </div>
 
@@ -4717,7 +4764,7 @@ function ky5ActivityImageFallback(img){
                     return;
                 }
 
-                dynamicServicesGrid.innerHTML = services.map(function (service) {
+                const renderServiceCard = function (service) {
                     const titre = escapeHtml(service.titre || "Service KY5");
                     const description = escapeHtml(service.description || "Service proposé par KY5 GLOBAL TRADE.");
                     const icone = escapeHtml(service.icone || "🛠️");
@@ -4737,7 +4784,7 @@ function ky5ActivityImageFallback(img){
                     if (videoUrl) {
                         mediaHtml = `
                             <div class="service-image">
-                                <video class="dynamic-service-video" controls playsinline preload="metadata">
+                                <video class="dynamic-service-video" controls playsinline preload="metadata" aria-label="${titre}" ${photoUrl ? `poster="${photoUrl}"` : ""}>
                                     <source src="${videoUrl}">
                                     Votre navigateur ne prend pas en charge cette vidéo.
                                 </video>
@@ -4777,7 +4824,27 @@ function ky5ActivityImageFallback(img){
                                 </button>
                             </div>
                         </article>`;
-                }).join("");
+                };
+
+                const serviceItems = services.filter(service => !service.video_url && !service.video_lien);
+                const videoItems = services.filter(service => service.video_url || service.video_lien);
+                const serviceHtml = serviceItems.length ? `
+                    <div class="ky5-services-list">${serviceItems.map(renderServiceCard).join("")}</div>` : "";
+                const videoHtml = videoItems.length ? `
+                    <section class="ky5-video-section" aria-labelledby="ky5-video-heading">
+                        <div class="ky5-video-intro">
+                            <span class="section-label">KY5 GLOBAL TRADE EN IMAGES</span>
+                            <h2 id="ky5-video-heading">Nos activités en vidéo</h2>
+                            <p>Découvrez nos activités et nos solutions à travers nos vidéos.</p>
+                        </div>
+                        <div class="ky5-video-grid">${videoItems.map(renderServiceCard).join("")}</div>
+                    </section>` : "";
+                dynamicServicesGrid.innerHTML = serviceHtml + videoHtml;
+                // Une seule lecture à la fois, sans démarrage automatique.
+                const players = dynamicServicesGrid.querySelectorAll("video");
+                players.forEach(player => player.addEventListener("play", () => {
+                    players.forEach(other => { if (other !== player) other.pause(); });
+                }));
 
                 servicesAdminContainer.style.display = "block";
                 activateServiceButtons();
