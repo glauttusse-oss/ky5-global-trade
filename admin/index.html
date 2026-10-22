@@ -1,3 +1,35 @@
+aujourd’hui 14:05
+aujourd’hui 20:47
+
+C’est la bonne page, Gaspard.
+
+Dans le champ à droite, efface http://localhost:3000.
+Remplace-le par :
+https://ky5globaltrade.com/admin/
+Clique sur Save changes : cela signifie Enregistrer les modifications.
+
+Ensuite, retourne sur Users → ktg.admins@gmail.com → Send password recovery pour recevoir un nouvel e-mail. Ouvre le nouveau lien et dis-moi ce qui apparaît.
+
+voilà ce qui apparait 
+
+Le lien t’a ouvert directement le tableau de bord sans afficher de formulaire pour changer le mot de passe. Ton mot de passe n’a donc pas encore été modifié.
+
+Il faut ajouter ce formulaire à ta page admin.
+
+Envoie-moi le fichier index.html du dossier admin, ainsi que le fichier JavaScript qui gère la connexion s’il est séparé. Je préparerai la modification pour changer le mot de passe puis déconnecter tous les appareils, en conservant ton adresse et ton compte.
+
+Code collé(20261022-185905).html
+Fichier
+
+Voici le fichier corrigé : 
+index.html.
+
+Remplace admin/index.html sur ton hébergement par ce fichier. Garde config.js.
+Dans Supabase, demande un nouvel e-mail de récupération.
+Ouvre son lien : le formulaire en français permettra de changer le mot de passe et révoquer les sessions de tous les appareils.
+
+Le code a été vérifié, mais le changement réel reste à effectuer sur ton site. Les anciens accès peuvent rester valables jusqu’à l’expiration de leur jeton.
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -1110,6 +1142,13 @@
 
             </form>
 
+
+            <form id="resetForm" hidden>
+                <div class="form-group"><label for="newPassword">Nouveau mot de passe (12 caractères minimum)</label><input id="newPassword" type="password" autocomplete="new-password" minlength="12" required></div>
+                <div class="form-group"><label for="confirmPassword">Confirmer le nouveau mot de passe</label><input id="confirmPassword" type="password" autocomplete="new-password" minlength="12" required></div>
+                <p style="font-size:13px;line-height:1.6;margin-bottom:20px;color:#416078">Après l’enregistrement, les sessions de ce compte seront fermées sur tous les appareils. Vous devrez vous reconnecter.</p>
+                <button class="login-button" id="resetButton" type="submit">Enregistrer et déconnecter les appareils</button>
+            </form>
             <div class="security-info">
 
                 <span class="lock">
@@ -1152,455 +1191,123 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script>
-
-        /*
-        ==========================================================
-        KY5 GLOBAL TRADE
-        AUTHENTIFICATION ADMINISTRATEUR
-        ==========================================================
-        */
-
-        const loginForm =
-            document.getElementById(
-                "loginForm"
-            );
-
-        const emailInput =
-            document.getElementById(
-                "email"
-            );
-
-        const passwordInput =
-            document.getElementById(
-                "password"
-            );
-
-        const loginButton =
-            document.getElementById(
-                "loginButton"
-            );
-
-        const togglePassword =
-            document.getElementById(
-                "togglePassword"
-            );
-
-        const messageBox =
-            document.getElementById(
-                "message"
-            );
-
-        const forgotPassword =
-            document.getElementById(
-                "forgotPassword"
-            );
-
-        const currentYear =
-            document.getElementById(
-                "currentYear"
-            );
-
-
-        /*
-        ==========================================================
-        ANNÉE
-        ==========================================================
-        */
-
-        currentYear.textContent =
-            new Date().getFullYear();
-
-
-        /*
-        ==========================================================
-        INITIALISATION SUPABASE
-        ==========================================================
-        */
-
-        let supabaseClient = null;
-
-        try {
-
-            if (
-                typeof SUPABASE_URL ===
-                    "undefined" ||
-
-                typeof SUPABASE_PUBLISHABLE_KEY ===
-                    "undefined"
-            ) {
-
-                throw new Error(
-                    "Configuration Supabase introuvable."
-                );
-
+const $ = id => document.getElementById(id);
+$('currentYear').textContent = new Date().getFullYear();
+const incoming = new URLSearchParams(location.hash.slice(1));
+let recoveryMode = incoming.get('type') === 'recovery' || new URLSearchParams(location.search).get('recovery') === '1';
+let passwordSaved = false;
+let client;
+function message(text, type = 'error') {
+    $('message').textContent = text;
+    $('message').className = 'message ' + type;
+}
+function recoveryView() {
+    recoveryMode = true;
+    $('loginForm').hidden = true;
+    $('resetForm').hidden = false;
+    document.querySelector('.login-header h2').textContent = 'Nouveau mot de passe';
+    document.querySelector('.login-header p').textContent = 'Choisissez un nouveau mot de passe pour votre compte administrateur.';
+}
+if (recoveryMode) recoveryView();
+try {
+    client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+    // Ne pas appeler de méthode Auth asynchrone dans ce callback.
+    client.auth.onAuthStateChange((event) => {
+        if (event === 'PASSWORD_RECOVERY') recoveryView();
+    });
+} catch (_) {
+    message('Impossible de charger la connexion. Vérifiez le fichier config.js et votre connexion Internet.');
+    $('loginButton').disabled = true;
+    $('resetButton').disabled = true;
+}
+$('togglePassword').addEventListener('click', () => {
+    const visible = $('password').type === 'password';
+    $('password').type = visible ? 'text' : 'password';
+    $('togglePassword').setAttribute('aria-label', visible ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
+});
+$('loginForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!client) return;
+    $('loginButton').disabled = true;
+    try {
+        const {error} = await client.auth.signInWithPassword({email: $('email').value.trim(), password: $('password').value});
+        if (error) { message('Adresse e-mail ou mot de passe incorrect.'); return; }
+        location.replace('dashboard.html');
+    } catch (_) { message('Connexion impossible. Vérifiez votre connexion Internet.'); }
+    finally { $('loginButton').disabled = false; }
+});
+$('forgotPassword').addEventListener('click', async event => {
+    event.preventDefault();
+    if (!client) return;
+    if (!$('email').reportValidity() || !$('email').value.trim()) { $('email').focus(); return; }
+    try {
+        const target = new URL('./', location.href);
+        target.search = '?recovery=1';
+        target.hash = '';
+        const {error} = await client.auth.resetPasswordForEmail($('email').value.trim(), {redirectTo: target.href});
+        if (error) throw error;
+        message('Si cette adresse est autorisée, un e-mail de récupération a été envoyé. Ouvrez le lien le plus récent.', 'success');
+    } catch (_) { message('Impossible d’envoyer l’e-mail. Réessayez plus tard.'); }
+});
+$('resetForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!client) return;
+    if (!passwordSaved && $('newPassword').value !== $('confirmPassword').value) {
+        message('Les deux mots de passe doivent être identiques.'); return;
+    }
+    $('resetButton').disabled = true;
+    try {
+        if (!passwordSaved) {
+            const {data, error: sessionError} = await client.auth.getSession();
+            if (sessionError || !data.session) {
+                message('Le lien a expiré ou est invalide. Demandez un nouvel e-mail de récupération.'); return;
             }
-
-            supabaseClient =
-                window.supabase.createClient(
-                    SUPABASE_URL,
-                    SUPABASE_PUBLISHABLE_KEY
-                );
-
+            const {error} = await client.auth.updateUser({password: $('newPassword').value});
+            if (error) {
+                message('Mot de passe refusé. Utilisez un mot de passe différent, plus long, avec majuscules, minuscules, chiffres et symboles, puis réessayez.'); return;
+            }
+            passwordSaved = true;
+            $('newPassword').value = '';
+            $('confirmPassword').value = '';
+            $('newPassword').required = false;
+            $('confirmPassword').required = false;
+            $('newPassword').disabled = true;
+            $('confirmPassword').disabled = true;
         }
-        catch (error) {
-
-            console.error(
-                "Erreur configuration :",
-                error
-            );
-
+        const {error: logoutError} = await client.auth.signOut({scope: 'global'});
+        if (logoutError) {
+            message('Le mot de passe est changé, mais la fermeture des sessions a échoué. Cliquez sur « Réessayer la déconnexion ».');
+            $('resetButton').textContent = 'Réessayer la déconnexion'; return;
         }
-
-
-        /*
-        ==========================================================
-        MESSAGES
-        ==========================================================
-        */
-
-        function showMessage(
-            text,
-            type = "error"
-        ) {
-
-            messageBox.textContent =
-                text;
-
-            messageBox.className =
-                "message " + type;
-
-        }
-
-
-        function hideMessage() {
-
-            messageBox.textContent = "";
-
-            messageBox.className =
-                "message";
-
-        }
-
-
-        /*
-        ==========================================================
-        MOT DE PASSE VISIBLE / MASQUÉ
-        ==========================================================
-        */
-
-        togglePassword.addEventListener(
-            "click",
-            function () {
-
-                const hidden =
-                    passwordInput.type ===
-                    "password";
-
-                passwordInput.type =
-                    hidden
-                        ? "text"
-                        : "password";
-
-                togglePassword.textContent =
-                    hidden
-                        ? "🙈"
-                        : "👁";
-
-            }
-        );
-
-
-        /*
-        ==========================================================
-        CONNEXION
-        ==========================================================
-        */
-
-        loginForm.addEventListener(
-            "submit",
-            async function (event) {
-
-                event.preventDefault();
-
-                hideMessage();
-
-                const email =
-                    emailInput.value
-                        .trim();
-
-                const password =
-                    passwordInput.value;
-
-
-                if (!email) {
-
-                    showMessage(
-                        "Veuillez saisir votre adresse e-mail."
-                    );
-
-                    return;
-                }
-
-
-                if (!password) {
-
-                    showMessage(
-                        "Veuillez saisir votre mot de passe."
-                    );
-
-                    return;
-                }
-
-
-                if (!supabaseClient) {
-
-                    showMessage(
-                        "Impossible de charger le système de connexion."
-                    );
-
-                    return;
-                }
-
-
-                loginButton.disabled =
-                    true;
-
-                loginButton.innerHTML =
-                    '<span class="spinner"></span>Connexion...';
-
-
-                try {
-
-                    const {
-                        data,
-                        error
-                    } =
-                    await supabaseClient
-                        .auth
-                        .signInWithPassword({
-
-                            email:
-                                email,
-
-                            password:
-                                password
-
-                        });
-
-
-                    if (error) {
-
-                        console.error(
-                            error
-                        );
-
-                        showMessage(
-                            "Adresse e-mail ou mot de passe incorrect."
-                        );
-
-                        return;
-                    }
-
-
-                    if (
-                        !data ||
-                        !data.user
-                    ) {
-
-                        showMessage(
-                            "La connexion n'a pas pu être vérifiée."
-                        );
-
-                        return;
-                    }
-
-
-                    showMessage(
-                        "Connexion réussie. Ouverture du tableau de bord...",
-                        "success"
-                    );
-
-
-                    setTimeout(
-                        function () {
-
-                            window.location.href =
-                                "dashboard.html";
-
-                        },
-                        800
-                    );
-
-                }
-                catch (error) {
-
-                    console.error(
-                        "Erreur de connexion :",
-                        error
-                    );
-
-                    showMessage(
-                        "Une erreur est survenue pendant la connexion."
-                    );
-
-                }
-                finally {
-
-                    loginButton.disabled =
-                        false;
-
-                    loginButton.textContent =
-                        "Se connecter";
-
-                }
-
-            }
-        );
-
-
-        /*
-        ==========================================================
-        SESSION DÉJÀ ACTIVE
-        ==========================================================
-        */
-
-        async function checkExistingSession() {
-
-            if (!supabaseClient) {
-                return;
-            }
-
-            try {
-
-                const {
-                    data
-                } =
-                await supabaseClient
-                    .auth
-                    .getSession();
-
-
-                if (
-                    data &&
-                    data.session
-                ) {
-
-                    window.location.href =
-                        "dashboard.html";
-
-                }
-
-            }
-            catch (error) {
-
-                console.error(
-                    "Erreur session :",
-                    error
-                );
-
-            }
-
-        }
-
-
-        /*
-        ==========================================================
-        MOT DE PASSE OUBLIÉ
-        ==========================================================
-        */
-
-        forgotPassword.addEventListener(
-            "click",
-            async function (event) {
-
-                event.preventDefault();
-
-                hideMessage();
-
-                const email =
-                    emailInput.value
-                        .trim();
-
-
-                if (!email) {
-
-                    showMessage(
-                        "Entrez d'abord votre adresse e-mail."
-                    );
-
-                    emailInput.focus();
-
-                    return;
-                }
-
-
-                if (!supabaseClient) {
-
-                    showMessage(
-                        "Le système de récupération n'est pas disponible."
-                    );
-
-                    return;
-                }
-
-
-                try {
-
-                    const {
-                        error
-                    } =
-                    await supabaseClient
-                        .auth
-                        .resetPasswordForEmail(
-                            email
-                        );
-
-
-                    if (error) {
-
-                        console.error(
-                            error
-                        );
-
-                        showMessage(
-                            "Impossible d'envoyer la demande de récupération."
-                        );
-
-                        return;
-                    }
-
-
-                    showMessage(
-                        "Si cette adresse est autorisée, les instructions de récupération ont été envoyées.",
-                        "success"
-                    );
-
-                }
-                catch (error) {
-
-                    console.error(
-                        error
-                    );
-
-                    showMessage(
-                        "Une erreur est survenue."
-                    );
-
-                }
-
-            }
-        );
-
-
-        /*
-        ==========================================================
-        VÉRIFICATION AU CHARGEMENT
-        ==========================================================
-        */
-
-        checkExistingSession();
-
+        history.replaceState(null, '', location.pathname);
+        $('resetForm').hidden = true;
+        $('loginForm').hidden = false;
+        $('password').value = '';
+        document.querySelector('.login-header h2').textContent = 'Connexion';
+        document.querySelector('.login-header p').textContent = 'Connectez-vous avec votre nouveau mot de passe.';
+        message('Mot de passe changé. Les sessions ont été révoquées sur tous les appareils. Les accès déjà délivrés peuvent rester valables jusqu’à leur expiration.', 'success');
+    } catch (_) {
+        message(passwordSaved ? 'Le mot de passe est changé. Réessayez la déconnexion des appareils.' : 'Une erreur réseau est survenue. Réessayez.');
+    } finally { $('resetButton').disabled = false; }
+});
+async function initialize() {
+    if (!client) return;
+    try {
+        const {data, error} = await client.auth.getSession();
+        // getSession attend le traitement du lien avant toute redirection.
+        if (recoveryMode) {
+            recoveryView();
+            if (error || !data.session) message('Lien invalide ou expiré. Demandez un nouvel e-mail de récupération.');
+            else history.replaceState(null, '', location.pathname + '?recovery=1');
+        } else if (incoming.has('error') || incoming.has('error_code')) {
+            message('Lien invalide ou expiré. Demandez un nouvel e-mail de récupération.');
+            history.replaceState(null, '', location.pathname);
+        } else if (!error && data.session) location.replace('dashboard.html');
+    } catch (_) { message('Impossible de vérifier la session. Rechargez la page.'); }
+}
+initialize();
     </script>
-
 </body>
 </html>
+index.html
+HTML
