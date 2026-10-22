@@ -4295,7 +4295,22 @@ function ky5FlagFallback(img){
 }
 </style>
 
-</head>
+<style>
+#prospectsView .location-cards {grid-template-columns:repeat(auto-fit,minmax(180px,1fr))!important}
+#prospectsView .prospect-location-tabs {display:flex!important;flex-wrap:wrap!important;gap:8px;max-width:100%}
+#prospectsView .location-card-copy {min-width:0}
+#prospectsView .location-card-copy small {white-space:normal!important;overflow-wrap:anywhere}
+@media(max-width:480px){#prospectsView .location-cards{grid-template-columns:1fr!important}}
+</style><style id="ky5-added-countries-fix">
+#prospectsView .location-card:not(.all):not(.rdc):not(.congo){background:linear-gradient(135deg,#0e354b,#071d2c)!important;color:#e8f7ff!important;border:1px solid #28617d!important;box-shadow:none!important}
+#prospectsView .location-card:not(.all):not(.rdc):not(.congo):hover{background:#16445b!important;border-color:#65d9ff!important}
+#prospectsView .location-card:not(.all):not(.rdc):not(.congo).is-active{background:linear-gradient(135deg,#075c87,#10374c)!important;outline:2px solid #65d9ff;outline-offset:2px}
+#prospectsView .location-card-copy small,#prospectsView .location-card-copy strong{color:#e8f7ff!important}
+#prospectsView .location-card:not(.all):not(.rdc):not(.congo) .location-flag{background:#071c2b!important;box-shadow:none!important;border:1px solid #386781!important;overflow:hidden}
+.country-flag-svg{display:block;width:100%;height:100%;object-fit:contain;flex-shrink:0}
+#prospectsView .location-card .country-flag-svg{width:56px;height:38px;border-radius:5px}
+#prospectsView .location-tab .tab-flag:has(.country-flag-svg){width:30px;height:20px;display:inline-flex;overflow:hidden;border-radius:3px}
+</style></head>
 
 <body>
 <div class="page-loader" id="pageLoader">
@@ -4572,7 +4587,14 @@ function ky5FlagFallback(img){
             </span>
             <span class="location-card-copy"><small>Congo-Brazzaville</small><strong id="locationCongoCount">0</strong></span>
             <span class="location-card-check" aria-hidden="true">✓</span>
-          </button>
+          </button><button type="button" class="location-card senegal" data-location-filter="senegal"><span class="location-card-icon location-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#00853f" d="M0 0h30v60H0z"/><path fill="#fdef42" d="M30 0h30v60H30z"/><path fill="#e31b23" d="M60 0h30v60H60z"/><text x="45" y="40" text-anchor="middle" font-size="30" fill="#00853f">★</text></svg></span><span class="location-card-copy"><small>Sénégal</small><strong id="locationsenegalCount">0</strong></span><span class="location-card-check" aria-hidden="true">✓</span></button>
+<button type="button" class="location-card coteivoire" data-location-filter="coteivoire"><span class="location-card-icon location-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#f77f00" d="M0 0h30v60H0z"/><path fill="white" d="M30 0h30v60H30z"/><path fill="#009e60" d="M60 0h30v60H60z"/></svg></span><span class="location-card-copy"><small>Côte d’Ivoire</small><strong id="locationcoteivoireCount">0</strong></span><span class="location-card-check" aria-hidden="true">✓</span></button>
+<button type="button" class="location-card gabon" data-location-filter="gabon"><span class="location-card-icon location-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#009e60" d="M0 0h90v20H0z"/><path fill="#fcd116" d="M0 20h90v20H0z"/><path fill="#3a75c4" d="M0 40h90v20H0z"/></svg></span><span class="location-card-copy"><small>Gabon</small><strong id="locationgabonCount">0</strong></span><span class="location-card-check" aria-hidden="true">✓</span></button>
+<button type="button" class="location-card benin" data-location-filter="benin"><span class="location-card-icon location-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#fcd116" d="M0 0h90v30H0z"/><path fill="#e8112d" d="M0 30h90v30H0z"/><path fill="#008751" d="M0 0h36v60H0z"/></svg></span><span class="location-card-copy"><small>Bénin</small><strong id="locationbeninCount">0</strong></span><span class="location-card-check" aria-hidden="true">✓</span></button>
+<button type="button" class="location-card burkina" data-location-filter="burkina"><span class="location-card-icon location-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#ef2b2d" d="M0 0h90v30H0z"/><path fill="#009e49" d="M0 30h90v30H0z"/><text x="45" y="40" text-anchor="middle" font-size="30" fill="#fcd116">★</text></svg></span><span class="location-card-copy"><small>Burkina Faso</small><strong id="locationburkinaCount">0</strong></span><span class="location-card-check" aria-hidden="true">✓</span></button>
+<button type="button" class="location-card cameroun" data-location-filter="cameroun"><span class="location-card-icon location-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#007a5e" d="M0 0h30v60H0z"/><path fill="#ce1126" d="M30 0h30v60H30z"/><path fill="#fcd116" d="M60 0h30v60H60z"/><text x="45" y="39" text-anchor="middle" font-size="26" fill="#fcd116">★</text></svg></span><span class="location-card-copy"><small>Cameroun</small><strong id="locationcamerounCount">0</strong></span><span class="location-card-check" aria-hidden="true">✓</span></button>
+<button type="button" class="location-card maroc" data-location-filter="maroc"><span class="location-card-icon location-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#c1272d" d="M0 0h90v60H0z"/><path d="M45 15 54 43 30 26 60 26 36 43z" fill="none" stroke="#006233" stroke-width="2.5"/></svg></span><span class="location-card-copy"><small>Maroc</small><strong id="locationmarocCount">0</strong></span><span class="location-card-check" aria-hidden="true">✓</span></button>
+<button type="button" class="location-card mali" data-location-filter="mali"><span class="location-card-icon location-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#14b53a" d="M0 0h30v60H0z"/><path fill="#fcd116" d="M30 0h30v60H30z"/><path fill="#ce1126" d="M60 0h30v60H60z"/></svg></span><span class="location-card-copy"><small>Mali</small><strong id="locationmaliCount">0</strong></span><span class="location-card-check" aria-hidden="true">✓</span></button>
         </div>
 
       <section class="bottom-grid">
@@ -4591,7 +4613,14 @@ function ky5FlagFallback(img){
                 <button type="button" class="location-tab" data-location-filter="congo"><span class="tab-flag tab-flag-photo">
                   <img src="../Drapeau Congo.jpg" data-flag-base="../Drapeau Congo" alt="" onerror="ky5FlagFallback(this)">
                 </span>Congo-Brazzaville</button>
-                
+                <button type="button" class="location-tab" data-location-filter="senegal"><span class="tab-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#00853f" d="M0 0h30v60H0z"/><path fill="#fdef42" d="M30 0h30v60H30z"/><path fill="#e31b23" d="M60 0h30v60H60z"/><text x="45" y="40" text-anchor="middle" font-size="30" fill="#00853f">★</text></svg></span>Sénégal</button>
+<button type="button" class="location-tab" data-location-filter="coteivoire"><span class="tab-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#f77f00" d="M0 0h30v60H0z"/><path fill="white" d="M30 0h30v60H30z"/><path fill="#009e60" d="M60 0h30v60H60z"/></svg></span>Côte d’Ivoire</button>
+<button type="button" class="location-tab" data-location-filter="gabon"><span class="tab-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#009e60" d="M0 0h90v20H0z"/><path fill="#fcd116" d="M0 20h90v20H0z"/><path fill="#3a75c4" d="M0 40h90v20H0z"/></svg></span>Gabon</button>
+<button type="button" class="location-tab" data-location-filter="benin"><span class="tab-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#fcd116" d="M0 0h90v30H0z"/><path fill="#e8112d" d="M0 30h90v30H0z"/><path fill="#008751" d="M0 0h36v60H0z"/></svg></span>Bénin</button>
+<button type="button" class="location-tab" data-location-filter="burkina"><span class="tab-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#ef2b2d" d="M0 0h90v30H0z"/><path fill="#009e49" d="M0 30h90v30H0z"/><text x="45" y="40" text-anchor="middle" font-size="30" fill="#fcd116">★</text></svg></span>Burkina Faso</button>
+<button type="button" class="location-tab" data-location-filter="cameroun"><span class="tab-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#007a5e" d="M0 0h30v60H0z"/><path fill="#ce1126" d="M30 0h30v60H30z"/><path fill="#fcd116" d="M60 0h30v60H60z"/><text x="45" y="39" text-anchor="middle" font-size="26" fill="#fcd116">★</text></svg></span>Cameroun</button>
+<button type="button" class="location-tab" data-location-filter="maroc"><span class="tab-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#c1272d" d="M0 0h90v60H0z"/><path d="M45 15 54 43 30 26 60 26 36 43z" fill="none" stroke="#006233" stroke-width="2.5"/></svg></span>Maroc</button>
+<button type="button" class="location-tab" data-location-filter="mali"><span class="tab-flag" aria-hidden="true"><svg class="country-flag-svg" viewBox="0 0 90 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#14b53a" d="M0 0h30v60H0z"/><path fill="#fcd116" d="M30 0h30v60H30z"/><path fill="#ce1126" d="M60 0h30v60H60z"/></svg></span>Mali</button>
               </div>
 
               <label class="prospect-city-control">
@@ -5768,6 +5797,11 @@ function ky5FlagFallback(img){
                 getProspectCity(prospect)
             );
 
+            const addedCountries = {"senegal": ["senegal"], "coteivoire": ["cote d'ivoire", "cote divoire", "cote d ivoire", "cote d’ivoire", "ivory coast"], "gabon": ["gabon"], "benin": ["benin"], "burkina": ["burkina", "burkina faso"], "cameroun": ["cameroun", "cameroon"], "maroc": ["maroc", "morocco"], "mali": ["mali"]};
+            for (const [key, aliases] of Object.entries(addedCountries)) {
+                if (aliases.includes(country.trim())) return key;
+            }
+
             if (
                 country.includes("republique democratique du congo") ||
                 country === "rdc" ||
@@ -5840,6 +5874,14 @@ function ky5FlagFallback(img){
                 ["locationAllCount", counts.all],
                 ["locationRdcCount", counts.rdc],
                 ["locationCongoCount", counts.congo],
+                ["locationsenegalCount", counts.senegal || 0],
+                ["locationcoteivoireCount", counts.coteivoire || 0],
+                ["locationgabonCount", counts.gabon || 0],
+                ["locationbeninCount", counts.benin || 0],
+                ["locationburkinaCount", counts.burkina || 0],
+                ["locationcamerounCount", counts.cameroun || 0],
+                ["locationmarocCount", counts.maroc || 0],
+                ["locationmaliCount", counts.mali || 0],
 
                 ["navProspectBadge", statusCounts.nouveau],
                 ["prospectEntryCount", statusCounts.nouveau]
