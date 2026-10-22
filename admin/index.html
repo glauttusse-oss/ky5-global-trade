@@ -1,35 +1,3 @@
-aujourd’hui 14:05
-aujourd’hui 20:47
-
-C’est la bonne page, Gaspard.
-
-Dans le champ à droite, efface http://localhost:3000.
-Remplace-le par :
-https://ky5globaltrade.com/admin/
-Clique sur Save changes : cela signifie Enregistrer les modifications.
-
-Ensuite, retourne sur Users → ktg.admins@gmail.com → Send password recovery pour recevoir un nouvel e-mail. Ouvre le nouveau lien et dis-moi ce qui apparaît.
-
-voilà ce qui apparait 
-
-Le lien t’a ouvert directement le tableau de bord sans afficher de formulaire pour changer le mot de passe. Ton mot de passe n’a donc pas encore été modifié.
-
-Il faut ajouter ce formulaire à ta page admin.
-
-Envoie-moi le fichier index.html du dossier admin, ainsi que le fichier JavaScript qui gère la connexion s’il est séparé. Je préparerai la modification pour changer le mot de passe puis déconnecter tous les appareils, en conservant ton adresse et ton compte.
-
-Code collé(20261022-185905).html
-Fichier
-
-Voici le fichier corrigé : 
-index.html.
-
-Remplace admin/index.html sur ton hébergement par ce fichier. Garde config.js.
-Dans Supabase, demande un nouvel e-mail de récupération.
-Ouvre son lien : le formulaire en français permettra de changer le mot de passe et révoquer les sessions de tous les appareils.
-
-Le code a été vérifié, mais le changement réel reste à effectuer sur ton site. Les anciens accès peuvent rester valables jusqu’à l’expiration de leur jeton.
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -1309,5 +1277,3 @@ initialize();
     </script>
 </body>
 </html>
-index.html
-HTML
