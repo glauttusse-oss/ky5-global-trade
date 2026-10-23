@@ -39,12 +39,9 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1993559367973865');
+    fbq('init', '1603609951116307');
     fbq('track', 'PageView');
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1993559367973865&ev=PageView&noscript=1"
-    /></noscript>
     <!-- End Meta Pixel Code -->
 
     <style>
@@ -2441,6 +2438,11 @@ footer {
 
 <body>
 
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1603609951116307&ev=PageView&noscript=1"
+    /></noscript>
+
+
 
     <!-- =====================================================
          HEADER
@@ -4214,6 +4216,19 @@ footer {
                    ENREGISTREMENT SUPABASE
                 ================================================= */
 
+                // Un seul événement Lead par envoi réussi, même si les deux
+                // destinations (Supabase et Formspree) acceptent la demande.
+                let metaLeadTracked = false;
+                function trackSuccessfulLead() {
+                    if (metaLeadTracked || typeof window.fbq !== "function") return;
+                    try {
+                        window.fbq('track', 'Lead');
+                        metaLeadTracked = true;
+                    } catch (pixelError) {
+                        console.warn("Meta Pixel : événement Lead non envoyé.", pixelError);
+                    }
+                }
+
                 let supabaseSaved =
                     false;
 
@@ -4247,6 +4262,8 @@ footer {
 
                         supabaseSaved =
                             true;
+
+                        trackSuccessfulLead();
 
 
                         console.log(
@@ -4380,10 +4397,8 @@ footer {
                        SUCCÈS
                     ============================================= */
 
-                    // Meta Pixel : compter uniquement une demande réellement envoyée
-                    if (typeof fbq === "function") {
-                        fbq('track', 'Lead');
-                    }
+                    // Secours : demande reçue par Formspree si Supabase a échoué.
+                    trackSuccessfulLead();
 
                     prospectForm.reset();
 
