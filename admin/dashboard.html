@@ -6236,6 +6236,7 @@ function ky5FlagFallback(img){
                         <td>
                             <div class="quick-actions">
                                 <button type="button" class="mini-btn view" data-view-prospect="${prospect.id}">Voir</button>
+<button type="button" class="mini-btn ky5-delete" data-delete-prospect="${escapeHtml(String(prospect.id))}">Supprimer</button>
 
                                 ${status !== "traité" ? `<button type="button" class="mini-btn take" data-take-prospect="${prospect.id}">${status === "en traitement" ? "En cours" : "Prendre"}</button>` : ""}
 
@@ -6887,6 +6888,64 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     sync();
   });
+})();
+</script>
+
+
+<style>
+.mini-btn.ky5-delete{background:#432332;color:#ffc2cb;border:1px solid #9c4e63}
+#ky5DeleteDialog{width:min(92vw,520px);box-sizing:border-box;border:1px solid #38546b;border-radius:20px;background:#0d2537;color:#eef7ff;padding:28px;font:inherit;box-shadow:0 24px 80px #0008}
+#ky5DeleteDialog::backdrop{background:#020d1cc9}
+#ky5DeleteDialog h2{font-size:23px;margin:0 0 18px}
+#ky5DeleteDialog p{line-height:1.6;overflow-wrap:anywhere}
+#ky5DeleteDialog .delete-actions{display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap;margin-top:25px}
+#ky5DeleteDialog button{padding:12px 18px;border-radius:10px;border:1px solid #456077;background:#203c51;color:white;cursor:pointer;font:inherit}
+#ky5DeleteDialog #ky5DeleteConfirm{background:#a52e49;border-color:#ca4968}
+#ky5DeleteDialog button:disabled{opacity:.55;cursor:wait}
+#ky5DeleteError{color:#ffc2cb}
+#ky5DeleteNotice{position:fixed;bottom:24px;right:24px;max-width:85vw;padding:16px 22px;background:#104c3e;color:white;border-radius:12px;z-index:10000}
+</style>
+<dialog id="ky5DeleteDialog" aria-labelledby="ky5DeleteTitle">
+<h2 id="ky5DeleteTitle">Supprimer ce prospect ?</h2>
+<p id="ky5DeleteIdentity"></p>
+<p>Le prospect et ses réponses liées seront définitivement supprimés. Cette action est irréversible.</p>
+<p id="ky5DeleteError" role="alert" hidden></p>
+<div class="delete-actions"><button type="button" id="ky5DeleteCancel">Annuler</button><button type="button" id="ky5DeleteConfirm">Supprimer définitivement</button></div>
+</dialog>
+<div id="ky5DeleteNotice" role="status" hidden></div>
+<script id="ky5-delete-prospects">
+(()=>{
+ const dialog=document.getElementById('ky5DeleteDialog');
+ const confirmButton=document.getElementById('ky5DeleteConfirm');
+ const cancelButton=document.getElementById('ky5DeleteCancel');
+ const errorBox=document.getElementById('ky5DeleteError');
+ let targetId=null,busy=false,noticeTimer;
+ document.addEventListener('click',event=>{
+  const button=event.target.closest('[data-delete-prospect]');if(!button||busy)return;
+  const p=prospectsCache.find(p=>String(p.id)===button.dataset.deleteProspect);if(!p)return;
+  targetId=String(p.id);errorBox.hidden=true;
+  document.getElementById('ky5DeleteIdentity').textContent=`${p.nom||'Sans nom'} — ${getProspectLocationDisplay(p)} — ${p.email||p.telephone||'Sans coordonnées'}`;
+  dialog.showModal();cancelButton.focus();
+ });
+ cancelButton.addEventListener('click',()=>{if(!busy){dialog.close();targetId=null;}});
+ dialog.addEventListener('cancel',event=>{if(busy)event.preventDefault();else targetId=null;});
+ confirmButton.addEventListener('click',async()=>{
+  if(busy||!targetId)return;
+  const id=targetId;busy=true;confirmButton.disabled=cancelButton.disabled=true;
+  confirmButton.textContent='Suppression en cours…';errorBox.hidden=true;
+  try{
+   const {data,error}=await supabaseClient.rpc('ky5_supprimer_prospect',{p_id:id});
+   if(error)throw error;
+   if(Number(data)!==1)throw new Error('Le prospect est introuvable ou a déjà été supprimé. Actualisez la liste.');
+   prospectsCache=prospectsCache.filter(p=>String(p.id)!==id);
+   renderProspects();renderAllStatistics();renderActivity();
+   dialog.close();targetId=null;
+   const notice=document.getElementById('ky5DeleteNotice');notice.textContent='Prospect supprimé. Les compteurs ont été actualisés.';notice.hidden=false;
+   clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>{notice.hidden=true;},6000);
+  }catch(error){
+   errorBox.textContent='Suppression non effectuée. Vérifiez que le SQL de suppression a été installé et que votre session est active. '+(error.message||'');errorBox.hidden=false;
+  }finally{busy=false;confirmButton.disabled=cancelButton.disabled=false;confirmButton.textContent='Supprimer définitivement';}
+ });
 })();
 </script>
 
